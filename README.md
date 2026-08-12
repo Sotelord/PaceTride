@@ -91,6 +91,4 @@ O ábrelo directamente en Android Studio y ejecuta `app` sobre un emulador/dispo
 - [ ] Mover los strings hardcodeados restantes a `strings.xml` (ya existe la mayoría, pero algunos textos siguen en el código).
 - [ ] Reemplazar los tests de plantilla por pruebas reales de UI y de lógica.
 
-## Licencia
 
-No se ha definido una licencia para este repositorio.
