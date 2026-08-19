@@ -1,6 +1,8 @@
 package com.example.pacetride.ui.screens.explorer.components.searchBar
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -11,6 +13,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -28,6 +31,7 @@ import com.example.pacetride.R
 fun FiltroChip(
     texto: String,
     seleccionado: Boolean,
+    onClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     val colorFondo = if (seleccionado) colorResource(R.color.electric_lime) else colorResource(R.color.graphite)
@@ -37,6 +41,11 @@ fun FiltroChip(
         modifier = modifier
             .clip(RoundedCornerShape(50))
             .background(colorFondo)
+            .clickable(
+                interactionSource = remember { MutableInteractionSource() },
+                indication = null,
+                onClick = onClick
+            )
             .padding(horizontal = 18.dp, vertical = 10.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
@@ -60,7 +69,8 @@ fun FiltroChip(
 @Preview
 fun FiltroChipPreview(modifier: Modifier = Modifier){
     FiltroChip("Todas",
-        true
+        true,
+        onClick = {}
     )
 }
 
@@ -68,7 +78,8 @@ fun FiltroChipPreview(modifier: Modifier = Modifier){
 @Preview(showBackground = true)
 fun FiltroChipPreview2(modifier: Modifier = Modifier){
     FiltroChip("5k",
-        false
+        false,
+        onClick = {}
     )
 }
 
@@ -76,7 +87,8 @@ fun FiltroChipPreview2(modifier: Modifier = Modifier){
 @Preview(showBackground = true)
 fun FiltroChipPreview3(modifier: Modifier = Modifier){
     FiltroChip("10k",
-        false
+        false,
+        onClick = {}
     )
 }
 
@@ -84,7 +96,8 @@ fun FiltroChipPreview3(modifier: Modifier = Modifier){
 @Preview(showBackground = true)
 fun FiltroChipPreview4(modifier: Modifier = Modifier){
     FiltroChip("21k",
-        false
+        false,
+        onClick = {}
     )
 }
 
@@ -92,6 +105,7 @@ fun FiltroChipPreview4(modifier: Modifier = Modifier){
 @Preview(showBackground = true)
 fun FiltroChipPreview5(modifier: Modifier = Modifier){
     FiltroChip("42k",
-        false
+        false,
+        onClick = {}
     )
 }

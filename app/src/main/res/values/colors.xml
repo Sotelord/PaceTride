@@ -8,7 +8,9 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="electric_lime">#C6FF00</color>
-    <color name="graphite">#1A211F</color>
-    <color name="mist">#A7B0AC</color>
     <color name="pulse_orange">#FF6B35</color>
+    <color name="midnight">#0B0F0E</color>
+    <color name="graphite">#1A211F</color>
+    <color name="ice">#F4F7F5</color>
+    <color name="mist">#A7B0AC</color>
 </resources>

@@ -1,4 +1,4 @@
-package com.example.pacetride.ui.screens.raceDetail.components.content
+package com.example.pacetride.ui.utils
 
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable

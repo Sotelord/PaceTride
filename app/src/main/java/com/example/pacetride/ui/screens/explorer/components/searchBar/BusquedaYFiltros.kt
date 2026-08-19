@@ -1,5 +1,6 @@
 package com.example.pacetride.ui.screens.explorer.components.searchBar
 
+import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -17,7 +18,7 @@ fun BusquedaYFiltros(modifier: Modifier = Modifier) {
         horizontalArrangement = Arrangement.spacedBy(10.dp)
     ) {
         BarraBusqueda(modifier = Modifier.weight(1f))
-        BotonFiltros()
+        BotonFiltros(onClick = { Log.d("ExploreScreen", "Boton filtros clicked")})
     }
 }
 

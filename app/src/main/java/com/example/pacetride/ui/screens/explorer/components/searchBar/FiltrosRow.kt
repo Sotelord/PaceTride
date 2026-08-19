@@ -1,5 +1,6 @@
 package com.example.pacetride.ui.screens.explorer.components.searchBar
 
+import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.lazy.LazyRow
@@ -28,7 +29,10 @@ fun FiltrosRow(modifier: Modifier = Modifier) {
             FiltroChip(
                 texto = filtro,
                 seleccionado = filtro == seleccionado,
-                modifier = Modifier.clip(RoundedCornerShape(50))
+                onClick = {
+                    Log.d("ExploreScreen", "Chip filtro clicked")
+                    seleccionado = filtro
+                }
             )
         }
     }

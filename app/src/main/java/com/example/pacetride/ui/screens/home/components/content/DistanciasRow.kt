@@ -1,5 +1,6 @@
 package com.example.pacetride.ui.screens.home.components.content
 
+import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -17,10 +18,10 @@ fun DistanciasRow(modifier: Modifier = Modifier) {
             .padding(horizontal = 20.dp),
         horizontalArrangement = Arrangement.spacedBy(10.dp)
     ) {
-        DistanciaChip("5K", modifier = Modifier.weight(1f))
-        DistanciaChip("10K", modifier = Modifier.weight(1f))
-        DistanciaChip("21K", modifier = Modifier.weight(1f))
-        DistanciaChip("42K", modifier = Modifier.weight(1f))
+        DistanciaChip("5K",onClick = { Log.d("HomeScreen", "Chip distancia clicked")}, modifier = Modifier.weight(1f))
+        DistanciaChip("10K",onClick = { Log.d("HomeScreen", "Chip distancia clicked")}, modifier = Modifier.weight(1f))
+        DistanciaChip("21K",onClick = { Log.d("HomeScreen", "Chip distancia clicked")}, modifier = Modifier.weight(1f))
+        DistanciaChip("42K",onClick = { Log.d("HomeScreen", "Chip distancia clicked")}, modifier = Modifier.weight(1f))
     }
 }
 

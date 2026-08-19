@@ -1,5 +1,6 @@
 package com.example.pacetride.ui.screens.profile
 
+import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -17,26 +18,23 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.pacetride.R
+import com.example.pacetride.data.local.LocalCarreraHistorialProvider
 import com.example.pacetride.ui.screens.profile.components.content.DatosUsuario
 import com.example.pacetride.ui.screens.profile.components.content.FotoPerfil
 import com.example.pacetride.ui.screens.profile.components.estadisticas.NextRaceCardWithGraph
 import com.example.pacetride.ui.screens.profile.components.estadisticas.EstadisticasRow
 import com.example.pacetride.ui.screens.profile.components.header.HeaderPerfil
 import com.example.pacetride.ui.screens.profile.components.history.HistorialRow
-import com.example.pacetride.ui.screens.profile.model.CarreraHistorial
 import com.example.pacetride.ui.utils.AppButton
 import com.example.pacetride.ui.utils.SeccionTitulo
 import com.example.pacetride.ui.utils.navbar.BottomNavBar
+import com.example.pacetride.ui.utils.navbar.Seccion
 
 // ---------- CONTENIDO ----------
 
 @Composable
 fun ProfileScreenContent(modifier: Modifier = Modifier) {
-    val historial = listOf(
-        CarreraHistorial("Carrera 10K Bogotá", "10K • 49:12", "15 de junio de 2026"),
-        CarreraHistorial("Carrera Universitaria Javeriana", "5K • 23:48", "20 de mayo de 2026"),
-        CarreraHistorial("Bogotá Night Run", "10K • 50:31", "18 de abril de 2026")
-    )
+    val historial = LocalCarreraHistorialProvider.historial
 
     Column(
         modifier = modifier
@@ -61,6 +59,7 @@ fun ProfileScreenContent(modifier: Modifier = Modifier) {
 
         AppButton(
             textoBoton = stringResource(R.string.editar_perfil),
+            onClick = { Log.d("ProfileScreen", "Editar perfil clicked")},
             modifier = Modifier.fillMaxWidth()
         )
         Spacer(modifier = Modifier.height(32.dp))
@@ -110,7 +109,7 @@ fun ProfileScreen(modifier: Modifier = Modifier) {
         ProfileScreenContent(
             modifier = Modifier.weight(1f)
         )
-        BottomNavBar()
+        BottomNavBar(Seccion.PERFIL)
     }
 }
 

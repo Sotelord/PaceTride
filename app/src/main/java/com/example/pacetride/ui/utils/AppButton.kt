@@ -14,9 +14,13 @@ import com.example.pacetride.R
 // ---------- BOTÓN ----------
 
 @Composable
-fun AppButton(textoBoton: String, modifier: Modifier = Modifier) {
+fun AppButton(
+    textoBoton: String,
+    onClick: () -> Unit = {},
+    modifier: Modifier = Modifier
+) {
     Button(
-        onClick = { /*TODO*/ },
+        onClick = onClick,
         colors = ButtonDefaults.buttonColors(
             containerColor = colorResource(R.color.electric_lime)
         ),

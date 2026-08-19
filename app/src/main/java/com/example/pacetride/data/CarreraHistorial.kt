@@ -1,4 +1,4 @@
-package com.example.pacetride.ui.screens.profile.model
+package com.example.pacetride.data
 
 data class CarreraHistorial(
     val titulo: String,

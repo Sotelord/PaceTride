@@ -1,5 +1,6 @@
 package com.example.pacetride.ui.screens.home.components.content
 
+import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -18,9 +19,9 @@ fun ProximasCarrerasRow(modifier: Modifier = Modifier) {
             .padding(horizontal = 20.dp),
         horizontalArrangement = Arrangement.spacedBy(12.dp)
     ) {
-        RaceCard(R.drawable.running, "Carrera 10K Bogotá", "$95.000 COP", "10K", modifier = Modifier.weight(1f))
-        RaceCard(R.drawable.running, "Carrera 5K Universitaria", "$65.000 COP", "5K", modifier = Modifier.weight(1f))
-        RaceCard(R.drawable.running, "Media Maratón Bogotá", "$145.000 COP", "21K", modifier = Modifier.weight(1f))
+        RaceCard(R.drawable.running, "Carrera 10K Bogotá", "$95.000 COP", "10K",onClick = { Log.d("HomeScreen", "Race Card Clicked")}, modifier = Modifier.weight(1f))
+        RaceCard(R.drawable.running, "Carrera 5K Universitaria", "$65.000 COP", "5K",onClick = { Log.d("HomeScreen", "Race Card Clicked")}, modifier = Modifier.weight(1f))
+        RaceCard(R.drawable.running, "Media Maratón Bogotá", "$145.000 COP", "21K",onClick = { Log.d("HomeScreen", "Race Card Clicked")}, modifier = Modifier.weight(1f))
     }
 }
 

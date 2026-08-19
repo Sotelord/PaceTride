@@ -2,6 +2,8 @@ package com.example.pacetride.ui.screens.home.components.content
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -14,6 +16,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
@@ -33,6 +36,7 @@ fun RaceCard(
     titulo: String,
     precio: String,
     distancia: String,
+    onClick: () -> Unit = {},
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -40,6 +44,11 @@ fun RaceCard(
             .width(150.dp)
             .clip(RoundedCornerShape(16.dp))
             .background(colorResource(R.color.graphite))
+            .clickable(
+                interactionSource = remember { MutableInteractionSource() },
+                indication = null,
+                onClick = onClick
+            )
     ) {
         Image(
             painter = painterResource(idImagen),
@@ -53,7 +62,7 @@ fun RaceCard(
             Text(
                 titulo,
                 color = Color.White,
-                fontSize = 14.sp,
+                fontSize = 12.sp,
                 fontWeight = FontWeight.Bold
             )
             Spacer(modifier = Modifier.height(6.dp))
@@ -65,7 +74,7 @@ fun RaceCard(
                 Text(
                     distancia,
                     color = Color.White,
-                    fontSize = 11.sp,
+                    fontSize = 8.sp,
                     modifier = Modifier
                         .clip(RoundedCornerShape(8.dp))
                         .background(Color.DarkGray)

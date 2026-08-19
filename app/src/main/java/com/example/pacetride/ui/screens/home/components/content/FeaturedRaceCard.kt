@@ -1,5 +1,6 @@
 package com.example.pacetride.ui.screens.home.components.content
 
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -93,6 +94,7 @@ fun FeaturedRaceCard(
             Spacer(modifier = Modifier.height(12.dp))
             AppButton(
                 textoBoton = stringResource(R.string.ver_carrera),
+                onClick = { Log.d("HomeScreen", "Ver carrera clicked")},
                 modifier = Modifier.fillMaxWidth()
             )
         }

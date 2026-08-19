@@ -1,5 +1,6 @@
 package com.example.pacetride.ui.screens.raceDetail.components.content
 
+import android.util.Log
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -20,7 +21,7 @@ import com.example.pacetride.R
 @Composable
 fun BotonInscripcion(precio: String, modifier: Modifier = Modifier) {
     Button(
-        onClick = { /*TODO*/ },
+        onClick = { Log.d("RaceDetailScreen", "Inscricion clicked") },
         colors = ButtonDefaults.buttonColors(
             containerColor = colorResource(R.color.electric_lime)
         ),

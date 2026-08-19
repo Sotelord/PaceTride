@@ -20,6 +20,7 @@ import com.example.pacetride.ui.screens.home.components.content.DistanciasRow
 import com.example.pacetride.ui.screens.home.components.content.ProximasCarrerasRow
 import com.example.pacetride.ui.screens.home.components.header.HeaderHomeScreen
 import com.example.pacetride.ui.utils.navbar.BottomNavBar
+import com.example.pacetride.ui.utils.navbar.Seccion
 
 // ---------- CONTENIDO ----------
 
@@ -60,7 +61,7 @@ fun HomeScreen(modifier: Modifier = Modifier) {
         HomeScreenContent(
             modifier = Modifier.weight(1f)
         )
-        BottomNavBar()
+        BottomNavBar(Seccion.INICIO)
     }
 }
 

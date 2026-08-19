@@ -1,5 +1,6 @@
 package com.example.pacetride.ui.screens.explorer.components.content
 
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
@@ -84,6 +85,7 @@ fun ExplorarRaceCard(
                 Spacer(modifier = Modifier.height(10.dp))
                 AppButton(
                     textoBoton = stringResource(R.string.ver_detalles),
+                    onClick = { Log.d("ExploreScreen", "Ver detalles race card clicked")},
                     modifier = Modifier.fillMaxWidth()
                 )
             }

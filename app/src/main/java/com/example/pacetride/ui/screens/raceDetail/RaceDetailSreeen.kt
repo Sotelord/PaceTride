@@ -13,6 +13,10 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
@@ -29,12 +33,27 @@ import com.example.pacetride.ui.screens.raceDetail.components.content.IncluyeGri
 import com.example.pacetride.ui.screens.raceDetail.components.content.MapaRuta
 import com.example.pacetride.ui.screens.raceDetail.components.content.TarjetaInfoCarrera
 import com.example.pacetride.ui.screens.raceDetail.components.content.TituloCarrera
-import com.example.pacetride.ui.screens.raceDetail.components.content.TituloSeccionDetalle
+import com.example.pacetride.ui.utils.TituloSeccionDetalle
+
+// Datos que cambian según la distancia elegida
+data class InfoDistancia(
+    val distancia: String,
+    val precio: String
+)
+
+private val infoPorDistancia = mapOf(
+    "5K" to InfoDistancia(distancia = "5 kilómetros", precio = "$60.000 COP"),
+    "10K" to InfoDistancia(distancia = "10 kilómetros", precio = "$95.000 COP"),
+    "21K" to InfoDistancia(distancia = "21 kilómetros", precio = "$145.000 COP")
+)
 
 // ---------- CONTENIDO ----------
 
 @Composable
 fun RaceDetailScreenContent(modifier: Modifier = Modifier) {
+    var distanciaSeleccionada by remember { mutableStateOf("21K") }
+    val infoActual = infoPorDistancia[distanciaSeleccionada] ?: infoPorDistancia.getValue("21K")
+
     Column(
         modifier = modifier
             .fillMaxSize()
@@ -53,7 +72,8 @@ fun RaceDetailScreenContent(modifier: Modifier = Modifier) {
 
             DistanciasDetalleRow(
                 distancias = listOf("5K", "10K", "21K"),
-                seleccionada = "21K"
+                seleccionada = distanciaSeleccionada,
+                onSeleccionar = { distancia -> distanciaSeleccionada = distancia }
             )
             Spacer(modifier = Modifier.height(24.dp))
 
@@ -61,8 +81,8 @@ fun RaceDetailScreenContent(modifier: Modifier = Modifier) {
                 fecha = "27 de septiembre de 2026",
                 hora = "6:00 a. m.",
                 lugar = "Bogotá, Colombia",
-                distancia = "21 kilómetros",
-                precio = "$145.000 COP"
+                distancia = infoActual.distancia,
+                precio = infoActual.precio
             )
 
             Spacer(modifier = Modifier.height(8.dp))
@@ -78,7 +98,7 @@ fun RaceDetailScreenContent(modifier: Modifier = Modifier) {
             Spacer(modifier = Modifier.height(8.dp))
             Text(
                 stringResource(R.string.descripcion_carrera),
-                color = Color.LightGray,
+                color = colorResource(R.color.ice),
                 fontSize = 14.sp
             )
             Spacer(modifier = Modifier.height(24.dp))
@@ -106,7 +126,7 @@ fun RaceDetailScreen(modifier: Modifier = Modifier) {
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .background(Color.Black)
+                    .background(colorResource(R.color.midnight))
                     .padding(16.dp)
             ) {
                 BotonInscripcion(precio = "$145.000 COP")

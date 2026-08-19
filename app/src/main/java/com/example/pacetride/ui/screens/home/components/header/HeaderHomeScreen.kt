@@ -1,5 +1,6 @@
 package com.example.pacetride.ui.screens.home.components.header
 
+import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -13,6 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.pacetride.ui.utils.CampanaNotificaciones
 import com.example.pacetride.ui.utils.LogoApp
 
 @Composable
@@ -29,6 +31,7 @@ fun HeaderHomeScreen(modifier: Modifier = Modifier) {
                     .align(Alignment.Center)
             )
             CampanaNotificaciones(
+                onClick = { Log.d("HomeScreen", "Campana notificaciones clicked")},
                 modifier = Modifier.align(Alignment.CenterEnd)
             )
         }

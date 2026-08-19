@@ -1,7 +1,9 @@
-package com.example.pacetride.ui.screens.explorer.model
+package com.example.pacetride.data
+
+import androidx.annotation.DrawableRes
 
 data class CarreraExplorar(
-    val idImagen: Int,
+    @DrawableRes val idImagen: Int,
     val titulo: String,
     val ubicacion: String,
     val fecha: String,
