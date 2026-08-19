@@ -9,6 +9,10 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
@@ -25,7 +29,15 @@ import com.example.pacetride.ui.utils.navbar.Seccion
 // ---------- CONTENIDO ----------
 
 @Composable
-fun HomeScreenContent(modifier: Modifier = Modifier) {
+fun HomeScreenContent(
+    idImagen: Int,
+    titulo: String,
+    fecha: String,
+    ubicacion: String,
+    distancia: String,
+    precio: String,
+    modifier: Modifier = Modifier
+) {
     Column(
         modifier = modifier.verticalScroll(rememberScrollState())
     ) {
@@ -33,12 +45,12 @@ fun HomeScreenContent(modifier: Modifier = Modifier) {
         HeaderHomeScreen()
         Spacer(modifier = Modifier.height(20.dp))
         FeaturedRaceCard(
-            idImagen = R.drawable.running,
-            titulo = "Media Maratón de Bogotá 2026",
-            fecha = "27 de septiembre de 2026",
-            ubicacion = "Bogotá, Colombia",
-            distancia = "21K",
-            precio = "$145.000 COP",
+            idImagen = idImagen,
+            titulo = titulo,
+            fecha = fecha,
+            ubicacion = ubicacion,
+            distancia = distancia,
+            precio = precio,
             modifier = Modifier.padding(horizontal = 20.dp)
         )
         SeccionTitulo("Próximas carreras")
@@ -53,12 +65,25 @@ fun HomeScreenContent(modifier: Modifier = Modifier) {
 
 @Composable
 fun HomeScreen(modifier: Modifier = Modifier) {
+    var idImagen by remember { mutableStateOf(R.drawable.running) }
+    var titulo by remember { mutableStateOf("Media Maratón de Bogotá 2026") }
+    var fecha by remember { mutableStateOf("27 de septiembre de 2026") }
+    var ubicacion by remember { mutableStateOf("Bogotá, Colombia") }
+    var distancia by remember { mutableStateOf("21K") }
+    var precio by remember { mutableStateOf("$145.000 COP") }
+
     Column(
         modifier = modifier
             .fillMaxSize()
             .background(Color.Black)
     ) {
         HomeScreenContent(
+            idImagen,
+            titulo,
+            fecha,
+            ubicacion,
+            distancia,
+            precio,
             modifier = Modifier.weight(1f)
         )
         BottomNavBar(Seccion.INICIO)

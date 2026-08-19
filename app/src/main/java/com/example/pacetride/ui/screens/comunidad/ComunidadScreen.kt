@@ -16,6 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.pacetride.data.Publicacion
 import com.example.pacetride.data.local.LocalPublicacionProvider
 import com.example.pacetride.ui.screens.comunidad.components.content.PostCard
 import com.example.pacetride.ui.screens.comunidad.components.header.HeaderComunidad
@@ -25,8 +26,7 @@ import com.example.pacetride.ui.utils.navbar.Seccion
 // ---------- CONTENIDO ----------
 
 @Composable
-fun ComunidadScreenContent(modifier: Modifier = Modifier) {
-    val publicaciones = LocalPublicacionProvider.publicaciones
+fun ComunidadScreenContent(publicaciones: List<Publicacion>, modifier: Modifier = Modifier) {
 
     Column(modifier = modifier) {
         Spacer(modifier = Modifier.height(16.dp))
@@ -63,12 +63,13 @@ fun ComunidadScreenContent(modifier: Modifier = Modifier) {
 
 @Composable
 fun ComunidadScreen(modifier: Modifier = Modifier) {
+    val publicaciones = LocalPublicacionProvider.publicaciones
     Column(
         modifier = modifier
             .fillMaxSize()
             .background(Color.Black)
     ) {
-        ComunidadScreenContent(
+        ComunidadScreenContent( publicaciones,
             modifier = Modifier.weight(1f)
         )
         BottomNavBar(Seccion.EXPLORAR)

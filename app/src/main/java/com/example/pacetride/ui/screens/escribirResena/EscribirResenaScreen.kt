@@ -37,13 +37,18 @@ import com.example.pacetride.ui.utils.TituloSeccionDetalle
 // ---------- CONTENIDO ----------
 
 @Composable
-fun EscribirResenaScreenContent(modifier: Modifier = Modifier) {
-    var calificacion by remember { mutableIntStateOf(4) }
-    var textoResena by remember { mutableStateOf("") }
-    var mensajeError by remember { mutableStateOf<String?>(null) }
-    val opcionesDestacar = listOf("Ruta", "Organización", "Ambiente", "Hidratación", "Seguridad", "Kit", "Precio")
-    val seleccionadas = remember { mutableStateOf(setOf("Ruta", "Organización", "Ambiente")) }
-
+fun EscribirResenaScreenContent(
+    calificacion: Int,
+    onCalificacionChange: (Int) -> Unit,
+    textoResena: String,
+    onTextoResenaChange: (String) -> Unit,
+    mensajeError: String?,
+    opcionesDestacar: List<String>,
+    seleccionadas: Set<String>,
+    onToggleDestacar: (String) -> Unit,
+    onPublicarClick: () -> Unit,
+    modifier: Modifier = Modifier
+) {
     Column(
         modifier = modifier
             .verticalScroll(rememberScrollState())
@@ -64,7 +69,7 @@ fun EscribirResenaScreenContent(modifier: Modifier = Modifier) {
         Spacer(modifier = Modifier.height(16.dp))
         SelectorCalificacion(
             calificacion = calificacion,
-            onCalificacionChange = { calificacion = it },
+            onCalificacionChange = onCalificacionChange,
             modifier = Modifier.fillMaxWidth()
         )
         Spacer(modifier = Modifier.height(28.dp))
@@ -73,7 +78,7 @@ fun EscribirResenaScreenContent(modifier: Modifier = Modifier) {
         Spacer(modifier = Modifier.height(12.dp))
         CampoResena(
             texto = textoResena,
-            onTextoChange = { textoResena = it }
+            onTextoChange = onTextoResenaChange
         )
         Spacer(modifier = Modifier.height(28.dp))
 
@@ -82,20 +87,14 @@ fun EscribirResenaScreenContent(modifier: Modifier = Modifier) {
 
         ChipsFlowDestacar(
             opciones = opcionesDestacar,
-            seleccionadas = seleccionadas.value,
-            onToggle = { opcion ->
-                seleccionadas.value = if (opcion in seleccionadas.value) {
-                    seleccionadas.value - opcion
-                } else {
-                    seleccionadas.value + opcion
-                }
-            }
+            seleccionadas = seleccionadas,
+            onToggle = onToggleDestacar
         )
         Spacer(modifier = Modifier.height(32.dp))
 
         if (mensajeError != null) {
             Text(
-                text = mensajeError!!,
+                text = mensajeError,
                 color = Color.Red,
                 fontSize = 12.sp,
                 modifier = Modifier.fillMaxWidth(),
@@ -104,18 +103,7 @@ fun EscribirResenaScreenContent(modifier: Modifier = Modifier) {
             Spacer(modifier = Modifier.height(8.dp))
         }
 
-        BotonPublicarResena(onClick = {
-            mensajeError = when {
-                textoResena.isBlank() -> "La reseña está vacía, por ende no se puede publicar"
-                textoResena.length > 500 -> "La reseña supera los 500 caracteres permitidos"
-                else -> null
-            }
-
-            if (mensajeError == null) {
-                Log.d("EscribirResenaScreen", "Publicar reseña clicked")
-                Log.d("EscribirResenaScreen", "Reseña: $textoResena")
-            }
-        })
+        BotonPublicarResena(onClick = onPublicarClick)
 
         Spacer(modifier = Modifier.height(12.dp))
         Text(
@@ -133,12 +121,47 @@ fun EscribirResenaScreenContent(modifier: Modifier = Modifier) {
 
 @Composable
 fun EscribirResenaScreen(modifier: Modifier = Modifier) {
+    var calificacion by remember { mutableIntStateOf(4) }
+    var textoResena by remember { mutableStateOf("") }
+    var mensajeError by remember { mutableStateOf<String?>(null) }
+    var seleccionadas by remember { mutableStateOf(setOf("Ruta", "Organización", "Ambiente")) }
+    val opcionesDestacar = remember {
+        listOf("Ruta", "Organización", "Ambiente", "Hidratación", "Seguridad", "Kit", "Precio")
+    }
+
     Box(
         modifier = modifier
             .fillMaxSize()
             .background(Color.Black)
     ) {
-        EscribirResenaScreenContent()
+        EscribirResenaScreenContent(
+            calificacion = calificacion,
+            onCalificacionChange = { calificacion = it },
+            textoResena = textoResena,
+            onTextoResenaChange = { textoResena = it },
+            mensajeError = mensajeError,
+            opcionesDestacar = opcionesDestacar,
+            seleccionadas = seleccionadas,
+            onToggleDestacar = { opcion ->
+                seleccionadas = if (opcion in seleccionadas) {
+                    seleccionadas - opcion
+                } else {
+                    seleccionadas + opcion
+                }
+            },
+            onPublicarClick = {
+                mensajeError = when {
+                    textoResena.isBlank() -> "La reseña está vacía, por ende no se puede publicar"
+                    textoResena.length > 500 -> "La reseña supera los 500 caracteres permitidos"
+                    else -> null
+                }
+
+                if (mensajeError == null) {
+                    Log.d("EscribirResenaScreen", "Publicar reseña clicked")
+                    Log.d("EscribirResenaScreen", "Reseña: $textoResena")
+                }
+            }
+        )
     }
 }
 

@@ -7,6 +7,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
+import com.example.compose.PacetrideTheme
 import com.example.pacetride.ui.screens.comunidad.ComunidadScreen
 import com.example.pacetride.ui.screens.escribirResena.EscribirResenaScreen
 import com.example.pacetride.ui.screens.explorer.ExploreScreen
@@ -22,10 +23,12 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            Scaffold() {
-                EscribirResenaScreen(
-                    modifier = Modifier.padding(it)
-                )
+            PacetrideTheme() {
+                Scaffold() {
+                    EscribirResenaScreen(
+                        modifier = Modifier.padding(it)
+                    )
+                }
             }
         }
     }

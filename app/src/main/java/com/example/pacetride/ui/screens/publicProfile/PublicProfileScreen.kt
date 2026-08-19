@@ -17,55 +17,89 @@ import com.example.pacetride.ui.screens.publicprofile.components.content.MisCarr
 import com.example.pacetride.ui.screens.publicprofile.components.content.ResenaCard
 import com.example.pacetride.ui.screens.publicprofile.components.header.HeaderPublico
 import androidx.compose.ui.tooling.preview.Preview
+import com.example.pacetride.data.UsuarioPublico
+import com.example.pacetride.data.local.LocalUsuarioPublicoProvider
 import com.example.pacetride.ui.screens.publicprofile.components.seccion.SeccionTitulo
 
 @Composable
-fun PublicProfileScreen(modifier: Modifier = Modifier) {
+fun PublicProfileContent(
+    usuario: UsuarioPublico,
+    modifier: Modifier = Modifier
+) {
+    Column(
+        modifier = modifier,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        HeaderPublico()
+
+        Spacer(modifier = Modifier.height(8.dp))
+
+        FotoPerfil(R.drawable.foto_perfil)
+
+        Spacer(modifier = Modifier.height(12.dp))
+
+        DatosUsuarioPublico(
+            nombre = "Laura Gómez",
+            usuario = "@lauragomez",
+            ubicacion = "Bogotá, Colombia",
+            bio = "Runner apasionada por las carreras de ruta.\nSiempre buscando nuevos retos."
+        )
+
+        Spacer(modifier = Modifier.height(24.dp))
+
+        SeccionTitulo(
+            titulo = "Estadísticas",
+            modifier = Modifier.fillMaxWidth()
+        )
+
+        EstadisticasRow()
+
+        Spacer(modifier = Modifier.height(24.dp))
+
+        SeccionTitulo(
+            titulo = "Mis carreras",
+            modifier = Modifier.fillMaxWidth()
+        )
+
+        MisCarrerasRow()
+
+        Spacer(modifier = Modifier.height(24.dp))
+
+        SeccionTitulo(
+            titulo = "Últimas reseñas",
+            modifier = Modifier.fillMaxWidth()
+        )
+
+        ResenaCard()
+    }
+}
+@Composable
+fun PublicProfileScreen(
+    usuario: UsuarioPublico,
+    modifier: Modifier = Modifier
+) {
     Column(
         modifier = modifier
             .fillMaxSize()
             .background(Color.Black)
     ) {
-        Column(
+        PublicProfileContent(
+            usuario = usuario,
             modifier = Modifier
                 .weight(1f)
                 .verticalScroll(rememberScrollState())
-                .padding(start = 20.dp, end = 20.dp, bottom = 32.dp),
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            HeaderPublico()
-            Spacer(modifier = Modifier.height(8.dp))
-
-            FotoPerfil(R.drawable.foto_perfil)
-            Spacer(modifier = Modifier.height(12.dp))
-
-            DatosUsuarioPublico(
-                nombre = "Laura Gómez",
-                usuario = "@lauragomez",
-                ubicacion = "Bogotá, Colombia",
-                bio = "Runner apasionada por las carreras de ruta.\nSiempre buscando nuevos retos."
-            )
-
-            Spacer(modifier = Modifier.height(24.dp))
-
-            SeccionTitulo(titulo = "Estadísticas", modifier = Modifier.fillMaxWidth())
-            EstadisticasRow()
-
-            Spacer(modifier = Modifier.height(24.dp))
-
-            SeccionTitulo(titulo = "Mis carreras", modifier = Modifier.fillMaxWidth())
-            MisCarrerasRow()
-
-            Spacer(modifier = Modifier.height(24.dp))
-
-            SeccionTitulo(titulo = "Últimas reseñas", modifier = Modifier.fillMaxWidth())
-            ResenaCard()
-        }
+                .padding(
+                    start = 20.dp,
+                    end = 20.dp,
+                    bottom = 32.dp
+                )
+        )
     }
 }
 
 @Preview(showBackground = true, device = "spec:width=411dp,height=891dp")
 @Composable
 fun PublicProfileScreenPreview() {
-    PublicProfileScreen()
+    val usuaro = LocalUsuarioPublicoProvider.usuario
+    PublicProfileScreen(usuaro)
 }

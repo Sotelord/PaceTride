@@ -13,6 +13,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.pacetride.R
+import com.example.pacetride.data.CarreraExplorar
 import com.example.pacetride.data.local.LocalCarreraExplorarProvider
 import com.example.pacetride.ui.screens.explorer.components.content.GrillaCarreras
 import com.example.pacetride.ui.screens.explorer.components.header.HeaderExplorar
@@ -25,8 +26,7 @@ import com.example.pacetride.ui.utils.navbar.Seccion
 // ---------- CONTENIDO ----------
 
 @Composable
-fun ExploreScreenContent(modifier: Modifier = Modifier) {
-    val carreras = LocalCarreraExplorarProvider.carreras
+fun ExploreScreenContent(carreras: List<CarreraExplorar>, modifier: Modifier = Modifier) {
 
     Column(
         modifier = modifier.padding(horizontal = 20.dp)
@@ -49,12 +49,14 @@ fun ExploreScreenContent(modifier: Modifier = Modifier) {
 
 @Composable
 fun ExploreScreen(modifier: Modifier = Modifier) {
+    val carreras = LocalCarreraExplorarProvider.carreras
     Column(
         modifier = modifier
             .fillMaxSize()
             .background(Color.Black)
     ) {
         ExploreScreenContent(
+            carreras,
             modifier = Modifier.weight(1f)
         )
         BottomNavBar(Seccion.EXPLORAR)
