@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -27,7 +28,7 @@ fun BadgeMarca(modifier: Modifier = Modifier) {
     Row(
         modifier = modifier
             .clip(RoundedCornerShape(bottomStart = 12.dp))
-            .background(Color.Black.copy(alpha = 0.7f))
+            .background(MaterialTheme.colorScheme.background.copy(alpha = 0.7f))
             .padding(horizontal = 12.dp, vertical = 6.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
@@ -35,7 +36,7 @@ fun BadgeMarca(modifier: Modifier = Modifier) {
         Spacer(modifier = Modifier.width(4.dp))
         Text(
             stringResource(R.string.pacetride_upper),
-            color = colorResource(R.color.electric_lime),
+            color = MaterialTheme.colorScheme.primaryContainer,
             fontWeight = FontWeight.Bold,
             fontSize = 12.sp
         )

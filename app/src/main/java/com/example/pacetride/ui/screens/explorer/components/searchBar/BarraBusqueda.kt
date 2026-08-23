@@ -15,6 +15,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -25,6 +26,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.colorResource
@@ -47,13 +49,14 @@ fun BarraBusqueda(
     Row(
         modifier = modifier
             .clip(RoundedCornerShape(14.dp))
-            .background(colorResource(R.color.graphite))
+            .background(MaterialTheme.colorScheme.secondaryContainer)
             .padding(horizontal = 14.dp, vertical = 12.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
         Image(
             painter = painterResource(R.drawable.ic_search),
             contentDescription = null,
+            colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onSurfaceVariant),
             modifier = Modifier.size(20.dp)
         )
         Spacer(modifier = Modifier.width(10.dp))
@@ -62,7 +65,7 @@ fun BarraBusqueda(
             if (texto.isEmpty()) {
                 Text(
                     stringResource(R.string.buscar_carreras_ciudades_o_eventos),
-                    color = Color.Gray,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
                     fontSize = 15.sp
                 )
             }
@@ -70,10 +73,10 @@ fun BarraBusqueda(
                 value = texto,
                 onValueChange = { texto = it },
                 textStyle = TextStyle(
-                    color = Color.White,
+                    color = MaterialTheme.colorScheme.onBackground,
                     fontSize = 15.sp
                 ),
-                cursorBrush = SolidColor(colorResource(R.color.electric_lime)),
+                cursorBrush = SolidColor(MaterialTheme.colorScheme.primaryContainer),
                 singleLine = true,
                 keyboardOptions = KeyboardOptions(imeAction = ImeAction.Search),
                 keyboardActions = KeyboardActions(
@@ -91,6 +94,7 @@ fun BarraBusqueda(
             Image(
                 painter = painterResource(R.drawable.ic_close),
                 contentDescription = stringResource(R.string.cerrar),
+                colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onSurfaceVariant),
                 modifier = Modifier
                     .size(18.dp)
                     .clickable {

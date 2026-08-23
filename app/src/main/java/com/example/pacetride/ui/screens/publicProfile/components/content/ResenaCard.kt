@@ -7,6 +7,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -25,25 +26,48 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.pacetride.R
+import com.example.pacetride.data.Resena
+import com.example.pacetride.data.local.LocalResenaProvider
 
 @Composable
-fun ResenaCard(modifier: Modifier = Modifier) {
+fun ResenaCard(resena: Resena, modifier: Modifier = Modifier) {
     var meGustaActivo by remember { mutableStateOf(false) }
     var cantidadLikes by remember { mutableIntStateOf(34) }
 
     Column(
         modifier = modifier
             .fillMaxWidth()
-            .background(Color(0xFF2A2A2A), RoundedCornerShape(12.dp))
+            .background(MaterialTheme.colorScheme.secondaryContainer, RoundedCornerShape(12.dp))
             .padding(16.dp)
     ) {
-        Text(text = "⭐ 4,5/5", color = Color(0xFFFFD700), fontSize = 14.sp, fontWeight = FontWeight.Bold)
+        // Renderiza de manera dinámica la calificación
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            Image(
+                painter = painterResource(R.drawable.ic_estrella),
+                contentDescription = null,
+                colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.primaryContainer),
+                modifier = Modifier.size(16.dp)
+            )
+            Spacer(modifier = Modifier.width(4.dp))
+            Text(
+                text = "${resena.calificacion}",
+                color = MaterialTheme.colorScheme.primaryContainer,
+                fontSize = 14.sp,
+                fontWeight = FontWeight.Bold
+            )
+        }
         Spacer(modifier = Modifier.height(8.dp))
-        Text(text = "Media Maratón Bogotá 2026", color = Color.White, fontSize = 16.sp, fontWeight = FontWeight.Bold)
-        Spacer(modifier = Modifier.height(4.dp))
         Text(
-            text = "Muy buena organización, excelente ambiente y una ruta exigente pero increíble.",
-            color = Color.LightGray,
+            text = "Media Maratón Bogotá 2026",
+            color = MaterialTheme.colorScheme.onBackground,
+            fontSize = 16.sp,
+            fontWeight = FontWeight.Bold
+        )
+        Spacer(modifier = Modifier.height(4.dp))
+        // Renderiza de manera dinámica el texto de la reseña
+        Text(
+            text = resena.resena,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
             fontSize = 14.sp,
             lineHeight = 20.sp
         )
@@ -67,13 +91,14 @@ fun ResenaCard(modifier: Modifier = Modifier) {
                         id = if (meGustaActivo) R.drawable.ic_me_gusta_lleno else R.drawable.ic_me_gusta
                     ),
                     contentDescription = "Likes",
-                    colorFilter = if (meGustaActivo) ColorFilter.tint(colorResource(R.color.electric_lime)) else null,
+                    colorFilter = if (meGustaActivo) ColorFilter.tint(MaterialTheme.colorScheme.primaryContainer) else ColorFilter.tint(
+                        MaterialTheme.colorScheme.onSurfaceVariant),
                     modifier = Modifier.size(16.dp)
                 )
                 Spacer(modifier = Modifier.width(4.dp))
                 Text(
                     text = cantidadLikes.toString(),
-                    color = if (meGustaActivo) colorResource(R.color.electric_lime) else Color.LightGray,
+                    color = if (meGustaActivo) MaterialTheme.colorScheme.primaryContainer else MaterialTheme.colorScheme.onSurfaceVariant,
                     fontSize = 14.sp
                 )
             }
@@ -92,10 +117,11 @@ fun ResenaCard(modifier: Modifier = Modifier) {
                 Image(
                     painter = painterResource(id = R.drawable.ic_comentario),
                     contentDescription = "Comentarios",
+                    colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onSurfaceVariant),
                     modifier = Modifier.size(16.dp)
                 )
                 Spacer(modifier = Modifier.width(4.dp))
-                Text(text = "6", color = Color.LightGray, fontSize = 14.sp)
+                Text(text = "6", color = MaterialTheme.colorScheme.onSurfaceVariant, fontSize = 14.sp)
             }
         }
     }
@@ -104,5 +130,6 @@ fun ResenaCard(modifier: Modifier = Modifier) {
 @Composable
 @Preview
 fun ResenaCardPreview(modifier: Modifier = Modifier){
-    ResenaCard()
+    val resena = LocalResenaProvider.listaResenas[1]
+    ResenaCard(resena)
 }

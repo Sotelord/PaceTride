@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -16,6 +17,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
@@ -31,6 +33,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
@@ -69,11 +72,11 @@ fun HeaderComunidad(modifier: Modifier = Modifier) {
                 singleLine = true,
                 shape = RoundedCornerShape(50),
                 colors = OutlinedTextFieldDefaults.colors(
-                    focusedTextColor = colorResource(R.color.ice),
-                    unfocusedTextColor = colorResource(R.color.ice),
-                    focusedContainerColor = colorResource(R.color.graphite),
-                    unfocusedContainerColor = colorResource(R.color.graphite),
-                    focusedBorderColor = colorResource(R.color.electric_lime),
+                    focusedTextColor = MaterialTheme.colorScheme.surface,
+                    unfocusedTextColor = MaterialTheme.colorScheme.surface,
+                    focusedContainerColor = MaterialTheme.colorScheme.secondaryContainer,
+                    unfocusedContainerColor = MaterialTheme.colorScheme.secondaryContainer,
+                    focusedBorderColor = MaterialTheme.colorScheme.primaryContainer,
                     unfocusedBorderColor = Color.Transparent
                 ),
                 keyboardOptions = KeyboardOptions(imeAction = ImeAction.Search),
@@ -93,7 +96,7 @@ fun HeaderComunidad(modifier: Modifier = Modifier) {
                 modifier = Modifier
                     .size(45.dp)
                     .clip(CircleShape)
-                    .background(colorResource(R.color.graphite))
+                    .background(MaterialTheme.colorScheme.secondaryContainer)
                     .padding(10.dp)
                     .clickable {
                         Log.d("Comunidad Screen", "Cerrar clicked")
@@ -107,7 +110,7 @@ fun HeaderComunidad(modifier: Modifier = Modifier) {
                 Spacer(modifier = Modifier.width(10.dp))
                 Text(
                     stringResource(R.string.comunidad),
-                    color = colorResource(R.color.ice),
+                    color = MaterialTheme.colorScheme.onBackground,
                     fontSize = 22.sp,
                     fontWeight = FontWeight.Bold,
                     textAlign = TextAlign.Center
@@ -117,10 +120,15 @@ fun HeaderComunidad(modifier: Modifier = Modifier) {
                 Image(
                     painter = painterResource(R.drawable.ic_search),
                     contentDescription = stringResource(R.string.buscar),
+                    colorFilter = if (isSystemInDarkTheme()) {
+                        null
+                    } else {
+                        ColorFilter.tint(MaterialTheme.colorScheme.onSurfaceVariant)
+                    },
                     modifier = Modifier
                         .size(45.dp)
                         .clip(CircleShape)
-                        .background(colorResource(R.color.graphite))
+                        .background(MaterialTheme.colorScheme.secondaryContainer)
                         .padding(10.dp)
                         .clickable {
                             Log.d("Comunidad Screen", "Buscar clicked")

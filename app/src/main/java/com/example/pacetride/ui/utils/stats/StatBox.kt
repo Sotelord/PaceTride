@@ -9,12 +9,14 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -36,17 +38,18 @@ fun StatBox(
         modifier = modifier
             .width(78.dp)
             .clip(RoundedCornerShape(12.dp))
-            .background(colorResource(R.color.graphite))
+            .background(MaterialTheme.colorScheme.secondaryContainer)
             .padding(vertical = 16.dp)
     ) {
         Image(
             painter = painterResource(idIcono),
             contentDescription = null,
+            colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.primaryContainer),
             modifier = Modifier.size(24.dp)
         )
         Spacer(modifier = Modifier.height(8.dp))
-        Text(valor, color = Color.White, fontWeight = FontWeight.Bold, fontSize = 14.sp)
-        Text(etiqueta, color = Color.LightGray, fontSize = 11.sp)
+        Text(valor, color = MaterialTheme.colorScheme.onBackground, fontWeight = FontWeight.Bold, fontSize = 14.sp)
+        Text(etiqueta, color = MaterialTheme.colorScheme.onSurfaceVariant, fontSize = 11.sp)
     }
 }
 

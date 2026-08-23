@@ -24,14 +24,15 @@ import com.example.pacetride.R
 import com.example.pacetride.ui.screens.profile.components.content.DatosUsuario
 import com.example.pacetride.ui.utils.AppButton
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.tooling.preview.Preview
+import com.example.pacetride.data.Usuario
+import com.example.pacetride.data.local.LocalUsuarioProvider
 
 @Composable
 fun DatosUsuarioPublico(
-    nombre: String,
-    usuario: String,
-    ubicacion: String,
-    bio: String,
+    usuario: Usuario,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -40,10 +41,10 @@ fun DatosUsuarioPublico(
     ) {
         // Reutilizamos tu componente DatosUsuario
         DatosUsuario(
-            nombre = nombre,
-            usuario = usuario,
-            ubicacion = ubicacion,
-            bio = bio
+            usuario.nombre,
+            usuario.usuario,
+            usuario.ubicacion,
+            usuario.bio
         )
 
         Spacer(modifier = Modifier.height(20.dp))
@@ -65,12 +66,13 @@ fun DatosUsuarioPublico(
             IconButton(
                 onClick = { Log.d("PubliProfileScreen", "Configuracion clicked") },
                 modifier = Modifier
-                    .background(Color(0xFF1E1E1E), CircleShape)
+                    .background(MaterialTheme.colorScheme.secondaryContainer, CircleShape)
                     .size(48.dp)
             ) {
                 Image(
                     painter = painterResource(id = R.drawable.ic_configuracion),
                     contentDescription = "Opciones",
+                    colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onSurfaceVariant),
                     modifier = Modifier.size(24.dp)
                 )
             }
@@ -79,14 +81,12 @@ fun DatosUsuarioPublico(
 }
 
 
-@Preview(showBackground = true, backgroundColor = 0xFF000000)
+@Preview(showBackground = true)
 @Composable
 fun DatosUsuarioPublicoPreview() {
+    val usuario = LocalUsuarioProvider.usuarios[1]
     DatosUsuarioPublico(
-        nombre = "Laura Gómez",
-        usuario = "@lauragomez",
-        ubicacion = "Bogotá, Colombia",
-        bio = "Runner apasionada por las carreras de ruta 🏃‍♀️. Siempre buscando nuevos retos.",
+        usuario,
         modifier = Modifier.padding(16.dp)
     )
 }

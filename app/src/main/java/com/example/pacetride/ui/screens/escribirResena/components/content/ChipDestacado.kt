@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
@@ -36,9 +37,9 @@ fun ChipDestacado(
     onClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    val fondo = if (seleccionado) colorResource(R.color.electric_lime).copy(alpha = 0.15f) else colorResource(R.color.graphite)
-    val borde = if (seleccionado) colorResource(R.color.electric_lime) else Color.Transparent
-    val colorTexto = if (seleccionado) colorResource(R.color.electric_lime) else colorResource(R.color.ice)
+    val fondo = if (seleccionado) MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.15f) else MaterialTheme.colorScheme.secondaryContainer
+    val borde = if (seleccionado) MaterialTheme.colorScheme.primaryContainer else Color.Transparent
+    val colorTexto = if (seleccionado) MaterialTheme.colorScheme.primaryContainer else MaterialTheme.colorScheme.onBackground
 
     Row(
         modifier = modifier
@@ -60,7 +61,7 @@ fun ChipDestacado(
             Image(
                 painter = painterResource(R.drawable.ic_check),
                 contentDescription = null,
-                colorFilter = ColorFilter.tint(colorResource(R.color.electric_lime)),
+                colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.primaryContainer),
                 modifier = Modifier.size(14.dp)
             )
             Spacer(modifier = Modifier.width(6.dp))

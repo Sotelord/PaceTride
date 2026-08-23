@@ -6,27 +6,30 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.compose.PacetrideTheme
 import com.example.pacetride.R
-import com.example.pacetride.data.CarreraExplorar
-import com.example.pacetride.data.local.LocalCarreraExplorarProvider
+import com.example.pacetride.data.Carrera
+import com.example.pacetride.data.local.LocalCarreraProvider
 import com.example.pacetride.ui.screens.explorer.components.content.GrillaCarreras
 import com.example.pacetride.ui.screens.explorer.components.header.HeaderExplorar
 import com.example.pacetride.ui.utils.SeccionTitulo
 import com.example.pacetride.ui.utils.navbar.BottomNavBar
 import com.example.pacetride.ui.screens.explorer.components.searchBar.BusquedaYFiltros
 import com.example.pacetride.ui.screens.explorer.components.searchBar.FiltrosRow
+import com.example.pacetride.ui.screens.home.HomeScreen
 import com.example.pacetride.ui.utils.navbar.Seccion
 
 // ---------- CONTENIDO ----------
 
 @Composable
-fun ExploreScreenContent(carreras: List<CarreraExplorar>, modifier: Modifier = Modifier) {
+fun ExploreScreenContent(carreras: List<Carrera>, modifier: Modifier = Modifier) {
 
     Column(
         modifier = modifier.padding(horizontal = 20.dp)
@@ -49,11 +52,11 @@ fun ExploreScreenContent(carreras: List<CarreraExplorar>, modifier: Modifier = M
 
 @Composable
 fun ExploreScreen(modifier: Modifier = Modifier) {
-    val carreras = LocalCarreraExplorarProvider.carreras
+    val carreras = LocalCarreraProvider.listCarrera
     Column(
         modifier = modifier
             .fillMaxSize()
-            .background(Color.Black)
+            .background(MaterialTheme.colorScheme.background)
     ) {
         ExploreScreenContent(
             carreras,
@@ -66,5 +69,7 @@ fun ExploreScreen(modifier: Modifier = Modifier) {
 @Composable
 @Preview(showBackground = true, device = "spec:width=411dp,height=891dp")
 fun ExploreScreenPreview() {
-    ExploreScreen()
+    PacetrideTheme(darkTheme = true) {
+        ExploreScreen()
+    }
 }

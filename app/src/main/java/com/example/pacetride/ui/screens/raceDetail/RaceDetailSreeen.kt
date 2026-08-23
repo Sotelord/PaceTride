@@ -10,22 +10,26 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.compose.PacetrideTheme
 import com.example.pacetride.R
+import com.example.pacetride.data.Carrera
+import com.example.pacetride.data.aPrecioCop
+import com.example.pacetride.data.local.LocalCarreraProvider
 import com.example.pacetride.ui.screens.raceDetail.components.content.BotonInscripcion
 import com.example.pacetride.ui.screens.raceDetail.components.content.DistanciasDetalleRow
 import com.example.pacetride.ui.screens.raceDetail.components.content.ImagenPortadaCarrera
@@ -35,70 +39,62 @@ import com.example.pacetride.ui.screens.raceDetail.components.content.TarjetaInf
 import com.example.pacetride.ui.screens.raceDetail.components.content.TituloCarrera
 import com.example.pacetride.ui.utils.TituloSeccionDetalle
 
-// Datos que cambian según la distancia elegida
-data class InfoDistancia(
-    val distancia: String,
-    val precio: String
-)
-
-private val infoPorDistancia = mapOf(
-    "5K" to InfoDistancia(distancia = "5 kilómetros", precio = "$60.000 COP"),
-    "10K" to InfoDistancia(distancia = "10 kilómetros", precio = "$95.000 COP"),
-    "21K" to InfoDistancia(distancia = "21 kilómetros", precio = "$145.000 COP")
-)
-
 // ---------- CONTENIDO ----------
 
 @Composable
-fun RaceDetailScreenContent(modifier: Modifier = Modifier) {
-    var distanciaSeleccionada by remember { mutableStateOf("21K") }
-    val infoActual = infoPorDistancia[distanciaSeleccionada] ?: infoPorDistancia.getValue("21K")
-
+fun RaceDetailScreenContent(
+    carrera: Carrera,
+    kmSeleccionado: Int,
+    onSeleccionarKm: (Int) -> Unit,
+    modifier: Modifier = Modifier
+) {
     Column(
         modifier = modifier
             .fillMaxSize()
-            .background(Color.Black)
+            .background(MaterialTheme.colorScheme.background)
             .verticalScroll(rememberScrollState())
     ) {
-        ImagenPortadaCarrera(R.drawable.running)
+        ImagenPortadaCarrera(carrera.idImagen ?: R.drawable.running)
 
         Column(modifier = Modifier.padding(16.dp)) {
             TituloCarrera(
-                titulo = "Media Maratón Bogotá 2026",
-                fecha = "27 de septiembre de 2026",
-                ubicacion = "Bogotá, Colombia"
+                titulo = carrera.nombre,
+                fecha = carrera.fecha,
+                ubicacion = carrera.ubicacion
             )
             Spacer(modifier = Modifier.height(24.dp))
 
             DistanciasDetalleRow(
-                distancias = listOf("5K", "10K", "21K"),
-                seleccionada = distanciaSeleccionada,
-                onSeleccionar = { distancia -> distanciaSeleccionada = distancia }
+                distancias = carrera.distanciasDisponiblesKm.map { "${it}K" },
+                seleccionada = "${kmSeleccionado}K",
+                onSeleccionar = { label -> onSeleccionarKm(label.removeSuffix("K").toInt()) }
             )
             Spacer(modifier = Modifier.height(24.dp))
 
             TarjetaInfoCarrera(
-                fecha = "27 de septiembre de 2026",
+                fecha = carrera.fecha,
                 hora = "6:00 a. m.",
-                lugar = "Bogotá, Colombia",
-                distancia = infoActual.distancia,
-                precio = infoActual.precio
+                lugar = carrera.ubicacion,
+                distancia = "$kmSeleccionado kilómetros",
+                precio = carrera.calcularPrecio(kmSeleccionado).aPrecioCop()
             )
 
-            Spacer(modifier = Modifier.height(8.dp))
-            Text(
-                stringResource(R.string.ltimos_cupos_disponibles),
-                color = colorResource(R.color.pulse_orange),
-                fontSize = 12.sp,
-                fontWeight = FontWeight.Bold
-            )
+            if (carrera.ultimosCupos == true) {
+                Spacer(modifier = Modifier.height(8.dp))
+                Text(
+                    stringResource(R.string.ltimos_cupos_disponibles),
+                    color = MaterialTheme.colorScheme.tertiaryContainer,
+                    fontSize = 12.sp,
+                    fontWeight = FontWeight.Bold
+                )
+            }
             Spacer(modifier = Modifier.height(24.dp))
 
             TituloSeccionDetalle(stringResource(R.string.sobre_la_carrera))
             Spacer(modifier = Modifier.height(8.dp))
             Text(
-                stringResource(R.string.descripcion_carrera),
-                color = colorResource(R.color.ice),
+                carrera.descripcion,
+                color = MaterialTheme.colorScheme.onBackground,
                 fontSize = 14.sp
             )
             Spacer(modifier = Modifier.height(24.dp))
@@ -119,28 +115,41 @@ fun RaceDetailScreenContent(modifier: Modifier = Modifier) {
 // ---------- PANTALLA COMPLETA ----------
 
 @Composable
-fun RaceDetailScreen(modifier: Modifier = Modifier) {
-    Scaffold(
-        modifier = modifier,
-        bottomBar = {
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .background(colorResource(R.color.midnight))
-                    .padding(16.dp)
-            ) {
-                BotonInscripcion(precio = "$145.000 COP")
-            }
-        }
-    ) { innerPadding ->
+fun RaceDetailScreen(
+    modifier: Modifier = Modifier
+) {
+    val carrera = LocalCarreraProvider.listCarrera[2]
+    var kmSeleccionado by remember { mutableIntStateOf(carrera.distanciaPrincipalKm) }
+    val precioActual = carrera.calcularPrecio(kmSeleccionado)
+
+    Column(
+        modifier = modifier
+            .fillMaxSize()
+            .background(MaterialTheme.colorScheme.background)
+    ) {
         RaceDetailScreenContent(
-            modifier = Modifier.padding(innerPadding)
+            carrera = carrera,
+            kmSeleccionado = kmSeleccionado,
+            onSeleccionarKm = { kmSeleccionado = it },
+            modifier = Modifier.weight(1f)
         )
+
+        // ---------- "bottomBar" manual ----------
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .background(MaterialTheme.colorScheme.background)
+                .padding(16.dp)
+        ) {
+            BotonInscripcion(precio = precioActual.aPrecioCop())
+        }
     }
 }
 
 @Composable
 @Preview(showBackground = true, device = "spec:width=411dp,height=891dp")
 fun RaceDetailScreenPreview() {
-    RaceDetailScreen()
+    PacetrideTheme(darkTheme = true) {
+        RaceDetailScreen()
+    }
 }

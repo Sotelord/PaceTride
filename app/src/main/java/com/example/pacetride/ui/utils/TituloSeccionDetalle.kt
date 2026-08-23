@@ -1,5 +1,6 @@
 package com.example.pacetride.ui.utils
 
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -14,7 +15,7 @@ import com.example.pacetride.R
 
 @Composable
 fun TituloSeccionDetalle(texto: String, modifier: Modifier = Modifier) {
-    Text(texto, color = Color.White, fontSize = 18.sp, fontWeight = FontWeight.Bold, modifier = modifier)
+    Text(texto, color = MaterialTheme.colorScheme.onBackground, fontSize = 18.sp, fontWeight = FontWeight.Bold, modifier = modifier)
 }
 
 @Composable

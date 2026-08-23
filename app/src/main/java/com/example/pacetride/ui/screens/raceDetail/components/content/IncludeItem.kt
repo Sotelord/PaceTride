@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -27,10 +28,10 @@ fun IncludeItem(idIcono: Int, texto: String, modifier: Modifier = Modifier) {
             painter = painterResource(idIcono),
             contentDescription = null,
             modifier = Modifier.size(20.dp),
-            colorFilter = ColorFilter.tint(Color.White)
+            colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onBackground)
         )
         Spacer(modifier = Modifier.width(8.dp))
-        Text(texto, color = Color.White, fontSize = 14.sp)
+        Text(texto, color = MaterialTheme.colorScheme.onBackground, fontSize = 14.sp)
     }
 }
 

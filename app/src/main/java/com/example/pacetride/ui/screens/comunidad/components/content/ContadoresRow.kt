@@ -1,5 +1,6 @@
 package com.example.pacetride.ui.screens.comunidad.components.content
 
+import android.graphics.Color
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -22,7 +23,7 @@ fun ContadoresRow(
     ) {
         ContadorInteraccion(R.drawable.ic_me_gusta_lleno, nLikes, stringResource(R.string.me_gusta))
         ContadorInteraccion(R.drawable.ic_comentario, nComentarios,
-            stringResource(R.string.comentarios)
+            stringResource(R.string.comentarios), aplicarTinte = true
         )
     }
 }

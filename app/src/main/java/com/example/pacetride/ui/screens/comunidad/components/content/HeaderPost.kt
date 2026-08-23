@@ -5,11 +5,11 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.width
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -19,7 +19,7 @@ import com.example.pacetride.R
 
 @Composable
 fun HeaderPost(
-    idAvatar: Int,
+    idAvatar: Int?,
     nombre: String,
     tiempo: String,
     modifier: Modifier = Modifier
@@ -31,8 +31,8 @@ fun HeaderPost(
         AvatarUsuario(idAvatar)
         Spacer(modifier = Modifier.width(10.dp))
         Column {
-            Text(nombre, color = colorResource(R.color.ice), fontSize = 15.sp, fontWeight = FontWeight.Bold)
-            Text(tiempo, color = colorResource(R.color.mist), fontSize = 12.sp)
+            Text(nombre, color = MaterialTheme.colorScheme.onBackground, fontSize = 15.sp, fontWeight = FontWeight.Bold)
+            Text(tiempo, color = MaterialTheme.colorScheme.onSurfaceVariant, fontSize = 12.sp)
         }
     }
 }

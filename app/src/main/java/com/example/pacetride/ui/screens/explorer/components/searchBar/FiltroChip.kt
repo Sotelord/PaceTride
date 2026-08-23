@@ -6,11 +6,13 @@ import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
@@ -23,6 +25,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.compose.PacetrideTheme
 import com.example.pacetride.R
 
 // ---------- CHIPS DE FILTRO (Todas / 5K / 10K / ...) ----------
@@ -34,8 +37,8 @@ fun FiltroChip(
     onClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    val colorFondo = if (seleccionado) colorResource(R.color.electric_lime) else colorResource(R.color.graphite)
-    val colorTexto = if (seleccionado) Color.Black else Color.White
+    val colorFondo = if (seleccionado) MaterialTheme.colorScheme.primaryContainer else MaterialTheme.colorScheme.secondaryContainer
+    val colorTexto = if (seleccionado) MaterialTheme.colorScheme.background else MaterialTheme.colorScheme.onBackground
 
     Row(
         modifier = modifier
@@ -56,10 +59,15 @@ fun FiltroChip(
                 modifier = Modifier
                     .size(16.dp)
                     .clip(CircleShape)
-                    .background(Color.Black),
+                    .background(MaterialTheme.colorScheme.background),
                 contentAlignment = Alignment.Center
             ) {
-                Text("✓", color = colorResource(R.color.electric_lime), fontSize = 10.sp)
+                Text("✓",
+                    color = MaterialTheme.colorScheme.primaryContainer,
+                    fontSize = 10.sp,
+                    lineHeight = 10.sp,
+                    modifier = Modifier.offset(y = (-1).dp)
+                )
             }
         }
     }
@@ -68,10 +76,12 @@ fun FiltroChip(
 @Composable
 @Preview
 fun FiltroChipPreview(modifier: Modifier = Modifier){
-    FiltroChip("Todas",
-        true,
-        onClick = {}
-    )
+    PacetrideTheme(darkTheme = true) {
+        FiltroChip("Todas",
+            true,
+            onClick = {}
+        )
+    }
 }
 
 @Composable

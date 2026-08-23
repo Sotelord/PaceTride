@@ -38,7 +38,7 @@ fun ImagenPortadaCarrera(idImagen: Int, modifier: Modifier = Modifier) {
         )
         BadgeMarca(modifier = Modifier
             .align(Alignment.TopEnd)
-            .padding(top = 8.dp))
+            .padding(top = 0.dp))
     }
 }
 @Composable

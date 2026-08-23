@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -34,11 +35,11 @@ fun EstadisticaPost(
         Image(
             painter = painterResource(idIcono),
             contentDescription = null,
-            colorFilter = ColorFilter.tint(colorResource(R.color.electric_lime)),
+            colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.primaryContainer),
             modifier = Modifier.size(18.dp)
         )
         Spacer(modifier = Modifier.width(6.dp))
-        Text(texto, color = colorResource(R.color.ice), fontSize = 15.sp, fontWeight = FontWeight.Bold)
+        Text(texto, color = MaterialTheme.colorScheme.onBackground, fontSize = 15.sp, fontWeight = FontWeight.Bold)
     }
 }
 

@@ -13,9 +13,9 @@ import androidx.compose.ui.unit.dp
 import com.example.pacetride.R
 
 @Composable
-fun AvatarUsuario(idImagen: Int, modifier: Modifier = Modifier) {
+fun AvatarUsuario(idImagen: Int?, modifier: Modifier = Modifier) {
     Image(
-        painter = painterResource(idImagen),
+        painter = painterResource(id = idImagen ?: R.drawable.ic_perfil),
         contentDescription = null,
         contentScale = ContentScale.Crop,
         modifier = modifier

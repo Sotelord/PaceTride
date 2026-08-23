@@ -1,6 +1,5 @@
 package com.example.pacetride.ui.screens.escribirResena.components.content
 
-import android.util.Log
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.runtime.Composable

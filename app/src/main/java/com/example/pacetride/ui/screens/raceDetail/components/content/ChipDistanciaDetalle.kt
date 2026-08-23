@@ -6,6 +6,7 @@ import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
@@ -26,8 +27,8 @@ fun ChipDistanciaDetalle(
     onClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    val fondo = if (seleccionado) colorResource(R.color.electric_lime) else colorResource(R.color.graphite)
-    val color = if (seleccionado) Color.Black else Color.LightGray
+    val fondo = if (seleccionado) MaterialTheme.colorScheme.primaryContainer else MaterialTheme.colorScheme.secondaryContainer
+    val color = if (seleccionado) MaterialTheme.colorScheme.background else MaterialTheme.colorScheme.onSurfaceVariant
 
     Box(
         modifier = modifier

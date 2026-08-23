@@ -11,22 +11,28 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.compose.PacetrideTheme
 import com.example.pacetride.data.Publicacion
 import com.example.pacetride.data.local.LocalPublicacionProvider
 import com.example.pacetride.ui.screens.comunidad.components.content.PostCard
 import com.example.pacetride.ui.screens.comunidad.components.header.HeaderComunidad
+import com.example.pacetride.ui.screens.home.HomeScreen
 import com.example.pacetride.ui.utils.navbar.BottomNavBar
 import com.example.pacetride.ui.utils.navbar.Seccion
 
 // ---------- CONTENIDO ----------
 
 @Composable
-fun ComunidadScreenContent(publicaciones: List<Publicacion>, modifier: Modifier = Modifier) {
+fun ComunidadScreenContent(
+    publicaciones: List<Publicacion>,
+    modifier: Modifier = Modifier
+) {
 
     Column(modifier = modifier) {
         Spacer(modifier = Modifier.height(16.dp))
@@ -46,11 +52,9 @@ fun ComunidadScreenContent(publicaciones: List<Publicacion>, modifier: Modifier 
                     idAvatar = publicacion.idAvatar,
                     nombre = publicacion.nombre,
                     tiempo = publicacion.tiempo,
-                    texto = publicacion.texto,
-                    distancia = publicacion.distancia,
-                    tiempoCarrera = publicacion.tiempoCarrera,
-                    ritmo = publicacion.ritmo,
-                    calificacion = publicacion.calificacion,
+                    texto = publicacion.textoAMostrar,
+                    estadisticasCarrera = publicacion.estadisiticas,
+                    resena = publicacion.resena,
                     likes = publicacion.likes,
                     comentarios = publicacion.comentarios
                 )
@@ -67,9 +71,10 @@ fun ComunidadScreen(modifier: Modifier = Modifier) {
     Column(
         modifier = modifier
             .fillMaxSize()
-            .background(Color.Black)
+            .background(MaterialTheme.colorScheme.background)
     ) {
-        ComunidadScreenContent( publicaciones,
+        ComunidadScreenContent(
+            publicaciones,
             modifier = Modifier.weight(1f)
         )
         BottomNavBar(Seccion.EXPLORAR)
@@ -79,5 +84,7 @@ fun ComunidadScreen(modifier: Modifier = Modifier) {
 @Composable
 @Preview(showBackground = true, device = "spec:width=411dp,height=891dp")
 fun ComunidadScreenPreview() {
-    ComunidadScreen()
+    PacetrideTheme(darkTheme = true) {
+        ComunidadScreen()
+    }
 }

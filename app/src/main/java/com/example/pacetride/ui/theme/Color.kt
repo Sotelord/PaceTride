@@ -2,15 +2,15 @@ package com.example.compose
 
 import androidx.compose.ui.graphics.Color
 
-// ---------- LIGHT ----------
+// ---------- LIGHT (ajustado a mano) ----------
 val primaryLight = Color(0xFF4E6700)
 val onPrimaryLight = Color(0xFFFFFFFF)
-val primaryContainerLight = Color(0xFFC6FF00)
-val onPrimaryContainerLight = Color(0xFF587300)
+val primaryContainerLight = Color(0xFF8FB300)          // 👈 verde más oscuro, mejor contraste sobre claro
+val onPrimaryContainerLight = Color(0xFFF4F7E8)          // blanco hueso, no blanco puro (para no chocar tanto)
 val secondaryLight = Color(0xFF030807)
 val onSecondaryLight = Color(0xFFFFFFFF)
-val secondaryContainerLight = Color(0xFF1A211F)
-val onSecondaryContainerLight = Color(0xFF818986)
+val secondaryContainerLight = Color(0xFFE4E7E5)         // 👈 gris claro en vez de casi-negro (para tarjetas)
+val onSecondaryContainerLight = Color(0xFF1A211F)       // 👈 texto oscuro sobre esa tarjeta gris
 val tertiaryLight = Color(0xFFAB3500)
 val onTertiaryLight = Color(0xFFFFFFFF)
 val tertiaryContainerLight = Color(0xFFFF6B35)
@@ -19,9 +19,9 @@ val errorLight = Color(0xFFAB3500)
 val onErrorLight = Color(0xFFFFFFFF)
 val errorContainerLight = Color(0xFFFF6B35)
 val onErrorContainerLight = Color(0xFF5F1900)
-val backgroundLight = Color(0xFFF8FBE5)
+val backgroundLight = Color(0xFFF2F4F0)                 // 👈 gris muy claro en vez de casi-blanco puro
 val onBackgroundLight = Color(0xFF191D10)
-val surfaceLight = Color(0xFFFCF9F8)
+val surfaceLight = Color(0xFFFFFFFF)
 val onSurfaceLight = Color(0xFF1C1B1B)
 val surfaceVariantLight = Color(0xFFDFE3E0)
 val onSurfaceVariantLight = Color(0xFF434846)
@@ -35,9 +35,9 @@ val surfaceDimLight = Color(0xFFDCD9D8)
 val surfaceBrightLight = Color(0xFFFCF9F8)
 val surfaceContainerLowestLight = Color(0xFFFFFFFF)
 val surfaceContainerLowLight = Color(0xFFF6F3F2)
-val surfaceContainerLight = Color(0xFFF0EDEC)
-val surfaceContainerHighLight = Color(0xFFEBE7E6)
-val surfaceContainerHighestLight = Color(0xFFE5E2E1)
+val surfaceContainerLight = Color(0xFFEDEEEA)           // 👈 gris para "cards" internas
+val surfaceContainerHighLight = Color(0xFFE4E6E1)
+val surfaceContainerHighestLight = Color(0xFFDADCD7)
 
 // ---------- DARK (este es tu tema principal actual) ----------
 val primaryDark = Color(0xFFFFFFFF)

@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
@@ -28,22 +29,22 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.pacetride.R
+import com.example.pacetride.data.Carrera
+import com.example.pacetride.data.local.LocalCarreraProvider
 
 // ---------- TARJETA PEQUEÑA DE CARRERA ----------
 @Composable
 fun RaceCard(
-    idImagen: Int,
-    titulo: String,
-    precio: String,
-    distancia: String,
+    carrera: Carrera,
     onClick: () -> Unit = {},
     modifier: Modifier = Modifier
 ) {
     Column(
         modifier = modifier
             .width(150.dp)
+            .height(210.dp)
             .clip(RoundedCornerShape(16.dp))
-            .background(colorResource(R.color.graphite))
+            .background(MaterialTheme.colorScheme.secondaryContainer)
             .clickable(
                 interactionSource = remember { MutableInteractionSource() },
                 indication = null,
@@ -51,33 +52,49 @@ fun RaceCard(
             )
     ) {
         Image(
-            painter = painterResource(idImagen),
-            contentDescription = titulo,
+            painter = painterResource(carrera.idImagen ?: R.drawable.running),
+            contentDescription = carrera.nombre,
             contentScale = ContentScale.Crop,
             modifier = Modifier
                 .fillMaxWidth()
                 .aspectRatio(1.3f)
         )
-        Column(modifier = Modifier.padding(10.dp)) {
+        Column(
+            modifier = Modifier
+                .weight(1f)
+                .padding(10.dp),
+            verticalArrangement = Arrangement.SpaceBetween
+        ) {
             Text(
-                titulo,
-                color = Color.White,
+                carrera.nombre,
+                color = MaterialTheme.colorScheme.onSecondaryContainer,
                 fontSize = 12.sp,
-                fontWeight = FontWeight.Bold
+                fontWeight = FontWeight.Bold,
+                maxLines = 2,
+                overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis,
+                lineHeight = 14.sp
             )
-            Spacer(modifier = Modifier.height(6.dp))
             Row(
                 horizontalArrangement = Arrangement.SpaceBetween,
                 modifier = Modifier.fillMaxWidth()
             ) {
-                Text(precio, color = Color.LightGray, fontSize = 10.sp)
                 Text(
-                    distancia,
-                    color = Color.White,
+                    carrera.precioMostrable,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    fontSize = 10.sp,
+                    maxLines = 1,
+                    overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis,
+                    modifier = Modifier.weight(1f, fill = false)
+                )
+                Spacer(modifier = Modifier.width(4.dp))
+                Text(
+                    carrera.distanciaMostrable,
+                    color = MaterialTheme.colorScheme.onSecondaryContainer,
                     fontSize = 8.sp,
+                    maxLines = 1,
                     modifier = Modifier
                         .clip(RoundedCornerShape(8.dp))
-                        .background(Color.DarkGray)
+                        .background(MaterialTheme.colorScheme.surfaceVariant)
                         .padding(horizontal = 6.dp, vertical = 2.dp)
                 )
             }
@@ -88,17 +105,20 @@ fun RaceCard(
 @Composable
 @Preview
 fun RaceCardPreview(modifier: Modifier = Modifier){
-    RaceCard(R.drawable.running, "Carrera 10K Bogotá", "$95.000 COP", "10K")
+    val carrera = LocalCarreraProvider.listCarrera[4]
+    RaceCard(carrera)
 }
 
 @Composable
 @Preview
 fun RaceCardPreview2(modifier: Modifier = Modifier){
-    RaceCard(R.drawable.running, "Carrera 5K Universitaria", "$65.000 COP", "5K")
+    val carrera = LocalCarreraProvider.listCarrera[5]
+    RaceCard(carrera)
 }
 
 @Composable
 @Preview
 fun RaceCardPreview3(modifier: Modifier = Modifier){
-    RaceCard(R.drawable.running, "Media Maratón Bogotá", "$145.000 COP", "21K")
+    val carrera = LocalCarreraProvider.listCarrera[2]
+    RaceCard(carrera)
 }

@@ -1,5 +1,6 @@
 package com.example.pacetride.ui.screens.home.components.header
 
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -16,7 +17,7 @@ fun MensajeMotivacion(modifier: Modifier = Modifier) {
         stringResource(R.string.listo_para_tu_pr_xima_carrera),
         fontSize = 20.sp,
         fontWeight = FontWeight.Bold,
-        color = Color.Gray,
+        color = MaterialTheme.colorScheme.onSurfaceVariant,
         modifier = modifier
     )
 }

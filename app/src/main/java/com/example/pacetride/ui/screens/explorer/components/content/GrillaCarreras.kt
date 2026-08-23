@@ -1,6 +1,7 @@
 package com.example.pacetride.ui.screens.explorer.components.content
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
@@ -9,12 +10,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.pacetride.data.CarreraExplorar
-import com.example.pacetride.data.local.LocalCarreraExplorarProvider
+import com.example.pacetride.data.Carrera
+import com.example.pacetride.data.local.LocalCarreraProvider
 
 @Composable
 fun GrillaCarreras(
-    carreras: List<CarreraExplorar>,
+    carreras: List<Carrera>,
     modifier: Modifier = Modifier
 ) {
     LazyVerticalGrid(
@@ -25,20 +26,14 @@ fun GrillaCarreras(
     ) {
         items(carreras) { carrera ->
             ExplorarRaceCard(
-                idImagen = carrera.idImagen,
-                titulo = carrera.titulo,
-                ubicacion = carrera.ubicacion,
-                fecha = carrera.fecha,
-                distancia = carrera.distancia,
-                precio = carrera.precio,
-                ultimosCupos = carrera.ultimosCupos
+                carrera
             )
         }
     }
 }
 
 @Composable
-@Preview
+@Preview(showBackground = true)
 fun GrillaCarrerasPreview(modifier: Modifier = Modifier){
-    GrillaCarreras(carreras = LocalCarreraExplorarProvider.carreras)
+    GrillaCarreras(carreras = LocalCarreraProvider.listCarrera)
 }

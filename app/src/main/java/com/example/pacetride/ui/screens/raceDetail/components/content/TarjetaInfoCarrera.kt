@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -34,7 +35,7 @@ fun TarjetaInfoCarrera(
         modifier = modifier
             .fillMaxWidth()
             .clip(RoundedCornerShape(16.dp))
-            .background(colorResource(R.color.graphite))
+            .background(MaterialTheme.colorScheme.secondaryContainer)
             .padding(16.dp)
     ) {
         Row(modifier = Modifier.fillMaxWidth()) {
@@ -54,7 +55,7 @@ fun TarjetaInfoCarrera(
             modifier = Modifier
                 .fillMaxWidth()
                 .height(1.dp)
-                .background(Color.DarkGray)
+                .background(MaterialTheme.colorScheme.surfaceVariant)
         )
         Spacer(modifier = Modifier.height(16.dp))
         InfoItem(R.drawable.ic_dinero,

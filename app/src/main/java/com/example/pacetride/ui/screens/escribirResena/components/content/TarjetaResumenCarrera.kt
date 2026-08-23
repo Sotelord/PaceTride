@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -24,33 +25,33 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.pacetride.R
+import com.example.pacetride.data.Carrera
+import com.example.pacetride.data.local.LocalCarreraProvider
 
 @Composable
 fun TarjetaResumenCarrera(
-    titulo: String,
-    fecha: String,
-    ubicacion: String,
+    carrera: Carrera,
     modifier: Modifier = Modifier
 ) {
     Row(
         modifier = modifier
             .fillMaxWidth()
             .clip(RoundedCornerShape(16.dp))
-            .background(colorResource(R.color.graphite))
+            .background(MaterialTheme.colorScheme.secondaryContainer)
             .padding(16.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
         Image(
             painter = painterResource(R.drawable.corriendo),
             contentDescription = null,
-            colorFilter = ColorFilter.tint(colorResource(R.color.electric_lime)),
+            colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.primaryContainer),
             modifier = Modifier.size(28.dp)
         )
         Spacer(modifier = Modifier.width(12.dp))
         Column {
-            Text(titulo, color = Color.White, fontSize = 16.sp, fontWeight = FontWeight.Bold)
-            Text(fecha, color = Color.LightGray, fontSize = 13.sp)
-            Text(ubicacion, color = Color.LightGray, fontSize = 13.sp)
+            Text(carrera.nombre, color = MaterialTheme.colorScheme.onBackground, fontSize = 16.sp, fontWeight = FontWeight.Bold)
+            Text(carrera.fecha, color = MaterialTheme.colorScheme.onSurfaceVariant, fontSize = 13.sp)
+            Text(carrera.ubicacion, color = MaterialTheme.colorScheme.onSurfaceVariant, fontSize = 13.sp)
         }
     }
 }
@@ -58,9 +59,6 @@ fun TarjetaResumenCarrera(
 @Composable
 @Preview
 fun TarjetaResumenCarreraPreview(modifier: Modifier = Modifier){
-    TarjetaResumenCarrera(
-        "Media Maratón Bogotá 2026",
-        "27 de septiembre de 2026",
-        "Bogotá, Colombia"
-    )
+    val carrera = LocalCarreraProvider.listCarrera[2]
+    TarjetaResumenCarrera(carrera)
 }

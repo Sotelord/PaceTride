@@ -6,9 +6,11 @@ import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier // ¡IMPORTACIÓN CORREGIDA AQUÍ!
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -22,6 +24,7 @@ fun Corazon(
     Image(
         painter = painterResource(id = R.drawable.ic_me_gusta),
         contentDescription = "Me gusta",
+        colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.secondaryContainer),
         modifier = modifier
             .size(24.dp)
             .clickable(
@@ -33,7 +36,7 @@ fun Corazon(
 }
 
 @Composable
-@Preview(showBackground = true, backgroundColor = 0xFF121212)
+@Preview(showBackground = true)
 fun CorazonPreview() {
     Box(modifier = Modifier.padding(16.dp)) {
         Corazon()

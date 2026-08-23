@@ -26,18 +26,15 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.pacetride.R
+import com.example.pacetride.data.Carrera
+import com.example.pacetride.data.local.LocalCarreraProvider
 import com.example.pacetride.ui.utils.AppButton
 
 // ---------- TARJETA GRANDE DE CARRERA DESTACADA ----------
 
 @Composable
 fun FeaturedRaceCard(
-    idImagen: Int,
-    titulo: String,
-    fecha: String,
-    ubicacion: String,
-    distancia: String,
-    precio: String,
+    carrera: Carrera,
     modifier: Modifier = Modifier
 ) {
     Box(
@@ -47,8 +44,8 @@ fun FeaturedRaceCard(
             .clip(RoundedCornerShape(20.dp))
     ) {
         Image(
-            painter = painterResource(idImagen),
-            contentDescription = titulo,
+            painter = painterResource(carrera.idImagen?: R.drawable.running),
+            contentDescription = carrera.nombre,
             contentScale = ContentScale.Crop,
             modifier = Modifier.fillMaxSize()
         )
@@ -60,7 +57,7 @@ fun FeaturedRaceCard(
                     Brush.verticalGradient(
                         colors = listOf(
                             Color.Transparent,
-                            Color.Black.copy(alpha = 0.85f)
+                            Color.Black.copy(alpha = 0.9f)
                         ),
                         startY = 0f
                     )
@@ -73,24 +70,26 @@ fun FeaturedRaceCard(
                 .padding(20.dp)
         ) {
             Text(
-                titulo,
+                carrera.nombre,
                 color = Color.White,
                 fontSize = 22.sp,
                 fontWeight = FontWeight.Bold
             )
             Spacer(modifier = Modifier.height(12.dp))
-            InfoRow(R.drawable.ic_calendario, fecha)
+            InfoRow(R.drawable.ic_calendario, carrera.fecha)
             Spacer(modifier = Modifier.height(4.dp))
-            InfoRow(R.drawable.ubicacion_blanco, ubicacion)
+            InfoRow(R.drawable.ubicacion_blanco, carrera.ubicacion)
             Spacer(modifier = Modifier.height(4.dp))
-            InfoRow(R.drawable.corriendo, distancia)
+            InfoRow(R.drawable.corriendo, carrera.distanciaMostrable)
             Spacer(modifier = Modifier.height(8.dp))
-            Text(
-                precio,
-                color = Color.White,
-                fontSize = 20.sp,
-                fontWeight = FontWeight.Bold
-            )
+            carrera.precioMostrable?.let {
+                Text(
+                    it,
+                    color = Color.White,
+                    fontSize = 20.sp,
+                    fontWeight = FontWeight.Bold
+                )
+            }
             Spacer(modifier = Modifier.height(12.dp))
             AppButton(
                 textoBoton = stringResource(R.string.ver_carrera),
@@ -104,13 +103,9 @@ fun FeaturedRaceCard(
 @Composable
 @Preview
 fun FeaturedRaceCardPreview(modifier: Modifier = Modifier){
+    val carrera = LocalCarreraProvider.listCarrera[2]
     FeaturedRaceCard(
-        R.drawable.running,
-        "Media Maratón de Bogotá 2026",
-        "27 de septiembre de 2026",
-        "Bogotá, Colombia",
-        "21K",
-        "$145.000 COP",
+        carrera,
         modifier = Modifier.padding(horizontal = 20.dp)
         )
 }

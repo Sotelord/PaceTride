@@ -7,17 +7,20 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.pacetride.data.CarreraHistorial
-import com.example.pacetride.data.local.LocalCarreraHistorialProvider
+import com.example.pacetride.data.CarreraRealizada
+import com.example.pacetride.data.local.LocalUsuarioProvider
 
 @Composable
-fun HistorialRow(carreras: List<CarreraHistorial>, modifier: Modifier = Modifier) {
+fun HistorialRow(carreras: List<CarreraRealizada>, modifier: Modifier = Modifier) {
     LazyRow(
         modifier = modifier,
         horizontalArrangement = Arrangement.spacedBy(12.dp)
     ) {
-        items(carreras) { carrera ->
-            HistoryRaceCard(carrera.titulo, carrera.resultado, carrera.fecha)
+        items(carreras) { carreraRealizada ->
+            HistoryRaceCard(
+                carreraRealizada.carrera.nombre,
+                "${carreraRealizada.carrera.ubicacion} • ${carreraRealizada.tiempo}",
+                carreraRealizada.carrera.fecha)
         }
     }
 }
@@ -25,5 +28,5 @@ fun HistorialRow(carreras: List<CarreraHistorial>, modifier: Modifier = Modifier
 @Composable
 @Preview
 fun HistorialRowPreview(modifier: Modifier = Modifier){
-    HistorialRow(LocalCarreraHistorialProvider.historial)
+    HistorialRow(LocalUsuarioProvider.usuarios[0].historial)
 }

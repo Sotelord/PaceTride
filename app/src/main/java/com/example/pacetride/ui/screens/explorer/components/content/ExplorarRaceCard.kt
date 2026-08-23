@@ -9,7 +9,9 @@ import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -25,68 +27,78 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.pacetride.R
+import com.example.pacetride.data.Carrera
+import com.example.pacetride.data.local.LocalCarreraProvider
 import com.example.pacetride.ui.utils.AppButton
 
 @Composable
 fun ExplorarRaceCard(
-    idImagen: Int,
-    titulo: String,
-    ubicacion: String,
-    fecha: String,
-    distancia: String,
-    precio: String? = null,
-    ultimosCupos: Boolean = false,
+    carrera: Carrera,
     modifier: Modifier = Modifier
 ) {
     Column(
         modifier = modifier
+            .height(300.dp)
             .clip(RoundedCornerShape(16.dp))
-            .background(colorResource(R.color.graphite))
+            .background(MaterialTheme.colorScheme.secondaryContainer)
     ) {
         Image(
-            painter = painterResource(idImagen),
-            contentDescription = titulo,
+            painter = painterResource(id = carrera.idImagen ?: R.drawable.running),
+            contentDescription = carrera.nombre,
             contentScale = ContentScale.Crop,
             modifier = Modifier
                 .fillMaxWidth()
-                .aspectRatio(1.3f)
+                .aspectRatio(1.5f)
         )
-        Column(modifier = Modifier.padding(12.dp)) {
+
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .weight(1f)
+                .padding(12.dp)
+        ) {
             Text(
-                titulo,
-                color = Color.White,
-                fontSize = 16.sp,
+                carrera.nombre,
+                color = MaterialTheme.colorScheme.onBackground,
+                fontSize = 14.sp,
                 fontWeight = FontWeight.Bold,
-                maxLines = 2,
+                maxLines = 1,
                 overflow = TextOverflow.Ellipsis
             )
-            Spacer(modifier = Modifier.height(6.dp))
+            Spacer(modifier = Modifier.height(4.dp))
             Text(
-                "$ubicacion • $fecha",
-                color = Color.LightGray,
-                fontSize = 12.sp
+                "${carrera.ubicacion} • ${carrera.fecha}",
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                fontSize = 11.sp,
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis
             )
 
-            if (ultimosCupos) {
-                Spacer(modifier = Modifier.height(4.dp))
+            Spacer(modifier = Modifier.weight(1f))
+
+            if (carrera.ultimosCupos == true) {
                 Text(
                     stringResource(R.string.ultimos_cupos),
-                    color = colorResource(R.color.pulse_orange),
-                    fontSize = 13.sp,
-                    fontWeight = FontWeight.Bold
+                    color = MaterialTheme.colorScheme.tertiaryContainer,
+                    fontSize = 12.sp,
+                    fontWeight = FontWeight.Bold,
+                    maxLines = 1
                 )
-            } else if (precio != null) {
-                Spacer(modifier = Modifier.height(4.dp))
+            } else if (carrera.precioMostrable != null) {
                 Text(
-                    "$distancia • $precio",
-                    color = Color.LightGray,
-                    fontSize = 12.sp
+                    "${carrera.distanciaMostrable} • ${carrera.precioMostrable}",
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    fontSize = 11.sp,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis
                 )
-                Spacer(modifier = Modifier.height(10.dp))
+                Spacer(modifier = Modifier.height(8.dp))
                 AppButton(
                     textoBoton = stringResource(R.string.ver_detalles),
-                    onClick = { Log.d("ExploreScreen", "Ver detalles race card clicked")},
-                    modifier = Modifier.fillMaxWidth()
+                    onClick = { Log.d("ExploreScreen", "Ver detalles race card clicked") },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(36.dp)
                 )
             }
         }
@@ -95,52 +107,36 @@ fun ExplorarRaceCard(
 
 @Composable
 @Preview
-fun ExplorarRaceCardPreview(modifier: Modifier = Modifier){
+fun ExplorarRaceCardPreview(modifier: Modifier = Modifier) {
     ExplorarRaceCard(
-        R.drawable.running,
-        "Carrera Atlética Bogotá 10K",
-        "Bogotá",
-        "15 de agosto",
-        "10K",
-        "$90.000 COP"
+        LocalCarreraProvider.listCarrera[0],
+        modifier = Modifier.width(180.dp)
     )
 }
 
 @Composable
 @Preview
-fun ExplorarRaceCardPreview2(modifier: Modifier = Modifier){
+fun ExplorarRaceCardPreview2(modifier: Modifier = Modifier) {
     ExplorarRaceCard(
-        R.drawable.running,
-        "Corre por Bogotá 5K",
-        "Bogotá",
-        "30 de agosto",
-        "5K",
-        "$65.000 COP"
+        LocalCarreraProvider.listCarrera[1],
+        modifier = Modifier.width(180.dp)
     )
 }
 
 @Composable
 @Preview
-fun ExplorarRaceCardPreview3(modifier: Modifier = Modifier){
+fun ExplorarRaceCardPreview3(modifier: Modifier = Modifier) {
     ExplorarRaceCard(
-        R.drawable.running,
-        "Media Maratón Bogotá 2026",
-        "Bogotá",
-        "27 de septiembre",
-        "21K",
-        "$145.000 COP"
+        LocalCarreraProvider.listCarrera[2],
+        modifier = Modifier.width(180.dp)
     )
 }
 
 @Composable
 @Preview
-fun ExplorarRaceCardPreview4(modifier: Modifier = Modifier){
+fun ExplorarRaceCardPreview4(modifier: Modifier = Modifier) {
     ExplorarRaceCard(
-        R.drawable.running,
-        "Correra 0 Bogotá",
-        "Bogotá",
-        "27 de agosto",
-        "",
-        ultimosCupos = true
+        LocalCarreraProvider.listCarrera[3],
+        modifier = Modifier.width(180.dp)
     )
 }

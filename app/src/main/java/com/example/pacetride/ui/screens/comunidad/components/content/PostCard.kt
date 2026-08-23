@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -21,18 +22,18 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.pacetride.R
+import com.example.pacetride.data.Resena
+import com.example.pacetride.data.EstadisticasCarrera
 import com.example.pacetride.data.local.LocalPublicacionProvider
 
 @Composable
 fun PostCard(
-    idAvatar: Int,
+    idAvatar: Int?,
     nombre: String,
     tiempo: String,
     texto: String,
-    distancia: String? = null,
-    tiempoCarrera: String? = null,
-    ritmo: String? = null,
-    calificacion: String? = null,
+    estadisticasCarrera: EstadisticasCarrera? = null,
+    resena: Resena? = null,
     likes: String,
     comentarios: String,
     modifier: Modifier = Modifier
@@ -45,21 +46,21 @@ fun PostCard(
         modifier = modifier
             .fillMaxWidth()
             .clip(RoundedCornerShape(18.dp))
-            .background(colorResource(R.color.graphite))
+            .background(MaterialTheme.colorScheme.secondaryContainer)
             .padding(16.dp)
     ) {
         HeaderPost(idAvatar, nombre, tiempo)
         Spacer(modifier = Modifier.height(12.dp))
-        Text(texto, color = Color.White, fontSize = 14.sp, lineHeight = 20.sp)
+        Text(texto, color = MaterialTheme.colorScheme.onBackground, fontSize = 14.sp, lineHeight = 20.sp)
         Spacer(modifier = Modifier.height(14.dp))
 
-        if (distancia != null && tiempoCarrera != null && ritmo != null) {
-            EstadisticasPostGrid(distancia, tiempoCarrera, ritmo)
+        if (estadisticasCarrera != null) {
+            EstadisticasPostGrid(estadisticasCarrera.distancia, estadisticasCarrera.tiempoCarrera, estadisticasCarrera.ritmo)
             Spacer(modifier = Modifier.height(14.dp))
         }
 
-        if (calificacion != null) {
-            CalificacionPost(calificacion)
+        if (resena != null) {
+            ResenaPost(resena)
             Spacer(modifier = Modifier.height(14.dp))
         }
 
@@ -85,10 +86,8 @@ fun PostCardPreview(modifier: Modifier = Modifier){
         idAvatar = publicacion.idAvatar,
         nombre = publicacion.nombre,
         tiempo = publicacion.tiempo,
-        texto = publicacion.texto,
-        distancia = publicacion.distancia,
-        tiempoCarrera = publicacion.tiempoCarrera,
-        ritmo = publicacion.ritmo,
+        texto = publicacion.textoAMostrar,
+        estadisticasCarrera = publicacion.estadisiticas,
         likes = publicacion.likes,
         comentarios = publicacion.comentarios
     )
@@ -103,8 +102,8 @@ fun PostCardPreview2(modifier: Modifier = Modifier){
         idAvatar = publicacion.idAvatar,
         nombre = publicacion.nombre,
         tiempo = publicacion.tiempo,
-        texto = publicacion.texto,
-        calificacion = publicacion.calificacion,
+        texto = publicacion.textoAMostrar,
+        resena = publicacion.resena,
         likes = publicacion.likes,
         comentarios = publicacion.comentarios
     )
@@ -119,7 +118,7 @@ fun PostCardPreview3(modifier: Modifier = Modifier){
         idAvatar = publicacion.idAvatar,
         nombre = publicacion.nombre,
         tiempo = publicacion.tiempo,
-        texto = publicacion.texto,
+        texto = publicacion.textoAMostrar,
         likes = publicacion.likes,
         comentarios = publicacion.comentarios
     )

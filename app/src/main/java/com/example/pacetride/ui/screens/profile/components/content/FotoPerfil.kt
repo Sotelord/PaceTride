@@ -14,9 +14,9 @@ import androidx.compose.ui.unit.dp
 import com.example.pacetride.R
 
 @Composable
-fun FotoPerfil(idImagen: Int, modifier: Modifier = Modifier) {
+fun FotoPerfil(idImagen: Int?, modifier: Modifier = Modifier) {
     Image(
-        painter = painterResource(idImagen),
+        painter = painterResource(id = idImagen ?: R.drawable.ic_perfil),
         contentDescription = stringResource(R.string.foto_de_perfil),
         contentScale = ContentScale.Crop,
         modifier = modifier

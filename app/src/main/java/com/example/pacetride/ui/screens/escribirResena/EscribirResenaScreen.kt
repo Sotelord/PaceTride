@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -25,19 +26,24 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.compose.PacetrideTheme
 import com.example.pacetride.R
+import com.example.pacetride.data.Carrera
+import com.example.pacetride.data.local.LocalCarreraProvider
 import com.example.pacetride.ui.screens.escribirResena.components.content.BotonPublicarResena
 import com.example.pacetride.ui.screens.escribirResena.components.content.CampoResena
 import com.example.pacetride.ui.screens.escribirResena.components.content.ChipsFlowDestacar
 import com.example.pacetride.ui.screens.escribirResena.components.content.SelectorCalificacion
 import com.example.pacetride.ui.screens.escribirResena.components.content.TarjetaResumenCarrera
 import com.example.pacetride.ui.screens.escribirResena.components.header.BarraSuperiorConTitulo
+import com.example.pacetride.ui.screens.home.HomeScreen
 import com.example.pacetride.ui.utils.TituloSeccionDetalle
 
 // ---------- CONTENIDO ----------
 
 @Composable
 fun EscribirResenaScreenContent(
+    carrera: Carrera,
     calificacion: Int,
     onCalificacionChange: (Int) -> Unit,
     textoResena: String,
@@ -58,11 +64,7 @@ fun EscribirResenaScreenContent(
         BarraSuperiorConTitulo(stringResource(R.string.escribir_resena))
         Spacer(modifier = Modifier.height(24.dp))
 
-        TarjetaResumenCarrera(
-            titulo = "Media Maratón Bogotá 2026",
-            fecha = "27 de septiembre de 2026",
-            ubicacion = "Bogotá, Colombia"
-        )
+        TarjetaResumenCarrera(carrera)
         Spacer(modifier = Modifier.height(28.dp))
 
         TituloSeccionDetalle(stringResource(R.string.como_calificarias))
@@ -95,7 +97,7 @@ fun EscribirResenaScreenContent(
         if (mensajeError != null) {
             Text(
                 text = mensajeError,
-                color = Color.Red,
+                color = MaterialTheme.colorScheme.tertiaryContainer,
                 fontSize = 12.sp,
                 modifier = Modifier.fillMaxWidth(),
                 textAlign = TextAlign.Center
@@ -108,7 +110,7 @@ fun EscribirResenaScreenContent(
         Spacer(modifier = Modifier.height(12.dp))
         Text(
             stringResource(R.string.tu_resena_ayudara),
-            color = Color.LightGray,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
             fontSize = 12.sp,
             modifier = Modifier.fillMaxWidth(),
             textAlign = TextAlign.Center
@@ -121,6 +123,7 @@ fun EscribirResenaScreenContent(
 
 @Composable
 fun EscribirResenaScreen(modifier: Modifier = Modifier) {
+    val carrera = LocalCarreraProvider.listCarrera[2]
     var calificacion by remember { mutableIntStateOf(4) }
     var textoResena by remember { mutableStateOf("") }
     var mensajeError by remember { mutableStateOf<String?>(null) }
@@ -132,9 +135,10 @@ fun EscribirResenaScreen(modifier: Modifier = Modifier) {
     Box(
         modifier = modifier
             .fillMaxSize()
-            .background(Color.Black)
+            .background(MaterialTheme.colorScheme.background)
     ) {
         EscribirResenaScreenContent(
+            carrera = carrera,
             calificacion = calificacion,
             onCalificacionChange = { calificacion = it },
             textoResena = textoResena,
@@ -168,5 +172,7 @@ fun EscribirResenaScreen(modifier: Modifier = Modifier) {
 @Composable
 @Preview(showBackground = true, device = "spec:width=411dp,height=891dp")
 fun EscribirResenaScreenPreview() {
-    EscribirResenaScreen()
+    PacetrideTheme(darkTheme = true) {
+        EscribirResenaScreen()
+    }
 }

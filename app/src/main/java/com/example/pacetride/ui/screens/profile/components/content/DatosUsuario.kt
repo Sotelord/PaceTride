@@ -3,6 +3,7 @@ package com.example.pacetride.ui.screens.profile.components.content
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -18,19 +19,21 @@ fun DatosUsuario(
     nombre: String,
     usuario: String,
     ubicacion: String,
-    bio: String,
+    bio: String?,
     modifier: Modifier = Modifier
 ) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = modifier
     ) {
-        Text(nombre, color = Color.White, fontSize = 24.sp, fontWeight = FontWeight.Bold)
-        Text(usuario, color = Color.LightGray, fontSize = 14.sp)
+        Text(nombre, color = MaterialTheme.colorScheme.onBackground, fontSize = 24.sp, fontWeight = FontWeight.Bold)
+        Text(usuario, color = MaterialTheme.colorScheme.onSurfaceVariant, fontSize = 14.sp)
         Spacer(modifier = Modifier.height(8.dp))
         UbicacionUsuario(ubicacion)
         Spacer(modifier = Modifier.height(8.dp))
-        Text(bio, color = Color.LightGray, fontSize = 12.sp)
+        if(bio != null){
+            Text(bio, color = MaterialTheme.colorScheme.onSurfaceVariant, fontSize = 12.sp)
+        }
     }
 }
 

@@ -1,5 +1,6 @@
 package com.example.pacetride.ui.screens.home.components.header
 
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -19,7 +20,7 @@ fun MensajeBienvenida(
         stringResource(R.string.bienvenida, nombre),
         fontSize = 30.sp,
         fontWeight = FontWeight.Bold,
-        color = Color.White,
+        color = MaterialTheme.colorScheme.onBackground,
         modifier = modifier
     )
 }

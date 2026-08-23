@@ -2,6 +2,7 @@ package com.example.pacetride.ui.screens.profile.components.estadisticas
 
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
@@ -12,6 +13,9 @@ import androidx.compose.ui.tooling.preview.Preview
 
 @Composable
 fun GraficoProgreso(modifier: Modifier = Modifier) {
+
+    val lineColor = MaterialTheme.colorScheme.primaryContainer
+
     Canvas(modifier = modifier.fillMaxSize()) {
         val path = Path().apply {
             moveTo(0f, size.height)
@@ -20,7 +24,7 @@ fun GraficoProgreso(modifier: Modifier = Modifier) {
         }
         drawPath(
             path = path,
-            color = Color(0xFFC6FF00),
+            color = lineColor,
             style = Stroke(width = 4f)
         )
         drawCircle(

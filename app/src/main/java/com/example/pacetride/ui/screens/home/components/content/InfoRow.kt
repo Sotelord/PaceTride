@@ -1,12 +1,10 @@
 package com.example.pacetride.ui.screens.home.components.content
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -26,7 +24,7 @@ import com.example.pacetride.R
 @Composable
 fun InfoRow(
     idIcono: Int,
-    texto: String,
+    texto: String?,
     modifier: Modifier = Modifier
 ) {
     Row(
@@ -39,7 +37,9 @@ fun InfoRow(
             modifier = Modifier.size(18.dp)
         )
         Spacer(modifier = Modifier.width(8.dp))
-        Text(texto, color = Color.LightGray, fontSize = 14.sp)
+        if (texto != null) {
+            Text(texto, color = Color.LightGray, fontSize = 14.sp)
+        }
     }
 }
 

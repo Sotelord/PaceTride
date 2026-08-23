@@ -17,26 +17,18 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.pacetride.R
+import com.example.pacetride.ui.utils.AppButton
 
 @Composable
 fun BotonInscripcion(precio: String, modifier: Modifier = Modifier) {
-    Button(
-        onClick = { Log.d("RaceDetailScreen", "Inscricion clicked") },
-        colors = ButtonDefaults.buttonColors(
-            containerColor = colorResource(R.color.electric_lime)
-        ),
-        shape = RoundedCornerShape(12.dp),
+    AppButton(
+        textoBoton = stringResource(R.string.inscribeme, precio),
+        onClick = { Log.d("RaceDetailScreen", "Inscripcion clicked") },
+        fontSize = 16.sp,
         modifier = modifier
             .fillMaxWidth()
             .height(56.dp)
-    ) {
-        Text(
-            stringResource(R.string.inscribeme, precio),
-            color = Color.Black,
-            fontWeight = FontWeight.Bold,
-            fontSize = 16.sp
-        )
-    }
+    )
 }
 
 @Composable

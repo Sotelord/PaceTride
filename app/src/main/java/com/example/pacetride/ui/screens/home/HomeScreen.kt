@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -15,14 +16,21 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.compose.PacetrideTheme
 import com.example.pacetride.R
+import com.example.pacetride.data.Carrera
+import com.example.pacetride.data.Usuario
+import com.example.pacetride.data.local.LocalCarreraProvider
+import com.example.pacetride.data.local.LocalUsuarioProvider
 import com.example.pacetride.ui.screens.home.components.content.FeaturedRaceCard
 import com.example.pacetride.ui.utils.SeccionTitulo
 import com.example.pacetride.ui.screens.home.components.content.DistanciasRow
 import com.example.pacetride.ui.screens.home.components.content.ProximasCarrerasRow
 import com.example.pacetride.ui.screens.home.components.header.HeaderHomeScreen
+import com.example.pacetride.ui.utils.LogoApp
 import com.example.pacetride.ui.utils.navbar.BottomNavBar
 import com.example.pacetride.ui.utils.navbar.Seccion
 
@@ -30,32 +38,23 @@ import com.example.pacetride.ui.utils.navbar.Seccion
 
 @Composable
 fun HomeScreenContent(
-    idImagen: Int,
-    titulo: String,
-    fecha: String,
-    ubicacion: String,
-    distancia: String,
-    precio: String,
+    usuario: Usuario,
+    featuredRace: Carrera,
     modifier: Modifier = Modifier
 ) {
     Column(
         modifier = modifier.verticalScroll(rememberScrollState())
     ) {
         Spacer(modifier = Modifier.height(16.dp))
-        HeaderHomeScreen()
+        HeaderHomeScreen(usuario)
         Spacer(modifier = Modifier.height(20.dp))
         FeaturedRaceCard(
-            idImagen = idImagen,
-            titulo = titulo,
-            fecha = fecha,
-            ubicacion = ubicacion,
-            distancia = distancia,
-            precio = precio,
+            featuredRace,
             modifier = Modifier.padding(horizontal = 20.dp)
         )
-        SeccionTitulo("Próximas carreras")
-        ProximasCarrerasRow()
-        SeccionTitulo("Elige tu distancia")
+        SeccionTitulo(stringResource(R.string.pr_ximas_carreras))
+        ProximasCarrerasRow(usuario.proximaCarreras)
+        SeccionTitulo(stringResource(R.string.elige_tu_distancia))
         DistanciasRow()
         Spacer(modifier = Modifier.height(20.dp))
     }
@@ -65,25 +64,16 @@ fun HomeScreenContent(
 
 @Composable
 fun HomeScreen(modifier: Modifier = Modifier) {
-    var idImagen by remember { mutableStateOf(R.drawable.running) }
-    var titulo by remember { mutableStateOf("Media Maratón de Bogotá 2026") }
-    var fecha by remember { mutableStateOf("27 de septiembre de 2026") }
-    var ubicacion by remember { mutableStateOf("Bogotá, Colombia") }
-    var distancia by remember { mutableStateOf("21K") }
-    var precio by remember { mutableStateOf("$145.000 COP") }
-
+    val usuario = LocalUsuarioProvider.usuarios[2]
+    val featuredRace = LocalCarreraProvider.listCarrera[2]
     Column(
         modifier = modifier
             .fillMaxSize()
-            .background(Color.Black)
+            .background(MaterialTheme.colorScheme.background)
     ) {
         HomeScreenContent(
-            idImagen,
-            titulo,
-            fecha,
-            ubicacion,
-            distancia,
-            precio,
+            usuario,
+            featuredRace,
             modifier = Modifier.weight(1f)
         )
         BottomNavBar(Seccion.INICIO)
@@ -93,5 +83,7 @@ fun HomeScreen(modifier: Modifier = Modifier) {
 @Composable
 @Preview(showBackground = true, device = "spec:width=411dp,height=891dp")
 fun HomeScreenPreview() {
-    HomeScreen()
+    PacetrideTheme(darkTheme = true) {
+        HomeScreen()
+    }
 }

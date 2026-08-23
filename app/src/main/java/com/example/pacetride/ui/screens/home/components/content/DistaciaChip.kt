@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
@@ -38,7 +39,7 @@ fun DistanciaChip(
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = modifier
-            .border(1.dp, colorResource(R.color.electric_lime), RoundedCornerShape(16.dp))
+            .border(1.dp, MaterialTheme.colorScheme.primaryContainer, RoundedCornerShape(16.dp))
             .padding(vertical = 16.dp)
             .clickable(
                 interactionSource = remember { MutableInteractionSource() },
@@ -46,17 +47,17 @@ fun DistanciaChip(
                 onClick = onClick
             )
     ) {
-        Text(distancia, color = Color.White, fontSize = 18.sp, fontWeight = FontWeight.Bold)
+        Text(distancia, color = MaterialTheme.colorScheme.onBackground, fontSize = 18.sp, fontWeight = FontWeight.Bold)
         Spacer(modifier = Modifier.height(4.dp))
         Row(verticalAlignment = Alignment.CenterVertically) {
             Image(
                 painter = painterResource(R.drawable.corriendo),
                 contentDescription = null,
-                colorFilter = ColorFilter.tint(colorResource(R.color.electric_lime)),
+                colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.primaryContainer),
                 modifier = Modifier.size(12.dp)
             )
             Spacer(modifier = Modifier.width(4.dp))
-            Text(distancia, color = colorResource(R.color.electric_lime), fontSize = 12.sp)
+            Text(distancia, color = MaterialTheme.colorScheme.primaryContainer, fontSize = 12.sp)
         }
     }
 }
