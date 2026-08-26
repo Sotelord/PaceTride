@@ -19,9 +19,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.example.pacetride.ui.theme.PacetrideTheme
 import com.example.pacetride.R
-import com.example.pacetride.data.local.LocalCarreraProvider
-import com.example.pacetride.data.local.LocalNotificacionProvider
-import com.example.pacetride.data.local.LocalUsuarioProvider
+import com.example.pacetride.ui.screens.escribirResena.EscribirResenaScreen
 import com.example.pacetride.ui.screens.explorer.ExploreScreen
 import com.example.pacetride.ui.screens.home.HomeScreen
 import com.example.pacetride.ui.screens.login.LoginScreen
@@ -55,6 +53,7 @@ sealed class Screen(val route: String){
     object EditProfile : Screen ("editProfile")
     object Configuracion : Screen ("Configuracion")
     object RecuperarContrasena : Screen ("recuperarContrasena")
+    object EscribirResena : Screen ("escribirResena")
 }
 
 
@@ -178,26 +177,26 @@ fun AppNavigation(
             val raceId = it.arguments?.getInt("raceId") ?: 0
 
             //Buscar la carrera
-
-            val carrera = LocalCarreraProvider.listCarrera.find {it.id == raceId}
-
-            if(carrera != null) {
-                RaceDetailScreen(
-                    carrera = carrera,
-                    atrasPressed = {
-                        navControler.popBackStack()
-                    },
-                    inscribemePressed = {
-                        navControler.navigate(Screen.Inscribeme.route)
-                    }
-                )
-            } else {
-                Text(text = "Carrera no encontrada")
-            }
+            RaceDetailScreen(
+                raceId = raceId,
+                atrasPressed = {
+                    navControler.popBackStack()
+                               },
+                inscribemePressed = {
+                    navControler.navigate(Screen.Inscribeme.route)
+                },
+                escribirResenaPressed = {
+                    navControler.navigate(Screen.EscribirResena.route)
+                }
+            )
         }
 
         composable (route = Screen.Inscribeme.route){
             Text("Falta esta pantalla")
+        }
+
+        composable (route = Screen.EscribirResena.route){
+            EscribirResenaScreen()
         }
 
         composable(
@@ -205,24 +204,18 @@ fun AppNavigation(
             arguments = listOf(navArgument("usuarioId") {type = NavType.IntType})
         ){ it ->
             val usuarioId = it.arguments?.getInt("usuarioId") ?: 0
-            val usuario = LocalUsuarioProvider.usuarios.find { it.id == usuarioId }
-
-            if(usuario != null){
-                val userNotifications = LocalNotificacionProvider.notificacionesDe(usuarioId)
-
-                NotificationsScreen(
-                    notificaciones = userNotifications,
-                    atrasPressed = {
-                        navControler.popBackStack()
-                    },
-                    viewProfile = { usuarioId ->
-                        navControler.navigate(Screen.PublicProfile.createRoute(usuarioId))
-                    },
-                    verCarrera = { raceId ->
-                        navControler.navigate(Screen.RaceDetail.createRoute(raceId))
-                    }
-                )
-            }
+            NotificationsScreen(
+                usuarioId = usuarioId,
+                atrasPressed = {
+                    navControler.popBackStack()
+                               },
+                viewProfile = { usuarioId ->
+                    navControler.navigate(Screen.PublicProfile.createRoute(usuarioId))
+                              },
+                verCarrera = { raceId ->
+                    navControler.navigate(Screen.RaceDetail.createRoute(raceId))
+                }
+            )
         }
 
         composable (
@@ -230,22 +223,19 @@ fun AppNavigation(
             arguments = listOf(navArgument("usuarioId") {type = NavType.IntType})
         ) {it ->
             val usuarioId = it.arguments?.getInt("usuarioId") ?: 0
-            val usuario = LocalUsuarioProvider.usuarios.find { it.id == usuarioId }
 
-            if(usuario != null){
-                PublicProfileScreen(
-                    atrasPressed = {
-                        navControler.popBackStack()
-                    },
-                    usuario = usuario,
-                    comentariosPressed = {
-                        navControler.navigate(Screen.Comentarios.route)
-                    },
-                    configPressed = {
-                        navControler.navigate(Screen.ConfigUsuarioPublico.route)
-                    }
-                )
-            }
+            PublicProfileScreen(
+                atrasPressed = {
+                    navControler.popBackStack()
+                               },
+                usuarioId = usuarioId,
+                comentariosPressed = {
+                    navControler.navigate(Screen.Comentarios.route)
+                                     },
+                configPressed = {
+                    navControler.navigate(Screen.ConfigUsuarioPublico.route)
+                }
+            )
         }
 
         composable (route = Screen.Comentarios.route){

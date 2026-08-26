@@ -143,19 +143,22 @@ fun NotificationsScreenContent(
 
 @Composable
 fun NotificationsScreen(
-    notificaciones: List<Notificacion>,
+    usuarioId: Int,
     atrasPressed: () -> Unit,
     viewProfile: (Int) -> Unit,
     verCarrera: (Int) -> Unit = {},
     modifier: Modifier = Modifier
 ) {
+    val userNotifications = LocalNotificacionProvider.notificacionesDe(usuarioId)
+
+
     Box(
         modifier = modifier
             .fillMaxSize()
             .background(MaterialTheme.colorScheme.background)
     ) {
         NotificationsScreenContent(
-            notificacionesIniciales = notificaciones,
+            notificacionesIniciales = userNotifications,
             atrasPressed = atrasPressed,
             viewProfile = viewProfile,
             verCarrera = verCarrera
@@ -168,6 +171,6 @@ fun NotificationsScreen(
 fun NotificationsScreenPreview() {
     val notificaciones = LocalNotificacionProvider.notificaciones
     PacetrideTheme(darkTheme = true) {
-        NotificationsScreen(notificaciones, {}, {})
+        NotificationsScreen(3, {}, {})
     }
 }

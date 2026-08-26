@@ -1,5 +1,6 @@
 package com.example.pacetride.ui.screens.raceDetail
 
+import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -35,6 +36,7 @@ import com.example.pacetride.ui.screens.raceDetail.components.content.IncluyeGri
 import com.example.pacetride.ui.screens.raceDetail.components.content.MapaRuta
 import com.example.pacetride.ui.screens.raceDetail.components.content.TarjetaInfoCarrera
 import com.example.pacetride.ui.screens.raceDetail.components.content.TituloCarrera
+import com.example.pacetride.ui.utils.AppButton
 import com.example.pacetride.ui.utils.TituloSeccionDetalle
 
 // ---------- CONTENIDO ----------
@@ -116,37 +118,53 @@ fun RaceDetailScreenContent(
 
 @Composable
 fun RaceDetailScreen(
-    carrera: Carrera,
+    raceId: Int,
     atrasPressed: () -> Unit,
     inscribemePressed: () -> Unit,
+    escribirResenaPressed: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    var kmSeleccionado by remember { mutableIntStateOf(carrera.distanciaPrincipalKm) }
-    val precioActual = carrera.calcularPrecio(kmSeleccionado)
+    val carrera = LocalCarreraProvider.listCarrera.find {it.id == raceId}
 
-    Column(
-        modifier = modifier
-            .fillMaxSize()
-            .background(MaterialTheme.colorScheme.background)
-    ) {
-        RaceDetailScreenContent(
-            carrera = carrera,
-            kmSeleccionado = kmSeleccionado,
-            onSeleccionarKm = { kmSeleccionado = it },
-            atrasPressed = atrasPressed,
-            inscribemePressed = inscribemePressed,
-            modifier = Modifier.weight(1f)
-        )
+    if (carrera != null){
+        var kmSeleccionado by remember { mutableIntStateOf(carrera.distanciaPrincipalKm) }
+        val precioActual = carrera.calcularPrecio(kmSeleccionado)
 
-        // ---------- "bottomBar" manual ----------
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
+        Column(
+            modifier = modifier
+                .fillMaxSize()
                 .background(MaterialTheme.colorScheme.background)
-                .padding(16.dp)
         ) {
-            BotonInscripcion(inscribemePressed, precio = precioActual.aPrecioCop())
+            RaceDetailScreenContent(
+                carrera = carrera,
+                kmSeleccionado = kmSeleccionado,
+                onSeleccionarKm = { kmSeleccionado = it },
+                atrasPressed = atrasPressed,
+                inscribemePressed = inscribemePressed,
+                modifier = Modifier.weight(1f)
+            )
+
+            AppButton(
+                textoBoton = stringResource(R.string.escribir_resena),
+                onClick = {
+                    Log.d("ExplorerScreen", "Escribir reseña clicked")
+                    escribirResenaPressed()
+                },
+                modifier = Modifier.fillMaxWidth()
+            )
+
+            // ---------- "bottomBar" manual ----------
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .background(MaterialTheme.colorScheme.background)
+                    .padding(16.dp)
+            ) {
+                BotonInscripcion(inscribemePressed, precio = precioActual.aPrecioCop())
+            }
         }
+    } else {
+        Text("Carrera no encontrada")
     }
 }
 
@@ -157,8 +175,9 @@ fun RaceDetailScreenPreview() {
     PacetrideTheme(darkTheme = true) {
         RaceDetailScreen(
             inscribemePressed = {},
-            carrera = carrera,
-            atrasPressed = {}
+            raceId = 2,
+            atrasPressed = {},
+            escribirResenaPressed = {}
         )
     }
 }

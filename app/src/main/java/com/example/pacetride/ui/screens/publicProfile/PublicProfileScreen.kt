@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -75,31 +76,37 @@ fun PublicProfileContent(
 }
 @Composable
 fun PublicProfileScreen(
-    usuario: Usuario,
+    usuarioId: Int,
     atrasPressed: () -> Unit,
     comentariosPressed: () -> Unit,
     configPressed: () -> Unit,
     modifier: Modifier = Modifier
 ) {
+    val usuario = LocalUsuarioProvider.usuarios.find { it.id == usuarioId }
+
     Column(
         modifier = modifier
             .fillMaxSize()
             .background(MaterialTheme.colorScheme.background)
     ) {
-        PublicProfileContent(
-            atrasPressed = atrasPressed,
-            comentariosPressed = comentariosPressed,
-            configPressed = configPressed,
-            usuario = usuario,
-            modifier = Modifier
-                .weight(1f)
-                .verticalScroll(rememberScrollState())
-                .padding(
-                    start = 20.dp,
-                    end = 20.dp,
-                    bottom = 32.dp
-                )
-        )
+        if(usuario != null){
+            PublicProfileContent(
+                atrasPressed = atrasPressed,
+                comentariosPressed = comentariosPressed,
+                configPressed = configPressed,
+                usuario = usuario,
+                modifier = Modifier
+                    .weight(1f)
+                    .verticalScroll(rememberScrollState())
+                    .padding(
+                        start = 20.dp,
+                        end = 20.dp,
+                        bottom = 32.dp
+                    )
+            )
+        } else {
+            Text("Usuario no encontrados")
+        }
     }
 }
 
@@ -108,6 +115,6 @@ fun PublicProfileScreen(
 fun PublicProfileScreenPreview() {
     val usuario = LocalUsuarioProvider.usuarios[1]
     PacetrideTheme(darkTheme = true) {
-        PublicProfileScreen(usuario, {}, {}, {})
+        PublicProfileScreen(2, {}, {}, {})
     }
 }
