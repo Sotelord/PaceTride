@@ -25,6 +25,7 @@ import com.example.pacetride.ui.utils.AppButton
 fun LoginForm(
     loginButtonPressed: () -> Unit,
     createAcountPressed: () -> Unit,
+    recuperarContrasenaPressed: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     var email by remember { mutableStateOf("") }
@@ -94,7 +95,10 @@ fun LoginForm(
             text = "¿Olvidaste tu contraseña?",
             color = MaterialTheme.colorScheme.primaryContainer,
             fontSize = 14.sp,
-            modifier = Modifier.align(Alignment.End).clickable { }.padding(vertical = 4.dp)
+            modifier = Modifier.align(Alignment.End).clickable {
+                recuperarContrasenaPressed()
+                Log.d("LoginScreen", "Iniciar sesión clicked")
+            }.padding(vertical = 4.dp)
         )
 
         Spacer(modifier = Modifier.height(16.dp))
@@ -164,7 +168,8 @@ fun LoginFormPreview() {
     PacetrideTheme(darkTheme = true) {
         LoginForm(
             loginButtonPressed = {},
-            createAcountPressed = {}
+            createAcountPressed = {},
+            recuperarContrasenaPressed = {}
         )
     }
 }

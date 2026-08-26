@@ -54,6 +54,7 @@ sealed class Screen(val route: String){
     object ConfigUsuarioPublico : Screen ("configUsuarioPublico")
     object EditProfile : Screen ("editProfile")
     object Configuracion : Screen ("Configuracion")
+    object RecuperarContrasena : Screen ("recuperarContrasena")
 }
 
 
@@ -81,6 +82,9 @@ fun AppNavigation(
                 },
                 createAcountPressed = {
                     navControler.navigate(Screen.Register.route)
+                },
+                recuperarContrasenaPressed = {
+                    navControler.navigate((Screen.RecuperarContrasena.route))
                 }
             )
         }
@@ -154,6 +158,9 @@ fun AppNavigation(
 
 
         //Otra navegación
+        composable (route = Screen.RecuperarContrasena.route){
+            Text("Falta esta pantalla")
+        }
 
         composable (route = Screen.Configuracion.route){
             Text("Falta esta pantalla")

@@ -18,6 +18,7 @@ import com.example.pacetride.ui.screens.login.components.header.LoginHeader
 @Composable
 fun LoginScreen(
     createAcountPressed: () -> Unit,
+    recuperarContrasenaPressed: () -> Unit,
     loginButtonPressed: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -34,7 +35,8 @@ fun LoginScreen(
         Spacer(modifier = Modifier.height(32.dp))
         LoginForm(
             loginButtonPressed = loginButtonPressed,
-            createAcountPressed = createAcountPressed
+            createAcountPressed = createAcountPressed,
+            recuperarContrasenaPressed = recuperarContrasenaPressed
         )
     }
 }
@@ -43,6 +45,6 @@ fun LoginScreen(
 @Composable
 fun LoginScreenPreview() {
     PacetrideTheme(darkTheme = true) {
-        LoginScreen({}, {})
+        LoginScreen({}, {},{})
     }
 }
