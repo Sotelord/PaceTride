@@ -4,7 +4,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -20,18 +19,18 @@ fun TituloSeccionDetalle(texto: String, modifier: Modifier = Modifier) {
 
 @Composable
 @Preview
-fun TituloSeccionDetallePreview(modifier: Modifier = Modifier){
+fun TituloSeccionDetallePreview(){
     TituloSeccionDetalle(stringResource(R.string.sobre_la_carrera))
 }
 
 @Composable
 @Preview
-fun TituloSeccionDetallePreview2(modifier: Modifier = Modifier){
+fun TituloSeccionDetallePreview2(){
     TituloSeccionDetalle(stringResource(R.string.ruta))
 }
 
 @Composable
 @Preview
-fun TituloSeccionDetallePreview3(modifier: Modifier = Modifier){
+fun TituloSeccionDetallePreview3(){
     TituloSeccionDetalle(stringResource(R.string.tu_inscripcion_incluye))
 }

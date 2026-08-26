@@ -38,7 +38,7 @@ fun EstrellaCalificable(
 
 @Composable
 @Preview
-fun EstrellaCalificablePreview(modifier: Modifier = Modifier){
+fun EstrellaCalificablePreview(){
     EstrellaCalificable(
         true,
         onClick = {}
@@ -47,7 +47,7 @@ fun EstrellaCalificablePreview(modifier: Modifier = Modifier){
 
 @Composable
 @Preview
-fun EstrellaCalificablePreview2(modifier: Modifier = Modifier){
+fun EstrellaCalificablePreview2(){
     EstrellaCalificable(
         false,
         onClick = {}

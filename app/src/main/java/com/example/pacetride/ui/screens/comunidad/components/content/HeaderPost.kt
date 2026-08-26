@@ -10,7 +10,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -39,18 +38,18 @@ fun HeaderPost(
 
 @Composable
 @Preview
-fun HeaderPostPreview(modifier: Modifier = Modifier){
+fun HeaderPostPreview(){
     HeaderPost(R.drawable.foto_perfil, "Santiago Rayo", "Hace 2 h")
 }
 
 @Composable
 @Preview
-fun HeaderPostPreview2(modifier: Modifier = Modifier){
+fun HeaderPostPreview2(){
     HeaderPost(R.drawable.foto_perfil, "Laura Gómez", "Hace 5 h")
 }
 
 @Composable
 @Preview
-fun HeaderPostPreview3(modifier: Modifier = Modifier){
+fun HeaderPostPreview3(){
     HeaderPost(R.drawable.foto_perfil, "Luis Martínez", "Hace 8 h")
 }

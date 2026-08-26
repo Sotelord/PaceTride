@@ -12,6 +12,7 @@ object LocalUsuarioProvider {
 
     val usuarios = listOf(
         Usuario(
+            id = 1,
             nombre = "Santiago Rayo",
             usuario = "@santiagorayo",
             ubicacion = "Bogotá, Colombia",
@@ -29,6 +30,7 @@ object LocalUsuarioProvider {
         ),
 
         Usuario(
+            id = 2,
             nombre = "Sara Castro",
             usuario = "@saracastro",
             ubicacion = "Chía, Colombia",
@@ -46,6 +48,7 @@ object LocalUsuarioProvider {
         ),
 
         Usuario(
+            id = 3,
             nombre = "David Sotelo",
             usuario = "@davidsotelo",
             ubicacion = "Cajicá, Colombia",
@@ -62,6 +65,7 @@ object LocalUsuarioProvider {
         ),
 
         Usuario(
+            id = 4,
             nombre = "Juan Angarita",
             usuario = "@juanangarita",
             ubicacion = "Bogotá, Colombia",

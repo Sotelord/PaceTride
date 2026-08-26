@@ -26,6 +26,6 @@ fun AvatarUsuario(idImagen: Int?, modifier: Modifier = Modifier) {
 
 @Composable
 @Preview
-fun AvatarUsuarioPreview(modifier: Modifier = Modifier){
+fun AvatarUsuarioPreview(){
     AvatarUsuario(R.drawable.foto_perfil)
 }

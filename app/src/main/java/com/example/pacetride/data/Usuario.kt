@@ -3,6 +3,7 @@ package com.example.pacetride.data
 import com.example.pacetride.R
 
 data class Usuario(
+    val id: Int,
     val nombre: String,
     val usuario: String,
     val ubicacion: String,

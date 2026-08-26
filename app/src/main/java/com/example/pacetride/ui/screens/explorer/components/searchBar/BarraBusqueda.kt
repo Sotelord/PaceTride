@@ -25,11 +25,9 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
@@ -41,9 +39,10 @@ import com.example.pacetride.R
 
 @Composable
 fun BarraBusqueda(
+    texto: String,
+    onTextoChange: (String) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    var texto by remember { mutableStateOf("") }
     val teclado = LocalSoftwareKeyboardController.current
 
     Row(
@@ -71,7 +70,7 @@ fun BarraBusqueda(
             }
             BasicTextField(
                 value = texto,
-                onValueChange = { texto = it },
+                onValueChange = onTextoChange,
                 textStyle = TextStyle(
                     color = MaterialTheme.colorScheme.onBackground,
                     fontSize = 15.sp
@@ -99,7 +98,7 @@ fun BarraBusqueda(
                     .size(18.dp)
                     .clickable {
                         Log.d("ExploreScreen", "Búsqueda cancelada")
-                        texto = ""
+                        onTextoChange("")
                         teclado?.hide()
                     }
             )
@@ -109,6 +108,7 @@ fun BarraBusqueda(
 
 @Composable
 @Preview
-fun BarraBusquedaPreview(modifier: Modifier = Modifier){
-    BarraBusqueda()
+fun BarraBusquedaPreview() {
+    var texto by remember { mutableStateOf("") }
+    BarraBusqueda(texto = texto, onTextoChange = { texto = it })
 }

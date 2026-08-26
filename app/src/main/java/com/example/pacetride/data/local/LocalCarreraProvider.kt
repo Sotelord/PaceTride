@@ -6,6 +6,7 @@ import com.example.pacetride.data.Carrera
 object LocalCarreraProvider {
     val listCarrera = listOf(
         Carrera(
+            id = 1,
             idImagen = R.drawable.running,
             nombre = "Carrera Atlética Bogotá 10K",
             ubicacion = "Bogotá",
@@ -16,6 +17,7 @@ object LocalCarreraProvider {
             descripcion = "Un recorrido rápido y plano por las principales vías del norte de la ciudad. Ideal para corredores que buscan superar su mejor marca personal en la distancia reina de los 10 kilómetros."
         ),
         Carrera(
+            id = 2,
             idImagen = R.drawable.running,
             nombre = "Corre por Bogotá 5K",
             ubicacion = "Bogotá",
@@ -26,6 +28,7 @@ object LocalCarreraProvider {
             descripcion = "El evento perfecto para iniciarse en el mundo del running o disfrutar con amigos y familia. Una ruta recreativa llena de puntos de entretenimiento, música en vivo y mucha energía positiva."
         ),
         Carrera(
+            id = 3,
             idImagen = R.drawable.running,
             nombre = "Media Maratón Bogotá 2026",
             ubicacion = "Bogotá",
@@ -36,6 +39,7 @@ object LocalCarreraProvider {
             descripcion = "Vive una de las experiencias de running ás importantes de Bogotá. Corre, supera tus límites y comparte el recorrido con miles de runners"
         ),
         Carrera(
+            id = 4,
             idImagen = R.drawable.running,
             nombre = "Correra 0 Bogotá",
             ubicacion = "Bogotá",
@@ -47,6 +51,7 @@ object LocalCarreraProvider {
             descripcion = "Una maratón desafiante diseñada exclusivamente para los atletas más experimentados de la región. El circuito atraviesa zonas de alta exigencia topográfica poniendo a prueba tu resistencia física y mental."
         ),
         Carrera(
+            id = 5,
             idImagen = R.drawable.running,
             nombre = "Carrera 10k",
             ubicacion = "Bogotá",
@@ -57,6 +62,7 @@ object LocalCarreraProvider {
             descripcion = "Disfruta de una edición nocturna muy especial. Una ruta iluminada donde todos los participantes visten prendas reflectivas para crear un río de luces a lo largo de los parques principales de la capital."
         ),
         Carrera(
+            id = 6,
             idImagen = R.drawable.running,
             nombre = "Carrera Universitaria 5k",
             ubicacion = "Pontificia Universidad Javeriana",

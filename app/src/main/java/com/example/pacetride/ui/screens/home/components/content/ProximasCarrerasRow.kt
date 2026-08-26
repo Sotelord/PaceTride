@@ -14,7 +14,11 @@ import com.example.pacetride.data.Carrera
 import com.example.pacetride.data.local.LocalCarreraProvider
 
 @Composable
-fun ProximasCarrerasRow(carreras: List<Carrera>, modifier: Modifier = Modifier) {
+fun ProximasCarrerasRow(
+    carreras: List<Carrera>,
+    raceCardPressed: (Int)-> Unit,
+    modifier: Modifier = Modifier
+) {
     LazyRow(
         modifier = modifier
             .fillMaxWidth()
@@ -22,7 +26,13 @@ fun ProximasCarrerasRow(carreras: List<Carrera>, modifier: Modifier = Modifier) 
         horizontalArrangement = Arrangement.spacedBy(12.dp)
     ) {
         items(carreras) {
-            carrera -> RaceCard(carrera,onClick = { Log.d("HomeScreen", "Race Card Clicked")})
+            carrera -> RaceCard(
+            carrera = carrera,
+            onClick = {
+                raceCardPressed(carrera.id)
+                Log.d("HomeScreen", "Race Card Clicked")
+            }
+            )
 
         }
     }
@@ -30,7 +40,7 @@ fun ProximasCarrerasRow(carreras: List<Carrera>, modifier: Modifier = Modifier) 
 
 @Preview
 @Composable
-fun ProximasCarrerasRowPreview(modifier: Modifier = Modifier){
+fun ProximasCarrerasRowPreview(){
     val carreras = LocalCarreraProvider.listCarrera
-    ProximasCarrerasRow(carreras)
+    ProximasCarrerasRow(carreras, {})
 }

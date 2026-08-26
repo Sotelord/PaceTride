@@ -13,12 +13,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.pacetride.R
 
 @Composable
 fun ChipDistanciaDetalle(
@@ -48,18 +45,18 @@ fun ChipDistanciaDetalle(
 
 @Composable
 @Preview(showBackground = true)
-fun ChipDistanciaDetallePreview(modifier: Modifier = Modifier){
+fun ChipDistanciaDetallePreview(){
     ChipDistanciaDetalle("5K", false, onClick = {})
 }
 
 @Composable
 @Preview(showBackground = true)
-fun ChipDistanciaDetallePreview2(modifier: Modifier = Modifier){
+fun ChipDistanciaDetallePreview2(){
     ChipDistanciaDetalle("10K", false, onClick = {})
 }
 
 @Composable
 @Preview
-fun ChipDistanciaDetallePreview3(modifier: Modifier = Modifier){
+fun ChipDistanciaDetallePreview3(){
     ChipDistanciaDetalle("21K", true, onClick = {})
 }

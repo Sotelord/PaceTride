@@ -45,7 +45,7 @@ fun ChipsFlowDestacar(
 
 @Composable
 @Preview
-fun ChipsFlowDestacarPreview(modifier: Modifier = Modifier){
+fun ChipsFlowDestacarPreview(){
     val opcionesDestacar = listOf("Ruta", "Organización", "Ambiente", "Hidratación", "Seguridad", "Kit", "Precio")
     var seleccionadas by remember { mutableStateOf(setOf("Ruta", "Organización", "Ambiente")) }
 

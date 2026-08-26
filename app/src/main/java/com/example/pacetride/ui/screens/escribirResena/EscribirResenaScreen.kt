@@ -20,13 +20,12 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.compose.PacetrideTheme
+import com.example.pacetride.ui.theme.PacetrideTheme
 import com.example.pacetride.R
 import com.example.pacetride.data.Carrera
 import com.example.pacetride.data.local.LocalCarreraProvider
@@ -36,7 +35,6 @@ import com.example.pacetride.ui.screens.escribirResena.components.content.ChipsF
 import com.example.pacetride.ui.screens.escribirResena.components.content.SelectorCalificacion
 import com.example.pacetride.ui.screens.escribirResena.components.content.TarjetaResumenCarrera
 import com.example.pacetride.ui.screens.escribirResena.components.header.BarraSuperiorConTitulo
-import com.example.pacetride.ui.screens.home.HomeScreen
 import com.example.pacetride.ui.utils.TituloSeccionDetalle
 
 // ---------- CONTENIDO ----------

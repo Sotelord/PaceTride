@@ -22,7 +22,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -72,7 +71,7 @@ fun ChipDestacado(
 
 @Composable
 @Preview
-fun ChipDestacadoPreview(modifier: Modifier = Modifier){
+fun ChipDestacadoPreview(){
     Row(
         modifier = Modifier.padding(16.dp),
         horizontalArrangement = Arrangement.spacedBy(8.dp)
@@ -95,7 +94,7 @@ fun ChipDestacadoPreview(modifier: Modifier = Modifier){
 
 @Composable
 @Preview
-fun ChipDestacadoPreview2(modifier: Modifier = Modifier){
+fun ChipDestacadoPreview2(){
     Row(
         modifier = Modifier.padding(16.dp),
         horizontalArrangement = Arrangement.spacedBy(8.dp)
@@ -118,7 +117,7 @@ fun ChipDestacadoPreview2(modifier: Modifier = Modifier){
 
 @Composable
 @Preview
-fun ChipDestacadoPreview3(modifier: Modifier = Modifier){
+fun ChipDestacadoPreview3(){
     Row(
         modifier = Modifier.padding(16.dp),
         horizontalArrangement = Arrangement.spacedBy(8.dp)
@@ -141,7 +140,7 @@ fun ChipDestacadoPreview3(modifier: Modifier = Modifier){
 
 @Composable
 @Preview
-fun ChipDestacadoPreview4(modifier: Modifier = Modifier){
+fun ChipDestacadoPreview4(){
     Row(
         modifier = Modifier.padding(16.dp),
         horizontalArrangement = Arrangement.spacedBy(8.dp)
@@ -164,7 +163,7 @@ fun ChipDestacadoPreview4(modifier: Modifier = Modifier){
 
 @Composable
 @Preview
-fun ChipDestacadoPreview5(modifier: Modifier = Modifier){
+fun ChipDestacadoPreview5(){
     Row(
         modifier = Modifier.padding(16.dp),
         horizontalArrangement = Arrangement.spacedBy(8.dp)
@@ -187,7 +186,7 @@ fun ChipDestacadoPreview5(modifier: Modifier = Modifier){
 
 @Composable
 @Preview
-fun ChipDestacadoPreview6(modifier: Modifier = Modifier){
+fun ChipDestacadoPreview6(){
     Row(
         modifier = Modifier.padding(16.dp),
         horizontalArrangement = Arrangement.spacedBy(8.dp)
@@ -210,7 +209,7 @@ fun ChipDestacadoPreview6(modifier: Modifier = Modifier){
 
 @Composable
 @Preview
-fun ChipDestacadoPreview7(modifier: Modifier = Modifier){
+fun ChipDestacadoPreview7(){
     Row(
         modifier = Modifier.padding(16.dp),
         horizontalArrangement = Arrangement.spacedBy(8.dp)

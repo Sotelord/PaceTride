@@ -35,6 +35,7 @@ import com.example.pacetride.ui.utils.AppButton
 @Composable
 fun FeaturedRaceCard(
     carrera: Carrera,
+    verCarreraButtonPressed: (Int) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Box(
@@ -82,18 +83,19 @@ fun FeaturedRaceCard(
             Spacer(modifier = Modifier.height(4.dp))
             InfoRow(R.drawable.corriendo, carrera.distanciaMostrable)
             Spacer(modifier = Modifier.height(8.dp))
-            carrera.precioMostrable?.let {
-                Text(
-                    it,
-                    color = Color.White,
-                    fontSize = 20.sp,
-                    fontWeight = FontWeight.Bold
-                )
-            }
+            Text(
+                carrera.precioMostrable,
+                color = Color.White,
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold
+            )
             Spacer(modifier = Modifier.height(12.dp))
             AppButton(
                 textoBoton = stringResource(R.string.ver_carrera),
-                onClick = { Log.d("HomeScreen", "Ver carrera clicked")},
+                onClick = {
+                    Log.d("HomeScreen", "Ver carrera clicked")
+                    verCarreraButtonPressed(carrera.id)
+                },
                 modifier = Modifier.fillMaxWidth()
             )
         }
@@ -102,10 +104,10 @@ fun FeaturedRaceCard(
 
 @Composable
 @Preview
-fun FeaturedRaceCardPreview(modifier: Modifier = Modifier){
+fun FeaturedRaceCardPreview(){
     val carrera = LocalCarreraProvider.listCarrera[2]
     FeaturedRaceCard(
-        carrera,
+        carrera,{},
         modifier = Modifier.padding(horizontal = 20.dp)
         )
 }

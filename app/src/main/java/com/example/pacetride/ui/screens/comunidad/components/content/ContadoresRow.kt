@@ -1,6 +1,5 @@
 package com.example.pacetride.ui.screens.comunidad.components.content
 
-import android.graphics.Color
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -21,27 +20,27 @@ fun ContadoresRow(
         modifier = modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.spacedBy(20.dp)
     ) {
-        ContadorInteraccion(R.drawable.ic_me_gusta_lleno, nLikes, stringResource(R.string.me_gusta))
-        ContadorInteraccion(R.drawable.ic_comentario, nComentarios,
-            stringResource(R.string.comentarios), aplicarTinte = true
+        ContadorInteraccion(idIcono = R.drawable.ic_me_gusta_lleno, cantidad = nLikes, interaccion =  stringResource(R.string.me_gusta))
+        ContadorInteraccion(idIcono = R.drawable.ic_comentario, cantidad =  nComentarios,
+            interaccion =  stringResource(R.string.comentarios), aplicarTinte = true
         )
     }
 }
 
 @Composable
 @Preview
-fun ContadoresRowPreview(modifier: Modifier = Modifier){
+fun ContadoresRowPreview(){
     ContadoresRow("128", "24")
 }
 
 @Composable
 @Preview
-fun ContadoresRowPreview2(modifier: Modifier = Modifier){
+fun ContadoresRowPreview2(){
     ContadoresRow("67", "8")
 }
 
 @Composable
 @Preview
-fun ContadoresRowPreview3(modifier: Modifier = Modifier){
+fun ContadoresRowPreview3(){
     ContadoresRow("34", "5")
 }

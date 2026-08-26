@@ -32,11 +32,11 @@ import com.example.pacetride.R
 
 @Composable
 fun BotonAccionPost(
+    modifier: Modifier = Modifier,
     idIcono: Int,
     texto: String,
     seleccionado: Boolean = false,
-    onClick: () -> Unit,
-    modifier: Modifier = Modifier
+    onClick: () -> Unit
 ) {
     val iconoFinal = if (seleccionado && idIcono == R.drawable.ic_me_gusta) {
         R.drawable.ic_me_gusta_lleno

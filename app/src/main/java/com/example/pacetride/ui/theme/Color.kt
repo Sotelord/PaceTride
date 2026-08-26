@@ -1,4 +1,4 @@
-package com.example.compose
+package com.example.pacetride.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
@@ -31,13 +31,6 @@ val scrimLight = Color(0xFF000000)
 val inverseSurfaceLight = Color(0xFF313030)
 val inverseOnSurfaceLight = Color(0xFFF3F0EF)
 val inversePrimaryLight = Color(0xFFA6D700)
-val surfaceDimLight = Color(0xFFDCD9D8)
-val surfaceBrightLight = Color(0xFFFCF9F8)
-val surfaceContainerLowestLight = Color(0xFFFFFFFF)
-val surfaceContainerLowLight = Color(0xFFF6F3F2)
-val surfaceContainerLight = Color(0xFFEDEEEA)           // 👈 gris para "cards" internas
-val surfaceContainerHighLight = Color(0xFFE4E6E1)
-val surfaceContainerHighestLight = Color(0xFFDADCD7)
 
 // ---------- DARK (este es tu tema principal actual) ----------
 val primaryDark = Color(0xFFFFFFFF)
@@ -68,10 +61,3 @@ val scrimDark = Color(0xFF000000)
 val inverseSurfaceDark = Color(0xFFE5E2E1)
 val inverseOnSurfaceDark = Color(0xFF313030)
 val inversePrimaryDark = Color(0xFF4E6700)
-val surfaceDimDark = Color(0xFF131313)
-val surfaceBrightDark = Color(0xFF3A3939)
-val surfaceContainerLowestDark = Color(0xFF0E0E0E)
-val surfaceContainerLowDark = Color(0xFF1C1B1B)
-val surfaceContainerDark = Color(0xFF201F1F)
-val surfaceContainerHighDark = Color(0xFF2A2A2A)
-val surfaceContainerHighestDark = Color(0xFF353534)

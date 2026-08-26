@@ -11,23 +11,22 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.pacetride.R
 import com.example.pacetride.data.Resena
 import com.example.pacetride.data.EstadisticasCarrera
 import com.example.pacetride.data.local.LocalPublicacionProvider
 
 @Composable
 fun PostCard(
+    modifier: Modifier = Modifier,
     idAvatar: Int?,
     nombre: String,
     tiempo: String,
@@ -35,12 +34,11 @@ fun PostCard(
     estadisticasCarrera: EstadisticasCarrera? = null,
     resena: Resena? = null,
     likes: String,
-    comentarios: String,
-    modifier: Modifier = Modifier
+    comentarios: String
 ) {
     var meGustaActivo by remember { mutableStateOf(false) }
     // Convertimos el string inicial a Int una sola vez
-    var cantidadLikes by remember { mutableStateOf(likes.toIntOrNull() ?: 0) }
+    var cantidadLikes by remember { mutableIntStateOf(likes.toIntOrNull() ?: 0) }
 
     Column(
         modifier = modifier
@@ -80,7 +78,7 @@ fun PostCard(
 //Publicacion con estadisticas de la persona en el evento
 @Composable
 @Preview
-fun PostCardPreview(modifier: Modifier = Modifier){
+fun PostCardPreview(){
     val publicacion = LocalPublicacionProvider.publicaciones[0] // Santiago Rayo
     PostCard(
         idAvatar = publicacion.idAvatar,
@@ -96,7 +94,7 @@ fun PostCardPreview(modifier: Modifier = Modifier){
 //Publicacion de reseña
 @Composable
 @Preview
-fun PostCardPreview2(modifier: Modifier = Modifier){
+fun PostCardPreview2(){
     val publicacion = LocalPublicacionProvider.publicaciones[1] // Laura Gómez
     PostCard(
         idAvatar = publicacion.idAvatar,
@@ -112,7 +110,7 @@ fun PostCardPreview2(modifier: Modifier = Modifier){
 //Publicacion estilo comentario
 @Composable
 @Preview
-fun PostCardPreview3(modifier: Modifier = Modifier){
+fun PostCardPreview3(){
     val publicacion = LocalPublicacionProvider.publicaciones[2] // Luis Martínez
     PostCard(
         idAvatar = publicacion.idAvatar,

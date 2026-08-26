@@ -11,17 +11,18 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.pacetride.R
-import com.example.pacetride.ui.screens.notifications.components.item.Configuracion
 
 @Composable
-fun HeaderPerfil(modifier: Modifier = Modifier) {
+fun HeaderPerfil(
+    configurationPressed: () -> Unit,
+    modifier: Modifier = Modifier
+) {
     Row(
         modifier = modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.SpaceBetween,
@@ -34,12 +35,15 @@ fun HeaderPerfil(modifier: Modifier = Modifier) {
             fontWeight = FontWeight.Bold,
             fontSize = 20.sp
         )
-        Configuracion(onClick = { Log.d("ProfileScreen", "Configuracion clicked")})
+        Configuracion(onClick = {
+            configurationPressed()
+            Log.d("ProfileScreen", "Configuracion clicked")
+        })
     }
 }
 
 @Composable
 @Preview
 fun HeaderPerfilPreview(modifier: Modifier = Modifier){
-    HeaderPerfil()
+    HeaderPerfil({})
 }

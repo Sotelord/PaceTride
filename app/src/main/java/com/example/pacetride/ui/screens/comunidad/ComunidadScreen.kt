@@ -14,17 +14,13 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.compose.PacetrideTheme
+import com.example.pacetride.ui.theme.PacetrideTheme
 import com.example.pacetride.data.Publicacion
 import com.example.pacetride.data.local.LocalPublicacionProvider
 import com.example.pacetride.ui.screens.comunidad.components.content.PostCard
 import com.example.pacetride.ui.screens.comunidad.components.header.HeaderComunidad
-import com.example.pacetride.ui.screens.home.HomeScreen
-import com.example.pacetride.ui.utils.navbar.BottomNavBar
-import com.example.pacetride.ui.utils.navbar.Seccion
 
 // ---------- CONTENIDO ----------
 
@@ -77,7 +73,6 @@ fun ComunidadScreen(modifier: Modifier = Modifier) {
             publicaciones,
             modifier = Modifier.weight(1f)
         )
-        BottomNavBar(Seccion.EXPLORAR)
     }
 }
 

@@ -27,6 +27,6 @@ fun FotoPerfil(idImagen: Int?, modifier: Modifier = Modifier) {
 
 @Composable
 @Preview
-fun FotoPerfilPreview(modifier: Modifier = Modifier){
+fun FotoPerfilPreview(){
     FotoPerfil(R.drawable.foto_perfil)
 }

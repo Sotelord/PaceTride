@@ -12,14 +12,17 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import com.example.pacetride.R
 import com.example.pacetride.ui.screens.raceDetail.components.header.BadgeMarca
 import com.example.pacetride.ui.screens.raceDetail.components.header.BarraSuperiorDetalle
 
 @Composable
-fun ImagenPortadaCarrera(idImagen: Int, modifier: Modifier = Modifier) {
+fun ImagenPortadaCarrera(
+    idImagen: Int,
+    atrasPressed: () -> Unit,
+    modifier: Modifier = Modifier
+) {
     Box(
         modifier = modifier
             .fillMaxWidth()
@@ -32,6 +35,7 @@ fun ImagenPortadaCarrera(idImagen: Int, modifier: Modifier = Modifier) {
             modifier = Modifier.fillMaxSize()
         )
         BarraSuperiorDetalle(
+            atrasPressed = atrasPressed,
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(top = 40.dp, start = 16.dp, end = 16.dp)
@@ -43,6 +47,6 @@ fun ImagenPortadaCarrera(idImagen: Int, modifier: Modifier = Modifier) {
 }
 @Composable
 @Preview
-fun ImagenPortadaCarreraPreview(modifier: Modifier = Modifier){
-    ImagenPortadaCarrera(R.drawable.running)
+fun ImagenPortadaCarreraPreview(){
+    ImagenPortadaCarrera(R.drawable.running, {})
 }

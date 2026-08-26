@@ -20,7 +20,11 @@ import com.example.pacetride.ui.utils.CampanaNotificaciones
 import com.example.pacetride.ui.utils.LogoApp
 
 @Composable
-fun HeaderHomeScreen(usuario: Usuario, modifier: Modifier = Modifier) {
+fun HeaderHomeScreen(
+    usuario: Usuario,
+    notificacionButtonPressed: (Int)-> Unit,
+    modifier: Modifier = Modifier
+) {
     Column(
         modifier = modifier
             .padding(horizontal = 20.dp)
@@ -33,7 +37,10 @@ fun HeaderHomeScreen(usuario: Usuario, modifier: Modifier = Modifier) {
                     .align(Alignment.Center)
             )
             CampanaNotificaciones(
-                onClick = { Log.d("HomeScreen", "Campana notificaciones clicked")},
+                onClick = {
+                    notificacionButtonPressed(usuario.id)
+                    Log.d("HomeScreen", "Campana notificaciones clicked")
+                          },
                 modifier = Modifier.align(Alignment.CenterEnd)
             )
         }
@@ -45,7 +52,7 @@ fun HeaderHomeScreen(usuario: Usuario, modifier: Modifier = Modifier) {
 
 @Composable
 @Preview
-fun HeaderHomeScreenPreview(modifier: Modifier = Modifier){
+fun HeaderHomeScreenPreview(){
     val usuario = LocalUsuarioProvider.usuarios[0]
-    HeaderHomeScreen(usuario)
+    HeaderHomeScreen(usuario, {})
 }

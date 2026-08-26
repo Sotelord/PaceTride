@@ -40,7 +40,7 @@ fun DistanciasDetalleRow(
 
 @Composable
 @Preview(showBackground = true)
-fun DistanciasDetalleRowInteractivoPreview(modifier: Modifier = Modifier){
+fun DistanciasDetalleRowInteractivoPreview(){
     var seleccionada by remember { mutableStateOf("21K") }
 
     DistanciasDetalleRow(

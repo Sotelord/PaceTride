@@ -1,4 +1,4 @@
-package com.example.pacetride.ui.screens.publicprofile
+package com.example.pacetride.ui.screens.publicProfile
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -11,28 +11,31 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.example.pacetride.ui.screens.profile.components.content.FotoPerfil
-import com.example.pacetride.ui.screens.publicprofile.components.content.DatosUsuarioPublico
-import com.example.pacetride.ui.screens.publicprofile.components.content.MisCarrerasRow
-import com.example.pacetride.ui.screens.publicprofile.components.header.HeaderPublico
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.compose.PacetrideTheme
+import com.example.pacetride.ui.theme.PacetrideTheme
 import com.example.pacetride.R
 import com.example.pacetride.data.Usuario
 import com.example.pacetride.data.local.LocalUsuarioProvider
-import com.example.pacetride.ui.screens.profile.components.estadisticas.EstadisticasRow
-import com.example.pacetride.ui.screens.publicprofile.components.content.ResenasList
-import com.example.pacetride.ui.screens.publicprofile.components.seccion.SeccionTitulo
+import com.example.pacetride.ui.screens.publicProfile.Components.content.DatosUsuarioPublico
+import com.example.pacetride.ui.screens.publicProfile.Components.content.MisCarrerasRow
+import com.example.pacetride.ui.screens.publicProfile.Components.content.ResenasList
+import com.example.pacetride.ui.screens.publicProfile.Components.header.HeaderPublico
+import com.example.pacetride.ui.screens.publicProfile.Components.seccion.SeccionTitulo
+import com.example.pacetride.ui.utils.stats.EstadisticasRow
 
 @Composable
 fun PublicProfileContent(
     usuario: Usuario,
+    atrasPressed: () -> Unit,
+    comentariosPressed: () -> Unit,
+    configPressed: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Column(
         modifier = modifier,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        HeaderPublico()
+        HeaderPublico(atrasPressed)
 
         Spacer(modifier = Modifier.height(8.dp))
 
@@ -40,7 +43,7 @@ fun PublicProfileContent(
 
         Spacer(modifier = Modifier.height(12.dp))
 
-        DatosUsuarioPublico(usuario)
+        DatosUsuarioPublico(usuario, configPressed)
 
         Spacer(modifier = Modifier.height(24.dp))
 
@@ -67,18 +70,26 @@ fun PublicProfileContent(
             modifier = Modifier.fillMaxWidth()
         )
 
-        ResenasList(usuario.resenas)
+        ResenasList(usuario.resenas, comentariosPressed)
     }
 }
 @Composable
-fun PublicProfileScreen(modifier: Modifier = Modifier) {
-    val usuario = LocalUsuarioProvider.usuarios[1]
+fun PublicProfileScreen(
+    usuario: Usuario,
+    atrasPressed: () -> Unit,
+    comentariosPressed: () -> Unit,
+    configPressed: () -> Unit,
+    modifier: Modifier = Modifier
+) {
     Column(
         modifier = modifier
             .fillMaxSize()
             .background(MaterialTheme.colorScheme.background)
     ) {
         PublicProfileContent(
+            atrasPressed = atrasPressed,
+            comentariosPressed = comentariosPressed,
+            configPressed = configPressed,
             usuario = usuario,
             modifier = Modifier
                 .weight(1f)
@@ -95,7 +106,8 @@ fun PublicProfileScreen(modifier: Modifier = Modifier) {
 @Preview(showBackground = true, device = "spec:width=411dp,height=891dp")
 @Composable
 fun PublicProfileScreenPreview() {
+    val usuario = LocalUsuarioProvider.usuarios[1]
     PacetrideTheme(darkTheme = true) {
-        PublicProfileScreen()
+        PublicProfileScreen(usuario, {}, {}, {})
     }
 }

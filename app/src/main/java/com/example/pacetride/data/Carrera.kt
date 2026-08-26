@@ -1,9 +1,11 @@
 package com.example.pacetride.data
 
 import androidx.annotation.DrawableRes
+import kotlin.math.roundToInt
 
 data class Carrera(
     @DrawableRes val idImagen: Int? = null,
+    val id: Int,
     val nombre: String,
     val fecha: String,
     val ubicacion: String,
@@ -17,7 +19,7 @@ data class Carrera(
     //Calcula el precio de inscripción de forma proporcional a la distancia, usando precioBase como referencia para distanciaReferenciaKm.
     fun calcularPrecio(km: Int): Int {
         val precioExacto = precioBase.toDouble() * km / distanciaReferenciaKm
-        return (Math.round(precioExacto / 100.0) * 100).toInt()
+        return ((precioExacto / 100.0).roundToInt() * 100)
     }
 
     // La distancia "principal" a mostrar cuando no se ha elegido ninguna explícitamente.

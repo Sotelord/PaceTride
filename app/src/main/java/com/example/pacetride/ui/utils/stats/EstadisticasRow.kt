@@ -1,4 +1,4 @@
-package com.example.pacetride.ui.screens.profile.components.estadisticas
+package com.example.pacetride.ui.utils.stats
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
@@ -19,15 +19,27 @@ fun EstadisticasRow(estadisticasGlobales: EstadisticasGlobales, modifier: Modifi
     ) {
         val numCarrera = estadisticasGlobales.numCarrera.toString()
         StatBox(R.drawable.ic_medalla, numCarrera, stringResource(R.string.carreras))
-        StatBox(R.drawable.ic_distancia, estadisticasGlobales.distacia, stringResource(R.string.distancia))
-        StatBox(R.drawable.ic_cronometro, estadisticasGlobales.mejorTiempo10k, stringResource(R.string.mejor_10k))
-        StatBox(R.drawable.ic_cronometro, estadisticasGlobales.mejorTiempo21k, stringResource(R.string.mejor_21k))
+        StatBox(
+            R.drawable.ic_distancia,
+            estadisticasGlobales.distacia,
+            stringResource(R.string.distancia)
+        )
+        StatBox(
+            R.drawable.ic_cronometro,
+            estadisticasGlobales.mejorTiempo10k,
+            stringResource(R.string.mejor_10k)
+        )
+        StatBox(
+            R.drawable.ic_cronometro,
+            estadisticasGlobales.mejorTiempo21k,
+            stringResource(R.string.mejor_21k)
+        )
     }
 }
 
 @Composable
 @Preview(showBackground = true)
-fun EstadisiticasRowPreview(modifier: Modifier = Modifier){
+fun EstadisiticasRowPreview(){
     val estadisticasGlobales = LocalUsuarioProvider.usuarios[0].estadisticasGlobales
     EstadisticasRow(estadisticasGlobales)
 }

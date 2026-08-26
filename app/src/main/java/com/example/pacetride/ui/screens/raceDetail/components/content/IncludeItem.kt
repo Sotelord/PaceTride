@@ -10,7 +10,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -37,24 +36,24 @@ fun IncludeItem(idIcono: Int, texto: String, modifier: Modifier = Modifier) {
 
 @Composable
 @Preview
-fun IncludeItemPreview(modifier: Modifier = Modifier){
+fun IncludeItemPreview(){
     IncludeItem(R.drawable.ic_camiseta, stringResource(R.string.camiseta_oficial))
 }
 
 @Composable
 @Preview
-fun IncludeItemPreview2(modifier: Modifier = Modifier){
+fun IncludeItemPreview2(){
     IncludeItem(R.drawable.ic_hidratacion, stringResource(R.string.hidratacion))
 }
 
 @Composable
 @Preview
-fun IncludeItemPreview3(modifier: Modifier = Modifier){
+fun IncludeItemPreview3(){
     IncludeItem(R.drawable.ic_medalla, stringResource(R.string.medalla))
 }
 
 @Composable
 @Preview
-fun IncludeItemPreview4(modifier: Modifier = Modifier){
+fun IncludeItemPreview4(){
     IncludeItem(R.drawable.ic_numero, stringResource(R.string.n_mero_de_competencia))
 }

@@ -31,6 +31,6 @@ fun MapaRuta(idImagen: Int, modifier: Modifier = Modifier) {
 
 @Composable
 @Preview
-fun MapaRutaPreview(modifier: Modifier = Modifier){
+fun MapaRutaPreview(){
     MapaRuta(R.drawable.mapa_ruta)
 }

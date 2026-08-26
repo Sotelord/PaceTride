@@ -11,7 +11,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -19,13 +18,12 @@ import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.compose.PacetrideTheme
+import com.example.pacetride.ui.theme.PacetrideTheme
 import com.example.pacetride.R
 import com.example.pacetride.data.Carrera
 import com.example.pacetride.data.aPrecioCop
@@ -46,6 +44,8 @@ fun RaceDetailScreenContent(
     carrera: Carrera,
     kmSeleccionado: Int,
     onSeleccionarKm: (Int) -> Unit,
+    atrasPressed: () -> Unit,
+    inscribemePressed: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -54,7 +54,7 @@ fun RaceDetailScreenContent(
             .background(MaterialTheme.colorScheme.background)
             .verticalScroll(rememberScrollState())
     ) {
-        ImagenPortadaCarrera(carrera.idImagen ?: R.drawable.running)
+        ImagenPortadaCarrera(carrera.idImagen ?: R.drawable.running, atrasPressed)
 
         Column(modifier = Modifier.padding(16.dp)) {
             TituloCarrera(
@@ -116,9 +116,11 @@ fun RaceDetailScreenContent(
 
 @Composable
 fun RaceDetailScreen(
+    carrera: Carrera,
+    atrasPressed: () -> Unit,
+    inscribemePressed: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    val carrera = LocalCarreraProvider.listCarrera[2]
     var kmSeleccionado by remember { mutableIntStateOf(carrera.distanciaPrincipalKm) }
     val precioActual = carrera.calcularPrecio(kmSeleccionado)
 
@@ -131,6 +133,8 @@ fun RaceDetailScreen(
             carrera = carrera,
             kmSeleccionado = kmSeleccionado,
             onSeleccionarKm = { kmSeleccionado = it },
+            atrasPressed = atrasPressed,
+            inscribemePressed = inscribemePressed,
             modifier = Modifier.weight(1f)
         )
 
@@ -141,7 +145,7 @@ fun RaceDetailScreen(
                 .background(MaterialTheme.colorScheme.background)
                 .padding(16.dp)
         ) {
-            BotonInscripcion(precio = precioActual.aPrecioCop())
+            BotonInscripcion(inscribemePressed, precio = precioActual.aPrecioCop())
         }
     }
 }
@@ -149,7 +153,12 @@ fun RaceDetailScreen(
 @Composable
 @Preview(showBackground = true, device = "spec:width=411dp,height=891dp")
 fun RaceDetailScreenPreview() {
+    val carrera = LocalCarreraProvider.listCarrera[2]
     PacetrideTheme(darkTheme = true) {
-        RaceDetailScreen()
+        RaceDetailScreen(
+            inscribemePressed = {},
+            carrera = carrera,
+            atrasPressed = {}
+        )
     }
 }

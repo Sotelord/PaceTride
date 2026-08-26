@@ -11,7 +11,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -45,7 +44,7 @@ fun InfoItem(
 
 @Composable
 @Preview
-fun InfoItemPreview(modifier: Modifier = Modifier){
+fun InfoItemPreview(){
     InfoItem(
         R.drawable.ic_calendario,
         stringResource(R.string.fecha),
@@ -55,7 +54,7 @@ fun InfoItemPreview(modifier: Modifier = Modifier){
 
 @Composable
 @Preview
-fun InfoItemPreview2(modifier: Modifier = Modifier){
+fun InfoItemPreview2(){
     InfoItem(
         R.drawable.ic_reloj,
         stringResource(R.string.hora_de_salida),
@@ -65,7 +64,7 @@ fun InfoItemPreview2(modifier: Modifier = Modifier){
 
 @Composable
 @Preview
-fun InfoItemPreview3(modifier: Modifier = Modifier){
+fun InfoItemPreview3(){
     InfoItem(
         R.drawable.ubicacion_blanco,
         stringResource(R.string.lugar),
@@ -75,7 +74,7 @@ fun InfoItemPreview3(modifier: Modifier = Modifier){
 
 @Composable
 @Preview
-fun InfoItemPreview4(modifier: Modifier = Modifier){
+fun InfoItemPreview4(){
     InfoItem(
         R.drawable.ic_distancia, stringResource(R.string.distancia),
         "distancia"
@@ -84,7 +83,7 @@ fun InfoItemPreview4(modifier: Modifier = Modifier){
 
 @Composable
 @Preview
-fun InfoItemPreview5(modifier: Modifier = Modifier){
+fun InfoItemPreview5(){
     InfoItem(
         R.drawable.ic_dinero,
         stringResource(R.string.inscripcion),

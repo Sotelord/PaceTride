@@ -10,9 +10,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -45,18 +43,18 @@ fun EstadisticaPost(
 
 @Composable
 @Preview
-fun EstadisticaPostPreview(modifier: Modifier = Modifier){
+fun EstadisticaPostPreview(){
     EstadisticaPost(R.drawable.corriendo, "21,1 km")
 }
 
 @Composable
 @Preview
-fun EstadisticaPostPreview2(modifier: Modifier = Modifier){
+fun EstadisticaPostPreview2(){
     EstadisticaPost(R.drawable.ic_reloj, "1:52:40")
 }
 
 @Composable
 @Preview
-fun EstadisticaPostPreview3(modifier: Modifier = Modifier){
+fun EstadisticaPostPreview3(){
     EstadisticaPost(R.drawable.ic_ritmo, "Ritmo: 5:20 min/km")
 }

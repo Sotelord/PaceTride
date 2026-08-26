@@ -5,17 +5,19 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.toMutableStateList
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.pacetride.ui.screens.notifications.components.NotificationItem
-import com.example.pacetride.ui.screens.notifications.components.NotificationsHeader
+import com.example.pacetride.ui.screens.notifications.components.item.NotificationItem
+import com.example.pacetride.ui.screens.notifications.components.header.NotificationsHeader
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.MaterialTheme
-import com.example.compose.PacetrideTheme
+import com.example.pacetride.data.Notificacion
+import com.example.pacetride.ui.theme.PacetrideTheme
 import com.example.pacetride.data.local.LocalNotificacionProvider
 import java.time.LocalDate
 import java.time.LocalDateTime
@@ -23,41 +25,57 @@ import java.time.LocalDateTime
 // ---------- CONTENIDO ----------
 
 @Composable
-fun NotificationsScreenContent(modifier: Modifier = Modifier) {
-    val notificaciones = LocalNotificacionProvider.notificaciones
+fun NotificationsScreenContent(
+    notificacionesIniciales: List<Notificacion>,
+    atrasPressed: () -> Unit,
+    viewProfile: (Int) -> Unit,
+    verCarrera: (Int) -> Unit,
+    modifier: Modifier = Modifier
+) {
+    val notificaciones = remember { notificacionesIniciales.toMutableStateList() }
+
+    fun marcarComoLeida(id: Int) {
+        val index = notificaciones.indexOfFirst { it.id == id }
+        if (index != -1 && !notificaciones[index].leida) {
+            notificaciones[index] = notificaciones[index].copy(leida = true)
+        }
+    }
+
+    fun marcarTodasComoLeidas() {
+        for (i in notificaciones.indices) {
+            if (!notificaciones[i].leida) {
+                notificaciones[i] = notificaciones[i].copy(leida = true)
+            }
+        }
+    }
 
     val ahora = LocalDateTime.now()
     val hoy = LocalDate.now()
     val haceSieteDias = ahora.minusDays(7)
 
-    //Notificaciones recibidas hoy
     val notificacionesHoy = notificaciones.filter {
         it.fecha.toLocalDate() == hoy
     }.sortedByDescending { it.fecha }
 
-    //Notificaciones de los ultimos 7 días, excluyendo las de hoy
     val notificacionEstaSemana = notificaciones.filter {
         it.fecha.toLocalDate() != hoy && it.fecha.isAfter(haceSieteDias)
     }.sortedByDescending { it.fecha }
 
-    //Notificaciones anteriores a los ultimos 7 dias
     val notificacionesAnteriores = notificaciones.filter {
         it.fecha.isBefore(haceSieteDias)
     }.sortedByDescending { it.fecha }
 
     Column(modifier = modifier) {
-        NotificationsHeader()
+        NotificationsHeader(
+            atrasPressed = atrasPressed,
+            marcarTodasLeidasPressed = { marcarTodasComoLeidas() }
+        )
 
         LazyColumn(
-            contentPadding = PaddingValues(
-                horizontal = 20.dp,
-                vertical = 8.dp
-            ),
+            contentPadding = PaddingValues(horizontal = 20.dp, vertical = 8.dp),
             verticalArrangement = Arrangement.spacedBy(12.dp),
             modifier = Modifier.fillMaxSize()
         ) {
-
-            //Notificaciones de hoy
             if (notificacionesHoy.isNotEmpty()) {
                 item {
                     Text(
@@ -68,12 +86,16 @@ fun NotificationsScreenContent(modifier: Modifier = Modifier) {
                         modifier = Modifier.padding(bottom = 4.dp)
                     )
                 }
-                items(notificacionesHoy) { notificacion ->
-                    NotificationItem(notificacion)
+                items(notificacionesHoy, key = { it.id }) { notificacion ->
+                    NotificationItem(
+                        notificacion = notificacion,
+                        viewProfile = viewProfile,
+                        verCarrera = verCarrera,
+                        onClick = { marcarComoLeida(notificacion.id) }
+                    )
                 }
             }
 
-            //Notificaciones esta semana
             if (notificacionEstaSemana.isNotEmpty()) {
                 item {
                     Text(
@@ -81,18 +103,19 @@ fun NotificationsScreenContent(modifier: Modifier = Modifier) {
                         color = MaterialTheme.colorScheme.onBackground,
                         fontSize = 18.sp,
                         fontWeight = FontWeight.Bold,
-                        modifier = Modifier.padding(
-                            top = 16.dp,
-                            bottom = 4.dp
-                        )
+                        modifier = Modifier.padding(top = 16.dp, bottom = 4.dp)
                     )
                 }
-                items(notificacionEstaSemana) { notificacion ->
-                    NotificationItem(notificacion)
+                items(notificacionEstaSemana, key = { it.id }) { notificacion ->
+                    NotificationItem(
+                        notificacion = notificacion,
+                        viewProfile = viewProfile,
+                        verCarrera = verCarrera,
+                        onClick = { marcarComoLeida(notificacion.id) }
+                    )
                 }
             }
 
-            //Notificaciones anteriores
             if (notificacionesAnteriores.isNotEmpty()) {
                 item {
                     Text(
@@ -100,14 +123,16 @@ fun NotificationsScreenContent(modifier: Modifier = Modifier) {
                         color = MaterialTheme.colorScheme.onBackground,
                         fontSize = 18.sp,
                         fontWeight = FontWeight.Bold,
-                        modifier = Modifier.padding(
-                            top = 16.dp,
-                            bottom = 4.dp
-                        )
+                        modifier = Modifier.padding(top = 16.dp, bottom = 4.dp)
                     )
                 }
-                items(notificacionesAnteriores) { notificacion ->
-                    NotificationItem(notificacion)
+                items(notificacionesAnteriores, key = { it.id }) { notificacion ->
+                    NotificationItem(
+                        notificacion = notificacion,
+                        viewProfile = viewProfile,
+                        verCarrera = verCarrera,
+                        onClick = { marcarComoLeida(notificacion.id) }
+                    )
                 }
             }
         }
@@ -117,20 +142,32 @@ fun NotificationsScreenContent(modifier: Modifier = Modifier) {
 // ---------- PANTALLA COMPLETA ----------
 
 @Composable
-fun NotificationsScreen(modifier: Modifier = Modifier) {
+fun NotificationsScreen(
+    notificaciones: List<Notificacion>,
+    atrasPressed: () -> Unit,
+    viewProfile: (Int) -> Unit,
+    verCarrera: (Int) -> Unit = {},
+    modifier: Modifier = Modifier
+) {
     Box(
         modifier = modifier
             .fillMaxSize()
             .background(MaterialTheme.colorScheme.background)
     ) {
-        NotificationsScreenContent()
+        NotificationsScreenContent(
+            notificacionesIniciales = notificaciones,
+            atrasPressed = atrasPressed,
+            viewProfile = viewProfile,
+            verCarrera = verCarrera
+        )
     }
 }
 
 @Preview(showBackground = true, device = "spec:width=411dp,height=891dp")
 @Composable
 fun NotificationsScreenPreview() {
+    val notificaciones = LocalNotificacionProvider.notificaciones
     PacetrideTheme(darkTheme = true) {
-        NotificationsScreen()
+        NotificationsScreen(notificaciones, {}, {})
     }
 }

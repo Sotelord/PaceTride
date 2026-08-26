@@ -18,13 +18,13 @@ import com.example.pacetride.R
 
 @Composable
 fun Corazon(
+    modifier: Modifier = Modifier,
     onClick: () -> Unit = {},
-    modifier: Modifier = Modifier
 ) {
     Image(
         painter = painterResource(id = R.drawable.ic_me_gusta),
         contentDescription = "Me gusta",
-        colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.secondaryContainer),
+        colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.primaryContainer),
         modifier = modifier
             .size(24.dp)
             .clickable(

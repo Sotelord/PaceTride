@@ -1,4 +1,4 @@
-package com.example.pacetride.ui.screens.publicprofile.components.content
+package com.example.pacetride.ui.screens.publicProfile.Components.content
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
@@ -13,6 +13,7 @@ import com.example.pacetride.data.local.LocalCarreraRealizadaProvider
 @Composable
 fun MisCarrerasRow(historialCarrera: List<CarreraRealizada>, modifier: Modifier = Modifier) {
     LazyRow(
+        modifier = modifier,
         horizontalArrangement = Arrangement.spacedBy(12.dp),
         contentPadding = PaddingValues(end = 20.dp) // Para que no se corte feo al final
     ) {
@@ -25,7 +26,7 @@ fun MisCarrerasRow(historialCarrera: List<CarreraRealizada>, modifier: Modifier 
 
 @Composable
 @Preview
-fun MisCarrerasRowPreview(modifier: Modifier = Modifier){
+fun MisCarrerasRowPreview(){
     val historialCarrera = LocalCarreraRealizadaProvider.historial
     MisCarrerasRow(historialCarrera)
 }

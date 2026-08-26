@@ -27,6 +27,6 @@ fun IncluyeGrid(modifier: Modifier = Modifier) {
 
 @Composable
 @Preview
-fun IncluyeGridPreview(modifier: Modifier = Modifier){
+fun IncluyeGridPreview(){
     IncluyeGrid()
 }

@@ -64,7 +64,7 @@ fun HistoryRaceCard(
 
 @Composable
 @Preview
-fun HistoryRaceCardPreview(modifier: Modifier = Modifier) {
+fun HistoryRaceCardPreview() {
     HistoryRaceCard(
         "Carrera 10K Bogotá",
         "10K • 49:12",
@@ -74,7 +74,7 @@ fun HistoryRaceCardPreview(modifier: Modifier = Modifier) {
 
 @Composable
 @Preview
-fun HistoryRaceCardPreview2(modifier: Modifier = Modifier) {
+fun HistoryRaceCardPreview2() {
     HistoryRaceCard(
         "Carrera Universitaria Javeriana",
         "5K • 23:48",
@@ -84,7 +84,7 @@ fun HistoryRaceCardPreview2(modifier: Modifier = Modifier) {
 
 @Composable
 @Preview
-fun HistoryRaceCardPreview3(modifier: Modifier = Modifier) {
+fun HistoryRaceCardPreview3() {
     HistoryRaceCard(
         "Bogotá Night Run",
         "10K • 50:31",

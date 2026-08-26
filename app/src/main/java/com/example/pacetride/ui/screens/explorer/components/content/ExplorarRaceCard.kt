@@ -16,9 +16,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -33,6 +31,7 @@ import com.example.pacetride.ui.utils.AppButton
 
 @Composable
 fun ExplorarRaceCard(
+    verCarreraButtonPressed: (Int)->Unit,
     carrera: Carrera,
     modifier: Modifier = Modifier
 ) {
@@ -84,7 +83,7 @@ fun ExplorarRaceCard(
                     fontWeight = FontWeight.Bold,
                     maxLines = 1
                 )
-            } else if (carrera.precioMostrable != null) {
+            } else {
                 Text(
                     "${carrera.distanciaMostrable} • ${carrera.precioMostrable}",
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
@@ -95,7 +94,10 @@ fun ExplorarRaceCard(
                 Spacer(modifier = Modifier.height(8.dp))
                 AppButton(
                     textoBoton = stringResource(R.string.ver_detalles),
-                    onClick = { Log.d("ExploreScreen", "Ver detalles race card clicked") },
+                    onClick = {
+                        verCarreraButtonPressed(carrera.id)
+                        Log.d("ExploreScreen", "Ver detalles race card clicked")
+                              },
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(36.dp)
@@ -107,8 +109,9 @@ fun ExplorarRaceCard(
 
 @Composable
 @Preview
-fun ExplorarRaceCardPreview(modifier: Modifier = Modifier) {
+fun ExplorarRaceCardPreview() {
     ExplorarRaceCard(
+        {},
         LocalCarreraProvider.listCarrera[0],
         modifier = Modifier.width(180.dp)
     )
@@ -116,8 +119,9 @@ fun ExplorarRaceCardPreview(modifier: Modifier = Modifier) {
 
 @Composable
 @Preview
-fun ExplorarRaceCardPreview2(modifier: Modifier = Modifier) {
+fun ExplorarRaceCardPreview2() {
     ExplorarRaceCard(
+        {},
         LocalCarreraProvider.listCarrera[1],
         modifier = Modifier.width(180.dp)
     )
@@ -125,8 +129,9 @@ fun ExplorarRaceCardPreview2(modifier: Modifier = Modifier) {
 
 @Composable
 @Preview
-fun ExplorarRaceCardPreview3(modifier: Modifier = Modifier) {
+fun ExplorarRaceCardPreview3() {
     ExplorarRaceCard(
+        {},
         LocalCarreraProvider.listCarrera[2],
         modifier = Modifier.width(180.dp)
     )
@@ -134,8 +139,9 @@ fun ExplorarRaceCardPreview3(modifier: Modifier = Modifier) {
 
 @Composable
 @Preview
-fun ExplorarRaceCardPreview4(modifier: Modifier = Modifier) {
+fun ExplorarRaceCardPreview4() {
     ExplorarRaceCard(
+        {},
         LocalCarreraProvider.listCarrera[3],
         modifier = Modifier.width(180.dp)
     )

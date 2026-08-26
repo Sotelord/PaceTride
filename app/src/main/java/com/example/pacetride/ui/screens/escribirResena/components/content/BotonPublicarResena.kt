@@ -12,8 +12,8 @@ import com.example.pacetride.ui.utils.AppButton
 
 @Composable
 fun BotonPublicarResena(
+    modifier: Modifier = Modifier,
     onClick: ()-> Unit = {},
-    modifier: Modifier = Modifier
 ) {
     AppButton(
         textoBoton = stringResource(R.string.publicar_rese_a),
@@ -26,6 +26,6 @@ fun BotonPublicarResena(
 
 @Composable
 @Preview
-fun BotonPublicarResenaPreview(modifier: Modifier = Modifier){
+fun BotonPublicarResenaPreview(){
     BotonPublicarResena()
 }

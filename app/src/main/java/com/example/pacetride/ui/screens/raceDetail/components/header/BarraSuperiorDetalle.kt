@@ -23,7 +23,10 @@ import androidx.compose.ui.unit.dp
 import com.example.pacetride.R
 
 @Composable
-fun BarraSuperiorDetalle(modifier: Modifier = Modifier) {
+fun BarraSuperiorDetalle(
+    atrasPressed: () -> Unit,
+    modifier: Modifier = Modifier
+) {
     var meGustaActivo by remember { mutableStateOf(false) }
 
     Row(
@@ -38,7 +41,10 @@ fun BarraSuperiorDetalle(modifier: Modifier = Modifier) {
                 .clickable(
                     interactionSource = remember { MutableInteractionSource() },
                     indication = null,
-                    onClick = { Log.d("RaceDetailScreen", "Atras clicked") }
+                    onClick = {
+                        atrasPressed()
+                        Log.d("RaceDetailScreen", "Atras clicked")
+                    }
                 )
         )
         Image(
@@ -64,5 +70,5 @@ fun BarraSuperiorDetalle(modifier: Modifier = Modifier) {
 @Composable
 @Preview
 fun BarraSuperiorDetallePreview(modifier: Modifier = Modifier){
-    BarraSuperiorDetalle()
+    BarraSuperiorDetalle({})
 }

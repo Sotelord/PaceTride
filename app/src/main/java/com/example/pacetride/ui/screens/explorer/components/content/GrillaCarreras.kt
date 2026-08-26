@@ -1,7 +1,6 @@
 package com.example.pacetride.ui.screens.explorer.components.content
 
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
@@ -15,6 +14,7 @@ import com.example.pacetride.data.local.LocalCarreraProvider
 
 @Composable
 fun GrillaCarreras(
+    verCarreraButtonPressed: (Int)->Unit,
     carreras: List<Carrera>,
     modifier: Modifier = Modifier
 ) {
@@ -26,6 +26,7 @@ fun GrillaCarreras(
     ) {
         items(carreras) { carrera ->
             ExplorarRaceCard(
+                verCarreraButtonPressed = verCarreraButtonPressed,
                 carrera
             )
         }
@@ -34,6 +35,9 @@ fun GrillaCarreras(
 
 @Composable
 @Preview(showBackground = true)
-fun GrillaCarrerasPreview(modifier: Modifier = Modifier){
-    GrillaCarreras(carreras = LocalCarreraProvider.listCarrera)
+fun GrillaCarrerasPreview(){
+    GrillaCarreras(
+        verCarreraButtonPressed = {},
+        carreras = LocalCarreraProvider.listCarrera
+    )
 }

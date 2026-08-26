@@ -5,7 +5,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -26,12 +25,12 @@ fun SeccionTitulo(texto: String, modifier: Modifier = Modifier) {
 
 @Composable
 @Preview
-fun SeccionTituloPreview(modifier: Modifier = Modifier){
+fun SeccionTituloPreview(){
     SeccionTitulo("Próximas carreras")
 }
 
 @Composable
 @Preview
-fun SeccionTituloPreview2(modifier: Modifier = Modifier){
+fun SeccionTituloPreview2(){
     SeccionTitulo("Elige tu distancia")
 }

@@ -11,7 +11,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -39,6 +38,6 @@ fun ResenaPost(resena: Resena, modifier: Modifier = Modifier) {
 
 @Composable
 @Preview
-fun ResenaPostPreview(modifier: Modifier = Modifier){
+fun ResenaPostPreview(){
     ResenaPost(Resena("Acabo de correr la Carrera 10K Bogotá. Muy buena organización y la ruta estuvo increíble.", "4/5"))
 }

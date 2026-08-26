@@ -25,8 +25,8 @@ import com.example.pacetride.R
 
 @Composable
 fun CampanaNotificaciones(
-    onClick: () -> Unit = {},
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onClick: () -> Unit = {}
 ) {
     Box(
         modifier = modifier
@@ -62,6 +62,6 @@ fun CampanaNotificaciones(
 
 @Composable
 @Preview
-fun CampanaNotificacionesPreview(modifier: Modifier = Modifier){
+fun CampanaNotificacionesPreview(){
     CampanaNotificaciones()
 }

@@ -19,8 +19,13 @@ fun GraficoProgreso(modifier: Modifier = Modifier) {
     Canvas(modifier = modifier.fillMaxSize()) {
         val path = Path().apply {
             moveTo(0f, size.height)
-            quadraticBezierTo(size.width * 0.25f, size.height * 0.9f, size.width * 0.5f, size.height * 0.7f)
-            quadraticBezierTo(size.width * 0.75f, size.height * 0.5f, size.width, size.height * 0.3f)
+            quadraticTo(
+                size.width * 0.25f,
+                size.height * 0.9f,
+                size.width * 0.5f,
+                size.height * 0.7f
+            )
+            quadraticTo(size.width * 0.75f, size.height * 0.5f, size.width, size.height * 0.3f)
         }
         drawPath(
             path = path,
@@ -37,6 +42,6 @@ fun GraficoProgreso(modifier: Modifier = Modifier) {
 
 @Composable
 @Preview
-fun GraficoProgresoPreview(modifier: Modifier = Modifier){
+fun GraficoProgresoPreview(){
     GraficoProgreso()
 }

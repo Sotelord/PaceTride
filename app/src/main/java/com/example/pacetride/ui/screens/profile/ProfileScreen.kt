@@ -14,31 +14,29 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.compose.PacetrideTheme
+import com.example.pacetride.ui.theme.PacetrideTheme
 import com.example.pacetride.R
 import com.example.pacetride.data.Usuario
 import com.example.pacetride.data.local.LocalUsuarioProvider
 import com.example.pacetride.ui.screens.profile.components.content.DatosUsuario
 import com.example.pacetride.ui.screens.profile.components.content.FotoPerfil
 import com.example.pacetride.ui.screens.profile.components.estadisticas.NextRaceCardWithGraph
-import com.example.pacetride.ui.screens.profile.components.estadisticas.EstadisticasRow
+import com.example.pacetride.ui.utils.stats.EstadisticasRow
 import com.example.pacetride.ui.screens.profile.components.header.HeaderPerfil
 import com.example.pacetride.ui.screens.profile.components.history.HistorialRow
 import com.example.pacetride.ui.utils.AppButton
 import com.example.pacetride.ui.utils.SeccionTitulo
-import com.example.pacetride.ui.utils.navbar.BottomNavBar
-import com.example.pacetride.ui.utils.navbar.Seccion
 
 // ---------- CONTENIDO ----------
 
 @Composable
 fun ProfileScreenContent(
     usuario: Usuario,
-    onEditarPerfilClick: () -> Unit,
+    editProfilePressed: () -> Unit,
+    configurationPressed: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -49,7 +47,7 @@ fun ProfileScreenContent(
     ) {
         Spacer(modifier = Modifier.height(16.dp))
 
-        HeaderPerfil()
+        HeaderPerfil(editProfilePressed)
 
         Spacer(modifier = Modifier.height(24.dp))
 
@@ -68,7 +66,10 @@ fun ProfileScreenContent(
 
         AppButton(
             textoBoton = stringResource(R.string.editar_perfil),
-            onClick = onEditarPerfilClick,
+            onClick = {
+                editProfilePressed()
+                Log.d("ProfileScreen", "Editar perfil clicked")
+            },
             modifier = Modifier.fillMaxWidth()
         )
 
@@ -109,6 +110,8 @@ fun ProfileScreenContent(
 
 @Composable
 fun ProfileScreen(
+    editProfilePressed: () -> Unit,
+    configurationPressed: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     val usuario = LocalUsuarioProvider.usuarios[2]
@@ -120,13 +123,10 @@ fun ProfileScreen(
     ) {
         ProfileScreenContent(
             usuario = usuario,
-            onEditarPerfilClick = {
-                Log.d("ProfileScreen", "Editar perfil clicked")
-            },
+            editProfilePressed = editProfilePressed,
+            configurationPressed = configurationPressed,
             modifier = Modifier.weight(1f)
         )
-
-        BottomNavBar(Seccion.PERFIL)
     }
 }
 
@@ -135,6 +135,6 @@ fun ProfileScreen(
 @Preview(showBackground = true, device = "spec:width=411dp,height=891dp")
 fun ProfileScreenPreview() {
     PacetrideTheme(darkTheme = true) {
-        ProfileScreen()
+        ProfileScreen({},{})
     }
 }

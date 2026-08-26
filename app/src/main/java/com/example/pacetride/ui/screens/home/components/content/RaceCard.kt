@@ -20,9 +20,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -35,9 +33,9 @@ import com.example.pacetride.data.local.LocalCarreraProvider
 // ---------- TARJETA PEQUEÑA DE CARRERA ----------
 @Composable
 fun RaceCard(
+    modifier: Modifier = Modifier,
     carrera: Carrera,
     onClick: () -> Unit = {},
-    modifier: Modifier = Modifier
 ) {
     Column(
         modifier = modifier
@@ -104,21 +102,21 @@ fun RaceCard(
 
 @Composable
 @Preview
-fun RaceCardPreview(modifier: Modifier = Modifier){
+fun RaceCardPreview(){
     val carrera = LocalCarreraProvider.listCarrera[4]
-    RaceCard(carrera)
+    RaceCard(carrera = carrera)
 }
 
 @Composable
 @Preview
-fun RaceCardPreview2(modifier: Modifier = Modifier){
+fun RaceCardPreview2(){
     val carrera = LocalCarreraProvider.listCarrera[5]
-    RaceCard(carrera)
+    RaceCard(carrera = carrera)
 }
 
 @Composable
 @Preview
-fun RaceCardPreview3(modifier: Modifier = Modifier){
+fun RaceCardPreview3(){
     val carrera = LocalCarreraProvider.listCarrera[2]
-    RaceCard(carrera)
+    RaceCard(carrera = carrera)
 }

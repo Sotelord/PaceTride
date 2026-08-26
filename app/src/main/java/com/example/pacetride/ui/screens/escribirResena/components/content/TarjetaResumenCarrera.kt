@@ -16,9 +16,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -58,7 +56,7 @@ fun TarjetaResumenCarrera(
 
 @Composable
 @Preview
-fun TarjetaResumenCarreraPreview(modifier: Modifier = Modifier){
+fun TarjetaResumenCarreraPreview(){
     val carrera = LocalCarreraProvider.listCarrera[2]
     TarjetaResumenCarrera(carrera)
 }

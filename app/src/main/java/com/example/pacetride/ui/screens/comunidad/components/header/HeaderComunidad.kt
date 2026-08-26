@@ -35,7 +35,6 @@ import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -48,6 +47,7 @@ import com.example.pacetride.R
 import com.example.pacetride.ui.utils.CampanaNotificaciones
 import com.example.pacetride.ui.utils.LogoApp
 import kotlinx.coroutines.delay
+import kotlin.time.Duration.Companion.milliseconds
 
 @Composable
 fun HeaderComunidad(modifier: Modifier = Modifier) {
@@ -143,7 +143,7 @@ fun HeaderComunidad(modifier: Modifier = Modifier) {
 
     LaunchedEffect(enModoBusqueda) {
         if (enModoBusqueda) {
-            delay(100)
+            delay(100.milliseconds)
             focusRequester.requestFocus()
         }
     }

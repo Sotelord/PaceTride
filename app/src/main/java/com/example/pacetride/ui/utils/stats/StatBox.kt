@@ -1,4 +1,4 @@
-package com.example.pacetride.ui.screens.profile.components.estadisticas
+package com.example.pacetride.ui.utils.stats
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -15,9 +15,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -55,7 +53,7 @@ fun StatBox(
 
 @Composable
 @Preview
-fun StatBoxPreview(modifier: Modifier = Modifier){
+fun StatBoxPreview(){
     StatBox(
         R.drawable.ic_medalla,
         "12",
@@ -65,7 +63,7 @@ fun StatBoxPreview(modifier: Modifier = Modifier){
 
 @Composable
 @Preview
-fun StatBoxPreview2(modifier: Modifier = Modifier){
+fun StatBoxPreview2(){
     StatBox(
         R.drawable.ic_distancia,
         "186,4 km",
@@ -75,7 +73,7 @@ fun StatBoxPreview2(modifier: Modifier = Modifier){
 
 @Composable
 @Preview
-fun StatBoxPreview3(modifier: Modifier = Modifier){
+fun StatBoxPreview3(){
     StatBox(
         R.drawable.ic_cronometro,
         "48:32",
@@ -85,7 +83,7 @@ fun StatBoxPreview3(modifier: Modifier = Modifier){
 
 @Composable
 @Preview
-fun StatBoxPreview4(modifier: Modifier = Modifier){
+fun StatBoxPreview4(){
     StatBox(
         R.drawable.ic_cronometro,
         "1:52:40",

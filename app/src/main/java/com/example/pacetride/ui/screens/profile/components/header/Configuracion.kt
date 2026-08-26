@@ -1,4 +1,4 @@
-package com.example.pacetride.ui.screens.notifications.components.item
+package com.example.pacetride.ui.screens.profile.components.header
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -18,8 +18,8 @@ import com.example.pacetride.R
 
 @Composable
 fun Configuracion(
-    onClick: () -> Unit = {},
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onClick: () -> Unit = {}
 ) {
     Image(
         painter = painterResource(id = R.drawable.ic_configuracion),

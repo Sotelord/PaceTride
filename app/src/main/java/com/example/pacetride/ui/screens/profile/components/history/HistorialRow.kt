@@ -27,6 +27,6 @@ fun HistorialRow(carreras: List<CarreraRealizada>, modifier: Modifier = Modifier
 
 @Composable
 @Preview
-fun HistorialRowPreview(modifier: Modifier = Modifier){
+fun HistorialRowPreview(){
     HistorialRow(LocalUsuarioProvider.usuarios[0].historial)
 }

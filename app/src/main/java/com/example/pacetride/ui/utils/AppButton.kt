@@ -6,22 +6,19 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.sp
-import com.example.pacetride.R
 
 // ---------- BOTÓN ----------
 
 @Composable
 fun AppButton(
+    modifier: Modifier = Modifier,
     textoBoton: String,
-    onClick: () -> Unit = {},
+    onClick: () -> Unit,
     fontSize: TextUnit = 14.sp,
-    modifier: Modifier = Modifier
 ) {
     Button(
         onClick = onClick,
@@ -37,17 +34,17 @@ fun AppButton(
 @Composable
 @Preview
 fun AppButtonPreview(){
-    AppButton("Ver carrera")
+    AppButton( textoBoton = "Ver carrera", onClick = {})
 }
 
 @Composable
 @Preview
 fun AppButtonPreview2(){
-    AppButton("Ver detalles")
+    AppButton(textoBoton = "Ver detalles", onClick = {})
 }
 
 @Composable
 @Preview
 fun AppButtonPreview3(){
-    AppButton("Editar perfil")
+    AppButton(textoBoton = "Editar perfil", onClick = {})
 }

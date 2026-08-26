@@ -1,4 +1,4 @@
-package com.example.pacetride.ui.screens.publicprofile.components.content
+package com.example.pacetride.ui.screens.publicProfile.Components.content
 
 import android.util.Log
 import androidx.compose.foundation.Image
@@ -17,9 +17,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -30,7 +28,11 @@ import com.example.pacetride.data.Resena
 import com.example.pacetride.data.local.LocalResenaProvider
 
 @Composable
-fun ResenaCard(resena: Resena, modifier: Modifier = Modifier) {
+fun ResenaCard(
+    resena: Resena,
+    comentariosPressed: () -> Unit,
+    modifier: Modifier = Modifier
+) {
     var meGustaActivo by remember { mutableStateOf(false) }
     var cantidadLikes by remember { mutableIntStateOf(34) }
 
@@ -50,7 +52,7 @@ fun ResenaCard(resena: Resena, modifier: Modifier = Modifier) {
             )
             Spacer(modifier = Modifier.width(4.dp))
             Text(
-                text = "${resena.calificacion}",
+                text = resena.calificacion,
                 color = MaterialTheme.colorScheme.primaryContainer,
                 fontSize = 14.sp,
                 fontWeight = FontWeight.Bold
@@ -111,7 +113,10 @@ fun ResenaCard(resena: Resena, modifier: Modifier = Modifier) {
                 modifier = Modifier.clickable(
                     interactionSource = remember { MutableInteractionSource() },
                     indication = null,
-                    onClick = { Log.d("PubliProfileScreen", "Comentario clicked") }
+                    onClick = {
+                        comentariosPressed()
+                        Log.d("PubliProfileScreen", "Comentario clicked")
+                    }
                 )
             ) {
                 Image(
@@ -129,7 +134,7 @@ fun ResenaCard(resena: Resena, modifier: Modifier = Modifier) {
 
 @Composable
 @Preview
-fun ResenaCardPreview(modifier: Modifier = Modifier){
+fun ResenaCardPreview(){
     val resena = LocalResenaProvider.listaResenas[1]
-    ResenaCard(resena)
+    ResenaCard(resena,{})
 }

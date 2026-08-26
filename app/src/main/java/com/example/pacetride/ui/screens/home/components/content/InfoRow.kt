@@ -45,7 +45,7 @@ fun InfoRow(
 
 @Composable
 @Preview
-fun InfoRowPreview(modifier: Modifier = Modifier){
+fun InfoRowPreview(){
     Box {
         Column(
             modifier = Modifier

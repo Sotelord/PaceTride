@@ -18,9 +18,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -32,9 +30,9 @@ import com.example.pacetride.R
 
 @Composable
 fun DistanciaChip(
+    modifier: Modifier = Modifier,
     distancia: String,
     onClick: ()-> Unit = {},
-    modifier: Modifier = Modifier
 ) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -64,24 +62,24 @@ fun DistanciaChip(
 
 @Composable
 @Preview
-fun DistanciaChipPreview(modifier: Modifier = Modifier){
-    DistanciaChip("5K")
+fun DistanciaChipPreview(){
+    DistanciaChip(distancia = "5K")
 }
 
 @Composable
 @Preview
-fun DistanciaChipPreview2(modifier: Modifier = Modifier){
-    DistanciaChip("10K")
+fun DistanciaChipPreview2(){
+    DistanciaChip(distancia = "10K")
 }
 
 @Composable
 @Preview
-fun DistanciaChipPreview3(modifier: Modifier = Modifier){
-    DistanciaChip("21K")
+fun DistanciaChipPreview3(){
+    DistanciaChip(distancia = "21K")
 }
 
 @Composable
 @Preview
-fun DistanciaChipPreview4(modifier: Modifier = Modifier){
-    DistanciaChip("42K")
+fun DistanciaChipPreview4(){
+    DistanciaChip(distancia = "42K")
 }

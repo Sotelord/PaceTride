@@ -11,7 +11,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -21,11 +20,11 @@ import com.example.pacetride.R
 
 @Composable
 fun ContadorInteraccion(
+    modifier: Modifier = Modifier,
     idIcono: Int,
     cantidad: String,
     interaccion: String,
-    aplicarTinte: Boolean = false,
-    modifier: Modifier = Modifier
+    aplicarTinte: Boolean = false
 ) {
     Row(
         modifier = modifier,
@@ -34,7 +33,7 @@ fun ContadorInteraccion(
         Image(
             painter = painterResource(idIcono),
             contentDescription = null,
-            colorFilter = if (aplicarTinte && isSystemInDarkTheme() != true) {
+            colorFilter = if (aplicarTinte && !isSystemInDarkTheme()) {
                 ColorFilter.tint(MaterialTheme.colorScheme.onSurfaceVariant)
             } else {
                 null
@@ -52,36 +51,61 @@ fun ContadorInteraccion(
 
 @Composable
 @Preview
-fun ContadorInteraccionPreview(modifier: Modifier = Modifier) {
-    ContadorInteraccion(R.drawable.ic_me_gusta_lleno, "128", "Me gusta") // sin tinte, corazón rojo
+fun ContadorInteraccionPreview() {
+    ContadorInteraccion(
+        idIcono = R.drawable.ic_me_gusta_lleno,
+        cantidad =  "128",
+        interaccion = "Me gusta"
+    ) // sin tinte, corazón rojo
 }
 
 @Composable
 @Preview
-fun ContadorInteraccionPreview1_1(modifier: Modifier = Modifier) {
-    ContadorInteraccion(R.drawable.ic_comentario, "24", "comentarios", aplicarTinte = true) // con tinte
+fun ContadorInteraccionPreview1_1() {
+    ContadorInteraccion(
+        idIcono = R.drawable.ic_comentario,
+        cantidad = "24",
+        interaccion = "comentarios"
+    )
 }
 
 @Composable
 @Preview
-fun ContadorInteraccionPreview2(modifier: Modifier = Modifier) {
-    ContadorInteraccion(R.drawable.ic_me_gusta_lleno, "67", "Me gusta")
+fun ContadorInteraccionPreview2() {
+    ContadorInteraccion(
+        idIcono =  R.drawable.ic_me_gusta_lleno,
+        cantidad = "67",
+        interaccion = "Me gusta"
+    )
 }
 
 @Composable
 @Preview
-fun ContadorInteraccionPreview2_1(modifier: Modifier = Modifier) {
-    ContadorInteraccion(R.drawable.ic_comentario, "8", "comentarios", aplicarTinte = true)
+fun ContadorInteraccionPreview2_1() {
+    ContadorInteraccion(
+        idIcono =  R.drawable.ic_comentario,
+        cantidad = "8",
+        interaccion = "comentarios"
+    )
 }
 
 @Composable
 @Preview
-fun ContadorInteraccionPreview3(modifier: Modifier = Modifier) {
-    ContadorInteraccion(R.drawable.ic_me_gusta_lleno, "34", "Me gusta")
+fun ContadorInteraccionPreview3() {
+    ContadorInteraccion(
+        idIcono =  R.drawable.ic_me_gusta_lleno,
+        cantidad = "34",
+        interaccion = "Me gusta"
+    )
 }
 
 @Composable
 @Preview
-fun ContadorInteraccionPreview3_1(modifier: Modifier = Modifier) {
-    ContadorInteraccion(R.drawable.ic_comentario, "5", "comentarios", aplicarTinte = true)
+fun ContadorInteraccionPreview3_1() {
+    ContadorInteraccion(
+        idIcono =  R.drawable.ic_comentario,
+        cantidad = "5",
+        interaccion = "comentarios",
+        aplicarTinte = true
+    )
 }
