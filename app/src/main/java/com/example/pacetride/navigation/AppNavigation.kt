@@ -6,10 +6,14 @@ import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -19,15 +23,28 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.example.pacetride.ui.theme.PacetrideTheme
 import com.example.pacetride.R
+import com.example.pacetride.ui.screens.comunidad.ComunidadScreen
+import com.example.pacetride.ui.screens.comunidad.ComunidadViewModel
 import com.example.pacetride.ui.screens.escribirResena.EscribirResenaScreen
+import com.example.pacetride.ui.screens.escribirResena.EscribirResenaViewModel
 import com.example.pacetride.ui.screens.explorer.ExploreScreen
+import com.example.pacetride.ui.screens.explorer.ExploreViewModel
 import com.example.pacetride.ui.screens.home.HomeScreen
+import com.example.pacetride.ui.screens.home.HomeViewModel
 import com.example.pacetride.ui.screens.login.LoginScreen
+import com.example.pacetride.ui.screens.login.LoginViewModel
+import com.example.pacetride.ui.screens.misCarreras.MisCarrerasScreen
+import com.example.pacetride.ui.screens.misCarreras.MisCarrerasViewModel
 import com.example.pacetride.ui.screens.notifications.NotificationsScreen
+import com.example.pacetride.ui.screens.notifications.NotificationsViewModel
 import com.example.pacetride.ui.screens.profile.ProfileScreen
+import com.example.pacetride.ui.screens.profile.ProfileViewModel
 import com.example.pacetride.ui.screens.publicProfile.PublicProfileScreen
+import com.example.pacetride.ui.screens.publicProfile.PublicProfileViewModel
+import com.example.pacetride.ui.screens.raceDetail.RaceDatailViewModel
 import com.example.pacetride.ui.screens.raceDetail.RaceDetailScreen
 import com.example.pacetride.ui.screens.registrar.RegisterScreen
+import com.example.pacetride.ui.screens.registrar.RegisterViewModel
 
 sealed class Screen(val route: String){
     object Login : Screen("login")
@@ -54,6 +71,7 @@ sealed class Screen(val route: String){
     object Configuracion : Screen ("Configuracion")
     object RecuperarContrasena : Screen ("recuperarContrasena")
     object EscribirResena : Screen ("escribirResena")
+    object Comunidad: Screen("comunidad")
 }
 
 
@@ -71,14 +89,21 @@ fun AppNavigation(
         //Inicio de sesión
 
         composable(route = Screen.Login.route){
-            LoginScreen(
-                loginButtonPressed = {
+            val loginViewModel: LoginViewModel = viewModel()
+            val state by loginViewModel.uiState.collectAsState()
+
+            LaunchedEffect(state.navigate) {
+                if (state.navigate) {
                     navControler.navigate(Screen.Home.route){
                         popUpTo(0){
                             inclusive = true
                         }
                     }
-                },
+                }
+            }
+
+            LoginScreen(
+                loginViewModel = loginViewModel,
                 createAcountPressed = {
                     navControler.navigate(Screen.Register.route)
                 },
@@ -89,24 +114,31 @@ fun AppNavigation(
         }
 
         composable(route = Screen.Register.route){
-            RegisterScreen (
-                loginPressed = {
-                    navControler.popBackStack()
-                },
-                registerPressed = {
+            val registerViewModel: RegisterViewModel = viewModel()
+            val state by registerViewModel.uiState.collectAsState()
+
+            LaunchedEffect(state.navigate) {
+                if (state.navigate) {
                     navControler.navigate(Screen.Home.route){
                         popUpTo(0){
                             inclusive = true
                         }
                     }
                 }
+            }
+
+            RegisterScreen (
+                registerViewModel = registerViewModel,
+                loginPressed = {
+                    navControler.popBackStack()
+                }
             )
         }
 
-        //Nav Bar
-
         composable(route = Screen.Home.route){
+            val homeViewModel: HomeViewModel = viewModel()
             HomeScreen(
+                homeViewModel = homeViewModel,
                 verCarreraButtonPressed = { raceId ->
                     navControler.navigate(Screen.RaceDetail.createRoute(raceId))
                 },
@@ -126,6 +158,7 @@ fun AppNavigation(
         }
 
         composable(route = Screen.Explorer.route){ backStackEntry ->
+            val exploreViewModel: ExploreViewModel = viewModel()
             val filtroDistancia = remember(backStackEntry) {
                 navControler.previousBackStackEntry
                     ?.savedStateHandle
@@ -133,19 +166,37 @@ fun AppNavigation(
             }
 
             ExploreScreen(
+                exploreViewModel = exploreViewModel,
                 verCarreraButtonPressed = { raceId ->
                     navControler.navigate(Screen.RaceDetail.createRoute(raceId))
                 },
-                filtroDistanciaInicial = filtroDistancia
+                filtroDistanciaInicial = filtroDistancia,
+                comunidadPressed = {
+                    navControler.navigate(Screen.Comunidad.route)
+                }
             )
         }
 
         composable(route = Screen.MisCarreras.route){
-            Text("Falta esta pantalla")
+            val misCarrerasViewModel: MisCarrerasViewModel = viewModel()
+            MisCarrerasScreen(
+                misCarrerasViewModel = misCarrerasViewModel,
+                notificacionButtonPressed = { usuarioId ->
+                    navControler.navigate(Screen.Notifications.createRoute(usuarioId))
+                },
+                verCarreraButtonPressed = { raceId ->
+                    navControler.navigate(Screen.RaceDetail.createRoute(raceId))
+                },
+                explorarPressed = {
+                    navControler.navigate(Screen.Explorer.route)
+                }
+            )
         }
 
         composable(route = Screen.Profile.route){
+            val profileViewModel: ProfileViewModel = viewModel()
             ProfileScreen(
+                profileViewModel = profileViewModel,
                 editProfilePressed = {
                     navControler.navigate(Screen.EditProfile.route)
                 },
@@ -169,24 +220,34 @@ fun AppNavigation(
             Text("Falta esta pantalla")
         }
 
+        composable (route = Screen.Comunidad.route){
+            val comunidadViewModel: ComunidadViewModel = viewModel()
+            ComunidadScreen(
+                comunidadViewModel = comunidadViewModel,
+                escribirResenaPressed = {
+                    navControler.navigate(Screen.EscribirResena.route)
+                },
+                notificacionButtonPressed = { usuarioId ->
+                    navControler.navigate(Screen.Notifications.createRoute(usuarioId))
+                }
+            )
+        }
+
         composable(
             route = "${Screen.RaceDetail.route}/{raceId}",
             arguments = listOf(navArgument("raceId") {type = NavType.IntType})
-        ){ it ->
-            //Obtener los parametros
+        ){
+            val raceDatailViewModel: RaceDatailViewModel = viewModel()
             val raceId = it.arguments?.getInt("raceId") ?: 0
 
-            //Buscar la carrera
             RaceDetailScreen(
+                raceDatailViewModel = raceDatailViewModel,
                 raceId = raceId,
                 atrasPressed = {
                     navControler.popBackStack()
                                },
                 inscribemePressed = {
                     navControler.navigate(Screen.Inscribeme.route)
-                },
-                escribirResenaPressed = {
-                    navControler.navigate(Screen.EscribirResena.route)
                 }
             )
         }
@@ -196,15 +257,29 @@ fun AppNavigation(
         }
 
         composable (route = Screen.EscribirResena.route){
-            EscribirResenaScreen()
+            val escribirResenaViewModel: EscribirResenaViewModel = viewModel()
+            val state by escribirResenaViewModel.uiState.collectAsState()
+            LaunchedEffect(state.navigate) {
+                if (state.navigate) {
+                    navControler.popBackStack()
+                }
+            }
+            EscribirResenaScreen(
+                escribirResenaViewModel = escribirResenaViewModel,
+                atrasPressed = {
+                    navControler.popBackStack()
+                }
+            )
         }
 
         composable(
             route = "${Screen.Notifications.route}/{usuarioId}",
             arguments = listOf(navArgument("usuarioId") {type = NavType.IntType})
-        ){ it ->
+        ){
+            val notificationsViewModel: NotificationsViewModel = viewModel()
             val usuarioId = it.arguments?.getInt("usuarioId") ?: 0
             NotificationsScreen(
+                notificationsViewModel = notificationsViewModel,
                 usuarioId = usuarioId,
                 atrasPressed = {
                     navControler.popBackStack()
@@ -221,17 +296,19 @@ fun AppNavigation(
         composable (
             route = "${Screen.PublicProfile.route}/{usuarioId}",
             arguments = listOf(navArgument("usuarioId") {type = NavType.IntType})
-        ) {it ->
+        ) {
+            val publicProfileViewModel: PublicProfileViewModel = viewModel()
             val usuarioId = it.arguments?.getInt("usuarioId") ?: 0
 
             PublicProfileScreen(
+                publicProfileViewModel = publicProfileViewModel,
                 atrasPressed = {
                     navControler.popBackStack()
-                               },
+                },
                 usuarioId = usuarioId,
                 comentariosPressed = {
                     navControler.navigate(Screen.Comentarios.route)
-                                     },
+                },
                 configPressed = {
                     navControler.navigate(Screen.ConfigUsuarioPublico.route)
                 }

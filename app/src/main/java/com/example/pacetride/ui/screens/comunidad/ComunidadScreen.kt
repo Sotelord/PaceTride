@@ -1,76 +1,38 @@
 package com.example.pacetride.ui.screens.comunidad
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.pacetride.ui.screens.comunidad.components.ComunidadScreenContent
 import com.example.pacetride.ui.theme.PacetrideTheme
-import com.example.pacetride.data.Publicacion
-import com.example.pacetride.data.local.LocalPublicacionProvider
-import com.example.pacetride.ui.screens.comunidad.components.content.PostCard
-import com.example.pacetride.ui.screens.comunidad.components.header.HeaderComunidad
-
-// ---------- CONTENIDO ----------
 
 @Composable
-fun ComunidadScreenContent(
-    publicaciones: List<Publicacion>,
+fun ComunidadScreen(
+    comunidadViewModel: ComunidadViewModel,
+    escribirResenaPressed: () -> Unit,
+    notificacionButtonPressed: (Int)-> Unit,
     modifier: Modifier = Modifier
 ) {
-
-    Column(modifier = modifier) {
-        Spacer(modifier = Modifier.height(16.dp))
-        HeaderComunidad(modifier = Modifier.padding(horizontal = 20.dp))
-        Spacer(modifier = Modifier.height(16.dp))
-
-        LazyColumn(
-            modifier = Modifier.fillMaxWidth(),
-            contentPadding = PaddingValues(
-                horizontal = 20.dp,
-                vertical = 4.dp
-            ),
-            verticalArrangement = Arrangement.spacedBy(14.dp)
-        ) {
-            items(publicaciones) { publicacion ->
-                PostCard(
-                    idAvatar = publicacion.idAvatar,
-                    nombre = publicacion.nombre,
-                    tiempo = publicacion.tiempo,
-                    texto = publicacion.textoAMostrar,
-                    estadisticasCarrera = publicacion.estadisiticas,
-                    resena = publicacion.resena,
-                    likes = publicacion.likes,
-                    comentarios = publicacion.comentarios
-                )
-            }
-        }
-    }
-}
-
-// ---------- PANTALLA COMPLETA ----------
-
-@Composable
-fun ComunidadScreen(modifier: Modifier = Modifier) {
-    val publicaciones = LocalPublicacionProvider.publicaciones
+    val state by comunidadViewModel.uiState.collectAsState()
     Column(
         modifier = modifier
             .fillMaxSize()
             .background(MaterialTheme.colorScheme.background)
     ) {
         ComunidadScreenContent(
-            publicaciones,
+            publicaciones = state.publicaciones,
+            usuario = state.usuario,
+            escribirResenaPressed = escribirResenaPressed,
+            notificacionButtonPressed = notificacionButtonPressed,
+            textoBusqueda = state.textoBusqueda,
+            onTextoBusquedaChange = {comunidadViewModel.updateTextoBusqueda(it)},
             modifier = Modifier.weight(1f)
         )
     }
@@ -80,6 +42,10 @@ fun ComunidadScreen(modifier: Modifier = Modifier) {
 @Preview(showBackground = true, device = "spec:width=411dp,height=891dp")
 fun ComunidadScreenPreview() {
     PacetrideTheme(darkTheme = true) {
-        ComunidadScreen()
+        ComunidadScreen(
+            comunidadViewModel = viewModel(),
+            escribirResenaPressed = {},
+            notificacionButtonPressed = {}
+        )
     }
 }

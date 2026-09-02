@@ -4,6 +4,7 @@ import androidx.annotation.DrawableRes
 
 data class Publicacion(
     @DrawableRes val idAvatar: Int?,
+    val id: Int,
     val nombre: String,
     val tiempo: String,
     val texto: String? = null,

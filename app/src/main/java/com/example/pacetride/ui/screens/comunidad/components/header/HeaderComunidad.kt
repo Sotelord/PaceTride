@@ -44,15 +44,22 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.pacetride.R
+import com.example.pacetride.data.Usuario
+import com.example.pacetride.data.local.LocalUsuarioProvider
 import com.example.pacetride.ui.utils.CampanaNotificaciones
 import com.example.pacetride.ui.utils.LogoApp
 import kotlinx.coroutines.delay
 import kotlin.time.Duration.Companion.milliseconds
 
 @Composable
-fun HeaderComunidad(modifier: Modifier = Modifier) {
+fun HeaderComunidad(
+    textoBusqueda: String,
+    usuario: Usuario,
+    onTextoBusquedaChange: (String) -> Unit,
+    notificacionButtonPressed: (Int)-> Unit,
+    modifier: Modifier = Modifier
+) {
     var enModoBusqueda by remember { mutableStateOf(false) }
-    var textoBusqueda by remember { mutableStateOf("") }
     val focusRequester = remember { FocusRequester() }
     val teclado = LocalSoftwareKeyboardController.current
 
@@ -64,7 +71,7 @@ fun HeaderComunidad(modifier: Modifier = Modifier) {
         if (enModoBusqueda) {
             OutlinedTextField(
                 value = textoBusqueda,
-                onValueChange = { textoBusqueda = it },
+                onValueChange = onTextoBusquedaChange,
                 modifier = Modifier
                     .weight(1f)
                     .focusRequester(focusRequester),
@@ -72,8 +79,8 @@ fun HeaderComunidad(modifier: Modifier = Modifier) {
                 singleLine = true,
                 shape = RoundedCornerShape(50),
                 colors = OutlinedTextFieldDefaults.colors(
-                    focusedTextColor = MaterialTheme.colorScheme.surface,
-                    unfocusedTextColor = MaterialTheme.colorScheme.surface,
+                    focusedTextColor = MaterialTheme.colorScheme.onBackground,
+                    unfocusedTextColor = MaterialTheme.colorScheme.onBackground,
                     focusedContainerColor = MaterialTheme.colorScheme.secondaryContainer,
                     unfocusedContainerColor = MaterialTheme.colorScheme.secondaryContainer,
                     focusedBorderColor = MaterialTheme.colorScheme.primaryContainer,
@@ -101,7 +108,7 @@ fun HeaderComunidad(modifier: Modifier = Modifier) {
                     .clickable {
                         Log.d("Comunidad Screen", "Cerrar clicked")
                         enModoBusqueda = false
-                        textoBusqueda = ""
+                        onTextoBusquedaChange("")
                     }
             )
         } else {
@@ -136,7 +143,10 @@ fun HeaderComunidad(modifier: Modifier = Modifier) {
                         }
                 )
                 Spacer(modifier = Modifier.width(10.dp))
-                CampanaNotificaciones(onClick = { Log.d("Comunidad Screen", "Campana notificaciones clicked") })
+                CampanaNotificaciones(onClick = {
+                    notificacionButtonPressed(usuario.id)
+                    Log.d("Comunidad Screen", "Campana notificaciones clicked")
+                })
             }
         }
     }
@@ -153,7 +163,13 @@ fun HeaderComunidad(modifier: Modifier = Modifier) {
 @Composable
 @Preview
 fun HeaderComunidadPreview() {
+    var texto by remember { mutableStateOf("") }
+    val usuario = LocalUsuarioProvider.usuarios[0]
     HeaderComunidad(
+        textoBusqueda = texto,
+        usuario = usuario,
+        onTextoBusquedaChange = { texto = it },
+        notificacionButtonPressed = {},
         modifier = Modifier.padding(16.dp)
     )
 }

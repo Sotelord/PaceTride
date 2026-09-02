@@ -25,6 +25,7 @@ import com.example.pacetride.R
 @Composable
 fun BarraSuperiorConTitulo(
     titulo: String,
+    atrasPressed: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Box(modifier = modifier.fillMaxWidth()) {
@@ -38,7 +39,10 @@ fun BarraSuperiorConTitulo(
                 .clickable(
                     interactionSource = remember { MutableInteractionSource() },
                     indication = null,
-                    onClick = { Log.d("EscribirResenaScreen", "Atrás clicked") }
+                    onClick = {
+                        atrasPressed()
+                        Log.d("EscribirResenaScreen", "Atrás clicked")
+                    }
                 )
         )
         Text(
@@ -54,5 +58,8 @@ fun BarraSuperiorConTitulo(
 @Composable
 @Preview
 fun BarraSuperiorConTituloPreview(){
-    BarraSuperiorConTitulo(stringResource(R.string.escribir_resena))
+    BarraSuperiorConTitulo(
+        stringResource(R.string.escribir_resena),
+        atrasPressed = {}
+    )
 }

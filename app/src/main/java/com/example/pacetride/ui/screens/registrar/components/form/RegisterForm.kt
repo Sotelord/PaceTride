@@ -5,32 +5,35 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.input.PasswordVisualTransformation
-import androidx.compose.ui.text.input.VisualTransformation
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.pacetride.ui.theme.PacetrideTheme
-import com.example.pacetride.R
 
 @Composable
 fun RegisterForm(
+    name: String,
+    onNameChange: (String) -> Unit,
+    email: String,
+    onEmailChange: (String) -> Unit,
+    password: String,
+    onPasswordChange: (String) -> Unit,
+    confirmPassword: String,
+    onConfirmPasswordChange: (String) -> Unit,
+    passwordVisible: Boolean,
+    onPasswordVisibleChange: (Boolean) -> Unit,
+    confirmPasswordVisible: Boolean,
+    onConfirmPasswordVisibleChange: (Boolean) -> Unit,
+    termsAccepted: Boolean,
+    mostrarMensajeError: Boolean,
+    errorMessage: String,
+    onTermsAcceptedChange: (Boolean) -> Unit,
     registerPressed: () -> Unit,
     loginPressed: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    var name by remember { mutableStateOf("") }
-    var email by remember { mutableStateOf("") }
-    var password by remember { mutableStateOf("") }
-    var confirmPassword by remember { mutableStateOf("") }
-    var passwordVisible by remember { mutableStateOf(false) }
-    var confirmPasswordVisible by remember { mutableStateOf(false) }
-    var termsAccepted by remember { mutableStateOf(false) }
-
     val fieldColors = OutlinedTextFieldDefaults.colors(
         focusedBorderColor = MaterialTheme.colorScheme.primaryContainer,
         unfocusedBorderColor = MaterialTheme.colorScheme.outline,
@@ -39,91 +42,76 @@ fun RegisterForm(
     )
 
     Column(modifier = modifier.fillMaxWidth()) {
-        OutlinedTextField(
+        // Campo: Nombre Completo
+        FormTextField(
             value = name,
-            onValueChange = { name = it },
-            label = { Text("Nombre completo") },
-            modifier = Modifier.fillMaxWidth(),
-            colors = fieldColors
+            onValueChange = onNameChange,
+            label = "Nombre completo",
+            colors = fieldColors,
+            modifier = Modifier.fillMaxWidth()
         )
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        OutlinedTextField(
+        // Campo: Correo Electrónico
+        FormTextField(
             value = email,
-            onValueChange = { email = it },
-            label = { Text("Correo electrónico") },
-            modifier = Modifier.fillMaxWidth(),
-            colors = fieldColors
+            onValueChange = onEmailChange,
+            label = "Correo electrónico",
+            colors = fieldColors,
+            modifier = Modifier.fillMaxWidth()
         )
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        OutlinedTextField(
+        // Campo: Contraseña
+        PasswordTextField(
             value = password,
-            onValueChange = { password = it },
-            label = { Text("Contraseña") },
-            visualTransformation = if (passwordVisible) VisualTransformation.None else PasswordVisualTransformation(),
-            trailingIcon = {
-                IconButton(onClick = { passwordVisible = !passwordVisible }) {
-                    Icon(
-                        painter = painterResource(
-                            id = if (passwordVisible) R.drawable.ic_eyevisible else R.drawable.ic_eyeinvisible
-                        ),
-                        contentDescription = if (passwordVisible) "Ocultar contraseña" else "Mostrar contraseña",
-                        modifier = Modifier.size(22.dp) // Tamaño controlado para evitar cuadros gigantes
-                    )
-                }
-            },
-            modifier = Modifier.fillMaxWidth(),
+            onValueChange = onPasswordChange,
+            label = "Contraseña",
+            isVisible = passwordVisible,
+            onVisibilityChange = onPasswordVisibleChange,
             colors = fieldColors
         )
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        OutlinedTextField(
+        // Campo: Confirmar Contraseña
+        PasswordTextField(
             value = confirmPassword,
-            onValueChange = { confirmPassword = it },
-            label = { Text("Confirmar contraseña") },
-            visualTransformation = if (confirmPasswordVisible) VisualTransformation.None else PasswordVisualTransformation(),
-            trailingIcon = {
-                IconButton(onClick = { confirmPasswordVisible = !confirmPasswordVisible }) {
-                    Icon(
-                        painter = painterResource(
-                            id = if (confirmPasswordVisible) R.drawable.ic_eyevisible else R.drawable.ic_eyeinvisible
-                        ),
-                        contentDescription = if (confirmPasswordVisible) "Ocultar contraseña" else "Mostrar contraseña",
-                        modifier = Modifier.size(22.dp) // Tamaño controlado
-                    )
-                }
-            },
-            modifier = Modifier.fillMaxWidth(),
+            onValueChange = onConfirmPasswordChange,
+            label = "Confirmar contraseña",
+            isVisible = confirmPasswordVisible,
+            onVisibilityChange = onConfirmPasswordVisibleChange,
             colors = fieldColors
         )
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        Row(verticalAlignment = Alignment.CenterVertically) {
-            Checkbox(
-                checked = termsAccepted,
-                onCheckedChange = { termsAccepted = it },
-                colors = CheckboxDefaults.colors(
-                    checkedColor = MaterialTheme.colorScheme.primaryContainer
-                )
-            )
-            Text(
-                text = "Al crear una cuenta aceptas nuestros términos y condiciones y política de privacidad.",
-                style = MaterialTheme.typography.bodySmall,
-                color = MaterialTheme.colorScheme.onBackground
-            )
-        }
+        // Componente: Checkbox de Términos
+        TermsCheckbox(
+            checked = termsAccepted,
+            onCheckedChange = onTermsAcceptedChange
+        )
 
         Spacer(modifier = Modifier.height(24.dp))
 
+        if(mostrarMensajeError)
+            Text(
+                text = errorMessage,
+                color = MaterialTheme.colorScheme.tertiaryContainer,
+                textAlign = TextAlign.Center,
+                modifier = Modifier.fillMaxWidth(1f)
+            )
+
+        Spacer(modifier = Modifier.height(24.dp))
+
+        // Botón Principal de Registro
         Button(
             onClick = {
                 registerPressed()
-                Log.d("RegisterScreen", "Crear cuenta clicked")},
+                Log.d("RegisterScreen", "Crear cuenta clicked")
+            },
             enabled = termsAccepted,
             modifier = Modifier
                 .fillMaxWidth()
@@ -139,44 +127,10 @@ fun RegisterForm(
 
         Spacer(modifier = Modifier.height(20.dp))
 
-        Row(verticalAlignment = Alignment.CenterVertically) {
-            HorizontalDivider(modifier = Modifier.weight(1f))
-            Text(
-                text = "o continúa con",
-                modifier = Modifier.padding(horizontal = 8.dp),
-                style = MaterialTheme.typography.bodySmall,
-                color = MaterialTheme.colorScheme.onSurfaceVariant
-            )
-            HorizontalDivider(modifier = Modifier.weight(1f))
-        }
-
-        Spacer(modifier = Modifier.height(20.dp))
-
-        // BOTÓN DE GOOGLE ACTUALIZADO CON SU ICONO
-        OutlinedButton(
-            onClick = { /* TODO: login con Google */ },
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(52.dp),
-            shape = RoundedCornerShape(50)
-        ) {
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.Center
-            ) {
-                Icon(
-                    painter = painterResource(id = R.drawable.ic_google),
-                    contentDescription = "Google Logo",
-                    tint = Color.Unspecified, // Mantiene los colores originales de tu icono de Google
-                    modifier = Modifier.size(20.dp)
-                )
-                Spacer(modifier = Modifier.width(12.dp))
-                Text(text = "Continuar con Google", fontWeight = FontWeight.Medium)
-            }
-        }
-
-        Spacer(modifier = Modifier.height(16.dp))
-
+        // Componente: Divisor, Google Login y Navegación
+        SocialAndNavigationButtons(
+            onGoogleLoginPressed = { /* TODO: login con Google */ },
+        )
         TextButton(
             onClick = loginPressed,
             modifier = Modifier.fillMaxWidth()
@@ -195,6 +149,22 @@ fun RegisterForm(
 fun RegisterFormPreview() {
     PacetrideTheme(darkTheme = true) {
         RegisterForm(
+            name = "",
+            onNameChange = {},
+            email = "",
+            onEmailChange = {},
+            password = "",
+            onPasswordChange = {},
+            confirmPassword = "",
+            onConfirmPasswordChange = {},
+            passwordVisible = false,
+            onPasswordVisibleChange = {},
+            confirmPasswordVisible = false,
+            onConfirmPasswordVisibleChange = {},
+            termsAccepted = false,
+            onTermsAcceptedChange = {},
+            mostrarMensajeError = true,
+            errorMessage = "hola",
             registerPressed = {},
             loginPressed = {}
         )

@@ -6,10 +6,13 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.pacetride.ui.theme.PacetrideTheme
 import com.example.pacetride.ui.screens.login.components.form.LoginForm
 import com.example.pacetride.ui.screens.login.components.header.LoginHeader
@@ -17,11 +20,13 @@ import com.example.pacetride.ui.screens.login.components.header.LoginHeader
 
 @Composable
 fun LoginScreen(
+    loginViewModel: LoginViewModel,
     createAcountPressed: () -> Unit,
     recuperarContrasenaPressed: () -> Unit,
-    loginButtonPressed: () -> Unit,
     modifier: Modifier = Modifier
 ) {
+    val state by loginViewModel.uiState.collectAsState()
+
     Column(
         modifier = modifier
             .fillMaxSize()
@@ -34,9 +39,17 @@ fun LoginScreen(
         LoginHeader()
         Spacer(modifier = Modifier.height(32.dp))
         LoginForm(
-            loginButtonPressed = loginButtonPressed,
+            email = state.email,
+            onEmailChange = {loginViewModel.updateEmail(it)},
+            password = state.password,
+            onPasswordChange = {loginViewModel.updatePassword(it)},
+            passwordVisible = state.passwordVisible,
+            onPasswordVisibleChange = {loginViewModel.mostrarEsconderPasswordVisible()},
+            loginButtonPressed = { loginViewModel.loginButtonPressed() },
             createAcountPressed = createAcountPressed,
-            recuperarContrasenaPressed = recuperarContrasenaPressed
+            recuperarContrasenaPressed = recuperarContrasenaPressed,
+            mostrarMensajeError = state.mostrarMensajeError,
+            errorMessage = state.errorMessage,
         )
     }
 }
@@ -45,6 +58,10 @@ fun LoginScreen(
 @Composable
 fun LoginScreenPreview() {
     PacetrideTheme(darkTheme = true) {
-        LoginScreen({}, {},{})
+        LoginScreen(
+            loginViewModel = viewModel(),
+            createAcountPressed = {},
+            recuperarContrasenaPressed = {}
+        )
     }
 }
