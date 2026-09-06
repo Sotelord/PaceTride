@@ -6,6 +6,7 @@ data class Usuario(
     val id: Int,
     val nombre: String,
     val usuario: String,
+    val email: String,
     val ubicacion: String,
     val bio: String?,
     val fotoPerfil: Int? = R.drawable.ic_perfil,

@@ -2,11 +2,14 @@ package com.example.pacetride.ui.screens.escribirResena
 
 import androidx.lifecycle.ViewModel
 import com.example.pacetride.data.local.LocalCarreraProvider
+import dagger.hilt.android.lifecycle.HiltViewModel
+import jakarta.inject.Inject
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
 
-class EscribirResenaViewModel: ViewModel() {
+@HiltViewModel
+class EscribirResenaViewModel @Inject constructor() : ViewModel() {
 
     private val _uiState = MutableStateFlow(EscribirResenaState())
     val uiState: StateFlow<EscribirResenaState> = _uiState

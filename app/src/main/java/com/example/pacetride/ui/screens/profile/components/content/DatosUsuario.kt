@@ -17,6 +17,7 @@ import androidx.compose.ui.unit.sp
 fun DatosUsuario(
     nombre: String,
     usuario: String,
+    email: String,
     ubicacion: String,
     bio: String?,
     modifier: Modifier = Modifier
@@ -27,6 +28,8 @@ fun DatosUsuario(
     ) {
         Text(nombre, color = MaterialTheme.colorScheme.onBackground, fontSize = 24.sp, fontWeight = FontWeight.Bold)
         Text(usuario, color = MaterialTheme.colorScheme.onSurfaceVariant, fontSize = 14.sp)
+        Spacer(modifier = Modifier.height(8.dp))
+        Text(email, color = MaterialTheme.colorScheme.onSurfaceVariant, fontSize = 14.sp)
         Spacer(modifier = Modifier.height(8.dp))
         UbicacionUsuario(ubicacion)
         Spacer(modifier = Modifier.height(8.dp))
@@ -42,6 +45,7 @@ fun DatosUsuarioPreview(){
     DatosUsuario(
         "Santiago Rayo",
         "@santiagorayo",
+        "example.com",
         "Bogotá, Colombia",
         "Runner • Siempre buscando mi próximo reto 🏃"
     )

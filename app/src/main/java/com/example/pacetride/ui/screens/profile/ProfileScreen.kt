@@ -18,6 +18,7 @@ fun ProfileScreen(
     profileViewModel: ProfileViewModel,
     editProfilePressed: () -> Unit,
     configurationPressed: () -> Unit,
+    logOutPressed: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     val state by profileViewModel.uiState.collectAsState()
@@ -31,6 +32,10 @@ fun ProfileScreen(
             usuario = state.usuario,
             editProfilePressed = editProfilePressed,
             configurationPressed = configurationPressed,
+            logOutPressed = {
+                profileViewModel.logOut()
+                logOutPressed()
+            },
             modifier = Modifier.weight(1f)
         )
     }
@@ -44,7 +49,8 @@ fun ProfileScreenPreview() {
         ProfileScreen(
             profileViewModel = viewModel(),
             editProfilePressed = {},
-            configurationPressed = {}
+            configurationPressed = {},
+            logOutPressed = {}
         )
     }
 }

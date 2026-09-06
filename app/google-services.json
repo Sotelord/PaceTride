@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1045769954254",
+    "project_id": "pacetride",
+    "storage_bucket": "pacetride.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1045769954254:android:129005b955895b7faf819f",
+        "android_client_info": {
+          "package_name": "com.example.pacetride"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAGSxthlblpbI7qXb1hjNjNhCuY1GiR-PQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

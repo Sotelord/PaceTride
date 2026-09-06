@@ -1,17 +1,21 @@
 package com.example.pacetride.ui.screens.registrar
 
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.pacetride.data.repository.AuthRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
+import jakarta.inject.Inject
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 
 // - controlar los datos que se muestran en pantalla
 // - lógica de negocio
-class RegisterViewModel: ViewModel() {
+@HiltViewModel
+class RegisterViewModel @Inject constructor(
+    private val authRepository: AuthRepository
+) : ViewModel() {
 
     private val _uiState = MutableStateFlow(RegisterState())
     val uiState: StateFlow<RegisterState> = _uiState
@@ -68,7 +72,19 @@ class RegisterViewModel: ViewModel() {
                         if(_uiState.value.password != _uiState.value.confirmPassword){
                             _uiState.update { it.copy(mostrarMensajeError = true, errorMessage = "Las contraseñas no coinciden") }
                         } else {
-                            _uiState.update { it.copy(navigate = true) }
+                            viewModelScope.launch {
+                                try {
+                                    authRepository.signUp(_uiState.value.email, _uiState.value.password)
+                                    _uiState.update { it.copy(navigate = true) }
+                                } catch (e: Exception) {
+                                    _uiState.update {
+                                        it.copy(
+                                            errorMessage = e.message.toString(),
+                                            mostrarMensajeError = true
+                                        )
+                                    }
+                                }
+                            }
                         }
                     }
                 }

@@ -8,6 +8,7 @@ data class PublicProfileState(
         id = 10,
         nombre = "demo",
         usuario = "@demo",
+         email = "example0.com",
         ubicacion = "Tangamandapio",
         bio = "a",
         estadisticasGlobales = EstadisticasGlobales(

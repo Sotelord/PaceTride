@@ -13,6 +13,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
@@ -45,6 +46,7 @@ import com.example.pacetride.ui.screens.raceDetail.RaceDatailViewModel
 import com.example.pacetride.ui.screens.raceDetail.RaceDetailScreen
 import com.example.pacetride.ui.screens.registrar.RegisterScreen
 import com.example.pacetride.ui.screens.registrar.RegisterViewModel
+import com.example.pacetride.ui.screens.splash.SplashScreen
 
 sealed class Screen(val route: String){
     object Login : Screen("login")
@@ -57,7 +59,7 @@ sealed class Screen(val route: String){
         fun createRoute(usuarioId : Int) = "notificaciones/$usuarioId"
     }
     object Explorer : Screen("explorer") {
-        const val filtroDistancia = "filtroDistancia"
+        const val FILTRODISTANCIA = "filtroDistancia"
     }
     object  MisCarreras : Screen("misCarreras")
     object  Profile : Screen("profile")
@@ -72,6 +74,7 @@ sealed class Screen(val route: String){
     object RecuperarContrasena : Screen ("recuperarContrasena")
     object EscribirResena : Screen ("escribirResena")
     object Comunidad: Screen("comunidad")
+    object Splash: Screen("splash")
 }
 
 
@@ -82,14 +85,29 @@ fun AppNavigation(
 ){
     NavHost(
         navController = navControler,
-        startDestination = Screen.Login.route,
+        startDestination = Screen.Splash.route,
         modifier = modifier
     ){
+        composable (route = Screen.Splash.route){
+            SplashScreen(
+                navigateToHome = {
+                    navControler.navigate(Screen.Home.route){
+                        popUpTo(0) {inclusive = true}
+                    }
+                },
+                navigateToLogin = {
+                    navControler.navigate(Screen.Login.route){
+                        popUpTo(0) {inclusive = true}
+                    }
+                },
+                splashViewModel = hiltViewModel()
+            )
+        }
 
         //Inicio de sesión
 
         composable(route = Screen.Login.route){
-            val loginViewModel: LoginViewModel = viewModel()
+            val loginViewModel: LoginViewModel = hiltViewModel()
             val state by loginViewModel.uiState.collectAsState()
 
             LaunchedEffect(state.navigate) {
@@ -114,7 +132,7 @@ fun AppNavigation(
         }
 
         composable(route = Screen.Register.route){
-            val registerViewModel: RegisterViewModel = viewModel()
+            val registerViewModel: RegisterViewModel = hiltViewModel()
             val state by registerViewModel.uiState.collectAsState()
 
             LaunchedEffect(state.navigate) {
@@ -136,7 +154,7 @@ fun AppNavigation(
         }
 
         composable(route = Screen.Home.route){
-            val homeViewModel: HomeViewModel = viewModel()
+            val homeViewModel: HomeViewModel = hiltViewModel()
             HomeScreen(
                 homeViewModel = homeViewModel,
                 verCarreraButtonPressed = { raceId ->
@@ -151,18 +169,18 @@ fun AppNavigation(
                 distanciaShortcutPressed = { distanciaKm ->
                     navControler.currentBackStackEntry
                         ?.savedStateHandle
-                        ?.set(Screen.Explorer.filtroDistancia, distanciaKm)
+                        ?.set(Screen.Explorer.FILTRODISTANCIA, distanciaKm)
                     navControler.navigate(Screen.Explorer.route)
                 }
             )
         }
 
         composable(route = Screen.Explorer.route){ backStackEntry ->
-            val exploreViewModel: ExploreViewModel = viewModel()
+            val exploreViewModel: ExploreViewModel = hiltViewModel()
             val filtroDistancia = remember(backStackEntry) {
                 navControler.previousBackStackEntry
                     ?.savedStateHandle
-                    ?.remove<Int>(Screen.Explorer.filtroDistancia)
+                    ?.remove<Int>(Screen.Explorer.FILTRODISTANCIA)
             }
 
             ExploreScreen(
@@ -178,7 +196,7 @@ fun AppNavigation(
         }
 
         composable(route = Screen.MisCarreras.route){
-            val misCarrerasViewModel: MisCarrerasViewModel = viewModel()
+            val misCarrerasViewModel: MisCarrerasViewModel = hiltViewModel()
             MisCarrerasScreen(
                 misCarrerasViewModel = misCarrerasViewModel,
                 notificacionButtonPressed = { usuarioId ->
@@ -194,7 +212,7 @@ fun AppNavigation(
         }
 
         composable(route = Screen.Profile.route){
-            val profileViewModel: ProfileViewModel = viewModel()
+            val profileViewModel: ProfileViewModel = hiltViewModel()
             ProfileScreen(
                 profileViewModel = profileViewModel,
                 editProfilePressed = {
@@ -202,6 +220,11 @@ fun AppNavigation(
                 },
                 configurationPressed = {
                     navControler.navigate(Screen.Configuracion.route)
+                },
+                logOutPressed = {
+                    navControler.navigate(Screen.Login.route) {
+                        popUpTo(0) { inclusive = true }
+                    }
                 }
             )
         }
@@ -221,7 +244,7 @@ fun AppNavigation(
         }
 
         composable (route = Screen.Comunidad.route){
-            val comunidadViewModel: ComunidadViewModel = viewModel()
+            val comunidadViewModel: ComunidadViewModel = hiltViewModel()
             ComunidadScreen(
                 comunidadViewModel = comunidadViewModel,
                 escribirResenaPressed = {
@@ -237,7 +260,7 @@ fun AppNavigation(
             route = "${Screen.RaceDetail.route}/{raceId}",
             arguments = listOf(navArgument("raceId") {type = NavType.IntType})
         ){
-            val raceDatailViewModel: RaceDatailViewModel = viewModel()
+            val raceDatailViewModel: RaceDatailViewModel = hiltViewModel()
             val raceId = it.arguments?.getInt("raceId") ?: 0
 
             RaceDetailScreen(
@@ -257,7 +280,7 @@ fun AppNavigation(
         }
 
         composable (route = Screen.EscribirResena.route){
-            val escribirResenaViewModel: EscribirResenaViewModel = viewModel()
+            val escribirResenaViewModel: EscribirResenaViewModel = hiltViewModel()
             val state by escribirResenaViewModel.uiState.collectAsState()
             LaunchedEffect(state.navigate) {
                 if (state.navigate) {
@@ -276,7 +299,7 @@ fun AppNavigation(
             route = "${Screen.Notifications.route}/{usuarioId}",
             arguments = listOf(navArgument("usuarioId") {type = NavType.IntType})
         ){
-            val notificationsViewModel: NotificationsViewModel = viewModel()
+            val notificationsViewModel: NotificationsViewModel = hiltViewModel()
             val usuarioId = it.arguments?.getInt("usuarioId") ?: 0
             NotificationsScreen(
                 notificationsViewModel = notificationsViewModel,
@@ -297,7 +320,7 @@ fun AppNavigation(
             route = "${Screen.PublicProfile.route}/{usuarioId}",
             arguments = listOf(navArgument("usuarioId") {type = NavType.IntType})
         ) {
-            val publicProfileViewModel: PublicProfileViewModel = viewModel()
+            val publicProfileViewModel: PublicProfileViewModel = hiltViewModel()
             val usuarioId = it.arguments?.getInt("usuarioId") ?: 0
 
             PublicProfileScreen(

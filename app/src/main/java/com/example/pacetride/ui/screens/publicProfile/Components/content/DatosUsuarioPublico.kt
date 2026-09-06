@@ -52,6 +52,7 @@ fun DatosUsuarioPublico(
         DatosUsuario(
             usuario.nombre,
             usuario.usuario,
+            usuario.email,
             usuario.ubicacion,
             usuario.bio
         )

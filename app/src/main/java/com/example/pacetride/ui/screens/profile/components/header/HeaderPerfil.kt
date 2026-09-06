@@ -2,6 +2,7 @@ package com.example.pacetride.ui.screens.profile.components.header
 
 import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -21,29 +22,40 @@ import com.example.pacetride.R
 @Composable
 fun HeaderPerfil(
     configurationPressed: () -> Unit,
+    logOutPressed: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    Row(
-        modifier = modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.SpaceBetween,
-        verticalAlignment = Alignment.CenterVertically
+    Box(
+        modifier = modifier.fillMaxWidth()
     ) {
-        Spacer(modifier = Modifier.width(24.dp))
         Text(
             stringResource(R.string.mi_perfil),
             color = MaterialTheme.colorScheme.onBackground,
             fontWeight = FontWeight.Bold,
-            fontSize = 20.sp
+            fontSize = 20.sp,
+            modifier = Modifier.align(Alignment.Center)
         )
-        Configuracion(onClick = {
-            configurationPressed()
-            Log.d("ProfileScreen", "Configuracion clicked")
-        })
+
+        Row(
+            modifier = Modifier.align(Alignment.CenterEnd),
+            horizontalArrangement = Arrangement.spacedBy(4.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Configuracion(onClick = {
+                configurationPressed()
+                Log.d("ProfileScreen", "Configuracion clicked")
+            })
+            Spacer(modifier = Modifier.width(5.dp))
+            LogOut(onClick = {
+                logOutPressed()
+                Log.d("ProfileScreen", "LogOut cliked")
+            })
+        }
     }
 }
 
 @Composable
-@Preview
+@Preview(showBackground = true)
 fun HeaderPerfilPreview(modifier: Modifier = Modifier){
-    HeaderPerfil({})
+    HeaderPerfil({}, {})
 }

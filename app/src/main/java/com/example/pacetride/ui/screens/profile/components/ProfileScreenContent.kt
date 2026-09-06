@@ -32,6 +32,7 @@ fun ProfileScreenContent(
     usuario: Usuario,
     editProfilePressed: () -> Unit,
     configurationPressed: () -> Unit,
+    logOutPressed: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -42,7 +43,7 @@ fun ProfileScreenContent(
     ) {
         Spacer(modifier = Modifier.height(16.dp))
 
-        HeaderPerfil(configurationPressed)
+        HeaderPerfil(configurationPressed, logOutPressed)
 
         Spacer(modifier = Modifier.height(24.dp))
 
@@ -53,6 +54,7 @@ fun ProfileScreenContent(
         DatosUsuario(
             nombre = usuario.nombre,
             usuario = usuario.usuario,
+            email = usuario.email,
             ubicacion = usuario.ubicacion,
             bio = usuario.bio
         )
@@ -109,6 +111,7 @@ fun ProfileScreenContentPreview(){
         ProfileScreenContent(
             configurationPressed = {},
             editProfilePressed = {},
+            logOutPressed = {},
             usuario = usuario
         )
     }
