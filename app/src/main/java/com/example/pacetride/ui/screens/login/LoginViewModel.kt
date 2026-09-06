@@ -3,6 +3,9 @@ package com.example.pacetride.ui.screens.login
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.pacetride.data.repository.AuthRepository
+import com.google.firebase.FirebaseNetworkException
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
+import com.google.firebase.auth.FirebaseAuthInvalidUserException
 import dagger.hilt.android.lifecycle.HiltViewModel
 import jakarta.inject.Inject
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -32,8 +35,8 @@ class LoginViewModel @Inject constructor(
 
     fun loginButtonPressed(){
         if(
-            _uiState.value.email.isNullOrEmpty() ||
-            _uiState.value.password.isNullOrEmpty()
+            _uiState.value.email.isEmpty() ||
+            _uiState.value.password.isEmpty()
         ){
             _uiState.update { it.copy(mostrarMensajeError = true, errorMessage = "Todos los campos deben ser rellenados") }
         }else{
@@ -42,9 +45,15 @@ class LoginViewModel @Inject constructor(
                     authRepository.signIn(_uiState.value.email, _uiState.value.password)
                     _uiState.update { it.copy(navigate = true) }
                 }catch (e : Exception){
+                    val mensaje = when (e) {
+                        is FirebaseAuthInvalidCredentialsException -> "Correo o contraseña incorrectos"
+                        is FirebaseAuthInvalidUserException -> "No existe una cuenta con ese correo"
+                        is FirebaseNetworkException -> "Sin conexión a internet. Revisa tu red"
+                        else -> "Ocurrió un error al iniciar sesión. Intenta de nuevo"
+                    }
                     _uiState.update {
                         it.copy(
-                            errorMessage = e.message.toString(),
+                            errorMessage = mensaje,
                             mostrarMensajeError = true
                         )
                     }

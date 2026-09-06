@@ -53,10 +53,10 @@ class RegisterViewModel @Inject constructor(
 
     fun registerButtonPressed(){
         if(
-            _uiState.value.name.isNullOrEmpty() ||
-            _uiState.value.email.isNullOrEmpty() ||
-            _uiState.value.password.isNullOrEmpty() ||
-            _uiState.value.confirmPassword.isNullOrEmpty()
+            _uiState.value.name.isEmpty() ||
+            _uiState.value.email.isEmpty() ||
+            _uiState.value.password.isEmpty() ||
+            _uiState.value.confirmPassword.isEmpty()
         ){
             _uiState.update { it.copy(mostrarMensajeError = true, errorMessage = "Todos los campos deben ser rellenados") }
         } else {

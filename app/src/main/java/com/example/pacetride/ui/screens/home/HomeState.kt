@@ -3,8 +3,6 @@ package com.example.pacetride.ui.screens.home
 import com.example.pacetride.data.Carrera
 import com.example.pacetride.data.EstadisticasGlobales
 import com.example.pacetride.data.Usuario
-import com.example.pacetride.data.local.LocalCarreraProvider
-import com.example.pacetride.data.local.LocalUsuarioProvider
 
 data class HomeState(
     val usuario: Usuario = Usuario(

@@ -1,4 +1,4 @@
-package com.example.pacetride.ui.screens.publicProfile.Components.seccion
+package com.example.pacetride.ui.screens.publicProfile.components.seccion
 
 
 import androidx.compose.foundation.layout.padding

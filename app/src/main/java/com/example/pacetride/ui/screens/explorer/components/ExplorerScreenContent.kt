@@ -1,4 +1,4 @@
-package com.example.pacetride.ui.screens.explorer
+package com.example.pacetride.ui.screens.explorer.components
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.expandVertically

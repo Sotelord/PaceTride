@@ -15,7 +15,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.pacetride.ui.theme.PacetrideTheme
-import com.example.pacetride.ui.screens.publicProfile.Components.PublicProfileContent
+import com.example.pacetride.ui.screens.publicProfile.components.PublicProfileContent
 
 @Composable
 fun PublicProfileScreen(

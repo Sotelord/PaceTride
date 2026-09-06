@@ -1,4 +1,4 @@
-package com.example.pacetride.ui.screens.publicProfile.Components.content
+package com.example.pacetride.ui.screens.publicProfile.components.content
 
 import android.util.Log
 import androidx.compose.foundation.Image

@@ -16,12 +16,12 @@ import com.example.pacetride.ui.theme.PacetrideTheme
 
 @Composable
 fun NotificationsScreen(
+    modifier: Modifier = Modifier,
     notificationsViewModel: NotificationsViewModel,
     usuarioId: Int,
     atrasPressed: () -> Unit,
     viewProfile: (Int) -> Unit,
-    verCarrera: (Int) -> Unit = {},
-    modifier: Modifier = Modifier
+    verCarrera: (Int) -> Unit = {}
 ) {
     val state by notificationsViewModel.uiState.collectAsState()
 

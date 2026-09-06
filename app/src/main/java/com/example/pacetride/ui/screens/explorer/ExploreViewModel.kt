@@ -2,7 +2,6 @@ package com.example.pacetride.ui.screens.explorer
 
 import androidx.lifecycle.ViewModel
 import com.example.pacetride.data.local.LocalCarreraProvider
-import com.example.pacetride.ui.screens.escribirResena.EscribirResenaState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import jakarta.inject.Inject
 import kotlinx.coroutines.flow.MutableStateFlow

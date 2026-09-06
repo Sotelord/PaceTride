@@ -56,6 +56,6 @@ fun HeaderPerfil(
 
 @Composable
 @Preview(showBackground = true)
-fun HeaderPerfilPreview(modifier: Modifier = Modifier){
+fun HeaderPerfilPreview(){
     HeaderPerfil({}, {})
 }

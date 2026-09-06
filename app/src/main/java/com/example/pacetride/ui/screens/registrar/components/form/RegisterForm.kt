@@ -11,6 +11,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.pacetride.ui.theme.PacetrideTheme
+import com.example.pacetride.ui.utils.forms.FormTextField
+import com.example.pacetride.ui.utils.forms.PasswordTextField
+import com.example.pacetride.ui.utils.forms.SocialAndNavigationButtons
 
 @Composable
 fun RegisterForm(

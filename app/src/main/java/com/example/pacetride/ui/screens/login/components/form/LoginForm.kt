@@ -5,21 +5,19 @@ import android.util.Log
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.pacetride.ui.screens.registrar.components.form.FormTextField
-import com.example.pacetride.ui.screens.registrar.components.form.PasswordTextField
-import com.example.pacetride.ui.screens.registrar.components.form.SocialAndNavigationButtons
 import com.example.pacetride.ui.theme.PacetrideTheme
 import com.example.pacetride.ui.utils.AppButton
+import com.example.pacetride.ui.utils.forms.FormTextField
+import com.example.pacetride.ui.utils.forms.PasswordTextField
+import com.example.pacetride.ui.utils.forms.SocialAndNavigationButtons
 
 @Composable
 fun LoginForm(

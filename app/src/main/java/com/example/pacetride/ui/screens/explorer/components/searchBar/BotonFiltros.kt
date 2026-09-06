@@ -34,8 +34,8 @@ import com.example.pacetride.ui.theme.PacetrideTheme
 
 @Composable
 fun BotonFiltros(
-    activo: Boolean = false,
     modifier: Modifier = Modifier,
+    activo: Boolean = false,
     onClick: () -> Unit = {}
 ) {
     val colorFondo = if (activo) MaterialTheme.colorScheme.primaryContainer else Color.Transparent

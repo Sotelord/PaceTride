@@ -69,6 +69,6 @@ fun BarraSuperiorDetalle(
 
 @Composable
 @Preview
-fun BarraSuperiorDetallePreview(modifier: Modifier = Modifier){
+fun BarraSuperiorDetallePreview(){
     BarraSuperiorDetalle({})
 }

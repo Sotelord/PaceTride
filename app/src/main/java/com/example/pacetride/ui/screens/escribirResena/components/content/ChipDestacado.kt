@@ -76,14 +76,14 @@ fun ChipDestacadoPreview(){
         modifier = Modifier.padding(16.dp),
         horizontalArrangement = Arrangement.spacedBy(8.dp)
     ) {
-        // Estado No Seleccionado
+        // Estado No seleccionado
         ChipDestacado(
             texto = "Ruta",
             seleccionado = false,
             onClick = {}
         )
 
-        // Estado Seleccionado
+        // Estado seleccionado
         ChipDestacado(
             texto = "Ruta",
             seleccionado = true,
@@ -99,14 +99,14 @@ fun ChipDestacadoPreview2(){
         modifier = Modifier.padding(16.dp),
         horizontalArrangement = Arrangement.spacedBy(8.dp)
     ) {
-        // Estado No Seleccionado
+        // Estado No seleccionado
         ChipDestacado(
             texto = "Organización",
             seleccionado = false,
             onClick = {}
         )
 
-        // Estado Seleccionado
+        // Estado seleccionado
         ChipDestacado(
             texto = "Organización",
             seleccionado = true,
@@ -122,14 +122,14 @@ fun ChipDestacadoPreview3(){
         modifier = Modifier.padding(16.dp),
         horizontalArrangement = Arrangement.spacedBy(8.dp)
     ) {
-        // Estado No Seleccionado
+        // Estado No seleccionado
         ChipDestacado(
             texto = "Ambiente",
             seleccionado = false,
             onClick = {}
         )
 
-        // Estado Seleccionado
+        // Estado seleccionado
         ChipDestacado(
             texto = "Ambiente",
             seleccionado = true,
@@ -145,14 +145,14 @@ fun ChipDestacadoPreview4(){
         modifier = Modifier.padding(16.dp),
         horizontalArrangement = Arrangement.spacedBy(8.dp)
     ) {
-        // Estado No Seleccionado
+        // Estado No seleccionado
         ChipDestacado(
             texto = "Hidratación",
             seleccionado = false,
             onClick = {}
         )
 
-        // Estado Seleccionado
+        // Estado seleccionado
         ChipDestacado(
             texto = "Hidratación",
             seleccionado = true,
@@ -168,14 +168,14 @@ fun ChipDestacadoPreview5(){
         modifier = Modifier.padding(16.dp),
         horizontalArrangement = Arrangement.spacedBy(8.dp)
     ) {
-        // Estado No Seleccionado
+        // Estado No seleccionado
         ChipDestacado(
             texto = "Seguridad",
             seleccionado = false,
             onClick = {}
         )
 
-        // Estado Seleccionado
+        // Estado seleccionado
         ChipDestacado(
             texto = "Seguridad",
             seleccionado = true,
@@ -191,14 +191,14 @@ fun ChipDestacadoPreview6(){
         modifier = Modifier.padding(16.dp),
         horizontalArrangement = Arrangement.spacedBy(8.dp)
     ) {
-        // Estado No Seleccionado
+        // Estado No seleccionado
         ChipDestacado(
             texto = "Kit",
             seleccionado = false,
             onClick = {}
         )
 
-        // Estado Seleccionado
+        // Estado seleccionado
         ChipDestacado(
             texto = "Kit",
             seleccionado = true,
@@ -214,14 +214,14 @@ fun ChipDestacadoPreview7(){
         modifier = Modifier.padding(16.dp),
         horizontalArrangement = Arrangement.spacedBy(8.dp)
     ) {
-        // Estado No Seleccionado
+        // Estado No seleccionado
         ChipDestacado(
             texto = "Precio",
             seleccionado = false,
             onClick = {}
         )
 
-        // Estado Seleccionado
+        // Estado seleccionado
         ChipDestacado(
             texto = "Precio",
             seleccionado = true,

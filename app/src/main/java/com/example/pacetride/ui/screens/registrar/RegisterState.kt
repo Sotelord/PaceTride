@@ -1,8 +1,5 @@
 package com.example.pacetride.ui.screens.registrar
 
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
-
 data class RegisterState(
     val name: String = "",
     val email: String = "",

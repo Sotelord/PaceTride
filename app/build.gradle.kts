@@ -53,12 +53,18 @@ dependencies {
     implementation(libs.androidx.compose.runtime)
     implementation(libs.androidx.core.splashscreen)
 
-    implementation("androidx.compose.ui:ui-text-google-fonts:1.12.0") //fonts
-    implementation("androidx.navigation:navigation-compose:2.9.8") //navigation
-    implementation("androidx.compose.material:material-icons-extended:$2024.04.01") //icons
+    //Fonts
+    implementation(libs.androidx.compose.ui.text.google.fonts)
 
-    implementation("androidx.compose.runtime:runtime-livedata:1.12.0")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.11.0")
+    //Navigation
+    implementation(libs.androidx.navigation.compose)
+
+    //Icons
+    implementation("androidx.compose.material:material-icons-extended:$2024.04.01")
+
+    //Livedata y lifecycle
+    implementation(libs.androidx.compose.runtime.livedata)
+    implementation(libs.androidx.lifecycle.viewmodel.compose)
 
     //Hilt
 

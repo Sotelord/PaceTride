@@ -26,11 +26,11 @@ data class Carrera(
     val distanciaPrincipalKm: Int
         get() = distanciasDisponiblesKm.firstOrNull() ?: distanciaReferenciaKm
 
-    //Precio ya calculado y formateado para la distancia principal, ej: "$90.000 COP"
+    //Precio ya calculado y formateado para la distancia principal, ej. "$90.000 COP"
     val precioMostrable: String
         get() = calcularPrecio(distanciaPrincipalKm).aPrecioCop()
 
-    //Texto de distancia listo para UI, ej: "10K"
+    //Texto de distancia listo para UI, ej. "10K"
     val distanciaMostrable: String
         get() = "${distanciaPrincipalKm}K"
 }

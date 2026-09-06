@@ -28,11 +28,11 @@ fun HistoryRaceCard(
     Column(
         modifier = modifier
             .width(140.dp)
-            .height(120.dp) // 👈 altura fija, así todas miden lo mismo
+            .height(120.dp)
             .clip(RoundedCornerShape(12.dp))
             .background(MaterialTheme.colorScheme.secondaryContainer)
             .padding(12.dp),
-        verticalArrangement = Arrangement.SpaceBetween // 👈 título arriba, resultado/fecha abajo, sin importar cuánto ocupe el título
+        verticalArrangement = Arrangement.SpaceBetween
     ) {
         Text(
             titulo,
@@ -40,7 +40,7 @@ fun HistoryRaceCard(
             fontWeight = FontWeight.Bold,
             fontSize = 14.sp,
             maxLines = 2,
-            overflow = TextOverflow.Ellipsis, // 👈 protege contra nombres largos tipo "Carrera Universitaria Javeriana"
+            overflow = TextOverflow.Ellipsis, 
             lineHeight = 16.sp
         )
         Column {

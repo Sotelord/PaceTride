@@ -1,4 +1,4 @@
-package com.example.pacetride.ui.screens.publicProfile.Components.content
+package com.example.pacetride.ui.screens.publicProfile.components.content
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow

@@ -1,4 +1,4 @@
-package com.example.pacetride.ui.screens.publicProfile.Components
+package com.example.pacetride.ui.screens.publicProfile.components
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -14,11 +14,11 @@ import com.example.pacetride.R
 import com.example.pacetride.data.Usuario
 import com.example.pacetride.data.local.LocalUsuarioProvider
 import com.example.pacetride.ui.screens.profile.components.content.FotoPerfil
-import com.example.pacetride.ui.screens.publicProfile.Components.content.DatosUsuarioPublico
-import com.example.pacetride.ui.screens.publicProfile.Components.content.MisCarrerasRow
-import com.example.pacetride.ui.screens.publicProfile.Components.content.ResenasList
-import com.example.pacetride.ui.screens.publicProfile.Components.header.HeaderPublico
-import com.example.pacetride.ui.screens.publicProfile.Components.seccion.SeccionTitulo
+import com.example.pacetride.ui.screens.publicProfile.components.content.DatosUsuarioPublico
+import com.example.pacetride.ui.screens.publicProfile.components.content.MisCarrerasRow
+import com.example.pacetride.ui.screens.publicProfile.components.content.ResenasList
+import com.example.pacetride.ui.screens.publicProfile.components.header.HeaderPublico
+import com.example.pacetride.ui.screens.publicProfile.components.seccion.SeccionTitulo
 import com.example.pacetride.ui.theme.PacetrideTheme
 import com.example.pacetride.ui.utils.stats.EstadisticasRow
 

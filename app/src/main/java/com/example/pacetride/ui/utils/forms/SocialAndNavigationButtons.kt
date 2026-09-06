@@ -1,4 +1,4 @@
-package com.example.pacetride.ui.screens.registrar.components.form
+package com.example.pacetride.ui.utils.forms
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column

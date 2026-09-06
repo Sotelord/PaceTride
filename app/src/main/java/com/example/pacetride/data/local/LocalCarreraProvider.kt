@@ -41,7 +41,7 @@ object LocalCarreraProvider {
         Carrera(
             id = 4,
             idImagen = R.drawable.running,
-            nombre = "Correra 0 Bogotá",
+            nombre = "Carrera 0 Bogotá",
             ubicacion = "Bogotá",
             fecha = "27 de agosto",
             distanciasDisponiblesKm = listOf(42),

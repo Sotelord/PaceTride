@@ -3,7 +3,6 @@ package com.example.pacetride.ui.screens.misCarreras.components
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
-import androidx.compose.material3.TabRowDefaults.tabIndicatorOffset
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -60,18 +59,17 @@ fun HeaderMisCarreras(
         }
 
         // Pestañas (Tabs)
-        TabRow(
+        SecondaryTabRow(
             selectedTabIndex = selectedTabIndex,
             containerColor = Color.Transparent,
             contentColor = MaterialTheme.colorScheme.onBackground,
-            indicator = { tabPositions ->
-                TabRowDefaults.Indicator(
-                    Modifier.tabIndicatorOffset(tabPositions[selectedTabIndex]),
-                    color = MaterialTheme.colorScheme.primaryContainer,
-                    height = 2.dp
+            indicator = {
+                TabRowDefaults.SecondaryIndicator(
+                    modifier = Modifier.tabIndicatorOffset(selectedTabIndex),
+                    color = MaterialTheme.colorScheme.primaryContainer
                 )
             },
-            divider = { Divider(color = MaterialTheme.colorScheme.outline) }
+            divider = { HorizontalDivider(color = MaterialTheme.colorScheme.outline) }
         ) {
             Tab(
                 selected = selectedTabIndex == 0,
