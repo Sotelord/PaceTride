@@ -1,7 +1,6 @@
 package com.example.pacetride.ui.screens.explorer.components.content
 
 import android.util.Log
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -16,8 +15,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
@@ -27,7 +24,9 @@ import androidx.compose.ui.unit.sp
 import com.example.pacetride.R
 import com.example.pacetride.data.Carrera
 import com.example.pacetride.data.local.LocalCarreraProvider
+import com.example.pacetride.ui.theme.PacetrideTheme
 import com.example.pacetride.ui.utils.AppButton
+import com.example.pacetride.ui.utils.RaceAsyncImage
 
 @Composable
 fun ExplorarRaceCard(
@@ -41,15 +40,14 @@ fun ExplorarRaceCard(
             .clip(RoundedCornerShape(16.dp))
             .background(MaterialTheme.colorScheme.secondaryContainer)
     ) {
-        Image(
-            painter = painterResource(id = carrera.idImagen ?: R.drawable.running),
-            contentDescription = carrera.nombre,
-            contentScale = ContentScale.Crop,
+        RaceAsyncImage(
             modifier = Modifier
                 .fillMaxWidth()
-                .aspectRatio(1.5f)
+                .aspectRatio(1.5f),
+            raceImage = carrera.raceImageUrl,
+            contentDescription = carrera.nombre,
+            background = MaterialTheme.colorScheme.surfaceVariant
         )
-
         Column(
             modifier = Modifier
                 .fillMaxWidth()
@@ -110,39 +108,47 @@ fun ExplorarRaceCard(
 @Composable
 @Preview
 fun ExplorarRaceCardPreview() {
-    ExplorarRaceCard(
-        {},
-        LocalCarreraProvider.listCarrera[0],
-        modifier = Modifier.width(180.dp)
-    )
+    PacetrideTheme(darkTheme = true) {
+        ExplorarRaceCard(
+            {},
+            LocalCarreraProvider.listCarrera[0],
+            modifier = Modifier.width(180.dp)
+        )
+    }
 }
 
 @Composable
 @Preview
 fun ExplorarRaceCardPreview2() {
-    ExplorarRaceCard(
-        {},
-        LocalCarreraProvider.listCarrera[1],
-        modifier = Modifier.width(180.dp)
-    )
+    PacetrideTheme(darkTheme = true) {
+        ExplorarRaceCard(
+            {},
+            LocalCarreraProvider.listCarrera[1],
+            modifier = Modifier.width(180.dp)
+        )
+    }
 }
 
 @Composable
 @Preview
 fun ExplorarRaceCardPreview3() {
-    ExplorarRaceCard(
-        {},
-        LocalCarreraProvider.listCarrera[2],
-        modifier = Modifier.width(180.dp)
-    )
+    PacetrideTheme(darkTheme = true) {
+        ExplorarRaceCard(
+            {},
+            LocalCarreraProvider.listCarrera[2],
+            modifier = Modifier.width(180.dp)
+        )
+    }
 }
 
 @Composable
 @Preview
 fun ExplorarRaceCardPreview4() {
-    ExplorarRaceCard(
-        {},
-        LocalCarreraProvider.listCarrera[3],
-        modifier = Modifier.width(180.dp)
-    )
+    PacetrideTheme(darkTheme = true) {
+        ExplorarRaceCard(
+            {},
+            LocalCarreraProvider.listCarrera[3],
+            modifier = Modifier.width(180.dp)
+        )
+    }
 }

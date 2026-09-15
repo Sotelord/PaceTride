@@ -10,7 +10,7 @@ object LocalPublicacionProvider {
     val publicaciones = listOf(
         Publicacion(
             id = 1,
-            idAvatar = usuarios[0].fotoPerfil,
+            imageUserURL = usuarios[0].fotoPerfil,
             nombre = usuarios[0].nombre,
             tiempo = "Hace 2 h",
             texto = "¡Por fin llegó el día! 🏃 🔥 Mi primera Media Maratón de Bogotá.",
@@ -25,7 +25,7 @@ object LocalPublicacionProvider {
 
         Publicacion(
             id = 2,
-            idAvatar = usuarios[1].fotoPerfil,
+            imageUserURL = usuarios[1].fotoPerfil,
             nombre = usuarios[1].nombre,
             tiempo = "Hace 5 h",
             resena = LocalResenaProvider.listaResenas[1],
@@ -35,7 +35,7 @@ object LocalPublicacionProvider {
 
         Publicacion(
             id = 3,
-            idAvatar = usuarios[2].fotoPerfil,
+            imageUserURL = usuarios[2].fotoPerfil,
             nombre = usuarios[2].nombre,
             tiempo = "Hace 8 h",
             texto = "¿Alguien más se anima a correr la Carrera 5K Universitaria este fin de semana?",

@@ -28,6 +28,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.pacetride.R
+import com.example.pacetride.ui.theme.PacetrideTheme
 
 @Composable
 fun ChipDestacado(
@@ -72,161 +73,175 @@ fun ChipDestacado(
 @Composable
 @Preview
 fun ChipDestacadoPreview(){
-    Row(
-        modifier = Modifier.padding(16.dp),
-        horizontalArrangement = Arrangement.spacedBy(8.dp)
-    ) {
-        // Estado No seleccionado
-        ChipDestacado(
-            texto = "Ruta",
-            seleccionado = false,
-            onClick = {}
-        )
+    PacetrideTheme(darkTheme = true) {
+        Row(
+            modifier = Modifier.padding(16.dp),
+            horizontalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
+            // Estado No seleccionado
+            ChipDestacado(
+                texto = "Ruta",
+                seleccionado = false,
+                onClick = {}
+            )
 
-        // Estado seleccionado
-        ChipDestacado(
-            texto = "Ruta",
-            seleccionado = true,
-            onClick = {}
-        )
+            // Estado seleccionado
+            ChipDestacado(
+                texto = "Ruta",
+                seleccionado = true,
+                onClick = {}
+            )
+        }
     }
 }
 
 @Composable
 @Preview
 fun ChipDestacadoPreview2(){
-    Row(
-        modifier = Modifier.padding(16.dp),
-        horizontalArrangement = Arrangement.spacedBy(8.dp)
-    ) {
-        // Estado No seleccionado
-        ChipDestacado(
-            texto = "Organización",
-            seleccionado = false,
-            onClick = {}
-        )
+    PacetrideTheme(darkTheme = true) {
+        Row(
+            modifier = Modifier.padding(16.dp),
+            horizontalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
+            // Estado No seleccionado
+            ChipDestacado(
+                texto = "Organización",
+                seleccionado = false,
+                onClick = {}
+            )
 
-        // Estado seleccionado
-        ChipDestacado(
-            texto = "Organización",
-            seleccionado = true,
-            onClick = {}
-        )
+            // Estado seleccionado
+            ChipDestacado(
+                texto = "Organización",
+                seleccionado = true,
+                onClick = {}
+            )
+        }
     }
 }
 
 @Composable
 @Preview
 fun ChipDestacadoPreview3(){
-    Row(
-        modifier = Modifier.padding(16.dp),
-        horizontalArrangement = Arrangement.spacedBy(8.dp)
-    ) {
-        // Estado No seleccionado
-        ChipDestacado(
-            texto = "Ambiente",
-            seleccionado = false,
-            onClick = {}
-        )
+    PacetrideTheme(darkTheme = true) {
+        Row(
+            modifier = Modifier.padding(16.dp),
+            horizontalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
+            // Estado No seleccionado
+            ChipDestacado(
+                texto = "Ambiente",
+                seleccionado = false,
+                onClick = {}
+            )
 
-        // Estado seleccionado
-        ChipDestacado(
-            texto = "Ambiente",
-            seleccionado = true,
-            onClick = {}
-        )
+            // Estado seleccionado
+            ChipDestacado(
+                texto = "Ambiente",
+                seleccionado = true,
+                onClick = {}
+            )
+        }
     }
 }
 
 @Composable
 @Preview
 fun ChipDestacadoPreview4(){
-    Row(
-        modifier = Modifier.padding(16.dp),
-        horizontalArrangement = Arrangement.spacedBy(8.dp)
-    ) {
-        // Estado No seleccionado
-        ChipDestacado(
-            texto = "Hidratación",
-            seleccionado = false,
-            onClick = {}
-        )
+    PacetrideTheme(darkTheme = true) {
+        Row(
+            modifier = Modifier.padding(16.dp),
+            horizontalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
+            // Estado No seleccionado
+            ChipDestacado(
+                texto = "Hidratación",
+                seleccionado = false,
+                onClick = {}
+            )
 
-        // Estado seleccionado
-        ChipDestacado(
-            texto = "Hidratación",
-            seleccionado = true,
-            onClick = {}
-        )
+            // Estado seleccionado
+            ChipDestacado(
+                texto = "Hidratación",
+                seleccionado = true,
+                onClick = {}
+            )
+        }
     }
 }
 
 @Composable
 @Preview
 fun ChipDestacadoPreview5(){
-    Row(
-        modifier = Modifier.padding(16.dp),
-        horizontalArrangement = Arrangement.spacedBy(8.dp)
-    ) {
-        // Estado No seleccionado
-        ChipDestacado(
-            texto = "Seguridad",
-            seleccionado = false,
-            onClick = {}
-        )
+    PacetrideTheme(darkTheme = true) {
+        Row(
+            modifier = Modifier.padding(16.dp),
+            horizontalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
+            // Estado No seleccionado
+            ChipDestacado(
+                texto = "Seguridad",
+                seleccionado = false,
+                onClick = {}
+            )
 
-        // Estado seleccionado
-        ChipDestacado(
-            texto = "Seguridad",
-            seleccionado = true,
-            onClick = {}
-        )
+            // Estado seleccionado
+            ChipDestacado(
+                texto = "Seguridad",
+                seleccionado = true,
+                onClick = {}
+            )
+        }
     }
 }
 
 @Composable
 @Preview
 fun ChipDestacadoPreview6(){
-    Row(
-        modifier = Modifier.padding(16.dp),
-        horizontalArrangement = Arrangement.spacedBy(8.dp)
-    ) {
-        // Estado No seleccionado
-        ChipDestacado(
-            texto = "Kit",
-            seleccionado = false,
-            onClick = {}
-        )
+    PacetrideTheme(darkTheme = true) {
+        Row(
+            modifier = Modifier.padding(16.dp),
+            horizontalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
+            // Estado No seleccionado
+            ChipDestacado(
+                texto = "Kit",
+                seleccionado = false,
+                onClick = {}
+            )
 
-        // Estado seleccionado
-        ChipDestacado(
-            texto = "Kit",
-            seleccionado = true,
-            onClick = {}
-        )
+            // Estado seleccionado
+            ChipDestacado(
+                texto = "Kit",
+                seleccionado = true,
+                onClick = {}
+            )
+        }
     }
 }
 
 @Composable
 @Preview
 fun ChipDestacadoPreview7(){
-    Row(
-        modifier = Modifier.padding(16.dp),
-        horizontalArrangement = Arrangement.spacedBy(8.dp)
-    ) {
-        // Estado No seleccionado
-        ChipDestacado(
-            texto = "Precio",
-            seleccionado = false,
-            onClick = {}
-        )
+    PacetrideTheme(darkTheme = true) {
+        Row(
+            modifier = Modifier.padding(16.dp),
+            horizontalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
+            // Estado No seleccionado
+            ChipDestacado(
+                texto = "Precio",
+                seleccionado = false,
+                onClick = {}
+            )
 
-        // Estado seleccionado
-        ChipDestacado(
-            texto = "Precio",
-            seleccionado = true,
-            onClick = {}
-        )
+            // Estado seleccionado
+            ChipDestacado(
+                texto = "Precio",
+                seleccionado = true,
+                onClick = {}
+            )
+        }
     }
 }
 

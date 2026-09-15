@@ -82,37 +82,45 @@ fun FiltroChipPreview(){
 }
 
 @Composable
-@Preview(showBackground = true)
+@Preview
 fun FiltroChipPreview2(){
-    FiltroChip("5k",
-        false,
-        onClick = {}
-    )
+    PacetrideTheme(darkTheme = true) {
+        FiltroChip("5k",
+            false,
+            onClick = {}
+        )
+    }
 }
 
 @Composable
-@Preview(showBackground = true)
+@Preview
 fun FiltroChipPreview3(){
-    FiltroChip("10k",
-        false,
-        onClick = {}
-    )
+    PacetrideTheme(darkTheme = true) {
+        FiltroChip("10k",
+            false,
+            onClick = {}
+        )
+    }
 }
 
 @Composable
-@Preview(showBackground = true)
+@Preview
 fun FiltroChipPreview4(){
-    FiltroChip("21k",
-        false,
-        onClick = {}
-    )
+    PacetrideTheme(darkTheme = true) {
+        FiltroChip("21k",
+            false,
+            onClick = {}
+        )
+    }
 }
 
 @Composable
-@Preview(showBackground = true)
+@Preview
 fun FiltroChipPreview5(){
-    FiltroChip("42k",
-        false,
-        onClick = {}
-    )
+    PacetrideTheme(darkTheme = true) {
+        FiltroChip("42k",
+            false,
+            onClick = {}
+        )
+    }
 }

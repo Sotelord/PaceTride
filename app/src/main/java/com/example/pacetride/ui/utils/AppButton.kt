@@ -10,6 +10,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.sp
+import com.example.pacetride.ui.theme.PacetrideTheme
 
 // ---------- BOTÓN ----------
 
@@ -34,17 +35,32 @@ fun AppButton(
 @Composable
 @Preview
 fun AppButtonPreview(){
-    AppButton( textoBoton = "Ver carrera", onClick = {})
+    PacetrideTheme(darkTheme = true) {
+        AppButton(
+            textoBoton = "Ver carrera",
+            onClick = {}
+        )
+    }
 }
 
 @Composable
 @Preview
 fun AppButtonPreview2(){
-    AppButton(textoBoton = "Ver detalles", onClick = {})
+    PacetrideTheme(darkTheme = true) {
+        AppButton(
+            textoBoton = "Ver detalles",
+            onClick = {}
+        )
+    }
 }
 
 @Composable
 @Preview
 fun AppButtonPreview3(){
-    AppButton(textoBoton = "Editar perfil", onClick = {})
+    PacetrideTheme(darkTheme = true) {
+        AppButton(
+            textoBoton = "Editar perfil",
+            onClick = {}
+        )
+    }
 }

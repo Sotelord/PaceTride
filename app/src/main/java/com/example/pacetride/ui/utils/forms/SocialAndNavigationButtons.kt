@@ -24,6 +24,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.pacetride.R
+import com.example.pacetride.ui.theme.PacetrideTheme
 
 @Composable
 fun SocialAndNavigationButtons(
@@ -73,7 +74,9 @@ fun SocialAndNavigationButtons(
 @Composable
 @Preview
 fun SocialAndNavigationButtonsPreview(){
-    SocialAndNavigationButtons(
-        onGoogleLoginPressed = {}
-    )
+    PacetrideTheme(darkTheme = true) {
+        SocialAndNavigationButtons(
+            onGoogleLoginPressed = {}
+        )
+    }
 }

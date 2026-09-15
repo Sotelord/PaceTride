@@ -5,12 +5,12 @@ import androidx.compose.ui.graphics.Color
 // ---------- LIGHT (ajustado a mano) ----------
 val primaryLight = Color(0xFF4E6700)
 val onPrimaryLight = Color(0xFFFFFFFF)
-val primaryContainerLight = Color(0xFF8FB300)          // 👈 verde más oscuro, mejor contraste sobre claro
-val onPrimaryContainerLight = Color(0xFFF4F7E8)          // blanco hueso, no blanco puro (para no chocar tanto)
+val primaryContainerLight = Color(0xFF8FB300)
+val onPrimaryContainerLight = Color(0xFFF4F7E8)
 val secondaryLight = Color(0xFF030807)
 val onSecondaryLight = Color(0xFFFFFFFF)
-val secondaryContainerLight = Color(0xFFE4E7E5)         // 👈 gris claro en vez de casi-negro (para tarjetas)
-val onSecondaryContainerLight = Color(0xFF1A211F)       // 👈 texto oscuro sobre esa tarjeta gris
+val secondaryContainerLight = Color(0xFFE4E7E5)
+val onSecondaryContainerLight = Color(0xFF1A211F)
 val tertiaryLight = Color(0xFFAB3500)
 val onTertiaryLight = Color(0xFFFFFFFF)
 val tertiaryContainerLight = Color(0xFFFF6B35)
@@ -19,7 +19,7 @@ val errorLight = Color(0xFFAB3500)
 val onErrorLight = Color(0xFFFFFFFF)
 val errorContainerLight = Color(0xFFFF6B35)
 val onErrorContainerLight = Color(0xFF5F1900)
-val backgroundLight = Color(0xFFF2F4F0)                 // 👈 gris muy claro en vez de casi-blanco puro
+val backgroundLight = Color(0xFFF2F4F0)
 val onBackgroundLight = Color(0xFF191D10)
 val surfaceLight = Color(0xFFFFFFFF)
 val onSurfaceLight = Color(0xFF1C1B1B)

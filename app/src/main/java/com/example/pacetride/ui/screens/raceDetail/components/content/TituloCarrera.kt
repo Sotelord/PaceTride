@@ -8,6 +8,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
+import com.example.pacetride.ui.theme.PacetrideTheme
 
 @Composable
 fun TituloCarrera(
@@ -26,8 +27,11 @@ fun TituloCarrera(
 @Composable
 @Preview
 fun TituloCarreraPreview(){
-    TituloCarrera("Media Maratón Bogotá 2026",
-        "27 de septiembre de 2026",
-        "Bogotá, Colombia"
-    )
+    PacetrideTheme(darkTheme = true) {
+        TituloCarrera(
+            titulo = "Media Maratón Bogotá 2026",
+            fecha = "27 de septiembre de 2026",
+            ubicacion = "Bogotá, Colombia"
+        )
+    }
 }

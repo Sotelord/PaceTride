@@ -17,6 +17,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.pacetride.R
+import com.example.pacetride.ui.theme.PacetrideTheme
 
 @Composable
 fun ContadorInteraccion(
@@ -52,60 +53,72 @@ fun ContadorInteraccion(
 @Composable
 @Preview
 fun ContadorInteraccionPreview() {
-    ContadorInteraccion(
-        idIcono = R.drawable.ic_me_gusta_lleno,
-        cantidad =  "128",
-        interaccion = "Me gusta"
-    ) // sin tinte, corazón rojo
+    PacetrideTheme(darkTheme = true) {
+        ContadorInteraccion(
+            idIcono = R.drawable.ic_me_gusta_lleno,
+            cantidad =  "128",
+            interaccion = "Me gusta"
+        )
+    }
 }
 
 @Composable
 @Preview
 fun ContadorInteraccionPreview1_1() {
-    ContadorInteraccion(
-        idIcono = R.drawable.ic_comentario,
-        cantidad = "24",
-        interaccion = "comentarios"
-    )
+    PacetrideTheme(darkTheme = true) {
+        ContadorInteraccion(
+            idIcono = R.drawable.ic_comentario,
+            cantidad = "24",
+            interaccion = "comentarios"
+        )
+    }
 }
 
 @Composable
 @Preview
 fun ContadorInteraccionPreview2() {
-    ContadorInteraccion(
-        idIcono =  R.drawable.ic_me_gusta_lleno,
-        cantidad = "67",
-        interaccion = "Me gusta"
-    )
+    PacetrideTheme(darkTheme = true) {
+        ContadorInteraccion(
+            idIcono =  R.drawable.ic_me_gusta_lleno,
+            cantidad = "67",
+            interaccion = "Me gusta"
+        )
+    }
 }
 
 @Composable
 @Preview
 fun ContadorInteraccionPreview2_1() {
-    ContadorInteraccion(
-        idIcono =  R.drawable.ic_comentario,
-        cantidad = "8",
-        interaccion = "comentarios"
-    )
+    PacetrideTheme(darkTheme = true) {
+        ContadorInteraccion(
+            idIcono =  R.drawable.ic_comentario,
+            cantidad = "8",
+            interaccion = "comentarios"
+        )
+    }
 }
 
 @Composable
 @Preview
 fun ContadorInteraccionPreview3() {
-    ContadorInteraccion(
-        idIcono =  R.drawable.ic_me_gusta_lleno,
-        cantidad = "34",
-        interaccion = "Me gusta"
-    )
+    PacetrideTheme(darkTheme = true) {
+        ContadorInteraccion(
+            idIcono =  R.drawable.ic_me_gusta_lleno,
+            cantidad = "34",
+            interaccion = "Me gusta"
+        )
+    }
 }
 
 @Composable
 @Preview
 fun ContadorInteraccionPreview3_1() {
-    ContadorInteraccion(
-        idIcono =  R.drawable.ic_comentario,
-        cantidad = "5",
-        interaccion = "comentarios",
-        aplicarTinte = true
-    )
+    PacetrideTheme(darkTheme = true) {
+        ContadorInteraccion(
+            idIcono =  R.drawable.ic_comentario,
+            cantidad = "5",
+            interaccion = "comentarios",
+            aplicarTinte = true
+        )
+    }
 }

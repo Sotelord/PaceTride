@@ -36,6 +36,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.pacetride.R
+import com.example.pacetride.ui.theme.PacetrideTheme
 
 @Composable
 fun BarraBusqueda(
@@ -109,6 +110,8 @@ fun BarraBusqueda(
 @Composable
 @Preview
 fun BarraBusquedaPreview() {
-    var texto by remember { mutableStateOf("") }
-    BarraBusqueda(texto = texto, onTextoChange = { texto = it })
+    PacetrideTheme(darkTheme = true) {
+        var texto by remember { mutableStateOf("") }
+        BarraBusqueda(texto = texto, onTextoChange = { texto = it })
+    }
 }

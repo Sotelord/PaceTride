@@ -1,7 +1,6 @@
 package com.example.pacetride.ui.screens.home.components.content
 
 import android.util.Log
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -18,8 +17,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -28,7 +25,9 @@ import androidx.compose.ui.unit.sp
 import com.example.pacetride.R
 import com.example.pacetride.data.Carrera
 import com.example.pacetride.data.local.LocalCarreraProvider
+import com.example.pacetride.ui.theme.PacetrideTheme
 import com.example.pacetride.ui.utils.AppButton
+import com.example.pacetride.ui.utils.RaceAsyncImage
 
 // ---------- TARJETA GRANDE DE CARRERA DESTACADA ----------
 
@@ -44,13 +43,11 @@ fun FeaturedRaceCard(
             .height(320.dp)
             .clip(RoundedCornerShape(20.dp))
     ) {
-        Image(
-            painter = painterResource(carrera.idImagen?: R.drawable.running),
-            contentDescription = carrera.nombre,
-            contentScale = ContentScale.Crop,
-            modifier = Modifier.fillMaxSize()
+        RaceAsyncImage(
+            modifier = Modifier.fillMaxSize(),
+            raceImage = carrera.raceImageUrl,
+            contentDescription = carrera.nombre
         )
-
         Box(
             modifier = Modifier
                 .fillMaxSize()
@@ -105,9 +102,11 @@ fun FeaturedRaceCard(
 @Composable
 @Preview
 fun FeaturedRaceCardPreview(){
-    val carrera = LocalCarreraProvider.listCarrera[2]
-    FeaturedRaceCard(
-        carrera,{},
-        modifier = Modifier.padding(horizontal = 20.dp)
+    PacetrideTheme(darkTheme = true) {
+        val carrera = LocalCarreraProvider.listCarrera[2]
+        FeaturedRaceCard(
+            carrera,{},
+            modifier = Modifier.padding(horizontal = 20.dp)
         )
+    }
 }

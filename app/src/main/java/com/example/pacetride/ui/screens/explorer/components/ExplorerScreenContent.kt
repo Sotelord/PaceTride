@@ -111,7 +111,7 @@ fun ExploreScreenContent(
 }
 
 @Composable
-@Preview(showBackground = true)
+@Preview
 fun ExploreScreenContentPreview(){
     val carreras = LocalCarreraProvider.listCarrera
     PacetrideTheme(darkTheme = true) {

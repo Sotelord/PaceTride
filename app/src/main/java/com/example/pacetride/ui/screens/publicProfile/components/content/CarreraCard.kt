@@ -21,6 +21,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.pacetride.R
+import com.example.pacetride.ui.theme.PacetrideTheme
 
 @Composable
 fun CarreraCard(titulo: String, detalle: String, modifier: Modifier = Modifier) {
@@ -48,5 +49,10 @@ fun CarreraCard(titulo: String, detalle: String, modifier: Modifier = Modifier) 
 @Composable
 @Preview
 fun CarreraCardPreview(){
-    CarreraCard(titulo = "Media maraton", detalle = "Increible")
+    PacetrideTheme(darkTheme = true) {
+        CarreraCard(
+            titulo = "Media maratón",
+            detalle = "Increíble"
+        )
+    }
 }

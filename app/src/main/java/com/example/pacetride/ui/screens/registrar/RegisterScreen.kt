@@ -61,7 +61,7 @@ fun RegisterScreen(
     }
 }
 
-@Preview(showBackground = true)
+@Preview
 @Composable
 fun RegisterScreenPreview() {
     PacetrideTheme(darkTheme = true) {

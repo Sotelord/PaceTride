@@ -22,6 +22,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.pacetride.R
+import com.example.pacetride.ui.theme.PacetrideTheme
 
 @Composable
 fun CampoResena(
@@ -71,26 +72,32 @@ fun CampoResena(
 @Composable
 @Preview
 fun CampoResenaPreview() {
-    CampoResena(
-        texto = "",
-        onTextoChange = {}
-    )
+    PacetrideTheme(darkTheme = true) {
+        CampoResena(
+            texto = "",
+            onTextoChange = {}
+        )
+    }
 }
 
 @Composable
 @Preview
 fun CampoResenaPreview2() {
-    CampoResena(
-        texto = "Hola",
-        onTextoChange = {}
-    )
+    PacetrideTheme(darkTheme = true) {
+        CampoResena(
+            texto = "Hola",
+            onTextoChange = {}
+        )
+    }
 }
 
 @Composable
 @Preview
 fun CampoResenaPreview3() {
-    CampoResena(
-        texto = "123456789",
-        onTextoChange = {}
-    )
+    PacetrideTheme(darkTheme = true) {
+        CampoResena(
+            texto = "123456789",
+            onTextoChange = {}
+        )
+    }
 }

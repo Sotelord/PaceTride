@@ -23,20 +23,20 @@ import com.example.pacetride.ui.screens.raceDetail.components.content.BotonInscr
 
 @Composable
 fun RaceDetailScreen(
-    raceDatailViewModel: RaceDatailViewModel,
+    raceDetailViewModel: RaceDetailViewModel,
     raceId: Int,
     atrasPressed: () -> Unit,
     inscribemePressed: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    val state by raceDatailViewModel.uiState.collectAsState()
+    val state by raceDetailViewModel.uiState.collectAsState()
 
     LaunchedEffect(Unit) {
-        raceDatailViewModel.getRaceId(raceId)
+        raceDetailViewModel.getRaceId(raceId)
     }
 
     if (state.carrera != null) {
-        val precioActual = raceDatailViewModel.getPrecioActual()
+        val precioActual = raceDetailViewModel.getPrecioActual()
 
         Column(
             modifier = modifier
@@ -46,7 +46,7 @@ fun RaceDetailScreen(
             RaceDetailScreenContent(
                 carrera = state.carrera!!,
                 kmSeleccionado = state.kmSeleccionado,
-                onSeleccionarKm = { raceDatailViewModel.updateKmSeleccionado(it) },
+                onSeleccionarKm = { raceDetailViewModel.updateKmSeleccionado(it) },
                 atrasPressed = atrasPressed,
                 modifier = Modifier.weight(1f),
             )
@@ -70,7 +70,7 @@ fun RaceDetailScreen(
 fun RaceDetailScreenPreview() {
     PacetrideTheme(darkTheme = true) {
         RaceDetailScreen(
-            raceDatailViewModel = viewModel(),
+            raceDetailViewModel = viewModel(),
             inscribemePressed = {},
             raceId = 2,
             atrasPressed = {},

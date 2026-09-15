@@ -9,6 +9,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.pacetride.data.CarreraRealizada
 import com.example.pacetride.data.local.LocalUsuarioProvider
+import com.example.pacetride.ui.theme.PacetrideTheme
 
 @Composable
 fun HistorialRow(carreras: List<CarreraRealizada>, modifier: Modifier = Modifier) {
@@ -28,5 +29,9 @@ fun HistorialRow(carreras: List<CarreraRealizada>, modifier: Modifier = Modifier
 @Composable
 @Preview
 fun HistorialRowPreview(){
-    HistorialRow(LocalUsuarioProvider.usuarios[0].historial)
+    PacetrideTheme(darkTheme = true) {
+        HistorialRow(
+            carreras =  LocalUsuarioProvider.usuarios[0].historial
+        )
+    }
 }

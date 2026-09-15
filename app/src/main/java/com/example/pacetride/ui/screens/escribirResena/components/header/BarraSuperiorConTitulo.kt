@@ -21,6 +21,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.pacetride.R
+import com.example.pacetride.ui.theme.PacetrideTheme
 
 @Composable
 fun BarraSuperiorConTitulo(
@@ -58,8 +59,10 @@ fun BarraSuperiorConTitulo(
 @Composable
 @Preview
 fun BarraSuperiorConTituloPreview(){
-    BarraSuperiorConTitulo(
-        stringResource(R.string.escribir_resena),
-        atrasPressed = {}
-    )
+    PacetrideTheme(darkTheme = true) {
+        BarraSuperiorConTitulo(
+            stringResource(R.string.escribir_resena),
+            atrasPressed = {}
+        )
+    }
 }

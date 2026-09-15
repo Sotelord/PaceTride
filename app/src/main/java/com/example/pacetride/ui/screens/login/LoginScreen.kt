@@ -46,7 +46,7 @@ fun LoginScreen(
             passwordVisible = state.passwordVisible,
             onPasswordVisibleChange = {loginViewModel.mostrarEsconderPasswordVisible()},
             loginButtonPressed = { loginViewModel.loginButtonPressed() },
-            createAcountPressed = createAcountPressed,
+            createAccountPressed = createAcountPressed,
             recuperarContrasenaPressed = recuperarContrasenaPressed,
             mostrarMensajeError = state.mostrarMensajeError,
             errorMessage = state.errorMessage,

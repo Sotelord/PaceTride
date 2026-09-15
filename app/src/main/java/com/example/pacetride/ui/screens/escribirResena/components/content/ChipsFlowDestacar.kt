@@ -15,6 +15,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.pacetride.ui.theme.PacetrideTheme
 
 @Composable
 fun ChipsFlowDestacar(
@@ -23,7 +24,6 @@ fun ChipsFlowDestacar(
     onToggle: (String) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    // Divido las opciones en filas de 3 en 3, siguiendo el layout de tu mockup
     val filas = opciones.chunked(3)
     Column(modifier = modifier.fillMaxWidth(), verticalArrangement = Arrangement.spacedBy(10.dp)) {
         filas.forEach { fila ->
@@ -46,21 +46,22 @@ fun ChipsFlowDestacar(
 @Composable
 @Preview
 fun ChipsFlowDestacarPreview(){
-    val opcionesDestacar = listOf("Ruta", "Organización", "Ambiente", "Hidratación", "Seguridad", "Kit", "Precio")
-    var seleccionadas by remember { mutableStateOf(setOf("Ruta", "Organización", "Ambiente")) }
+    PacetrideTheme(darkTheme = true) {
+        val opcionesDestacar = listOf("Ruta", "Organización", "Ambiente", "Hidratación", "Seguridad", "Kit", "Precio")
+        var seleccionadas by remember { mutableStateOf(setOf("Ruta", "Organización", "Ambiente")) }
 
-    Box(modifier = Modifier.padding(16.dp)) {
-        ChipsFlowDestacar(
-            opciones = opcionesDestacar,
-            seleccionadas = seleccionadas,
-            onToggle = { opcion ->
-                // Si ya existe la quita, si no existe la agrega al Set
-                seleccionadas = if (opcion in seleccionadas) {
-                    seleccionadas - opcion
-                } else {
-                    seleccionadas + opcion
+        Box(modifier = Modifier.padding(16.dp)) {
+            ChipsFlowDestacar(
+                opciones = opcionesDestacar,
+                seleccionadas = seleccionadas,
+                onToggle = { opcion ->
+                    seleccionadas = if (opcion in seleccionadas) {
+                        seleccionadas - opcion
+                    } else {
+                        seleccionadas + opcion
+                    }
                 }
-            }
-        )
+            )
+        }
     }
 }

@@ -19,6 +19,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.pacetride.R
+import com.example.pacetride.ui.theme.PacetrideTheme
 import com.example.pacetride.ui.utils.LogoApp
 
 @Composable
@@ -44,5 +45,7 @@ fun BadgeMarca(modifier: Modifier = Modifier) {
 @Composable
 @Preview
 fun BadgeMarcaPreview(){
-    BadgeMarca()
+    PacetrideTheme(darkTheme = true) {
+        BadgeMarca()
+    }
 }

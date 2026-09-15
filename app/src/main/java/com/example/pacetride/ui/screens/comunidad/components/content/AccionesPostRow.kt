@@ -14,6 +14,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.pacetride.R
+import com.example.pacetride.ui.theme.PacetrideTheme
 
 @Composable
 fun AccionesPostRow(
@@ -50,14 +51,15 @@ fun AccionesPostRow(
 }
 
 @Composable
-@Preview(showBackground = true, backgroundColor = 0xFF121212)
-fun AccionesPostRowPreview() { // Corregido: Quitamos el parámetro modifier de aquí
-    // Creamos un estado local en el Preview para probar el comportamiento de los botones reunidos
-    var meGustaActivo by remember { mutableStateOf(false) }
+@Preview
+fun AccionesPostRowPreview() {
+    PacetrideTheme(darkTheme = true) {
+        var meGustaActivo by remember { mutableStateOf(false) }
+        AccionesPostRow(
+            meGustaSeleccionado = meGustaActivo,
+            onMeGustaClick = { meGustaActivo = !meGustaActivo },
+            onComentarClick = { /* Acción de comentar */ }
+        )
 
-    AccionesPostRow(
-        meGustaSeleccionado = meGustaActivo,
-        onMeGustaClick = { meGustaActivo = !meGustaActivo },
-        onComentarClick = { /* Acción de comentar */ }
-    )
+    }
 }

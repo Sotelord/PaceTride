@@ -41,7 +41,7 @@ fun FiltrosRow(
 }
 
 @Composable
-@Preview(showBackground = true)
+@Preview
 fun FiltrosRowPreview() {
     var seleccionado by remember { mutableStateOf("Todas") }
     PacetrideTheme(darkTheme = true) {

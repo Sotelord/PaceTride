@@ -19,6 +19,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.pacetride.R
+import com.example.pacetride.ui.theme.PacetrideTheme
 
 @Composable
 fun InfoItem(
@@ -45,48 +46,59 @@ fun InfoItem(
 @Composable
 @Preview
 fun InfoItemPreview(){
-    InfoItem(
-        R.drawable.ic_calendario,
-        stringResource(R.string.fecha),
-        "fecha"
-    )
+    PacetrideTheme(darkTheme = true) {
+        InfoItem(
+            idIcono = R.drawable.ic_calendario,
+            etiqueta = stringResource(R.string.fecha),
+            valor = "fecha"
+        )
+    }
 }
 
 @Composable
 @Preview
 fun InfoItemPreview2(){
-    InfoItem(
-        R.drawable.ic_reloj,
-        stringResource(R.string.hora_de_salida),
-        "hora"
-    )
+    PacetrideTheme(darkTheme = true) {
+        InfoItem(
+            idIcono = R.drawable.ic_reloj,
+            etiqueta = stringResource(R.string.hora_de_salida),
+            valor = "hora"
+        )
+    }
 }
 
 @Composable
 @Preview
 fun InfoItemPreview3(){
-    InfoItem(
-        R.drawable.ubicacion_blanco,
-        stringResource(R.string.lugar),
-        "lugar"
-    )
+    PacetrideTheme(darkTheme = true) {
+        InfoItem(
+            idIcono = R.drawable.ubicacion_blanco,
+            etiqueta = stringResource(R.string.lugar),
+            valor = "lugar"
+        )
+    }
 }
 
 @Composable
 @Preview
 fun InfoItemPreview4(){
-    InfoItem(
-        R.drawable.ic_distancia, stringResource(R.string.distancia),
-        "distancia"
-    )
+    PacetrideTheme(darkTheme = true) {
+        InfoItem(
+            idIcono = R.drawable.ic_distancia,
+            etiqueta = stringResource(R.string.distancia),
+            valor = "distancia"
+        )
+    }
 }
 
 @Composable
 @Preview
 fun InfoItemPreview5(){
-    InfoItem(
-        R.drawable.ic_dinero,
-        stringResource(R.string.inscripcion),
-        "precio"
-    )
+    PacetrideTheme(darkTheme = true) {
+        InfoItem(
+            idIcono =  R.drawable.ic_dinero,
+            etiqueta =  stringResource(R.string.inscripcion),
+            valor = "precio"
+        )
+    }
 }

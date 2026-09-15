@@ -1,5 +1,6 @@
 package com.example.pacetride.ui.screens.registrar
 
+import android.util.Patterns
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.pacetride.data.repository.AuthRepository
@@ -52,38 +53,31 @@ class RegisterViewModel @Inject constructor(
     }
 
     fun registerButtonPressed(){
+        val state = _uiState.value
         if(
-            _uiState.value.name.isEmpty() ||
-            _uiState.value.email.isEmpty() ||
-            _uiState.value.password.isEmpty() ||
-            _uiState.value.confirmPassword.isEmpty()
+            state.name.isBlank() ||
+            state.email.isBlank() ||
+            state.password.isBlank() ||
+            state.confirmPassword.isBlank()
         ){
             _uiState.update { it.copy(mostrarMensajeError = true, errorMessage = "Todos los campos deben ser rellenados") }
         } else {
             if(_uiState.value.password.length < 7){
                 _uiState.update { it.copy(mostrarMensajeError = true, errorMessage = "La contraseña debe tener más de 7 dígitos") }
             } else {
-                if(!_uiState.value.email.contains("@")){
-                    _uiState.update { it.copy(mostrarMensajeError = true, errorMessage = "El correo debe de contener el caracter @") }
+                if(!Patterns.EMAIL_ADDRESS.matcher(_uiState.value.email).matches()){
+                    _uiState.update { it.copy(mostrarMensajeError = true, errorMessage = "Ingresa un correo válido") }
                 } else {
-                    if(_uiState.value.email == "admin@admin.com"){
-                        _uiState.update { it.copy(mostrarMensajeError = true, errorMessage = "El correo ya esta en uso") }
+                    if(_uiState.value.password != _uiState.value.confirmPassword){
+                        _uiState.update { it.copy(mostrarMensajeError = true, errorMessage = "Las contraseñas no coinciden") }
                     } else {
-                        if(_uiState.value.password != _uiState.value.confirmPassword){
-                            _uiState.update { it.copy(mostrarMensajeError = true, errorMessage = "Las contraseñas no coinciden") }
-                        } else {
-                            viewModelScope.launch {
-                                try {
-                                    authRepository.signUp(_uiState.value.email, _uiState.value.password)
-                                    _uiState.update { it.copy(navigate = true) }
-                                } catch (e: Exception) {
-                                    _uiState.update {
-                                        it.copy(
-                                            errorMessage = e.message.toString(),
-                                            mostrarMensajeError = true
-                                        )
-                                    }
-                                }
+                        viewModelScope.launch {
+                            val result = authRepository.signUp(_uiState.value.email, _uiState.value.password)
+                            if (result.isSuccess) {
+                                _uiState.update { it.copy(navigate = true) }
+                            } else {
+                                val mensaje = result.exceptionOrNull()?.message ?: "Error al registrarse"
+                                _uiState.update { it.copy(errorMessage = mensaje, mostrarMensajeError = true) }
                             }
                         }
                     }

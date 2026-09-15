@@ -11,6 +11,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.pacetride.ui.theme.PacetrideTheme
 import com.example.pacetride.ui.utils.CampanaNotificaciones
 import com.example.pacetride.ui.utils.LogoApp
 
@@ -88,9 +89,11 @@ fun HeaderMisCarreras(
 @Preview
 @Composable
 fun HeaderMisCarrerasPreview() {
-    HeaderMisCarreras(
-        selectedTabIndex = 0,
-        onTabSelected = {},
-        notificacionButtonPressed = {}
-    )
+    PacetrideTheme(darkTheme = true) {
+        HeaderMisCarreras(
+            selectedTabIndex = 0,
+            onTabSelected = {},
+            notificacionButtonPressed = {}
+        )
+    }
 }

@@ -18,14 +18,15 @@ import com.example.pacetride.R
 import com.example.pacetride.data.Usuario
 import com.example.pacetride.data.local.LocalUsuarioProvider
 import com.example.pacetride.ui.screens.profile.components.content.DatosUsuario
-import com.example.pacetride.ui.screens.profile.components.content.FotoPerfil
 import com.example.pacetride.ui.screens.profile.components.estadisticas.NextRaceCardWithGraph
 import com.example.pacetride.ui.screens.profile.components.header.HeaderPerfil
 import com.example.pacetride.ui.screens.profile.components.history.HistorialRow
+import com.example.pacetride.ui.screens.profile.components.profileImg.ProfileImgAndEdit
 import com.example.pacetride.ui.theme.PacetrideTheme
 import com.example.pacetride.ui.utils.AppButton
 import com.example.pacetride.ui.utils.SeccionTitulo
 import com.example.pacetride.ui.utils.stats.EstadisticasRow
+import android.net.Uri
 
 @Composable
 fun ProfileScreenContent(
@@ -33,6 +34,7 @@ fun ProfileScreenContent(
     editProfilePressed: () -> Unit,
     configurationPressed: () -> Unit,
     logOutPressed: () -> Unit,
+    onPickImg: (uri: Uri) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -47,7 +49,7 @@ fun ProfileScreenContent(
 
         Spacer(modifier = Modifier.height(24.dp))
 
-        FotoPerfil(usuario.fotoPerfil)
+        ProfileImgAndEdit(action = onPickImg, imageURL = usuario.fotoPerfil)
 
         Spacer(modifier = Modifier.height(12.dp))
 
@@ -104,7 +106,7 @@ fun ProfileScreenContent(
 }
 
 @Composable
-@Preview(showBackground = true)
+@Preview
 fun ProfileScreenContentPreview(){
     val usuario = LocalUsuarioProvider.usuarios[2]
     PacetrideTheme(darkTheme = true) {
@@ -112,6 +114,7 @@ fun ProfileScreenContentPreview(){
             configurationPressed = {},
             editProfilePressed = {},
             logOutPressed = {},
+            onPickImg = {},
             usuario = usuario
         )
     }

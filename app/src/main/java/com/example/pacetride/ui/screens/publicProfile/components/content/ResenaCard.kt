@@ -26,6 +26,7 @@ import androidx.compose.ui.unit.sp
 import com.example.pacetride.R
 import com.example.pacetride.data.Resena
 import com.example.pacetride.data.local.LocalResenaProvider
+import com.example.pacetride.ui.theme.PacetrideTheme
 
 @Composable
 fun ResenaCard(
@@ -107,7 +108,7 @@ fun ResenaCard(
 
             Spacer(modifier = Modifier.width(16.dp))
 
-            // ---------- COMENTARIOS ----------
+            // ---------- Comentarios ----------
             Row(
                 verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier.clickable(
@@ -135,6 +136,11 @@ fun ResenaCard(
 @Composable
 @Preview
 fun ResenaCardPreview(){
-    val resena = LocalResenaProvider.listaResenas[1]
-    ResenaCard(resena,{})
+    PacetrideTheme(darkTheme = true) {
+        val resena = LocalResenaProvider.listaResenas[1]
+        ResenaCard(
+            resena = resena,
+            comentariosPressed = {}
+        )
+    }
 }

@@ -112,7 +112,7 @@ fun MisCarrerasScreenContent(
 }
 
 @Composable
-@Preview(showBackground = true)
+@Preview
 fun MisCarrerasScreenContentPreview(){
     val carreraRealizadas = LocalCarreraRealizadaProvider.historial
     val carrerasProx = LocalCarreraProvider.listCarrera

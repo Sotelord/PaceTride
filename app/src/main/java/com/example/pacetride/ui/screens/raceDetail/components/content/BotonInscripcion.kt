@@ -10,6 +10,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.pacetride.R
+import com.example.pacetride.ui.theme.PacetrideTheme
 import com.example.pacetride.ui.utils.AppButton
 
 @Composable
@@ -34,5 +35,10 @@ fun BotonInscripcion(
 @Composable
 @Preview
 fun BotonInscripcionPreview(){
-    BotonInscripcion({},"$145.000 COP")
+    PacetrideTheme(darkTheme = true) {
+        BotonInscripcion(
+            inscribemePressed = {},
+            precio = "$145.000 COP"
+        )
+    }
 }

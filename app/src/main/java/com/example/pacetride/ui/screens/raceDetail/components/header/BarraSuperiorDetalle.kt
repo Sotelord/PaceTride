@@ -21,6 +21,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.pacetride.R
+import com.example.pacetride.ui.theme.PacetrideTheme
 
 @Composable
 fun BarraSuperiorDetalle(
@@ -43,7 +44,7 @@ fun BarraSuperiorDetalle(
                     indication = null,
                     onClick = {
                         atrasPressed()
-                        Log.d("RaceDetailScreen", "Atras clicked")
+                        Log.d("RaceDetailScreen", "Atrás clicked")
                     }
                 )
         )
@@ -70,5 +71,9 @@ fun BarraSuperiorDetalle(
 @Composable
 @Preview
 fun BarraSuperiorDetallePreview(){
-    BarraSuperiorDetalle({})
+    PacetrideTheme(darkTheme = true) {
+        BarraSuperiorDetalle(
+            atrasPressed = {}
+        )
+    }
 }

@@ -19,6 +19,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.example.pacetride.R
 import androidx.compose.ui.tooling.preview.Preview
+import com.example.pacetride.ui.theme.PacetrideTheme
 import com.example.pacetride.ui.utils.LogoApp
 
 @Composable
@@ -56,8 +57,12 @@ fun HeaderPublico(
 
 
 
-@Preview(showBackground = true)
+@Preview
 @Composable
 fun HeaderPublicoPreview() {
-    HeaderPublico({})
+    PacetrideTheme(darkTheme = true) {
+        HeaderPublico(
+            atrasPressed = {}
+        )
+    }
 }

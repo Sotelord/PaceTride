@@ -23,11 +23,12 @@ import androidx.compose.ui.unit.sp
 import com.example.pacetride.data.Resena
 import com.example.pacetride.data.EstadisticasCarrera
 import com.example.pacetride.data.local.LocalPublicacionProvider
+import com.example.pacetride.ui.theme.PacetrideTheme
 
 @Composable
 fun PostCard(
     modifier: Modifier = Modifier,
-    idAvatar: Int?,
+    imageURL: String?,
     nombre: String,
     tiempo: String,
     texto: String,
@@ -37,7 +38,6 @@ fun PostCard(
     comentarios: String
 ) {
     var meGustaActivo by remember { mutableStateOf(false) }
-    // Convertimos el string inicial a Int una sola vez
     var cantidadLikes by remember { mutableIntStateOf(likes.toIntOrNull() ?: 0) }
 
     Column(
@@ -47,7 +47,7 @@ fun PostCard(
             .background(MaterialTheme.colorScheme.secondaryContainer)
             .padding(16.dp)
     ) {
-        HeaderPost(idAvatar, nombre, tiempo)
+        HeaderPost(imageURL, nombre, tiempo)
         Spacer(modifier = Modifier.height(12.dp))
         Text(texto, color = MaterialTheme.colorScheme.onBackground, fontSize = 14.sp, lineHeight = 20.sp)
         Spacer(modifier = Modifier.height(14.dp))
@@ -79,45 +79,51 @@ fun PostCard(
 @Composable
 @Preview
 fun PostCardPreview(){
-    val publicacion = LocalPublicacionProvider.publicaciones[0] // Santiago Rayo
-    PostCard(
-        idAvatar = publicacion.idAvatar,
-        nombre = publicacion.nombre,
-        tiempo = publicacion.tiempo,
-        texto = publicacion.textoAMostrar,
-        estadisticasCarrera = publicacion.estadisiticas,
-        likes = publicacion.likes,
-        comentarios = publicacion.comentarios
-    )
+    PacetrideTheme(darkTheme = true) {
+        val publicacion = LocalPublicacionProvider.publicaciones[0] // Santiago Rayo
+        PostCard(
+            imageURL = publicacion.imageUserURL,
+            nombre = publicacion.nombre,
+            tiempo = publicacion.tiempo,
+            texto = publicacion.textoAMostrar,
+            estadisticasCarrera = publicacion.estadisiticas,
+            likes = publicacion.likes,
+            comentarios = publicacion.comentarios
+        )
+    }
 }
 
 //Publicacion de reseña
 @Composable
 @Preview
 fun PostCardPreview2(){
-    val publicacion = LocalPublicacionProvider.publicaciones[1] // Laura Gómez
-    PostCard(
-        idAvatar = publicacion.idAvatar,
-        nombre = publicacion.nombre,
-        tiempo = publicacion.tiempo,
-        texto = publicacion.textoAMostrar,
-        resena = publicacion.resena,
-        likes = publicacion.likes,
-        comentarios = publicacion.comentarios
-    )
+    PacetrideTheme(darkTheme = true) {
+        val publicacion = LocalPublicacionProvider.publicaciones[1] // Sara Castro
+        PostCard(
+            imageURL = publicacion.imageUserURL,
+            nombre = publicacion.nombre,
+            tiempo = publicacion.tiempo,
+            texto = publicacion.textoAMostrar,
+            resena = publicacion.resena,
+            likes = publicacion.likes,
+            comentarios = publicacion.comentarios
+        )
+    }
 }
 
 //Publicacion estilo comentario
 @Composable
 @Preview
 fun PostCardPreview3(){
-    val publicacion = LocalPublicacionProvider.publicaciones[2] // Luis Martínez
-    PostCard(
-        idAvatar = publicacion.idAvatar,
-        nombre = publicacion.nombre,
-        tiempo = publicacion.tiempo,
-        texto = publicacion.textoAMostrar,
-        likes = publicacion.likes,
-        comentarios = publicacion.comentarios
-    )
+    PacetrideTheme(darkTheme = true) {
+        val publicacion = LocalPublicacionProvider.publicaciones[2] // David Sotelo
+        PostCard(
+            imageURL = publicacion.imageUserURL,
+            nombre = publicacion.nombre,
+            tiempo = publicacion.tiempo,
+            texto = publicacion.textoAMostrar,
+            likes = publicacion.likes,
+            comentarios = publicacion.comentarios
+        )
+    }
 }

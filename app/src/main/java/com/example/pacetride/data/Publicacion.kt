@@ -1,9 +1,7 @@
 package com.example.pacetride.data
 
-import androidx.annotation.DrawableRes
-
 data class Publicacion(
-    @DrawableRes val idAvatar: Int?,
+    val imageUserURL: String?,
     val id: Int,
     val nombre: String,
     val tiempo: String,

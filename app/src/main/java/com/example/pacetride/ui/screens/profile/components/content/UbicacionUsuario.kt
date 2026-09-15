@@ -16,6 +16,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.pacetride.R
+import com.example.pacetride.ui.theme.PacetrideTheme
 
 @Composable
 fun UbicacionUsuario(texto: String, modifier: Modifier = Modifier) {
@@ -37,5 +38,7 @@ fun UbicacionUsuario(texto: String, modifier: Modifier = Modifier) {
 @Composable
 @Preview
 fun UbicacionUsuarioPreview(){
-    UbicacionUsuario("Bogotá, Colombia")
+    PacetrideTheme(darkTheme = true) {
+        UbicacionUsuario("Bogotá, Colombia")
+    }
 }

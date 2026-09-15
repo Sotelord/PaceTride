@@ -11,6 +11,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.pacetride.data.Carrera
 import com.example.pacetride.data.local.LocalCarreraProvider
+import com.example.pacetride.ui.theme.PacetrideTheme
 
 @Composable
 fun GrillaCarreras(
@@ -34,10 +35,12 @@ fun GrillaCarreras(
 }
 
 @Composable
-@Preview(showBackground = true)
+@Preview
 fun GrillaCarrerasPreview(){
-    GrillaCarreras(
-        verCarreraButtonPressed = {},
-        carreras = LocalCarreraProvider.listCarrera
-    )
+    PacetrideTheme(darkTheme = true) {
+        GrillaCarreras(
+            verCarreraButtonPressed = {},
+            carreras = LocalCarreraProvider.listCarrera
+        )
+    }
 }

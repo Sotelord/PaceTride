@@ -73,7 +73,9 @@ fun BotonFiltros(
 @Composable
 @Preview
 fun BotonFiltrosPreview() {
-    BotonFiltros(activo = false)
+    PacetrideTheme(darkTheme = true) {
+        BotonFiltros(activo = false)
+    }
 }
 
 @Composable
@@ -87,6 +89,8 @@ fun BotonFiltrosActivoPreview() {
 @Composable
 @Preview
 fun BotonFiltrosInteractivoPreview() {
-    var activo by remember { mutableStateOf(false) }
-    BotonFiltros(activo = activo, onClick = { activo = !activo })
+    PacetrideTheme(darkTheme = true) {
+        var activo by remember { mutableStateOf(false) }
+        BotonFiltros(activo = activo, onClick = { activo = !activo })
+    }
 }

@@ -12,6 +12,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.pacetride.ui.theme.PacetrideTheme
 
 @Composable
 fun DatosUsuario(
@@ -42,11 +43,13 @@ fun DatosUsuario(
 @Composable
 @Preview
 fun DatosUsuarioPreview(){
-    DatosUsuario(
-        "Santiago Rayo",
-        "@santiagorayo",
-        "example.com",
-        "Bogotá, Colombia",
-        "Runner • Siempre buscando mi próximo reto 🏃"
-    )
+    PacetrideTheme(darkTheme = true) {
+        DatosUsuario(
+            "Santiago Rayo",
+            "@santiagorayo",
+            "example.com",
+            "Bogotá, Colombia",
+            "Runner • Siempre buscando mi próximo reto 🏃"
+        )
+    }
 }

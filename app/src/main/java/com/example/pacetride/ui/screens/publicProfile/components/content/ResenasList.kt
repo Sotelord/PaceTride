@@ -9,6 +9,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.pacetride.data.Resena
 import com.example.pacetride.data.local.LocalResenaProvider
+import com.example.pacetride.ui.theme.PacetrideTheme
 
 @Composable
 fun ResenasList(
@@ -29,5 +30,10 @@ fun ResenasList(
 @Composable
 @Preview
 fun ResenasListPreview() {
-    ResenasList(resenas = LocalResenaProvider.listaResenas,{})
+    PacetrideTheme(darkTheme = true) {
+        ResenasList(
+            resenas = LocalResenaProvider.listaResenas,
+            comentariosPressed = {}
+        )
+    }
 }

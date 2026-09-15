@@ -9,28 +9,46 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 import com.example.pacetride.R
+import com.example.pacetride.ui.theme.PacetrideTheme
 
 // ---------- SECCIÓN CON TÍTULO SIMPLE (18sp, sin padding extra) ----------
 
 @Composable
 fun TituloSeccionDetalle(texto: String, modifier: Modifier = Modifier) {
-    Text(texto, color = MaterialTheme.colorScheme.onBackground, fontSize = 18.sp, fontWeight = FontWeight.Bold, modifier = modifier)
+    Text(
+        text = texto,
+        color = MaterialTheme.colorScheme.onBackground,
+        fontSize = 18.sp,
+        fontWeight = FontWeight.Bold,
+        modifier = modifier)
 }
 
 @Composable
 @Preview
 fun TituloSeccionDetallePreview(){
-    TituloSeccionDetalle(stringResource(R.string.sobre_la_carrera))
+    PacetrideTheme(darkTheme = true) {
+        TituloSeccionDetalle(
+            texto = stringResource(R.string.sobre_la_carrera)
+        )
+    }
 }
 
 @Composable
 @Preview
 fun TituloSeccionDetallePreview2(){
-    TituloSeccionDetalle(stringResource(R.string.ruta))
+    PacetrideTheme(darkTheme = true) {
+        TituloSeccionDetalle(
+            texto = stringResource(R.string.ruta)
+        )
+    }
 }
 
 @Composable
 @Preview
 fun TituloSeccionDetallePreview3(){
-    TituloSeccionDetalle(stringResource(R.string.tu_inscripcion_incluye))
+    PacetrideTheme(darkTheme = true) {
+        TituloSeccionDetalle(
+            texto = stringResource(R.string.tu_inscripcion_incluye)
+        )
+    }
 }

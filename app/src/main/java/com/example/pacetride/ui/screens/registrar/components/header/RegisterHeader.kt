@@ -52,7 +52,7 @@ fun RegisterHeader(modifier: Modifier = Modifier) {
 }
 
 
-@Preview(showBackground = true)
+@Preview
 @Composable
 fun RegisterHeaderPreview() {
     PacetrideTheme(darkTheme = true) {

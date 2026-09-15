@@ -17,6 +17,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.pacetride.R
+import com.example.pacetride.ui.theme.PacetrideTheme
 
 // ---------- ITEM DE "TU INSCRIPCIÓN INCLUYE" ----------
 
@@ -37,23 +38,43 @@ fun IncludeItem(idIcono: Int, texto: String, modifier: Modifier = Modifier) {
 @Composable
 @Preview
 fun IncludeItemPreview(){
-    IncludeItem(R.drawable.ic_camiseta, stringResource(R.string.camiseta_oficial))
+    PacetrideTheme(darkTheme = true) {
+        IncludeItem(
+            idIcono = R.drawable.ic_camiseta,
+            texto = stringResource(R.string.camiseta_oficial)
+        )
+    }
 }
 
 @Composable
 @Preview
 fun IncludeItemPreview2(){
-    IncludeItem(R.drawable.ic_hidratacion, stringResource(R.string.hidratacion))
+    PacetrideTheme(darkTheme = true) {
+        IncludeItem(
+            idIcono = R.drawable.ic_hidratacion,
+            texto = stringResource(R.string.hidratacion)
+        )
+    }
 }
 
 @Composable
 @Preview
 fun IncludeItemPreview3(){
-    IncludeItem(R.drawable.ic_medalla, stringResource(R.string.medalla))
+    PacetrideTheme(darkTheme = true) {
+        IncludeItem(
+            idIcono = R.drawable.ic_medalla,
+            texto = stringResource(R.string.medalla)
+        )
+    }
 }
 
 @Composable
 @Preview
 fun IncludeItemPreview4(){
-    IncludeItem(R.drawable.ic_numero, stringResource(R.string.n_mero_de_competencia))
+    PacetrideTheme(darkTheme = true) {
+        IncludeItem(
+            idIcono = R.drawable.ic_numero,
+            texto = stringResource(R.string.n_mero_de_competencia)
+        )
+    }
 }

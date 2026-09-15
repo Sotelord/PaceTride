@@ -35,6 +35,7 @@ fun NotificationsScreen(
             .background(MaterialTheme.colorScheme.background)
     ) {
         NotificationsScreenContent(
+            usuario = state.usuario,
             notificaciones = state.notificaciones,
             onMarcarComoLeida = { notificationsViewModel.marcarComoLeida(it) },
             onMarcarTodasComoLeidas = { notificationsViewModel.marcarTodasComoLeidas() },

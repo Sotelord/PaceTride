@@ -19,6 +19,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.pacetride.ui.theme.PacetrideTheme
 
 @Composable
 fun SelectorCalificacion(
@@ -54,77 +55,89 @@ fun SelectorCalificacion(
 @Composable
 @Preview(showBackground = true, backgroundColor = 0xFF121212)
 fun SelectorCalificacionInteractivoPreview() {
-    var calificacionActual by remember { mutableIntStateOf(0) }
+    PacetrideTheme(darkTheme = true) {
+        var calificacionActual by remember { mutableIntStateOf(0) }
 
-    SelectorCalificacion(
-        calificacion = calificacionActual,
-        onCalificacionChange = { nuevaCalificacion ->
-            calificacionActual = nuevaCalificacion
-        }
-    )
+        SelectorCalificacion(
+            calificacion = calificacionActual,
+            onCalificacionChange = { nuevaCalificacion ->
+                calificacionActual = nuevaCalificacion
+            }
+        )
+    }
 }
 
 @Composable
 @Preview(showBackground = true, backgroundColor = 0xFF121212)
 fun SelectorCalificacionInteractivoPreview2() {
-    var calificacionActual by remember { mutableIntStateOf(1) }
+    PacetrideTheme(darkTheme = true) {
+        var calificacionActual by remember { mutableIntStateOf(1) }
 
-    SelectorCalificacion(
-        calificacion = calificacionActual,
-        onCalificacionChange = { nuevaCalificacion ->
-            calificacionActual = nuevaCalificacion
-        }
-    )
+        SelectorCalificacion(
+            calificacion = calificacionActual,
+            onCalificacionChange = { nuevaCalificacion ->
+                calificacionActual = nuevaCalificacion
+            }
+        )
+    }
 }
 
 @Composable
 @Preview(showBackground = true, backgroundColor = 0xFF121212)
 fun SelectorCalificacionInteractivoPreview3() {
-    var calificacionActual by remember { mutableIntStateOf(2) }
+    PacetrideTheme(darkTheme = true) {
+        var calificacionActual by remember { mutableIntStateOf(2) }
 
-    SelectorCalificacion(
-        calificacion = calificacionActual,
-        onCalificacionChange = { nuevaCalificacion ->
-            calificacionActual = nuevaCalificacion
-        }
-    )
+        SelectorCalificacion(
+            calificacion = calificacionActual,
+            onCalificacionChange = { nuevaCalificacion ->
+                calificacionActual = nuevaCalificacion
+            }
+        )
+    }
 }
 
 @Composable
 @Preview(showBackground = true, backgroundColor = 0xFF121212)
 fun SelectorCalificacionInteractivoPreview4() {
-    var calificacionActual by remember { mutableIntStateOf(3) }
+    PacetrideTheme(darkTheme = true) {
+        var calificacionActual by remember { mutableIntStateOf(3) }
 
-    SelectorCalificacion(
-        calificacion = calificacionActual,
-        onCalificacionChange = { nuevaCalificacion ->
-            calificacionActual = nuevaCalificacion
-        }
-    )
+        SelectorCalificacion(
+            calificacion = calificacionActual,
+            onCalificacionChange = { nuevaCalificacion ->
+                calificacionActual = nuevaCalificacion
+            }
+        )
+    }
 }
 
 @Composable
 @Preview(showBackground = true, backgroundColor = 0xFF121212)
 fun SelectorCalificacionInteractivoPreview5() {
-    var calificacionActual by remember { mutableIntStateOf(4) }
+    PacetrideTheme(darkTheme = true) {
+        var calificacionActual by remember { mutableIntStateOf(4) }
 
-    SelectorCalificacion(
-        calificacion = calificacionActual,
-        onCalificacionChange = { nuevaCalificacion ->
-            calificacionActual = nuevaCalificacion
-        }
-    )
+        SelectorCalificacion(
+            calificacion = calificacionActual,
+            onCalificacionChange = { nuevaCalificacion ->
+                calificacionActual = nuevaCalificacion
+            }
+        )
+    }
 }
 
 @Composable
 @Preview(showBackground = true, backgroundColor = 0xFF121212)
 fun SelectorCalificacionInteractivoPreview6() {
-    var calificacionActual by remember { mutableIntStateOf(5) }
+    PacetrideTheme(darkTheme = true) {
+        var calificacionActual by remember { mutableIntStateOf(5) }
 
-    SelectorCalificacion(
-        calificacion = calificacionActual,
-        onCalificacionChange = { nuevaCalificacion ->
-            calificacionActual = nuevaCalificacion
-        }
-    )
+        SelectorCalificacion(
+            calificacion = calificacionActual,
+            onCalificacionChange = { nuevaCalificacion ->
+                calificacionActual = nuevaCalificacion
+            }
+        )
+    }
 }

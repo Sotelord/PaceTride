@@ -29,6 +29,7 @@ import com.example.pacetride.ui.screens.escribirResena.components.content.ChipsF
 import com.example.pacetride.ui.screens.escribirResena.components.content.SelectorCalificacion
 import com.example.pacetride.ui.screens.escribirResena.components.content.TarjetaResumenCarrera
 import com.example.pacetride.ui.screens.escribirResena.components.header.BarraSuperiorConTitulo
+import com.example.pacetride.ui.theme.PacetrideTheme
 import com.example.pacetride.ui.utils.TituloSeccionDetalle
 
 @Composable
@@ -117,22 +118,24 @@ fun EscribirResenaScreenContent(
 }
 
 @Composable
-@Preview(showBackground = true)
+@Preview
 fun EscribirResenaScreenContentPreview(){
-    val carerra = LocalCarreraProvider.listCarrera[2]
-    var seleccionadas by remember { mutableStateOf(setOf("Ruta", "Organización", "Ambiente")) }
-    EscribirResenaScreenContent(
-        atrasPressed = {},
-        calificacion = 4,
-        carrera = carerra,
-        errorMessage = "hola",
-        mostrarMensajeError = true,
-        onPublicarClick = {},
-        onCalificacionChange = {},
-        onTextoResenaChange = {},
-        onToggleDestacar = {},
-        opcionesDestacar = listOf("su", "no"),
-        seleccionadas = seleccionadas,
-        textoResena = ""
-    )
+    PacetrideTheme(darkTheme = true) {
+        val carerra = LocalCarreraProvider.listCarrera[2]
+        var seleccionadas by remember { mutableStateOf(setOf("Ruta", "Organización", "Ambiente")) }
+        EscribirResenaScreenContent(
+            atrasPressed = {},
+            calificacion = 4,
+            carrera = carerra,
+            errorMessage = "hola",
+            mostrarMensajeError = true,
+            onPublicarClick = {},
+            onCalificacionChange = {},
+            onTextoResenaChange = {},
+            onToggleDestacar = {},
+            opcionesDestacar = listOf("su", "no"),
+            seleccionadas = seleccionadas,
+            textoResena = ""
+        )
+    }
 }

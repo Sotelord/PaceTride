@@ -9,6 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.pacetride.ui.theme.PacetrideTheme
 
 @Composable
 fun DistanciasRow(
@@ -46,5 +47,7 @@ fun DistanciasRow(
 @Composable
 @Preview
 fun DistanciasRowPreview(){
-    DistanciasRow({})
+    PacetrideTheme(darkTheme = true) {
+        DistanciasRow({})
+    }
 }

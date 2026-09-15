@@ -22,11 +22,12 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.pacetride.R
+import com.example.pacetride.ui.theme.PacetrideTheme
 
 @Composable
 fun CampanaNotificaciones(
     modifier: Modifier = Modifier,
-    onClick: () -> Unit = {}
+    onClick: () -> Unit
 ) {
     Box(
         modifier = modifier
@@ -63,5 +64,9 @@ fun CampanaNotificaciones(
 @Composable
 @Preview
 fun CampanaNotificacionesPreview(){
-    CampanaNotificaciones()
+    PacetrideTheme(darkTheme = true) {
+        CampanaNotificaciones(
+            onClick = {}
+        )
+    }
 }

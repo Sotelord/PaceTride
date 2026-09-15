@@ -9,6 +9,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.pacetride.data.CarreraRealizada
 import com.example.pacetride.data.local.LocalCarreraRealizadaProvider
+import com.example.pacetride.ui.theme.PacetrideTheme
 
 @Composable
 fun MisCarrerasRow(historialCarrera: List<CarreraRealizada>, modifier: Modifier = Modifier) {
@@ -27,6 +28,10 @@ fun MisCarrerasRow(historialCarrera: List<CarreraRealizada>, modifier: Modifier 
 @Composable
 @Preview
 fun MisCarrerasRowPreview(){
-    val historialCarrera = LocalCarreraRealizadaProvider.historial
-    MisCarrerasRow(historialCarrera)
+    PacetrideTheme(darkTheme = true) {
+        val historialCarrera = LocalCarreraRealizadaProvider.historial
+        MisCarrerasRow(
+            historialCarrera = historialCarrera
+        )
+    }
 }

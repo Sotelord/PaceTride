@@ -13,6 +13,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.pacetride.R
+import com.example.pacetride.ui.theme.PacetrideTheme
 
 @Composable
 fun ItemCarreraCard(
@@ -115,34 +116,18 @@ fun ItemCarreraCard(
     }
 }
 
-// Función auxiliar para mantener el código limpio en las filas de ícono + texto
-@Composable
-fun IconTextRow(iconRes: Int, text: String) {
-    Row(
-        verticalAlignment = Alignment.CenterVertically,
-        modifier = Modifier.padding(vertical = 2.dp)
-    ) {
-        Icon(
-            painter = painterResource(id = iconRes),
-            contentDescription = null,
-            tint = MaterialTheme.colorScheme.onSurfaceVariant,
-            modifier = Modifier.size(16.dp)
-        )
-        Spacer(modifier = Modifier.width(8.dp))
-        Text(text = text, color = MaterialTheme.colorScheme.onSurfaceVariant, fontSize = 14.sp)
-    }
-}
-
 @Preview
 @Composable
 fun ItemCarreraCardPreview() {
-    ItemCarreraCard(
-        titulo = "Media Maratón Bogotá 2026",
-        fecha = "27 de septiembre de 2026",
-        ubicacion = "Bogotá, Colombia",
-        distancia = "21K",
-        diasRestantes = "39 días",
-        textoBoton = "Ver carrera",
-        onClick = {}
-    )
+    PacetrideTheme(darkTheme = true) {
+        ItemCarreraCard(
+            titulo = "Media Maratón Bogotá 2026",
+            fecha = "27 de septiembre de 2026",
+            ubicacion = "Bogotá, Colombia",
+            distancia = "21K",
+            diasRestantes = "39 días",
+            textoBoton = "Ver carrera",
+            onClick = {}
+        )
+    }
 }

@@ -1,13 +1,12 @@
 package com.example.pacetride.data.local
 
-import com.example.pacetride.R
 import com.example.pacetride.data.Carrera
 
 object LocalCarreraProvider {
     val listCarrera = listOf(
         Carrera(
             id = 1,
-            idImagen = R.drawable.running,
+            raceImageUrl = "https://bogota.gov.co/sites/default/files/2026-04/bogota-se-alista-para-la-carrera-verde-este-domingo-12-de-abril.jpg",
             nombre = "Carrera Atlética Bogotá 10K",
             ubicacion = "Bogotá",
             fecha = "15 de agosto",
@@ -18,7 +17,7 @@ object LocalCarreraProvider {
         ),
         Carrera(
             id = 2,
-            idImagen = R.drawable.running,
+            raceImageUrl = "https://bogota.gov.co/sites/default/files/styles/1050px/public/2025-11/bogota-se-alista-para-vivir-corremitierra%2C-el-evento-del-ano.png",
             nombre = "Corre por Bogotá 5K",
             ubicacion = "Bogotá",
             fecha = "30 de agosto",
@@ -29,7 +28,7 @@ object LocalCarreraProvider {
         ),
         Carrera(
             id = 3,
-            idImagen = R.drawable.running,
+            raceImageUrl = "https://www.kienyke.com/sites/default/files/styles/interna_contenido_s/public/2022-07/Media%20mARATON.jpg?itok=3wVp3M7D",
             nombre = "Media Maratón Bogotá 2026",
             ubicacion = "Bogotá",
             fecha = "27 de septiembre",
@@ -40,7 +39,6 @@ object LocalCarreraProvider {
         ),
         Carrera(
             id = 4,
-            idImagen = R.drawable.running,
             nombre = "Carrera 0 Bogotá",
             ubicacion = "Bogotá",
             fecha = "27 de agosto",
@@ -52,7 +50,7 @@ object LocalCarreraProvider {
         ),
         Carrera(
             id = 5,
-            idImagen = R.drawable.running,
+            raceImageUrl = "https://www.runningcolombia.com/wp-content/uploads/2024/09/Maraton-Medellin2024-runners.jpg",
             nombre = "Carrera 10k",
             ubicacion = "Bogotá",
             fecha = "31 de octubre",
@@ -63,7 +61,7 @@ object LocalCarreraProvider {
         ),
         Carrera(
             id = 6,
-            idImagen = R.drawable.running,
+            raceImageUrl = "https://www.cali.gov.co/info/caligovco_se/media/pubInt/thumbs/thpubInt_700X400_194293.webp",
             nombre = "Carrera Universitaria 5k",
             ubicacion = "Pontificia Universidad Javeriana",
             fecha = "22 de agosto",

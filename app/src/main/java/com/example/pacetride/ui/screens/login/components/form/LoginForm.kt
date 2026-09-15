@@ -28,7 +28,7 @@ fun LoginForm(
     passwordVisible: Boolean,
     onPasswordVisibleChange: (Boolean) -> Unit,
     loginButtonPressed: () -> Unit,
-    createAcountPressed: () -> Unit,
+    createAccountPressed: () -> Unit,
     recuperarContrasenaPressed: () -> Unit,
     mostrarMensajeError: Boolean,
     errorMessage: String,
@@ -74,7 +74,7 @@ fun LoginForm(
                 .align(Alignment.End)
                 .clickable {
                     recuperarContrasenaPressed()
-                    Log.d("LoginScreen", "Olvido contrasenna clicked")
+                    Log.d("LoginScreen", "Olvido contraseña clicked")
                 }
                 .padding(vertical = 4.dp)
         )
@@ -118,7 +118,7 @@ fun LoginForm(
                 color = MaterialTheme.colorScheme.primaryContainer,
                 fontWeight = FontWeight.Bold,
                 fontSize = 14.sp,
-                modifier = Modifier.clickable { createAcountPressed() }
+                modifier = Modifier.clickable { createAccountPressed() }
             )
         }
     }
@@ -126,7 +126,7 @@ fun LoginForm(
 
 
 
-@Preview(showBackground =true)
+@Preview
 @Composable
 fun LoginFormPreview() {
     PacetrideTheme(darkTheme = true) {
@@ -138,7 +138,7 @@ fun LoginFormPreview() {
             passwordVisible = false,
             onPasswordVisibleChange = {},
             loginButtonPressed = {},
-            createAcountPressed = {},
+            createAccountPressed = {},
             recuperarContrasenaPressed = {},
             mostrarMensajeError = true,
             errorMessage = "Hola"

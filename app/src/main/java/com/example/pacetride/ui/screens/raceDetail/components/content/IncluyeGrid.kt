@@ -10,6 +10,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.pacetride.R
+import com.example.pacetride.ui.theme.PacetrideTheme
 
 @Composable
 fun IncluyeGrid(modifier: Modifier = Modifier) {
@@ -28,5 +29,7 @@ fun IncluyeGrid(modifier: Modifier = Modifier) {
 @Composable
 @Preview
 fun IncluyeGridPreview(){
-    IncluyeGrid()
+    PacetrideTheme(darkTheme = true) {
+        IncluyeGrid()
+    }
 }

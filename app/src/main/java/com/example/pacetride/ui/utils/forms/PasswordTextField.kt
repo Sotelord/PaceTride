@@ -18,6 +18,7 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.pacetride.R
+import com.example.pacetride.ui.theme.PacetrideTheme
 
 @Composable
 fun PasswordTextField(
@@ -52,21 +53,23 @@ fun PasswordTextField(
 }
 
 @Composable
-@Preview(showBackground = true)
+@Preview
 fun PasswordTextFieldPreview(){
-    val fieldColors = OutlinedTextFieldDefaults.colors(
-        focusedBorderColor = MaterialTheme.colorScheme.primaryContainer,
-        unfocusedBorderColor = MaterialTheme.colorScheme.outline,
-        focusedLabelColor = MaterialTheme.colorScheme.primaryContainer,
-        unfocusedLabelColor = MaterialTheme.colorScheme.onSurfaceVariant
-    )
+    PacetrideTheme(darkTheme = true) {
+        val fieldColors = OutlinedTextFieldDefaults.colors(
+            focusedBorderColor = MaterialTheme.colorScheme.primaryContainer,
+            unfocusedBorderColor = MaterialTheme.colorScheme.outline,
+            focusedLabelColor = MaterialTheme.colorScheme.primaryContainer,
+            unfocusedLabelColor = MaterialTheme.colorScheme.onSurfaceVariant
+        )
 
-    PasswordTextField(
-        value = "",
-        onValueChange = {},
-        label = "Contraseña",
-        isVisible = false,
-        onVisibilityChange = {},
-        colors = fieldColors
-    )
+        PasswordTextField(
+            value = "",
+            onValueChange = {},
+            label = "Contraseña",
+            isVisible = false,
+            onVisibilityChange = {},
+            colors = fieldColors
+        )
+    }
 }

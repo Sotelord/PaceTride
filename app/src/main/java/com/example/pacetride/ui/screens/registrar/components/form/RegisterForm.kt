@@ -147,7 +147,7 @@ fun RegisterForm(
 }
 
 
-@Preview(showBackground = true)
+@Preview
 @Composable
 fun RegisterFormPreview() {
     PacetrideTheme(darkTheme = true) {

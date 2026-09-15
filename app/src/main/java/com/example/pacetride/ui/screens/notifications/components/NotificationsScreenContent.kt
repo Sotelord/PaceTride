@@ -17,7 +17,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.pacetride.data.Notificacion
+import com.example.pacetride.data.Usuario
 import com.example.pacetride.data.local.LocalNotificacionProvider
+import com.example.pacetride.data.local.LocalUsuarioProvider
 import com.example.pacetride.ui.screens.notifications.components.header.NotificationsHeader
 import com.example.pacetride.ui.screens.notifications.components.item.NotificationItem
 import com.example.pacetride.ui.theme.PacetrideTheme
@@ -26,6 +28,7 @@ import java.time.LocalDateTime
 
 @Composable
 fun NotificationsScreenContent(
+    usuario: Usuario,
     notificaciones: List<Notificacion>,
     onMarcarComoLeida: (Int) -> Unit,
     onMarcarTodasComoLeidas: () -> Unit,
@@ -76,8 +79,10 @@ fun NotificationsScreenContent(
                     )
                 }
                 items(notificacionesHoy, key = { it.id }) { notificacion ->
+                    val esMiNotificacion = notificacion.usuario?.id == usuario.id
                     NotificationItem(
                         notificacion = notificacion,
+                        fotoOverride = if (esMiNotificacion) usuario.fotoPerfil else null,
                         viewProfile = viewProfile,
                         verCarrera = verCarrera,
                         onClick = { onMarcarComoLeida(notificacion.id) }
@@ -96,8 +101,10 @@ fun NotificationsScreenContent(
                     )
                 }
                 items(notificacionEstaSemana, key = { it.id }) { notificacion ->
+                    val esMiNotificacion = notificacion.usuario?.id == usuario.id
                     NotificationItem(
                         notificacion = notificacion,
+                        fotoOverride = if (esMiNotificacion) usuario.fotoPerfil else null,
                         viewProfile = viewProfile,
                         verCarrera = verCarrera,
                         onClick = { onMarcarComoLeida(notificacion.id) }
@@ -116,8 +123,10 @@ fun NotificationsScreenContent(
                     )
                 }
                 items(notificacionesAnteriores, key = { it.id }) { notificacion ->
+                    val esMiNotificacion = notificacion.usuario?.id == usuario.id
                     NotificationItem(
                         notificacion = notificacion,
+                        fotoOverride = if (esMiNotificacion) usuario.fotoPerfil else null,
                         viewProfile = viewProfile,
                         verCarrera = verCarrera,
                         onClick = { onMarcarComoLeida(notificacion.id) }
@@ -129,11 +138,13 @@ fun NotificationsScreenContent(
 }
 
 @Composable
-@Preview (showBackground = true)
-fun MotificationsScreenContentPreview(){
+@Preview
+fun NotificationsScreenContentPreview(){
     val notificaciones = LocalNotificacionProvider.notificaciones
+    val usuario = LocalUsuarioProvider.usuarios[2]
     PacetrideTheme(darkTheme = true) {
         NotificationsScreenContent(
+            usuario = usuario,
             atrasPressed = {},
             onMarcarComoLeida = {},
             notificaciones = notificaciones,

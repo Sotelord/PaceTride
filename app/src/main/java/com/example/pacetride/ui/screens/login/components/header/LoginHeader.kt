@@ -52,7 +52,7 @@ fun LoginHeader(modifier: Modifier = Modifier) {
     }
 }
 
-@Preview(showBackground = true)
+@Preview
 @Composable
 fun LoginHeaderPreview() {
     PacetrideTheme(darkTheme = true) {

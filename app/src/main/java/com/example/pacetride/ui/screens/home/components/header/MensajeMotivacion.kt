@@ -9,6 +9,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 import com.example.pacetride.R
+import com.example.pacetride.ui.theme.PacetrideTheme
 
 @Composable
 fun MensajeMotivacion(modifier: Modifier = Modifier) {
@@ -24,5 +25,7 @@ fun MensajeMotivacion(modifier: Modifier = Modifier) {
 @Composable
 @Preview
 fun MensajeMotivacionPreview(){
-    MensajeMotivacion()
+    PacetrideTheme(darkTheme = true) {
+        MensajeMotivacion()
+    }
 }

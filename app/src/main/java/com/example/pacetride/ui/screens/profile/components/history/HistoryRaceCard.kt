@@ -17,6 +17,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.pacetride.ui.theme.PacetrideTheme
 
 @Composable
 fun HistoryRaceCard(
@@ -65,29 +66,35 @@ fun HistoryRaceCard(
 @Composable
 @Preview
 fun HistoryRaceCardPreview() {
-    HistoryRaceCard(
-        "Carrera 10K Bogotá",
-        "10K • 49:12",
-        "15 de junio de 2026"
-    )
+    PacetrideTheme(darkTheme = true) {
+        HistoryRaceCard(
+            titulo =  "Carrera 10K Bogotá",
+            resultado =  "10K • 49:12",
+            fecha =  "15 de junio de 2026"
+        )
+    }
 }
 
 @Composable
 @Preview
 fun HistoryRaceCardPreview2() {
-    HistoryRaceCard(
-        "Carrera Universitaria Javeriana",
-        "5K • 23:48",
-        "20 de mayo de 2026"
-    )
+    PacetrideTheme(darkTheme = true) {
+        HistoryRaceCard(
+            titulo = "Carrera Universitaria Javeriana",
+            resultado = "5K • 23:48",
+            fecha = "20 de mayo de 2026"
+        )
+    }
 }
 
 @Composable
 @Preview
 fun HistoryRaceCardPreview3() {
-    HistoryRaceCard(
-        "Bogotá Night Run",
-        "10K • 50:31",
-        "18 de abril de 2026"
-    )
+    PacetrideTheme(darkTheme = true) {
+        HistoryRaceCard(
+            titulo = "Bogotá Night Run",
+            resultado = "10K • 50:31",
+            fecha = "18 de abril de 2026"
+        )
+    }
 }

@@ -23,6 +23,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.pacetride.R
+import com.example.pacetride.ui.theme.PacetrideTheme
 
 @Composable
 fun StatBox(
@@ -54,39 +55,47 @@ fun StatBox(
 @Composable
 @Preview
 fun StatBoxPreview(){
-    StatBox(
-        R.drawable.ic_medalla,
-        "12",
-        stringResource(R.string.carreras)
-    )
+    PacetrideTheme(darkTheme = true) {
+        StatBox(
+            idIcono =  R.drawable.ic_medalla,
+            valor = "12",
+            etiqueta = stringResource(R.string.carreras)
+        )
+    }
 }
 
 @Composable
 @Preview
 fun StatBoxPreview2(){
-    StatBox(
-        R.drawable.ic_distancia,
-        "186,4 km",
-        stringResource(R.string.distancia)
-    )
+    PacetrideTheme(darkTheme = true) {
+        StatBox(
+            idIcono = R.drawable.ic_distancia,
+            valor = "186,4 km",
+            etiqueta = stringResource(R.string.distancia)
+        )
+    }
 }
 
 @Composable
 @Preview
 fun StatBoxPreview3(){
-    StatBox(
-        R.drawable.ic_cronometro,
-        "48:32",
-        stringResource(R.string.mejor_10k)
-    )
+    PacetrideTheme(darkTheme = true) {
+        StatBox(
+            idIcono = R.drawable.ic_cronometro,
+            valor = "48:32",
+            etiqueta = stringResource(R.string.mejor_10k)
+        )
+    }
 }
 
 @Composable
 @Preview
 fun StatBoxPreview4(){
-    StatBox(
-        R.drawable.ic_cronometro,
-        "1:52:40",
-        stringResource(R.string.mejor_21k)
-    )
+    PacetrideTheme(darkTheme = true) {
+        StatBox(
+            idIcono = R.drawable.ic_cronometro,
+            valor = "1:52:40",
+            etiqueta = stringResource(R.string.mejor_21k)
+        )
+    }
 }

@@ -13,6 +13,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.pacetride.R
+import com.example.pacetride.ui.theme.PacetrideTheme
 
 @Composable
 fun EstrellaCalificable(
@@ -39,17 +40,21 @@ fun EstrellaCalificable(
 @Composable
 @Preview
 fun EstrellaCalificablePreview(){
-    EstrellaCalificable(
-        true,
-        onClick = {}
+    PacetrideTheme(darkTheme = true) {
+        EstrellaCalificable(
+            true,
+            onClick = {}
         )
+    }
 }
 
 @Composable
-@Preview
+@Preview(showBackground = true)
 fun EstrellaCalificablePreview2(){
-    EstrellaCalificable(
-        false,
-        onClick = {}
-    )
+    PacetrideTheme(darkTheme = true) {
+        EstrellaCalificable(
+            false,
+            onClick = {}
+        )
+    }
 }

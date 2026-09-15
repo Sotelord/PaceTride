@@ -1,6 +1,5 @@
 package com.example.pacetride.ui.screens.home.components.content
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -20,15 +19,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.pacetride.R
 import com.example.pacetride.data.Carrera
 import com.example.pacetride.data.local.LocalCarreraProvider
+import com.example.pacetride.ui.theme.PacetrideTheme
+import com.example.pacetride.ui.utils.RaceAsyncImage
 
 // ---------- TARJETA PEQUEÑA DE CARRERA ----------
 @Composable
@@ -49,13 +47,13 @@ fun RaceCard(
                 onClick = onClick
             )
     ) {
-        Image(
-            painter = painterResource(carrera.idImagen ?: R.drawable.running),
-            contentDescription = carrera.nombre,
-            contentScale = ContentScale.Crop,
+        RaceAsyncImage(
             modifier = Modifier
                 .fillMaxWidth()
-                .aspectRatio(1.3f)
+                .aspectRatio(1.3f),
+            raceImage = carrera.raceImageUrl,
+            contentDescription = carrera.nombre,
+            background = MaterialTheme.colorScheme.surfaceVariant
         )
         Column(
             modifier = Modifier
@@ -103,20 +101,26 @@ fun RaceCard(
 @Composable
 @Preview
 fun RaceCardPreview(){
-    val carrera = LocalCarreraProvider.listCarrera[4]
-    RaceCard(carrera = carrera)
+    PacetrideTheme(darkTheme = true) {
+        val carrera = LocalCarreraProvider.listCarrera[4]
+        RaceCard(carrera = carrera)
+    }
 }
 
 @Composable
 @Preview
 fun RaceCardPreview2(){
-    val carrera = LocalCarreraProvider.listCarrera[5]
-    RaceCard(carrera = carrera)
+    PacetrideTheme(darkTheme = true) {
+        val carrera = LocalCarreraProvider.listCarrera[5]
+        RaceCard(carrera = carrera)
+    }
 }
 
 @Composable
 @Preview
 fun RaceCardPreview3(){
-    val carrera = LocalCarreraProvider.listCarrera[2]
-    RaceCard(carrera = carrera)
+    PacetrideTheme(darkTheme = true) {
+        val carrera = LocalCarreraProvider.listCarrera[2]
+        RaceCard(carrera = carrera)
+    }
 }

@@ -13,6 +13,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.pacetride.ui.theme.PacetrideTheme
 
 @Composable
 fun BusquedaYFiltros(
@@ -35,7 +36,7 @@ fun BusquedaYFiltros(
         BotonFiltros(
             activo = filtrosVisibles,
             onClick = {
-                Log.d("ExploreScreen", "Boton filtros clicked, visible=${!filtrosVisibles}")
+                Log.d("ExploreScreen", "Botón filtros clicked, visible=${!filtrosVisibles}")
                 onToggleFiltros()
             }
         )
@@ -45,12 +46,14 @@ fun BusquedaYFiltros(
 @Composable
 @Preview
 fun BusquedaYFiltrosPreview() {
-    var texto by remember { mutableStateOf("") }
-    var filtrosVisibles by remember { mutableStateOf(false) }
-    BusquedaYFiltros(
-        textoBusqueda = texto,
-        onTextoBusquedaChange = { texto = it },
-        filtrosVisibles = filtrosVisibles,
-        onToggleFiltros = { filtrosVisibles = !filtrosVisibles }
-    )
+    PacetrideTheme(darkTheme = true) {
+        var texto by remember { mutableStateOf("") }
+        var filtrosVisibles by remember { mutableStateOf(false) }
+        BusquedaYFiltros(
+            textoBusqueda = texto,
+            onTextoBusquedaChange = { texto = it },
+            filtrosVisibles = filtrosVisibles,
+            onToggleFiltros = { filtrosVisibles = !filtrosVisibles }
+        )
+    }
 }

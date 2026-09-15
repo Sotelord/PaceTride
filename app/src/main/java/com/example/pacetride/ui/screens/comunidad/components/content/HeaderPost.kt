@@ -14,11 +14,12 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.pacetride.R
+import com.example.pacetride.ui.theme.PacetrideTheme
+import com.example.pacetride.ui.utils.ProfileAsyncImage
 
 @Composable
 fun HeaderPost(
-    idAvatar: Int?,
+    imageURL: String?,
     nombre: String,
     tiempo: String,
     modifier: Modifier = Modifier
@@ -27,7 +28,12 @@ fun HeaderPost(
         modifier = modifier.fillMaxWidth(),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        AvatarUsuario(idAvatar)
+        ProfileAsyncImage(
+            imageURL = imageURL,
+            size = 44,
+            imgSize = 20,
+            background = MaterialTheme.colorScheme.background
+        )
         Spacer(modifier = Modifier.width(10.dp))
         Column {
             Text(nombre, color = MaterialTheme.colorScheme.onBackground, fontSize = 15.sp, fontWeight = FontWeight.Bold)
@@ -39,17 +45,23 @@ fun HeaderPost(
 @Composable
 @Preview
 fun HeaderPostPreview(){
-    HeaderPost(R.drawable.foto_perfil, "Santiago Rayo", "Hace 2 h")
+    PacetrideTheme(darkTheme = true) {
+        HeaderPost(null, "Santiago Rayo", "Hace 2 h")
+    }
 }
 
 @Composable
 @Preview
 fun HeaderPostPreview2(){
-    HeaderPost(R.drawable.foto_perfil, "Laura Gómez", "Hace 5 h")
+    PacetrideTheme(darkTheme = true) {
+        HeaderPost(null, "Laura Gómez", "Hace 5 h")
+    }
 }
 
 @Composable
 @Preview
 fun HeaderPostPreview3(){
-    HeaderPost(R.drawable.foto_perfil, "Luis Martínez", "Hace 8 h")
+    PacetrideTheme(darkTheme = true) {
+        HeaderPost(null, "Luis Martínez", "Hace 8 h")
+    }
 }

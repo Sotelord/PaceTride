@@ -12,6 +12,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.pacetride.ui.theme.PacetrideTheme
 
 @Composable
 fun DistanciasDetalleRow(
@@ -39,13 +40,15 @@ fun DistanciasDetalleRow(
 }
 
 @Composable
-@Preview(showBackground = true)
+@Preview
 fun DistanciasDetalleRowInteractivoPreview(){
-    var seleccionada by remember { mutableStateOf("21K") }
+    PacetrideTheme(darkTheme = true) {
+        var seleccionada by remember { mutableStateOf("21K") }
 
-    DistanciasDetalleRow(
-        distancias = listOf("5K", "10K", "21K"),
-        seleccionada = seleccionada,
-        onSeleccionar = { seleccionada = it }
-    )
+        DistanciasDetalleRow(
+            distancias = listOf("5K", "10K", "21K"),
+            seleccionada = seleccionada,
+            onSeleccionar = { seleccionada = it }
+        )
+    }
 }

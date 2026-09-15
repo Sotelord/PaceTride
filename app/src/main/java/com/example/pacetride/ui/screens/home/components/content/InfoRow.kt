@@ -18,6 +18,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.pacetride.R
+import com.example.pacetride.ui.theme.PacetrideTheme
 
 // ---------- FILA DE INFO (fecha / ubicación / distancia) ----------
 
@@ -46,17 +47,19 @@ fun InfoRow(
 @Composable
 @Preview
 fun InfoRowPreview(){
-    Box {
-        Column(
-            modifier = Modifier
-                .align(Alignment.BottomStart)
-                .padding(20.dp)
-        ){
-            InfoRow(R.drawable.ic_calendario, "27 de septiembre de 2026")
-            Spacer(modifier = Modifier.size(8.dp)) // Espacio opcional entre filas
-            InfoRow(R.drawable.ubicacion_blanco, "Bogotá, Colombia")
-            Spacer(modifier = Modifier.size(8.dp))
-            InfoRow(R.drawable.corriendo, "21K")
+    PacetrideTheme(darkTheme = true) {
+        Box {
+            Column(
+                modifier = Modifier
+                    .align(Alignment.BottomStart)
+                    .padding(20.dp)
+            ){
+                InfoRow(R.drawable.ic_calendario, "27 de septiembre de 2026")
+                Spacer(modifier = Modifier.size(8.dp))
+                InfoRow(R.drawable.ubicacion_blanco, "Bogotá, Colombia")
+                Spacer(modifier = Modifier.size(8.dp))
+                InfoRow(R.drawable.corriendo, "21K")
+            }
         }
     }
 }

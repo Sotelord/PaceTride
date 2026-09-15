@@ -18,6 +18,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.pacetride.R
 import com.example.pacetride.data.Resena
+import com.example.pacetride.ui.theme.PacetrideTheme
 
 @Composable
 fun ResenaPost(resena: Resena, modifier: Modifier = Modifier) {
@@ -39,5 +40,12 @@ fun ResenaPost(resena: Resena, modifier: Modifier = Modifier) {
 @Composable
 @Preview
 fun ResenaPostPreview(){
-    ResenaPost(Resena("Acabo de correr la Carrera 10K Bogotá. Muy buena organización y la ruta estuvo increíble.", "4/5"))
+    PacetrideTheme(darkTheme = true) {
+        ResenaPost(
+            Resena(
+                "Acabo de correr la Carrera 10K Bogotá. Muy buena organización y la ruta estuvo increíble.",
+                "4/5"
+            )
+        )
+    }
 }

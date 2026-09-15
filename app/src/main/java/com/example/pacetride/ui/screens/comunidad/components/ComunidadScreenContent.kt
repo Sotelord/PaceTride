@@ -17,12 +17,16 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.pacetride.R
 import com.example.pacetride.data.Publicacion
 import com.example.pacetride.data.Usuario
+import com.example.pacetride.data.local.LocalPublicacionProvider
+import com.example.pacetride.data.local.LocalUsuarioProvider
 import com.example.pacetride.ui.screens.comunidad.components.content.PostCard
 import com.example.pacetride.ui.screens.comunidad.components.header.HeaderComunidad
+import com.example.pacetride.ui.theme.PacetrideTheme
 import com.example.pacetride.ui.utils.AppButton
 
 private fun filtrarPublicaciones(
@@ -73,8 +77,9 @@ fun ComunidadScreenContent(
             verticalArrangement = Arrangement.spacedBy(14.dp)
         ) {
             items(publicacionesFiltradas) { publicacion ->
+                val esMiPublicacion = publicacion.nombre == usuario.nombre
                 PostCard(
-                    idAvatar = publicacion.idAvatar,
+                    imageURL = if(esMiPublicacion) usuario.fotoPerfil else publicacion.imageUserURL,
                     nombre = publicacion.nombre,
                     tiempo = publicacion.tiempo,
                     texto = publicacion.textoAMostrar,
@@ -100,5 +105,22 @@ fun ComunidadScreenContent(
                 modifier = Modifier.fillMaxWidth()
             )
         }
+    }
+}
+
+@Composable
+@Preview
+fun ComunidadScreenContentPreview(){
+    PacetrideTheme(darkTheme = true) {
+        val publicaciones = LocalPublicacionProvider.publicaciones
+        val usuario = LocalUsuarioProvider.usuarios[2]
+        ComunidadScreenContent(
+            publicaciones = publicaciones,
+            usuario = usuario,
+            escribirResenaPressed = {},
+            notificacionButtonPressed = {},
+            onTextoBusquedaChange = {},
+            textoBusqueda = ""
+        )
     }
 }

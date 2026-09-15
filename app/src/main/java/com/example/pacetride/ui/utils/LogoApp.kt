@@ -19,9 +19,9 @@ fun LogoApp(modifier: Modifier = Modifier) {
         painter = painterResource(R.drawable.logo),
         contentDescription = "Logo Pacetride",
         colorFilter = if (esOscuro) {
-            null // 👈 en oscuro, se muestra el logo original (verde + blanco)
+            null
         } else {
-            ColorFilter.tint(MaterialTheme.colorScheme.onBackground) // 👈 en claro, se aplica el filtro
+            ColorFilter.tint(MaterialTheme.colorScheme.onBackground)
         },
         modifier = modifier
     )

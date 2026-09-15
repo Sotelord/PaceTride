@@ -9,9 +9,9 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
 
 @HiltViewModel
-class RaceDatailViewModel @Inject constructor(): ViewModel() {
-    private  val _uiState = MutableStateFlow(RaceDatailState())
-    val uiState: StateFlow<RaceDatailState> = _uiState
+class RaceDetailViewModel @Inject constructor(): ViewModel() {
+    private  val _uiState = MutableStateFlow(RaceDetailState())
+    val uiState: StateFlow<RaceDetailState> = _uiState
 
     fun getRaceId(id: Int){
         //_uiState.update { it.copy(carrera = LocalCarreraProvider.listCarrera.find { it.id == id }) }

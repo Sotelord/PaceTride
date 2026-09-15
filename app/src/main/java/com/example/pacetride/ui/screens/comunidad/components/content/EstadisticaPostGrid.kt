@@ -16,6 +16,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.pacetride.R
+import com.example.pacetride.ui.theme.PacetrideTheme
 
 @Composable
 fun EstadisticasPostGrid(
@@ -46,5 +47,7 @@ fun EstadisticasPostGrid(
 @Composable
 @Preview
 fun EstadisticaPostGridPreview(){
-    EstadisticasPostGrid("21,1 km", "1:52:40", "Ritmo: 5:20 min/km")
+    PacetrideTheme(darkTheme = true) {
+        EstadisticasPostGrid("21,1 km", "1:52:40", "Ritmo: 5:20 min/km")
+    }
 }

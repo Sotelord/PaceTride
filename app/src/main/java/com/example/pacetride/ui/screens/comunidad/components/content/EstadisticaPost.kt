@@ -17,6 +17,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.pacetride.R
+import com.example.pacetride.ui.theme.PacetrideTheme
 
 // ---------- CHIP DE ESTADÍSTICA (distancia / tiempo / ritmo) ----------
 
@@ -44,17 +45,23 @@ fun EstadisticaPost(
 @Composable
 @Preview
 fun EstadisticaPostPreview(){
-    EstadisticaPost(R.drawable.corriendo, "21,1 km")
+    PacetrideTheme(darkTheme = true) {
+        EstadisticaPost(R.drawable.corriendo, "21,1 km")
+    }
 }
 
 @Composable
 @Preview
 fun EstadisticaPostPreview2(){
-    EstadisticaPost(R.drawable.ic_reloj, "1:52:40")
+    PacetrideTheme(darkTheme = true) {
+        EstadisticaPost(R.drawable.ic_reloj, "1:52:40")
+    }
 }
 
 @Composable
 @Preview
 fun EstadisticaPostPreview3(){
-    EstadisticaPost(R.drawable.ic_ritmo, "Ritmo: 5:20 min/km")
+    PacetrideTheme(darkTheme = true) {
+        EstadisticaPost(R.drawable.ic_ritmo, "Ritmo: 5:20 min/km")
+    }
 }

@@ -17,6 +17,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.pacetride.R
+import com.example.pacetride.ui.theme.PacetrideTheme
 
 // ---------- ITEM DE INFO (ícono + etiqueta + valor) ----------
 
@@ -64,11 +65,13 @@ fun TarjetaInfoCarrera(
 @Composable
 @Preview
 fun TarjetaInfoCarreraPreview(){
-    TarjetaInfoCarrera(
-        "27 de septiembre de 2026",
-        "6:00 a. m.",
-        "Bogotá, Colombia",
-        "21 kilómetros",
-        "$145.000 COP"
-    )
+    PacetrideTheme(darkTheme = true) {
+        TarjetaInfoCarrera(
+            fecha = "27 de septiembre de 2026",
+            hora = "6:00 a. m.",
+            lugar = "Bogotá, Colombia",
+            distancia = "21 kilómetros",
+            precio = "$145.000 COP"
+        )
+    }
 }

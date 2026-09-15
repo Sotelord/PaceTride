@@ -46,6 +46,7 @@ import androidx.compose.ui.unit.sp
 import com.example.pacetride.R
 import com.example.pacetride.data.Usuario
 import com.example.pacetride.data.local.LocalUsuarioProvider
+import com.example.pacetride.ui.theme.PacetrideTheme
 import com.example.pacetride.ui.utils.CampanaNotificaciones
 import com.example.pacetride.ui.utils.LogoApp
 import kotlinx.coroutines.delay
@@ -163,13 +164,15 @@ fun HeaderComunidad(
 @Composable
 @Preview
 fun HeaderComunidadPreview() {
-    var texto by remember { mutableStateOf("") }
-    val usuario = LocalUsuarioProvider.usuarios[0]
-    HeaderComunidad(
-        textoBusqueda = texto,
-        usuario = usuario,
-        onTextoBusquedaChange = { texto = it },
-        notificacionButtonPressed = {},
-        modifier = Modifier.padding(16.dp)
-    )
+    PacetrideTheme(darkTheme = true) {
+        var texto by remember { mutableStateOf("") }
+        val usuario = LocalUsuarioProvider.usuarios[0]
+        HeaderComunidad(
+            textoBusqueda = texto,
+            usuario = usuario,
+            onTextoBusquedaChange = { texto = it },
+            notificacionButtonPressed = {},
+            modifier = Modifier.padding(16.dp)
+        )
+    }
 }

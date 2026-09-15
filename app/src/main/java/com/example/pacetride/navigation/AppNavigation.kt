@@ -41,7 +41,7 @@ import com.example.pacetride.ui.screens.profile.ProfileScreen
 import com.example.pacetride.ui.screens.profile.ProfileViewModel
 import com.example.pacetride.ui.screens.publicProfile.PublicProfileScreen
 import com.example.pacetride.ui.screens.publicProfile.PublicProfileViewModel
-import com.example.pacetride.ui.screens.raceDetail.RaceDatailViewModel
+import com.example.pacetride.ui.screens.raceDetail.RaceDetailViewModel
 import com.example.pacetride.ui.screens.raceDetail.RaceDetailScreen
 import com.example.pacetride.ui.screens.registrar.RegisterScreen
 import com.example.pacetride.ui.screens.registrar.RegisterViewModel
@@ -259,11 +259,11 @@ fun AppNavigation(
             route = "${Screen.RaceDetail.route}/{raceId}",
             arguments = listOf(navArgument("raceId") {type = NavType.IntType})
         ){
-            val raceDatailViewModel: RaceDatailViewModel = hiltViewModel()
+            val raceDetailViewModel: RaceDetailViewModel = hiltViewModel()
             val raceId = it.arguments?.getInt("raceId") ?: 0
 
             RaceDetailScreen(
-                raceDatailViewModel = raceDatailViewModel,
+                raceDetailViewModel = raceDetailViewModel,
                 raceId = raceId,
                 atrasPressed = {
                     navControler.popBackStack()

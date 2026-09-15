@@ -9,6 +9,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.pacetride.ui.theme.PacetrideTheme
 
 // ---------- TÍTULO DE SECCIÓN ----------
 
@@ -26,11 +27,19 @@ fun SeccionTitulo(texto: String, modifier: Modifier = Modifier) {
 @Composable
 @Preview
 fun SeccionTituloPreview(){
-    SeccionTitulo("Próximas carreras")
+    PacetrideTheme(darkTheme = true) {
+        SeccionTitulo(
+            texto = "Próximas carreras"
+        )
+    }
 }
 
 @Composable
 @Preview
 fun SeccionTituloPreview2(){
-    SeccionTitulo("Elige tu distancia")
+    PacetrideTheme(darkTheme = true) {
+        SeccionTitulo(
+            texto = "Elige tu distancia"
+        )
+    }
 }

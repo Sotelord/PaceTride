@@ -36,6 +36,7 @@ fun ProfileScreen(
                 profileViewModel.logOut()
                 logOutPressed()
             },
+            onPickImg = { profileViewModel.uploadImageToFirebase(it) },
             modifier = Modifier.weight(1f)
         )
     }

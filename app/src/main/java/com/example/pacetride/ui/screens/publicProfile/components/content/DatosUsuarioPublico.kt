@@ -35,6 +35,7 @@ import com.example.pacetride.R
 import com.example.pacetride.data.Usuario
 import com.example.pacetride.data.local.LocalUsuarioProvider
 import com.example.pacetride.ui.screens.profile.components.content.DatosUsuario
+import com.example.pacetride.ui.theme.PacetrideTheme
 import com.example.pacetride.ui.utils.AppButton
 
 @Composable
@@ -95,7 +96,7 @@ fun DatosUsuarioPublico(
             IconButton(
                 onClick = {
                     configPressed()
-                    Log.d("PubliProfileScreen", "Configuracion clicked")
+                    Log.d("PubliProfileScreen", "Configuración clicked")
                 },
                 modifier = Modifier
                     .background(MaterialTheme.colorScheme.secondaryContainer, CircleShape)
@@ -112,13 +113,15 @@ fun DatosUsuarioPublico(
     }
 }
 
-@Preview(showBackground = true)
+@Preview
 @Composable
 fun DatosUsuarioPublicoPreview() {
-    val usuario = LocalUsuarioProvider.usuarios[1]
-    DatosUsuarioPublico(
-        usuario,
-        {},
-        modifier = Modifier.padding(16.dp)
-    )
+    PacetrideTheme(darkTheme = true) {
+        val usuario = LocalUsuarioProvider.usuarios[1]
+        DatosUsuarioPublico(
+            usuario = usuario,
+            configPressed = {},
+            modifier = Modifier.padding(16.dp)
+        )
+    }
 }

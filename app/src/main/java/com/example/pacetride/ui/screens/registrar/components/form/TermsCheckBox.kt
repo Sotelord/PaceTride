@@ -9,6 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.example.pacetride.ui.theme.PacetrideTheme
 
 @Composable
 fun TermsCheckbox(
@@ -36,10 +37,12 @@ fun TermsCheckbox(
 }
 
 @Composable
-@Preview(showBackground = true)
+@Preview
 fun TermsCheckBoxPreview(){
-    TermsCheckbox(
-        checked = false,
-        onCheckedChange = {}
-    )
+    PacetrideTheme(darkTheme = true) {
+        TermsCheckbox(
+            checked = false,
+            onCheckedChange = {}
+        )
+    }
 }

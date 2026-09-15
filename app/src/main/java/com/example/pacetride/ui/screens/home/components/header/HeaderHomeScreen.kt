@@ -16,6 +16,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.pacetride.data.Usuario
 import com.example.pacetride.data.local.LocalUsuarioProvider
+import com.example.pacetride.ui.theme.PacetrideTheme
 import com.example.pacetride.ui.utils.CampanaNotificaciones
 import com.example.pacetride.ui.utils.LogoApp
 
@@ -53,6 +54,8 @@ fun HeaderHomeScreen(
 @Composable
 @Preview
 fun HeaderHomeScreenPreview(){
-    val usuario = LocalUsuarioProvider.usuarios[0]
-    HeaderHomeScreen(usuario, {})
+    PacetrideTheme(darkTheme = true) {
+        val usuario = LocalUsuarioProvider.usuarios[0]
+        HeaderHomeScreen(usuario, {})
+    }
 }

@@ -18,6 +18,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.pacetride.R
+import com.example.pacetride.ui.theme.PacetrideTheme
 
 @Composable
 fun HeaderPerfil(
@@ -43,19 +44,24 @@ fun HeaderPerfil(
         ) {
             Configuracion(onClick = {
                 configurationPressed()
-                Log.d("ProfileScreen", "Configuracion clicked")
+                Log.d("ProfileScreen", "Configuración clicked")
             })
             Spacer(modifier = Modifier.width(5.dp))
             LogOut(onClick = {
                 logOutPressed()
-                Log.d("ProfileScreen", "LogOut cliked")
+                Log.d("ProfileScreen", "LogOut clicked")
             })
         }
     }
 }
 
 @Composable
-@Preview(showBackground = true)
+@Preview
 fun HeaderPerfilPreview(){
-    HeaderPerfil({}, {})
+    PacetrideTheme(darkTheme = true) {
+        HeaderPerfil(
+            configurationPressed = {},
+            logOutPressed =  {}
+        )
+    }
 }

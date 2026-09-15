@@ -25,6 +25,7 @@ import androidx.compose.ui.unit.sp
 import com.example.pacetride.R
 import com.example.pacetride.data.Carrera
 import com.example.pacetride.data.local.LocalCarreraProvider
+import com.example.pacetride.ui.theme.PacetrideTheme
 
 @Composable
 fun TarjetaResumenCarrera(
@@ -57,6 +58,8 @@ fun TarjetaResumenCarrera(
 @Composable
 @Preview
 fun TarjetaResumenCarreraPreview(){
-    val carrera = LocalCarreraProvider.listCarrera[2]
-    TarjetaResumenCarrera(carrera)
+    PacetrideTheme(darkTheme = true) {
+        val carrera = LocalCarreraProvider.listCarrera[2]
+        TarjetaResumenCarrera(carrera)
+    }
 }

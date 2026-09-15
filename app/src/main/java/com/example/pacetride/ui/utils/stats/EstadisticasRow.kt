@@ -10,6 +10,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.example.pacetride.R
 import com.example.pacetride.data.EstadisticasGlobales
 import com.example.pacetride.data.local.LocalUsuarioProvider
+import com.example.pacetride.ui.theme.PacetrideTheme
 
 @Composable
 fun EstadisticasRow(estadisticasGlobales: EstadisticasGlobales, modifier: Modifier = Modifier) {
@@ -38,8 +39,10 @@ fun EstadisticasRow(estadisticasGlobales: EstadisticasGlobales, modifier: Modifi
 }
 
 @Composable
-@Preview(showBackground = true)
+@Preview
 fun EstadisiticasRowPreview(){
-    val estadisticasGlobales = LocalUsuarioProvider.usuarios[0].estadisticasGlobales
-    EstadisticasRow(estadisticasGlobales)
+    PacetrideTheme(darkTheme = true) {
+        val estadisticasGlobales = LocalUsuarioProvider.usuarios[0].estadisticasGlobales
+        EstadisticasRow(estadisticasGlobales)
+    }
 }

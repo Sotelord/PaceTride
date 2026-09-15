@@ -29,6 +29,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.pacetride.R
+import com.example.pacetride.ui.theme.PacetrideTheme
 
 @Composable
 fun BotonAccionPost(
@@ -82,36 +83,42 @@ fun BotonAccionPost(
 @Composable
 @Preview
 fun BotonAccionPostPreview() {
-    var meGustaSeleccionado by remember { mutableStateOf(false) }
+    PacetrideTheme(darkTheme = true) {
+        var meGustaSeleccionado by remember { mutableStateOf(false) }
 
-    BotonAccionPost(
-        idIcono = R.drawable.ic_me_gusta,
-        texto = stringResource(R.string.me_gusta),
-        seleccionado = meGustaSeleccionado,
-        onClick = { meGustaSeleccionado = !meGustaSeleccionado }
-    )
+        BotonAccionPost(
+            idIcono = R.drawable.ic_me_gusta,
+            texto = stringResource(R.string.me_gusta),
+            seleccionado = meGustaSeleccionado,
+            onClick = { meGustaSeleccionado = !meGustaSeleccionado }
+        )
+    }
 }
 
 @Composable
 @Preview
 fun BotonAccionPostPreview2() {
-    var meGustaSeleccionado by remember { mutableStateOf(true) }
+    PacetrideTheme(darkTheme = true) {
+        var meGustaSeleccionado by remember { mutableStateOf(true) }
 
-    BotonAccionPost(
-        idIcono = R.drawable.ic_me_gusta,
-        texto = stringResource(R.string.me_gusta),
-        seleccionado = meGustaSeleccionado,
-        onClick = { meGustaSeleccionado = !meGustaSeleccionado }
-    )
+        BotonAccionPost(
+            idIcono = R.drawable.ic_me_gusta,
+            texto = stringResource(R.string.me_gusta),
+            seleccionado = meGustaSeleccionado,
+            onClick = { meGustaSeleccionado = !meGustaSeleccionado }
+        )
+    }
 }
 
 @Composable
 @Preview
 fun BotonAccionPostPreview3() {
-    BotonAccionPost(
-        idIcono = R.drawable.ic_comentario,
-        texto = stringResource(R.string.comentar),
-        seleccionado = false,
-        onClick = {}
-    )
+    PacetrideTheme(darkTheme = true) {
+        BotonAccionPost(
+            idIcono = R.drawable.ic_comentario,
+            texto = stringResource(R.string.comentar),
+            seleccionado = false,
+            onClick = {}
+        )
+    }
 }

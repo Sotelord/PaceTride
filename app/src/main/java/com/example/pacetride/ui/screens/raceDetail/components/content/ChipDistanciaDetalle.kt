@@ -16,6 +16,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.pacetride.ui.theme.PacetrideTheme
 
 @Composable
 fun ChipDistanciaDetalle(
@@ -44,19 +45,37 @@ fun ChipDistanciaDetalle(
 }
 
 @Composable
-@Preview(showBackground = true)
+@Preview
 fun ChipDistanciaDetallePreview(){
-    ChipDistanciaDetalle("5K", false, onClick = {})
-}
-
-@Composable
-@Preview(showBackground = true)
-fun ChipDistanciaDetallePreview2(){
-    ChipDistanciaDetalle("10K", false, onClick = {})
+    PacetrideTheme(darkTheme = true) {
+        ChipDistanciaDetalle(
+            texto = "5K",
+            seleccionado = false,
+            onClick = {}
+        )
+    }
 }
 
 @Composable
 @Preview
-fun ChipDistanciaDetallePreview3(){
-    ChipDistanciaDetalle("21K", true, onClick = {})
+fun ChipDistanciaDetallePreview2(){
+    PacetrideTheme(darkTheme = true) {
+        ChipDistanciaDetalle(
+            texto = "10K",
+            seleccionado = false,
+            onClick = {}
+        )
+    }
+}
+
+@Composable
+@Preview
+fun ChipDistanciaDetallePreview3() {
+    PacetrideTheme(darkTheme = true) {
+        ChipDistanciaDetalle(
+            texto = "21K",
+            seleccionado = true,
+            onClick = {}
+        )
+    }
 }

@@ -8,6 +8,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.pacetride.R
+import com.example.pacetride.ui.theme.PacetrideTheme
 import com.example.pacetride.ui.utils.AppButton
 
 @Composable
@@ -27,5 +28,7 @@ fun BotonPublicarResena(
 @Composable
 @Preview
 fun BotonPublicarResenaPreview(){
-    BotonPublicarResena()
+    PacetrideTheme(darkTheme = true) {
+        BotonPublicarResena()
+    }
 }

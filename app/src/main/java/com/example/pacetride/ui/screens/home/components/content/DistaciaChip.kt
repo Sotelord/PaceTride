@@ -25,6 +25,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.pacetride.R
+import com.example.pacetride.ui.theme.PacetrideTheme
 
 // ---------- CHIPS DE DISTANCIA ----------
 
@@ -63,23 +64,31 @@ fun DistanciaChip(
 @Composable
 @Preview
 fun DistanciaChipPreview(){
-    DistanciaChip(distancia = "5K")
+    PacetrideTheme(darkTheme = true) {
+        DistanciaChip(distancia = "5K")
+    }
 }
 
 @Composable
 @Preview
 fun DistanciaChipPreview2(){
-    DistanciaChip(distancia = "10K")
+    PacetrideTheme(darkTheme = true) {
+        DistanciaChip(distancia = "10K")
+    }
 }
 
 @Composable
 @Preview
 fun DistanciaChipPreview3(){
-    DistanciaChip(distancia = "21K")
+    PacetrideTheme(darkTheme = true) {
+        DistanciaChip(distancia = "21K")
+    }
 }
 
 @Composable
 @Preview
 fun DistanciaChipPreview4(){
-    DistanciaChip(distancia = "42K")
+    PacetrideTheme(darkTheme = true) {
+        DistanciaChip(distancia = "42K")
+    }
 }

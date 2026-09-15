@@ -2,6 +2,8 @@ package com.example.pacetride.ui.screens.notifications
 
 import androidx.lifecycle.ViewModel
 import com.example.pacetride.data.local.LocalNotificacionProvider
+import com.example.pacetride.data.local.LocalUsuarioProvider
+import com.example.pacetride.data.repository.AuthRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import jakarta.inject.Inject
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -9,9 +11,17 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
 
 @HiltViewModel
-class NotificationsViewModel @Inject constructor() : ViewModel() {
+class NotificationsViewModel @Inject constructor(
+    private val authRepository: AuthRepository
+) : ViewModel() {
     private val _uiState = MutableStateFlow(NotificationsState())
     val uiState: StateFlow<NotificationsState> = _uiState
+
+    fun getUser(){
+        val usuarioLocal = LocalUsuarioProvider.usuarios[2]
+        val fotoSesion = authRepository.currentUser?.photoUrl?.toString() ?: usuarioLocal.fotoPerfil
+        _uiState.update { it.copy(usuario = usuarioLocal.copy(fotoPerfil = fotoSesion)) }
+    }
 
     fun getNotificaciones(usuarioId: Int) {
         _uiState.update {
@@ -35,5 +45,9 @@ class NotificationsViewModel @Inject constructor() : ViewModel() {
                 notificaciones = estado.notificaciones.map { it.copy(leida = true) }
             )
         }
+    }
+
+    init {
+        getUser()
     }
 }

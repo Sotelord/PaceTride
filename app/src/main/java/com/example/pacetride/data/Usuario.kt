@@ -1,7 +1,5 @@
 package com.example.pacetride.data
 
-import com.example.pacetride.R
-
 data class Usuario(
     val id: Int,
     val nombre: String,
@@ -9,7 +7,7 @@ data class Usuario(
     val email: String,
     val ubicacion: String,
     val bio: String?,
-    val fotoPerfil: Int? = R.drawable.ic_perfil,
+    val fotoPerfil: String? = null,
     val proximaCarreras: List<Carrera> = emptyList(),
     val historial: List<CarreraRealizada> = emptyList(),
     val resenas: List<Resena> = emptyList(),

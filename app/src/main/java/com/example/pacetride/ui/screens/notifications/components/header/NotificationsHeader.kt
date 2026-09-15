@@ -27,6 +27,7 @@ import com.example.pacetride.R
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.pacetride.ui.utils.LogoApp
 import androidx.compose.foundation.layout.Box
+import com.example.pacetride.ui.theme.PacetrideTheme
 
 @Composable
 fun NotificationsHeader(
@@ -83,8 +84,10 @@ fun NotificationsHeader(
     }
 }
 
-@Preview(showBackground = true)
+@Preview
 @Composable
 fun NotificationsHeaderPreview() {
-    NotificationsHeader(atrasPressed = {})
+    PacetrideTheme(darkTheme = true) {
+        NotificationsHeader(atrasPressed = {})
+    }
 }

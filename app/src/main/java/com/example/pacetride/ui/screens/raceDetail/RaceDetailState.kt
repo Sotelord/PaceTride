@@ -2,7 +2,7 @@ package com.example.pacetride.ui.screens.raceDetail
 
 import com.example.pacetride.data.Carrera
 
-data class RaceDatailState(
+data class RaceDetailState(
     val carrera: Carrera? = Carrera(
         id = 10,
         nombre = "Carrera si",

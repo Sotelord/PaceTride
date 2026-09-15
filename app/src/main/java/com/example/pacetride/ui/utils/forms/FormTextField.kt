@@ -14,6 +14,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.pacetride.ui.theme.PacetrideTheme
 
 @Composable
 fun FormTextField(
@@ -38,18 +39,20 @@ fun FormTextField(
 }
 
 @Composable
-@Preview(showBackground = true)
+@Preview
 fun FormTextFieldPreview(){
-    val fieldColors = OutlinedTextFieldDefaults.colors(
-        focusedBorderColor = MaterialTheme.colorScheme.primaryContainer,
-        unfocusedBorderColor = MaterialTheme.colorScheme.outline,
-        focusedLabelColor = MaterialTheme.colorScheme.primaryContainer,
-        unfocusedLabelColor = MaterialTheme.colorScheme.onSurfaceVariant
-    )
-    FormTextField(
-        value = "",
-        onValueChange = {},
-        label = "Nombre completo",
-        colors = fieldColors
-    )
+    PacetrideTheme(darkTheme = true) {
+        val fieldColors = OutlinedTextFieldDefaults.colors(
+            focusedBorderColor = MaterialTheme.colorScheme.primaryContainer,
+            unfocusedBorderColor = MaterialTheme.colorScheme.outline,
+            focusedLabelColor = MaterialTheme.colorScheme.primaryContainer,
+            unfocusedLabelColor = MaterialTheme.colorScheme.onSurfaceVariant
+        )
+        FormTextField(
+            value = "",
+            onValueChange = {},
+            label = "Nombre completo",
+            colors = fieldColors
+        )
+    }
 }

@@ -12,6 +12,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.pacetride.data.Carrera
 import com.example.pacetride.data.local.LocalCarreraProvider
+import com.example.pacetride.ui.theme.PacetrideTheme
 
 @Composable
 fun ProximasCarrerasRow(
@@ -41,6 +42,8 @@ fun ProximasCarrerasRow(
 @Preview
 @Composable
 fun ProximasCarrerasRowPreview(){
-    val carreras = LocalCarreraProvider.listCarrera
-    ProximasCarrerasRow(carreras, {})
+    PacetrideTheme(darkTheme = true) {
+        val carreras = LocalCarreraProvider.listCarrera
+        ProximasCarrerasRow(carreras, {})
+    }
 }

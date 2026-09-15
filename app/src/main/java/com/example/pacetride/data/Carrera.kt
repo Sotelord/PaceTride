@@ -1,10 +1,9 @@
 package com.example.pacetride.data
 
-import androidx.annotation.DrawableRes
 import kotlin.math.roundToInt
 
 data class Carrera(
-    @DrawableRes val idImagen: Int? = null,
+    val raceImageUrl: String? = null,
     val id: Int,
     val nombre: String,
     val fecha: String,

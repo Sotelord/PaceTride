@@ -1,6 +1,5 @@
 package com.example.pacetride.data.local
 
-import com.example.pacetride.R
 import com.example.pacetride.data.EstadisticasGlobales
 import com.example.pacetride.data.Usuario
 
@@ -18,7 +17,7 @@ object LocalUsuarioProvider {
             email = "example.com",
             ubicacion = "Bogotá, Colombia",
             bio = "Runner • Siempre buscando mi próximo reto 🏃",
-            fotoPerfil = R.drawable.foto_perfil,
+            fotoPerfil = "https://media.istockphoto.com/id/545805760/photo/man-runner-jogger-running-isolated.jpg?s=612x612&w=0&k=20&c=h_yH1K2Ou_b6fjL8At0TY2wV5rhasGFNu4sdFVZW54A=",
             proximaCarreras = carreras,
             estadisticasGlobales = EstadisticasGlobales(
                 numCarrera = 12,
@@ -37,7 +36,7 @@ object LocalUsuarioProvider {
             email = "example2.com",
             ubicacion = "Chía, Colombia",
             bio = "Corredora • Kilómetros, música y nuevas metas 🎧🏃‍♀️",
-            fotoPerfil = R.drawable.foto_perfil,
+            fotoPerfil = "https://images.pexels.com/photos/3763996/pexels-photo-3763996.jpeg?cs=srgb&dl=pexels-olly-3763996.jpg&fm=jpg",
             proximaCarreras = carreras,
             estadisticasGlobales = EstadisticasGlobales(
                 numCarrera = 18,
@@ -56,7 +55,6 @@ object LocalUsuarioProvider {
             email = "example3.com",
             ubicacion = "Cajicá, Colombia",
             bio = "Runner • Constancia hoy, kilómetros mañana 🚀🏃",
-            fotoPerfil = R.drawable.foto_perfil,
             proximaCarreras = carreras,
             estadisticasGlobales = EstadisticasGlobales(
                 numCarrera = 9,
@@ -74,7 +72,6 @@ object LocalUsuarioProvider {
             email = "example4.com",
             ubicacion = "Bogotá, Colombia",
             bio = "Runner • Disfrutando cada kilómetro y cada nueva ruta 🏃‍♂️🌄",
-            fotoPerfil = R.drawable.foto_perfil,
             proximaCarreras = carreras,
             estadisticasGlobales = EstadisticasGlobales(
                 numCarrera = 15,

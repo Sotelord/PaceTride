@@ -9,6 +9,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.pacetride.R
+import com.example.pacetride.ui.theme.PacetrideTheme
 
 @Composable
 fun ContadoresRow(
@@ -30,17 +31,23 @@ fun ContadoresRow(
 @Composable
 @Preview
 fun ContadoresRowPreview(){
-    ContadoresRow("128", "24")
+    PacetrideTheme(darkTheme = true) {
+        ContadoresRow("128", "24")
+    }
 }
 
 @Composable
 @Preview
 fun ContadoresRowPreview2(){
-    ContadoresRow("67", "8")
+    PacetrideTheme(darkTheme = true) {
+        ContadoresRow("67", "8")
+    }
 }
 
 @Composable
 @Preview
 fun ContadoresRowPreview3(){
-    ContadoresRow("34", "5")
+    PacetrideTheme(darkTheme = true) {
+        ContadoresRow("34", "5")
+    }
 }

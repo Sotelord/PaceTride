@@ -29,6 +29,7 @@ import androidx.compose.ui.unit.sp
 import com.example.pacetride.R
 import com.example.pacetride.data.Carrera
 import com.example.pacetride.data.local.LocalUsuarioProvider
+import com.example.pacetride.ui.theme.PacetrideTheme
 
 @Composable
 fun NextRaceCardWithGraph(
@@ -69,8 +70,10 @@ fun NextRaceCardWithGraph(
 @Composable
 @Preview
 fun NextRaceCardWithGraphPreview(){
-    val carrera = LocalUsuarioProvider.usuarios[0].proximaCarreras[1]
-    NextRaceCardWithGraph(
-        carrera
-    )
+    PacetrideTheme(darkTheme = true) {
+        val carrera = LocalUsuarioProvider.usuarios[0].proximaCarreras[1]
+        NextRaceCardWithGraph(
+            carrera
+        )
+    }
 }

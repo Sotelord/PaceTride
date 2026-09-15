@@ -44,7 +44,7 @@ fun RaceDetailScreenContent(
             .background(MaterialTheme.colorScheme.background)
             .verticalScroll(rememberScrollState())
     ) {
-        ImagenPortadaCarrera(carrera.idImagen ?: R.drawable.running, atrasPressed)
+        ImagenPortadaCarrera(raceImageUrl =  carrera.raceImageUrl, contentDescription = carrera.nombre, atrasPressed = atrasPressed)
 
         Column(modifier = Modifier.padding(16.dp)) {
             TituloCarrera(
