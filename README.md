@@ -2,7 +2,7 @@
 
 Aplicación Android nativa (Jetpack Compose) para descubrir, explorar e inscribirse a carreras de running (5K, 10K, 21K, 42K) en Colombia.
 
-> 🚧 **Estado: en desarrollo activo.** Navegación completa, inyección de dependencias e inicio de sesión con Firebase Auth ya funcionan. Persistencia de datos de negocio (Firestore) e inscripción a carreras aún están pendientes. Ver [Estado del proyecto](#estado-del-proyecto).
+> 🚧 **Estado: en desarrollo activo.** Navegación completa, inyección de dependencias, inicio de sesión con Firebase Auth y carga de imágenes (Coil + Firebase Storage) ya funcionan. Persistencia de datos de negocio (Firestore) e inscripción a carreras aún están pendientes. Ver [Estado del proyecto](#estado-del-proyecto).
 
 ## Descripción
 
@@ -13,18 +13,19 @@ PaceTride muestra carreras destacadas, un listado de próximas carreras, filtros
 ### ✅ Hecho
 - **Navegación completa** con Navigation Compose (`AppNavigation.kt`, `NavHost` con rutas anidadas y argumentos).
 - **Splash screen** nativo (Android 12+ Splash Screen API) + `SplashScreen` composable que verifica si hay una sesión activa antes de decidir a dónde navegar (Login u Home).
-- **Autenticación con Firebase Auth**: registro (email/contraseña + `displayName`), inicio de sesión, cierre de sesión, y manejo de errores traducidos al español (credenciales inválidas, usuario no encontrado, sin conexión).
-- **Inyección de dependencias con Hilt**: `ViewModel`s anotados con `@HiltViewModel`, repositorios y data sources inyectados (`AuthRepository` → `AuthRemoteDataSource` → `FirebaseAuth`).
+- **Autenticación con Firebase Auth**: registro (email/contraseña + `displayName`), inicio de sesión, cierre de sesión, y manejo de errores traducidos al español (credenciales inválidas, usuario no encontrado, sin conexión) usando `Result` en `AuthRepository` y los `ViewModel`s.
+- **Carga de imágenes con Coil y Firebase Storage**: `RaceAsyncImage` y `ProfileAsyncImage` cargan imágenes de forma asíncrona (con placeholder y estado de error) a partir de URLs dinámicas en `Carrera`, `Usuario` y `Publicación`; `StorageRepository`/`StorageRemoteDataSource` suben y actualizan la foto de perfil del usuario en Firebase Storage.
+- **Inyección de dependencias con Hilt**: `ViewModel`s anotados con `@HiltViewModel`, repositorios y data sources inyectados (`AuthRepository` → `AuthRemoteDataSource` → `FirebaseAuth`, `StorageRepository` → `StorageRemoteDataSource`).
 - **Arquitectura MVVM** en todas las pantallas: `State` inmutable (`data class`) + `StateFlow` + `ViewModel`, sin lógica de negocio en los composables.
 - Pantallas maquetadas y conectadas a su `ViewModel` correspondiente: `Login`, `Register`, `Home`, `Explorer`, `MisCarreras`, `Profile`, `RaceDetail`, `Notifications`, `PublicProfile`, `Comunidad`, `EscribirResena`.
 - Barra de navegación inferior (`PacetrideBottomNavigationBar`) que se muestra solo en las pantallas principales.
 
 ### ❌ Pendiente
-- **Persistencia de datos de negocio**: carreras, perfil extendido (ubicación, bio, foto, estadísticas, historial), reseñas y notificaciones siguen viniendo de `LocalCarreraProvider`/`LocalUsuarioProvider` (datos de ejemplo hardcodeados), no de Firestore.
+- **Persistencia de datos de negocio**: carreras, perfil extendido (ubicación, bio, estadísticas, historial), reseñas y notificaciones siguen viniendo de `LocalCarreraProvider`/`LocalUsuarioProvider` (datos de ejemplo hardcodeados), no de Firestore.
 - **Botón "INSCRIBEME"** y pantallas de flujo de inscripción (`Screen.Inscribeme`) aún son placeholders (`Text("Falta esta pantalla")`).
 - Pantallas sin implementar: `RecuperarContrasena`, `Configuracion`, `EditProfile`, `Comentarios`, `ConfigUsuarioPublico`.
 - Sin tests reales: `ExampleUnitTest` y `ExampleInstrumentedTest` son los tests de plantilla que genera Android Studio.
-- Corregir el nombre de archivo `RaceDatailViewModel.kt` / `RaceDatailState.kt` / `RaceDetailSreeen.kt` (typos: "Datail", "Sreeen").
+- Corregir el nombre de archivo `RaceDatailViewModel.kt` / `RaceDetailSreeen.kt` (typos: "Datail", "Sreeen"; `RaceDatailState.kt` ya se renombró a `RaceDetailState.kt`).
 
 ## Pantallas
 
@@ -43,11 +44,12 @@ PaceTride muestra carreras destacadas, un listado de próximas carreras, filtros
 
 ## Stack tecnológico
 
-- **Lenguaje:** Kotlin 2.4.10
+- **Lenguaje:** Kotlin 2.4.20
 - **UI:** Jetpack Compose (Material 3), sin XML views
 - **Arquitectura:** MVVM (`ViewModel` + `StateFlow` + `State` inmutable por pantalla)
 - **Inyección de dependencias:** Dagger Hilt
-- **Backend:** Firebase Auth (autenticación) — Firestore planeado para datos de negocio
+- **Backend:** Firebase Auth (autenticación) y Firebase Storage (imágenes) — Firestore planeado para datos de negocio
+- **Carga de imágenes:** Coil (`coil-compose`)
 - **Navegación:** Navigation Compose
 - **Build:** Gradle (Kotlin DSL), Android Gradle Plugin 9.3.2 (soporte de Kotlin integrado), KSP, `libs.versions.toml` (Version Catalog)
 - **SDK:** `minSdk 26` · `targetSdk 37` · `compileSdk 37`
@@ -62,8 +64,8 @@ PaceTride/
 │   │   ├── MainActivity.kt
 │   │   ├── BaseAplication.kt              # @HiltAndroidApp
 │   │   ├── data/
-│   │   │   ├── datasource/                # AuthRemoteDataSource, etc.
-│   │   │   ├── repository/                # AuthRepository, etc.
+│   │   │   ├── datasource/                # AuthRemoteDataSource, StorageRemoteDataSource, etc.
+│   │   │   ├── repository/                # AuthRepository, StorageRepository, etc.
 │   │   │   ├── local/                     # Providers de datos de ejemplo
 │   │   │   └── injection/                 # Módulos de Hilt (FirebaseHiltModule, etc.)
 │   │   ├── navigation/
@@ -94,7 +96,7 @@ PaceTride/
 - Android Studio (versión reciente compatible con AGP 9.3.2)
 - JDK 11
 - SDK de Android con API 37 instalado
-- Un proyecto de Firebase configurado con Authentication (email/contraseña) habilitado, y `google-services.json` en `app/`
+- Un proyecto de Firebase configurado con Authentication (email/contraseña) y Storage habilitados, y `google-services.json` en `app/`
 
 ## Instalación y ejecución
 
@@ -112,4 +114,4 @@ O ábrelo directamente en Android Studio y ejecuta `app` sobre un emulador/dispo
 - [ ] Implementar el flujo de inscripción a una carrera (`Screen.Inscribeme`).
 - [ ] Completar las pantallas pendientes: Recuperar contraseña, Configuración, Editar perfil, Comentarios, Config. de perfil público.
 - [ ] Agregar tests reales de `ViewModel`s (lógica de estado) y de UI.
-- [ ] Corregir los typos de nombres de archivo (`RaceDatail*` → `RaceDetail*`, `RaceDetailSreeen` → `RaceDetailScreen`).
+- [ ] Corregir los typos de nombres de archivo restantes (`RaceDatailViewModel` → `RaceDetailViewModel`, `RaceDetailSreeen` → `RaceDetailScreen`).
