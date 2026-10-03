@@ -1,4 +1,5 @@
-package com.example.pacetride.ui.screens.publicProfile.components.content
+package com.example.pacetride.ui.utils.reviews
+
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column

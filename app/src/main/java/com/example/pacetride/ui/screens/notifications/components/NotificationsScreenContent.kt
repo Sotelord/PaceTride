@@ -30,11 +30,11 @@ import java.time.LocalDateTime
 fun NotificationsScreenContent(
     usuario: Usuario,
     notificaciones: List<Notificacion>,
-    onMarcarComoLeida: (Int) -> Unit,
+    onMarcarComoLeida: (String) -> Unit,
     onMarcarTodasComoLeidas: () -> Unit,
     atrasPressed: () -> Unit,
-    viewProfile: (Int) -> Unit,
-    verCarrera: (Int) -> Unit,
+    viewProfile: (String) -> Unit,
+    verCarrera: (String) -> Unit,
     modifier: Modifier = Modifier
 ) {
     val ahora = LocalDateTime.now()

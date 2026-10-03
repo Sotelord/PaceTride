@@ -4,7 +4,7 @@ import com.example.pacetride.data.Carrera
 
 data class RaceDetailState(
     val carrera: Carrera? = Carrera(
-        id = 10,
+        id = "10",
         nombre = "Carrera si",
         fecha = "10-10-2010",
         ubicacion = "Allá",

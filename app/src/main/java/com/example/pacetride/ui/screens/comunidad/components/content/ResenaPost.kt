@@ -43,8 +43,11 @@ fun ResenaPostPreview(){
     PacetrideTheme(darkTheme = true) {
         ResenaPost(
             Resena(
-                "Acabo de correr la Carrera 10K Bogotá. Muy buena organización y la ruta estuvo increíble.",
-                "4/5"
+                id = "3",
+                usuarioId = "2",
+                carreraId = "3",
+                resena = "Acabo de correr la Carrera 10K Bogotá. Muy buena organización y la ruta estuvo increíble.",
+                calificacion = "4"
             )
         )
     }

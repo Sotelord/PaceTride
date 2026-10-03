@@ -15,7 +15,7 @@ import com.example.pacetride.ui.theme.PacetrideTheme
 
 @Composable
 fun GrillaCarreras(
-    verCarreraButtonPressed: (Int)->Unit,
+    verCarreraButtonPressed: (String)->Unit,
     carreras: List<Carrera>,
     modifier: Modifier = Modifier
 ) {

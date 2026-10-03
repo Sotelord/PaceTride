@@ -4,6 +4,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
@@ -29,6 +30,7 @@ import com.example.pacetride.ui.screens.raceDetail.components.content.TarjetaInf
 import com.example.pacetride.ui.screens.raceDetail.components.content.TituloCarrera
 import com.example.pacetride.ui.theme.PacetrideTheme
 import com.example.pacetride.ui.utils.TituloSeccionDetalle
+import com.example.pacetride.ui.utils.reviews.ResenasList
 
 @Composable
 fun RaceDetailScreenContent(
@@ -44,7 +46,11 @@ fun RaceDetailScreenContent(
             .background(MaterialTheme.colorScheme.background)
             .verticalScroll(rememberScrollState())
     ) {
-        ImagenPortadaCarrera(raceImageUrl =  carrera.raceImageUrl, contentDescription = carrera.nombre, atrasPressed = atrasPressed)
+        ImagenPortadaCarrera(
+            raceImageUrl = carrera.raceImageUrl,
+            contentDescription = carrera.nombre,
+            atrasPressed = atrasPressed
+        )
 
         Column(modifier = Modifier.padding(16.dp)) {
             TituloCarrera(
@@ -98,13 +104,22 @@ fun RaceDetailScreenContent(
             Spacer(modifier = Modifier.height(16.dp))
             IncluyeGrid()
             Spacer(modifier = Modifier.height(24.dp))
+
+            Spacer(modifier = Modifier.height(24.dp))
+            TituloSeccionDetalle(
+                texto = stringResource(R.string.comentarios).replaceFirstChar { if (it.isLowerCase()) it.titlecase() else it.toString() },
+                modifier = Modifier
+                    .padding(bottom = 8.dp)
+                    .fillMaxWidth()
+            )
+
         }
     }
 }
 
 @Composable
 @Preview(showBackground = true)
-fun RaceDetailScreenContentPreview(){
+fun RaceDetailScreenContentPreview() {
     val carrera = LocalCarreraProvider.listCarrera[0]
     PacetrideTheme(darkTheme = true) {
         RaceDetailScreenContent(

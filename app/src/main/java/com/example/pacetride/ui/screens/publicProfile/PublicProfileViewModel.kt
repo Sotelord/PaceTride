@@ -13,7 +13,7 @@ class PublicProfileViewModel @Inject constructor(): ViewModel() {
     private val _uiState = MutableStateFlow(PublicProfileState())
     val uiState: StateFlow<PublicProfileState> = _uiState
 
-    fun getUserId(id: Int){
+    fun getUserId(id: String){
         val usuario = LocalUsuarioProvider.usuarios.find { it.id == id }
         _uiState.update {
             it.copy(

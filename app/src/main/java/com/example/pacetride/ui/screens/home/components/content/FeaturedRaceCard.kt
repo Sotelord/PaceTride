@@ -34,7 +34,7 @@ import com.example.pacetride.ui.utils.RaceAsyncImage
 @Composable
 fun FeaturedRaceCard(
     carrera: Carrera,
-    verCarreraButtonPressed: (Int) -> Unit,
+    verCarreraButtonPressed: (String) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Box(

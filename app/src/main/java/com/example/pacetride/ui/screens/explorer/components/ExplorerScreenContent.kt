@@ -52,7 +52,7 @@ private fun filtrarCarreras(
 @Composable
 fun ExploreScreenContent(
     modifier: Modifier = Modifier,
-    verCarreraButtonPressed: (Int) -> Unit,
+    verCarreraButtonPressed: (String) -> Unit,
     carreras: List<Carrera>,
     comunidadPressed: () -> Unit,
     textoBusqueda: String,

@@ -5,7 +5,7 @@ import com.example.pacetride.data.Usuario
 
 data class ProfileState(
     val usuario: Usuario = Usuario(
-        id = 10,
+        id = "10",
         nombre = "demo",
         usuario = "@demo",
         email = "example0.com",

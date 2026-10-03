@@ -18,10 +18,10 @@ import com.example.pacetride.ui.theme.PacetrideTheme
 fun NotificationsScreen(
     modifier: Modifier = Modifier,
     notificationsViewModel: NotificationsViewModel,
-    usuarioId: Int,
+    usuarioId: String,
     atrasPressed: () -> Unit,
-    viewProfile: (Int) -> Unit,
-    verCarrera: (Int) -> Unit = {}
+    viewProfile: (String) -> Unit,
+    verCarrera: (String) -> Unit = {}
 ) {
     val state by notificationsViewModel.uiState.collectAsState()
 
@@ -52,7 +52,7 @@ fun NotificationsScreenPreview() {
     PacetrideTheme(darkTheme = true) {
         NotificationsScreen(
             notificationsViewModel = viewModel<NotificationsViewModel>(),
-            usuarioId = 3,
+            usuarioId = "3",
             atrasPressed = {},
             viewProfile = {}
         )

@@ -23,7 +23,7 @@ import com.example.pacetride.ui.utils.LogoApp
 @Composable
 fun HeaderHomeScreen(
     usuario: Usuario,
-    notificacionButtonPressed: (Int)-> Unit,
+    notificacionButtonPressed: (String)-> Unit,
     modifier: Modifier = Modifier
 ) {
     Column(

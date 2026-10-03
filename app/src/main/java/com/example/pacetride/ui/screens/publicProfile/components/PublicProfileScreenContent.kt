@@ -16,11 +16,11 @@ import com.example.pacetride.data.Usuario
 import com.example.pacetride.data.local.LocalUsuarioProvider
 import com.example.pacetride.ui.screens.publicProfile.components.content.DatosUsuarioPublico
 import com.example.pacetride.ui.screens.publicProfile.components.content.MisCarrerasRow
-import com.example.pacetride.ui.screens.publicProfile.components.content.ResenasList
 import com.example.pacetride.ui.screens.publicProfile.components.header.HeaderPublico
 import com.example.pacetride.ui.theme.PacetrideTheme
 import com.example.pacetride.ui.utils.ProfileAsyncImage
 import com.example.pacetride.ui.utils.TituloSeccionDetalle
+import com.example.pacetride.ui.utils.reviews.ResenasList
 import com.example.pacetride.ui.utils.stats.EstadisticasRow
 
 @Composable

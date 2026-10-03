@@ -57,7 +57,7 @@ fun HeaderComunidad(
     textoBusqueda: String,
     usuario: Usuario,
     onTextoBusquedaChange: (String) -> Unit,
-    notificacionButtonPressed: (Int)-> Unit,
+    notificacionButtonPressed: (String)-> Unit,
     modifier: Modifier = Modifier
 ) {
     var enModoBusqueda by remember { mutableStateOf(false) }

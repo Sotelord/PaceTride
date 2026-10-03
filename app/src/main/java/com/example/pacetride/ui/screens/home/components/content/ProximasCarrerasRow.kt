@@ -17,7 +17,7 @@ import com.example.pacetride.ui.theme.PacetrideTheme
 @Composable
 fun ProximasCarrerasRow(
     carreras: List<Carrera>,
-    raceCardPressed: (Int)-> Unit,
+    raceCardPressed: (String)-> Unit,
     modifier: Modifier = Modifier
 ) {
     LazyRow(

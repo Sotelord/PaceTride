@@ -31,8 +31,8 @@ fun NotificationItem(
     modifier: Modifier = Modifier,
     notificacion: Notificacion,
     fotoOverride: String? = null,
-    viewProfile: (Int) -> Unit,
-    verCarrera: (Int) -> Unit = {},
+    viewProfile: (String) -> Unit,
+    verCarrera: (String) -> Unit = {},
     onClick: () -> Unit = {}
 ) {
     val nombre = notificacion.usuario?.nombre ?: notificacion.carrera?.nombre ?: ""
@@ -108,7 +108,7 @@ fun NotificationItem(
                             verCarrera(carreraId)
                             Log.d("NotificationsScreen", "Botón clicked -> carrera $carreraId")
                         } else {
-                            viewProfile(notificacion.usuario?.id ?: 0)
+                            viewProfile(notificacion.usuario?.id ?: "0")
                             Log.d("NotificationsScreen", "Botón clicked -> perfil")
                         }
                     },

@@ -11,7 +11,7 @@ object LocalUsuarioProvider {
 
     val usuarios = listOf(
         Usuario(
-            id = 1,
+            id = "1",
             nombre = "Santiago Rayo",
             usuario = "@santiagorayo",
             email = "example.com",
@@ -30,7 +30,7 @@ object LocalUsuarioProvider {
         ),
 
         Usuario(
-            id = 2,
+            id = "2",
             nombre = "Sara Castro",
             usuario = "@saracastro",
             email = "example2.com",
@@ -49,7 +49,7 @@ object LocalUsuarioProvider {
         ),
 
         Usuario(
-            id = 3,
+            id = "3",
             nombre = "David Sotelo",
             usuario = "@davidsotelo",
             email = "example3.com",
@@ -66,7 +66,7 @@ object LocalUsuarioProvider {
         ),
 
         Usuario(
-            id = 4,
+            id = "4",
             nombre = "Juan Angarita",
             usuario = "@juanangarita",
             email = "example4.com",

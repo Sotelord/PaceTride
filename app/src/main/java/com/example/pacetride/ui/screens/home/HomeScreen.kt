@@ -16,9 +16,9 @@ import com.example.pacetride.ui.screens.home.components.HomeScreenContent
 @Composable
 fun HomeScreen(
     homeViewModel: HomeViewModel,
-    verCarreraButtonPressed: (Int) -> Unit,
-    raceCardPressed: (Int) -> Unit,
-    notificacionButtonPressed: (Int)-> Unit,
+    verCarreraButtonPressed: (String) -> Unit,
+    raceCardPressed: (String) -> Unit,
+    notificacionButtonPressed: (String)-> Unit,
     distanciaShortcutPressed: (Int)-> Unit,
     modifier: Modifier = Modifier
 ) {

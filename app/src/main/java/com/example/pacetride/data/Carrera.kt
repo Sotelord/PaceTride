@@ -4,7 +4,7 @@ import kotlin.math.roundToInt
 
 data class Carrera(
     val raceImageUrl: String? = null,
-    val id: Int,
+    val id: String,
     val nombre: String,
     val fecha: String,
     val ubicacion: String,

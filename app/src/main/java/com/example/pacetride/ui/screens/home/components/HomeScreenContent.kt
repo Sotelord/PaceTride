@@ -27,9 +27,9 @@ import com.example.pacetride.ui.utils.SeccionTitulo
 fun HomeScreenContent(
     usuario: Usuario,
     featuredRace: Carrera,
-    verCarreraButtonPressed: (Int) -> Unit,
-    raceCardPressed: (Int)-> Unit,
-    notificacionButtonPressed: (Int)-> Unit,
+    verCarreraButtonPressed: (String) -> Unit,
+    raceCardPressed: (String)-> Unit,
+    notificacionButtonPressed: (String)-> Unit,
     distanciaShortcutPressed: (Int)-> Unit,
     modifier: Modifier = Modifier
 ) {

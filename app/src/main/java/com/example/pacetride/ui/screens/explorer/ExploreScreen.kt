@@ -18,7 +18,7 @@ import com.example.pacetride.ui.theme.PacetrideTheme
 fun ExploreScreen(
     modifier: Modifier = Modifier,
     exploreViewModel: ExploreViewModel,
-    verCarreraButtonPressed: (Int) -> Unit,
+    verCarreraButtonPressed: (String) -> Unit,
     comunidadPressed: () -> Unit,
     filtroDistanciaInicial: Int? = null
 ) {

@@ -9,7 +9,7 @@ object LocalPublicacionProvider {
 
     val publicaciones = listOf(
         Publicacion(
-            id = 1,
+            id = "1",
             imageUserURL = usuarios[0].fotoPerfil,
             nombre = usuarios[0].nombre,
             tiempo = "Hace 2 h",
@@ -22,9 +22,8 @@ object LocalPublicacionProvider {
             likes = "128",
             comentarios = "24"
         ),
-
         Publicacion(
-            id = 2,
+            id = "2",
             imageUserURL = usuarios[1].fotoPerfil,
             nombre = usuarios[1].nombre,
             tiempo = "Hace 5 h",
@@ -32,9 +31,8 @@ object LocalPublicacionProvider {
             likes = "67",
             comentarios = "8"
         ),
-
         Publicacion(
-            id = 3,
+            id = "3",
             imageUserURL = usuarios[2].fotoPerfil,
             nombre = usuarios[2].nombre,
             tiempo = "Hace 8 h",

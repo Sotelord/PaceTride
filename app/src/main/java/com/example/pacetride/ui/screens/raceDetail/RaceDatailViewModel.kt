@@ -13,7 +13,7 @@ class RaceDetailViewModel @Inject constructor(): ViewModel() {
     private  val _uiState = MutableStateFlow(RaceDetailState())
     val uiState: StateFlow<RaceDetailState> = _uiState
 
-    fun getRaceId(id: Int){
+    fun getRaceId(id: String){
         //_uiState.update { it.copy(carrera = LocalCarreraProvider.listCarrera.find { it.id == id }) }
         val carrera = LocalCarreraProvider.listCarrera.find { it.id == id }
         _uiState.update {

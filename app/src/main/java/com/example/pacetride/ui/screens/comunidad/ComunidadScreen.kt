@@ -17,7 +17,7 @@ import com.example.pacetride.ui.theme.PacetrideTheme
 fun ComunidadScreen(
     comunidadViewModel: ComunidadViewModel,
     escribirResenaPressed: () -> Unit,
-    notificacionButtonPressed: (Int)-> Unit,
+    notificacionButtonPressed: (String)-> Unit,
     modifier: Modifier = Modifier
 ) {
     val state by comunidadViewModel.uiState.collectAsState()

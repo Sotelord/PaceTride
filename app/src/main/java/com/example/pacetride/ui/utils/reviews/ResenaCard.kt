@@ -1,4 +1,4 @@
-package com.example.pacetride.ui.screens.publicProfile.components.content
+package com.example.pacetride.ui.utils.reviews
 
 import android.util.Log
 import androidx.compose.foundation.Image
@@ -44,7 +44,17 @@ fun ResenaCard(
             .padding(16.dp)
     ) {
         // Renderiza de manera dinámica la calificación
-        Row(verticalAlignment = Alignment.CenterVertically) {
+        Row(modifier = Modifier.fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Text(
+                text = "Media Maratón Bogotá 2026",
+                color = MaterialTheme.colorScheme.onBackground,
+                fontSize = 16.sp,
+                fontWeight = FontWeight.Bold,
+                modifier = Modifier.weight(1f)
+            )
+            Spacer(modifier = Modifier.width(8.dp))
             Image(
                 painter = painterResource(R.drawable.ic_estrella),
                 contentDescription = null,
@@ -59,13 +69,6 @@ fun ResenaCard(
                 fontWeight = FontWeight.Bold
             )
         }
-        Spacer(modifier = Modifier.height(8.dp))
-        Text(
-            text = "Media Maratón Bogotá 2026",
-            color = MaterialTheme.colorScheme.onBackground,
-            fontSize = 16.sp,
-            fontWeight = FontWeight.Bold
-        )
         Spacer(modifier = Modifier.height(4.dp))
         // Renderiza de manera dinámica el texto de la reseña
         Text(

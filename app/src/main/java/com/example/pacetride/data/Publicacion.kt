@@ -2,7 +2,7 @@ package com.example.pacetride.data
 
 data class Publicacion(
     val imageUserURL: String?,
-    val id: Int,
+    val id: String,
     val nombre: String,
     val tiempo: String,
     val texto: String? = null,
@@ -12,7 +12,7 @@ data class Publicacion(
     val resena: Resena? = null
 ) {
     init {
-        require(!texto.isNullOrBlank() || !resena?.resena.isNullOrBlank()){
+        require(!texto.isNullOrBlank() || !resena?.resena.isNullOrBlank()) {
             "La publicación debe tener texto o reseña con contenido"
         }
     }

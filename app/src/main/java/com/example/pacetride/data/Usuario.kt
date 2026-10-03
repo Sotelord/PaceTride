@@ -1,7 +1,7 @@
 package com.example.pacetride.data
 
 data class Usuario(
-    val id: Int,
+    val id: String,
     val nombre: String,
     val usuario: String,
     val email: String,

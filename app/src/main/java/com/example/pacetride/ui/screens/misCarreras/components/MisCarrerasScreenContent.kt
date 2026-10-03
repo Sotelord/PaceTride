@@ -33,7 +33,7 @@ fun MisCarrerasScreenContent(
     selectedTabIndex: Int,
     onTabSelected: (Int) -> Unit,
     notificacionButtonPressed: () -> Unit,
-    verCarreraButtonPressed: (Int) -> Unit,
+    verCarreraButtonPressed: (String) -> Unit,
     explorarPressed: () -> Unit,
     modifier: Modifier = Modifier
 ) {

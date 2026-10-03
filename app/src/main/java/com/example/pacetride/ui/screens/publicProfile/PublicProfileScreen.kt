@@ -20,7 +20,7 @@ import com.example.pacetride.ui.screens.publicProfile.components.PublicProfileCo
 @Composable
 fun PublicProfileScreen(
     publicProfileViewModel: PublicProfileViewModel,
-    usuarioId: Int,
+    usuarioId: String,
     atrasPressed: () -> Unit,
     comentariosPressed: () -> Unit,
     configPressed: () -> Unit,
@@ -65,7 +65,7 @@ fun PublicProfileScreenPreview() {
     PacetrideTheme(darkTheme = true) {
         PublicProfileScreen(
             publicProfileViewModel = viewModel(),
-            usuarioId =  2,
+            usuarioId =  "2",
             atrasPressed = {},
             comentariosPressed = {},
             configPressed = {})

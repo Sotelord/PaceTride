@@ -47,33 +47,37 @@ import com.example.pacetride.ui.screens.registrar.RegisterScreen
 import com.example.pacetride.ui.screens.registrar.RegisterViewModel
 import com.example.pacetride.ui.screens.splash.SplashScreen
 
-sealed class Screen(val route: String){
+sealed class Screen(val route: String) {
     object Login : Screen("login")
     object Register : Screen("register")
     object Home : Screen("home")
-    object RaceDetail : Screen ("raceDetail"){
-        fun createRoute(raceId : Int) = "raceDetail/$raceId"
+    object RaceDetail : Screen("raceDetail") {
+        fun createRoute(raceId: String) = "raceDetail/$raceId"
     }
-    object  Notifications : Screen("notificaciones"){
-        fun createRoute(usuarioId : Int) = "notificaciones/$usuarioId"
+
+    object Notifications : Screen("notificaciones") {
+        fun createRoute(usuarioId: String) = "notificaciones/$usuarioId"
     }
+
     object Explorer : Screen("explorer") {
         const val FILTRODISTANCIA = "filtroDistancia"
     }
-    object  MisCarreras : Screen("misCarreras")
-    object  Profile : Screen("profile")
-    object  PublicProfile : Screen("publicProfile"){
-        fun createRoute(usuarioId: Int) = "publicProfile/$usuarioId"
+
+    object MisCarreras : Screen("misCarreras")
+    object Profile : Screen("profile")
+    object PublicProfile : Screen("publicProfile") {
+        fun createRoute(usuarioId: String) = "publicProfile/$usuarioId"
     }
+
     object Inscribeme : Screen("inscribeme")
     object Comentarios : Screen("comentarios")
-    object ConfigUsuarioPublico : Screen ("configUsuarioPublico")
-    object EditProfile : Screen ("editProfile")
-    object Configuracion : Screen ("Configuracion")
-    object RecuperarContrasena : Screen ("recuperarContrasena")
-    object EscribirResena : Screen ("escribirResena")
-    object Comunidad: Screen("comunidad")
-    object Splash: Screen("splash")
+    object ConfigUsuarioPublico : Screen("configUsuarioPublico")
+    object EditProfile : Screen("editProfile")
+    object Configuracion : Screen("Configuracion")
+    object RecuperarContrasena : Screen("recuperarContrasena")
+    object EscribirResena : Screen("escribirResena")
+    object Comunidad : Screen("comunidad")
+    object Splash : Screen("splash")
 }
 
 
@@ -81,22 +85,22 @@ sealed class Screen(val route: String){
 fun AppNavigation(
     navControler: NavHostController,
     modifier: Modifier = Modifier
-){
+) {
     NavHost(
         navController = navControler,
         startDestination = Screen.Splash.route,
         modifier = modifier
-    ){
-        composable (route = Screen.Splash.route){
+    ) {
+        composable(route = Screen.Splash.route) {
             SplashScreen(
                 navigateToHome = {
-                    navControler.navigate(Screen.Home.route){
-                        popUpTo(0) {inclusive = true}
+                    navControler.navigate(Screen.Home.route) {
+                        popUpTo(0) { inclusive = true }
                     }
                 },
                 navigateToLogin = {
-                    navControler.navigate(Screen.Login.route){
-                        popUpTo(0) {inclusive = true}
+                    navControler.navigate(Screen.Login.route) {
+                        popUpTo(0) { inclusive = true }
                     }
                 },
                 splashViewModel = hiltViewModel()
@@ -105,14 +109,14 @@ fun AppNavigation(
 
         //Inicio de sesión
 
-        composable(route = Screen.Login.route){
+        composable(route = Screen.Login.route) {
             val loginViewModel: LoginViewModel = hiltViewModel()
             val state by loginViewModel.uiState.collectAsState()
 
             LaunchedEffect(state.navigate) {
                 if (state.navigate) {
-                    navControler.navigate(Screen.Home.route){
-                        popUpTo(0){
+                    navControler.navigate(Screen.Home.route) {
+                        popUpTo(0) {
                             inclusive = true
                         }
                     }
@@ -130,21 +134,21 @@ fun AppNavigation(
             )
         }
 
-        composable(route = Screen.Register.route){
+        composable(route = Screen.Register.route) {
             val registerViewModel: RegisterViewModel = hiltViewModel()
             val state by registerViewModel.uiState.collectAsState()
 
             LaunchedEffect(state.navigate) {
                 if (state.navigate) {
-                    navControler.navigate(Screen.Home.route){
-                        popUpTo(0){
+                    navControler.navigate(Screen.Home.route) {
+                        popUpTo(0) {
                             inclusive = true
                         }
                     }
                 }
             }
 
-            RegisterScreen (
+            RegisterScreen(
                 registerViewModel = registerViewModel,
                 loginPressed = {
                     navControler.popBackStack()
@@ -152,7 +156,7 @@ fun AppNavigation(
             )
         }
 
-        composable(route = Screen.Home.route){
+        composable(route = Screen.Home.route) {
             val homeViewModel: HomeViewModel = hiltViewModel()
             HomeScreen(
                 homeViewModel = homeViewModel,
@@ -174,7 +178,7 @@ fun AppNavigation(
             )
         }
 
-        composable(route = Screen.Explorer.route){ backStackEntry ->
+        composable(route = Screen.Explorer.route) { backStackEntry ->
             val exploreViewModel: ExploreViewModel = hiltViewModel()
             val filtroDistancia = remember(backStackEntry) {
                 navControler.previousBackStackEntry
@@ -194,7 +198,7 @@ fun AppNavigation(
             )
         }
 
-        composable(route = Screen.MisCarreras.route){
+        composable(route = Screen.MisCarreras.route) {
             val misCarrerasViewModel: MisCarrerasViewModel = hiltViewModel()
             MisCarrerasScreen(
                 misCarrerasViewModel = misCarrerasViewModel,
@@ -210,7 +214,7 @@ fun AppNavigation(
             )
         }
 
-        composable(route = Screen.Profile.route){
+        composable(route = Screen.Profile.route) {
             val profileViewModel: ProfileViewModel = hiltViewModel()
             ProfileScreen(
                 profileViewModel = profileViewModel,
@@ -230,19 +234,19 @@ fun AppNavigation(
 
 
         //Otra navegación
-        composable (route = Screen.RecuperarContrasena.route){
+        composable(route = Screen.RecuperarContrasena.route) {
             Text("Falta esta pantalla")
         }
 
-        composable (route = Screen.Configuracion.route){
+        composable(route = Screen.Configuracion.route) {
             Text("Falta esta pantalla")
         }
 
-        composable (route = Screen.EditProfile.route){
+        composable(route = Screen.EditProfile.route) {
             Text("Falta esta pantalla")
         }
 
-        composable (route = Screen.Comunidad.route){
+        composable(route = Screen.Comunidad.route) {
             val comunidadViewModel: ComunidadViewModel = hiltViewModel()
             ComunidadScreen(
                 comunidadViewModel = comunidadViewModel,
@@ -257,28 +261,28 @@ fun AppNavigation(
 
         composable(
             route = "${Screen.RaceDetail.route}/{raceId}",
-            arguments = listOf(navArgument("raceId") {type = NavType.IntType})
-        ){
+            arguments = listOf(navArgument("raceId") { type = NavType.StringType })
+        ) {
             val raceDetailViewModel: RaceDetailViewModel = hiltViewModel()
-            val raceId = it.arguments?.getInt("raceId") ?: 0
+            val raceId = it.arguments?.getString("raceId") ?: ""
 
             RaceDetailScreen(
                 raceDetailViewModel = raceDetailViewModel,
                 raceId = raceId,
                 atrasPressed = {
                     navControler.popBackStack()
-                               },
+                },
                 inscribemePressed = {
                     navControler.navigate(Screen.Inscribeme.route)
                 }
             )
         }
 
-        composable (route = Screen.Inscribeme.route){
+        composable(route = Screen.Inscribeme.route) {
             Text("Falta esta pantalla")
         }
 
-        composable (route = Screen.EscribirResena.route){
+        composable(route = Screen.EscribirResena.route) {
             val escribirResenaViewModel: EscribirResenaViewModel = hiltViewModel()
             val state by escribirResenaViewModel.uiState.collectAsState()
             LaunchedEffect(state.navigate) {
@@ -296,31 +300,31 @@ fun AppNavigation(
 
         composable(
             route = "${Screen.Notifications.route}/{usuarioId}",
-            arguments = listOf(navArgument("usuarioId") {type = NavType.IntType})
-        ){
+            arguments = listOf(navArgument("usuarioId") { type = NavType.StringType })
+        ) {
             val notificationsViewModel: NotificationsViewModel = hiltViewModel()
-            val usuarioId = it.arguments?.getInt("usuarioId") ?: 0
+            val usuarioId = it.arguments?.getString("usuarioId") ?: ""
             NotificationsScreen(
                 notificationsViewModel = notificationsViewModel,
                 usuarioId = usuarioId,
                 atrasPressed = {
                     navControler.popBackStack()
-                               },
+                },
                 viewProfile = { usuarioId ->
                     navControler.navigate(Screen.PublicProfile.createRoute(usuarioId))
-                              },
+                },
                 verCarrera = { raceId ->
                     navControler.navigate(Screen.RaceDetail.createRoute(raceId))
                 }
             )
         }
 
-        composable (
+        composable(
             route = "${Screen.PublicProfile.route}/{usuarioId}",
-            arguments = listOf(navArgument("usuarioId") {type = NavType.IntType})
+            arguments = listOf(navArgument("usuarioId") { type = NavType.StringType })
         ) {
             val publicProfileViewModel: PublicProfileViewModel = hiltViewModel()
-            val usuarioId = it.arguments?.getInt("usuarioId") ?: 0
+            val usuarioId = it.arguments?.getString("usuarioId") ?: ""
 
             PublicProfileScreen(
                 publicProfileViewModel = publicProfileViewModel,
@@ -337,11 +341,11 @@ fun AppNavigation(
             )
         }
 
-        composable (route = Screen.Comentarios.route){
+        composable(route = Screen.Comentarios.route) {
             Text("Falta esta pantalla")
         }
 
-        composable (route = Screen.ConfigUsuarioPublico.route){
+        composable(route = Screen.ConfigUsuarioPublico.route) {
             Text("Falta esta pantalla")
         }
     }
@@ -380,7 +384,7 @@ val bottomNavItems = listOf(
 fun PacetrideBottomNavigationBar(
     navController: NavHostController,
     modifier: Modifier = Modifier
-){
+) {
     val navBackStackEntry = navController.currentBackStackEntryAsState()
     val currentRoute = navBackStackEntry.value?.destination?.route
 
@@ -395,7 +399,7 @@ fun PacetrideBottomNavigationBar(
                     Icon(
                         painter = painterResource(item.idIcon),
                         contentDescription = item.route,
-                        tint = if(isSelected)
+                        tint = if (isSelected)
                             MaterialTheme.colorScheme.primaryContainer
                         else
                             MaterialTheme.colorScheme.onSurfaceVariant
@@ -423,7 +427,7 @@ fun PacetrideBottomNavigationBar(
 
 @Preview
 @Composable
-fun PacetrideBottomNavigationBarPreview(){
+fun PacetrideBottomNavigationBarPreview() {
     PacetrideTheme(darkTheme = true) {
         PacetrideBottomNavigationBar(
             navController = rememberNavController()

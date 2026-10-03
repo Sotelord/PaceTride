@@ -15,8 +15,8 @@ import com.example.pacetride.ui.theme.PacetrideTheme
 @Composable
 fun MisCarrerasScreen(
     misCarrerasViewModel: MisCarrerasViewModel,
-    notificacionButtonPressed: (Int) -> Unit,
-    verCarreraButtonPressed: (Int) -> Unit,
+    notificacionButtonPressed: (String) -> Unit,
+    verCarreraButtonPressed: (String) -> Unit,
     explorarPressed: () -> Unit,
     modifier: Modifier = Modifier
 ) {

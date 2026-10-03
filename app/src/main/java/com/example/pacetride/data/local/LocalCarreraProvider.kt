@@ -5,7 +5,7 @@ import com.example.pacetride.data.Carrera
 object LocalCarreraProvider {
     val listCarrera = listOf(
         Carrera(
-            id = 1,
+            id = "1",
             raceImageUrl = "https://bogota.gov.co/sites/default/files/2026-04/bogota-se-alista-para-la-carrera-verde-este-domingo-12-de-abril.jpg",
             nombre = "Carrera Atlética Bogotá 10K",
             ubicacion = "Bogotá",
@@ -16,7 +16,7 @@ object LocalCarreraProvider {
             descripcion = "Un recorrido rápido y plano por las principales vías del norte de la ciudad. Ideal para corredores que buscan superar su mejor marca personal en la distancia reina de los 10 kilómetros."
         ),
         Carrera(
-            id = 2,
+            id = "2",
             raceImageUrl = "https://bogota.gov.co/sites/default/files/styles/1050px/public/2025-11/bogota-se-alista-para-vivir-corremitierra%2C-el-evento-del-ano.png",
             nombre = "Corre por Bogotá 5K",
             ubicacion = "Bogotá",
@@ -27,7 +27,7 @@ object LocalCarreraProvider {
             descripcion = "El evento perfecto para iniciarse en el mundo del running o disfrutar con amigos y familia. Una ruta recreativa llena de puntos de entretenimiento, música en vivo y mucha energía positiva."
         ),
         Carrera(
-            id = 3,
+            id = "3",
             raceImageUrl = "https://www.kienyke.com/sites/default/files/styles/interna_contenido_s/public/2022-07/Media%20mARATON.jpg?itok=3wVp3M7D",
             nombre = "Media Maratón Bogotá 2026",
             ubicacion = "Bogotá",
@@ -38,7 +38,7 @@ object LocalCarreraProvider {
             descripcion = "Vive una de las experiencias de running ás importantes de Bogotá. Corre, supera tus límites y comparte el recorrido con miles de runners"
         ),
         Carrera(
-            id = 4,
+            id = "4",
             nombre = "Carrera 0 Bogotá",
             ubicacion = "Bogotá",
             fecha = "27 de agosto",
@@ -49,7 +49,7 @@ object LocalCarreraProvider {
             descripcion = "Una maratón desafiante diseñada exclusivamente para los atletas más experimentados de la región. El circuito atraviesa zonas de alta exigencia topográfica poniendo a prueba tu resistencia física y mental."
         ),
         Carrera(
-            id = 5,
+            id = "5",
             raceImageUrl = "https://www.runningcolombia.com/wp-content/uploads/2024/09/Maraton-Medellin2024-runners.jpg",
             nombre = "Carrera 10k",
             ubicacion = "Bogotá",
@@ -60,7 +60,7 @@ object LocalCarreraProvider {
             descripcion = "Disfruta de una edición nocturna muy especial. Una ruta iluminada donde todos los participantes visten prendas reflectivas para crear un río de luces a lo largo de los parques principales de la capital."
         ),
         Carrera(
-            id = 6,
+            id = "6",
             raceImageUrl = "https://www.cali.gov.co/info/caligovco_se/media/pubInt/thumbs/thpubInt_700X400_194293.webp",
             nombre = "Carrera Universitaria 5k",
             ubicacion = "Pontificia Universidad Javeriana",

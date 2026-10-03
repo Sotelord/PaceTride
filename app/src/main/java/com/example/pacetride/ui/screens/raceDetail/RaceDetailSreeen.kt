@@ -24,7 +24,7 @@ import com.example.pacetride.ui.screens.raceDetail.components.content.BotonInscr
 @Composable
 fun RaceDetailScreen(
     raceDetailViewModel: RaceDetailViewModel,
-    raceId: Int,
+    raceId: String,
     atrasPressed: () -> Unit,
     inscribemePressed: () -> Unit,
     modifier: Modifier = Modifier
@@ -72,7 +72,7 @@ fun RaceDetailScreenPreview() {
         RaceDetailScreen(
             raceDetailViewModel = viewModel(),
             inscribemePressed = {},
-            raceId = 2,
+            raceId = "2",
             atrasPressed = {},
         )
     }

@@ -46,7 +46,7 @@ fun ComunidadScreenContent(
     publicaciones: List<Publicacion>,
     usuario: Usuario,
     escribirResenaPressed: () -> Unit,
-    notificacionButtonPressed: (Int)-> Unit,
+    notificacionButtonPressed: (String)-> Unit,
     textoBusqueda: String,
     onTextoBusquedaChange: (String) -> Unit,
     modifier: Modifier = Modifier

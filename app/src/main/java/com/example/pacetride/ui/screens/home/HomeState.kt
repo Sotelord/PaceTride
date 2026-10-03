@@ -6,7 +6,7 @@ import com.example.pacetride.data.Usuario
 
 data class HomeState(
     val usuario: Usuario = Usuario(
-        id = 10,
+        id = "10",
         nombre = "demo",
         usuario = "@demo",
         email = "example0.com",
@@ -20,7 +20,7 @@ data class HomeState(
         )
     ),
     val featuredRace: Carrera = Carrera(
-        id = 10,
+        id = "10",
         nombre = "Carrera si",
         fecha = "10-10-2010",
         ubicacion = "Allá",

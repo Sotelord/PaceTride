@@ -23,13 +23,13 @@ class NotificationsViewModel @Inject constructor(
         _uiState.update { it.copy(usuario = usuarioLocal.copy(fotoPerfil = fotoSesion)) }
     }
 
-    fun getNotificaciones(usuarioId: Int) {
+    fun getNotificaciones(usuarioId: String) {
         _uiState.update {
             it.copy(notificaciones = LocalNotificacionProvider.notificacionesDe(usuarioId))
         }
     }
 
-    fun marcarComoLeida(id: Int) {
+    fun marcarComoLeida(id: String) {
         _uiState.update { estado ->
             estado.copy(
                 notificaciones = estado.notificaciones.map { notificacion ->
