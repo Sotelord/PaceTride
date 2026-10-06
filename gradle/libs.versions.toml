@@ -13,7 +13,7 @@ runtime = "1.12.1"
 splashscreen = "1.2.0"
 
 composeUiTextGoogleFonts = "1.12.1"
-navigationCompose = "2.10.1"
+navigationCompose = "2.10.2"
 composeRuntimeLivedata = "1.12.1"
 lifecycleViewmodelCompose = "2.11.0"
 
@@ -25,6 +25,10 @@ dagger = "2.60.1"
 firebaseStorageKtx = "21.0.2"
 
 coil = "2.7.0"
+
+retrofit = "3.0.0"
+retrofitScalars = "3.0.0"
+retrofirGson = "3.0.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -62,6 +66,10 @@ firebase-firestore = { module = "com.google.firebase:firebase-firestore" }
 firebase-storage-ktx = { module = "com.google.firebase:firebase-storage-ktx", version.ref = "firebaseStorageKtx" }
 
 coil-kt = { module = "io.coil-kt:coil-compose", version.ref = "coil"}
+
+retrofit-retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
+retrofit-convert-scalars = { module = "com.squareup.retrofit2:converter-scalars", version.ref = "retrofitScalars" }
+retrofit-convert-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "retrofirGson" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

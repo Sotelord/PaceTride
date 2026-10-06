@@ -17,7 +17,7 @@ android {
     defaultConfig {
         applicationId = "com.example.pacetride"
         minSdk = 26
-        targetSdk = 37
+        targetSdk = 36
         versionCode = 1
         versionName = "1.0"
 
@@ -82,6 +82,12 @@ dependencies {
 
     //Coil
     implementation(libs.coil.kt)
+
+    //Retrofit
+    implementation(libs.retrofit.retrofit)
+    //Retrofit con Scalar Converter
+    implementation(libs.retrofit.convert.scalars)
+    implementation(libs.retrofit.convert.gson)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

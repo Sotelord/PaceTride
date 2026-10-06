@@ -20,7 +20,7 @@ import com.example.pacetride.ui.theme.PacetrideTheme
 @Composable
 fun ChipsFlowDestacar(
     opciones: List<String>,
-    seleccionadas: Set<String>,
+    seleccionadas: List<String>?,
     onToggle: (String) -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -31,7 +31,7 @@ fun ChipsFlowDestacar(
                 fila.forEach { opcion ->
                     ChipDestacado(
                         texto = opcion,
-                        seleccionado = opcion in seleccionadas,
+                        seleccionado = seleccionadas?.contains(opcion) == true ,
                         onClick = {
                             Log.d("EscribirResnaScreen", "Chip/Item clicked")
                             onToggle(opcion)
@@ -48,7 +48,7 @@ fun ChipsFlowDestacar(
 fun ChipsFlowDestacarPreview(){
     PacetrideTheme(darkTheme = true) {
         val opcionesDestacar = listOf("Ruta", "Organización", "Ambiente", "Hidratación", "Seguridad", "Kit", "Precio")
-        var seleccionadas by remember { mutableStateOf(setOf("Ruta", "Organización", "Ambiente")) }
+        var seleccionadas by remember { mutableStateOf(listOf("Ruta", "Organización", "Ambiente")) }
 
         Box(modifier = Modifier.padding(16.dp)) {
             ChipsFlowDestacar(

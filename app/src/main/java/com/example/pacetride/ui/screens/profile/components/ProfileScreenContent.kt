@@ -27,14 +27,23 @@ import com.example.pacetride.ui.utils.AppButton
 import com.example.pacetride.ui.utils.SeccionTitulo
 import com.example.pacetride.ui.utils.stats.EstadisticasRow
 import android.net.Uri
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
+import androidx.compose.ui.text.style.TextAlign
+import com.example.pacetride.data.Resena
+import com.example.pacetride.data.local.LocalCarreraProvider
+import com.example.pacetride.ui.utils.reviews.ResenasList
 
 @Composable
 fun ProfileScreenContent(
     usuario: Usuario,
+    resenas: List<Resena>,
     editProfilePressed: () -> Unit,
     configurationPressed: () -> Unit,
     logOutPressed: () -> Unit,
     onPickImg: (uri: Uri) -> Unit,
+    onClickEdit: (String, String) -> Unit,
+    onClickDelete: (String) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -89,7 +98,7 @@ fun ProfileScreenContent(
         )
 
         NextRaceCardWithGraph(
-            usuario.proximaCarreras[2]
+            LocalCarreraProvider.listCarrera[2]
         )
 
         Spacer(modifier = Modifier.height(32.dp))
@@ -99,15 +108,39 @@ fun ProfileScreenContent(
             modifier = Modifier.fillMaxWidth()
         )
 
-        HistorialRow(usuario.historial)
+        if (!usuario.historial.isEmpty()) {
+            HistorialRow(usuario.historial)
+        } else {
+            Text(
+                text = "Aún no has realizado ninguna carrera",
+                textAlign = TextAlign.Center,
+                color = MaterialTheme.colorScheme.onBackground
+            )
+        }
 
-        Spacer(modifier = Modifier.height(20.dp))
+        Spacer(modifier = Modifier.height(24.dp))
+
+        SeccionTitulo(
+            texto = stringResource(R.string.tus_resenas),
+            modifier = Modifier
+                .padding(bottom = 8.dp)
+                .fillMaxWidth()
+        )
+
+        ResenasList(
+            resenas = resenas,
+            isOwn = true,
+            onClickDelete = onClickDelete,
+            onClickEdit = onClickEdit
+        )
+
+        Spacer(modifier = Modifier.height(24.dp))
     }
 }
 
 @Composable
 @Preview
-fun ProfileScreenContentPreview(){
+fun ProfileScreenContentPreview() {
     val usuario = LocalUsuarioProvider.usuarios[2]
     PacetrideTheme(darkTheme = true) {
         ProfileScreenContent(
@@ -115,7 +148,10 @@ fun ProfileScreenContentPreview(){
             editProfilePressed = {},
             logOutPressed = {},
             onPickImg = {},
-            usuario = usuario
+            usuario = usuario,
+            resenas = emptyList(),
+            onClickDelete = {},
+            onClickEdit = { _, _ -> },
         )
     }
 }

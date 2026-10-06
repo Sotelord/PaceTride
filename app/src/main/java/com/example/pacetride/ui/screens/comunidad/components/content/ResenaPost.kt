@@ -44,10 +44,15 @@ fun ResenaPostPreview(){
         ResenaPost(
             Resena(
                 id = "3",
-                usuarioId = "2",
+                usuarioId = "3",
+                usuario = "David Sotelo",
                 carreraId = "3",
+                carrera = "Media Maratón Bogotá 2026",
                 resena = "Acabo de correr la Carrera 10K Bogotá. Muy buena organización y la ruta estuvo increíble.",
-                calificacion = "4"
+                calificacion = "4",
+                fechaPublicacion = "hace 1h",
+                categoriasDestacadas = listOf("Organización", "Kit"),
+                likes = 3
             )
         )
     }

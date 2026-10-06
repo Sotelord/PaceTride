@@ -22,7 +22,6 @@ fun PublicProfileScreen(
     publicProfileViewModel: PublicProfileViewModel,
     usuarioId: String,
     atrasPressed: () -> Unit,
-    comentariosPressed: () -> Unit,
     configPressed: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -38,10 +37,9 @@ fun PublicProfileScreen(
             .fillMaxSize()
             .background(MaterialTheme.colorScheme.background)
     ) {
-        if(state.usuario != null){
+        if (state.usuario != null) {
             PublicProfileContent(
                 atrasPressed = atrasPressed,
-                comentariosPressed = comentariosPressed,
                 configPressed = configPressed,
                 usuario = state.usuario!!,
                 modifier = Modifier
@@ -65,9 +63,9 @@ fun PublicProfileScreenPreview() {
     PacetrideTheme(darkTheme = true) {
         PublicProfileScreen(
             publicProfileViewModel = viewModel(),
-            usuarioId =  "2",
+            usuarioId = "2",
             atrasPressed = {},
-            comentariosPressed = {},
-            configPressed = {})
+            configPressed = {}
+        )
     }
 }

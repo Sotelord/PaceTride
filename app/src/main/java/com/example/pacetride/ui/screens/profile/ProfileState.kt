@@ -1,6 +1,7 @@
 package com.example.pacetride.ui.screens.profile
 
 import com.example.pacetride.data.EstadisticasGlobales
+import com.example.pacetride.data.Resena
 import com.example.pacetride.data.Usuario
 
 data class ProfileState(
@@ -17,5 +18,8 @@ data class ProfileState(
             mejorTiempo10k = "10",
             mejorTiempo21k = "21"
         )
-    )
+    ),
+    val isLoading: Boolean = false,
+    val errorMessage: String? = null,
+    val resenas: List<Resena> = emptyList(),
 )

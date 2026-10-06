@@ -8,7 +8,7 @@ data class Carrera(
     val nombre: String,
     val fecha: String,
     val ubicacion: String,
-    val distanciasDisponiblesKm: List<Int> = listOf(5, 10, 21),
+    val distanciasDisponiblesKm: List<Int> = listOf(5,10,15,21),
     val precioBase: Int,
     val distanciaReferenciaKm: Int = 21,
     val ultimosCupos: Boolean? = false,

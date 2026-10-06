@@ -1,6 +1,7 @@
 package com.example.pacetride.ui.screens.raceDetail
 
 import com.example.pacetride.data.Carrera
+import com.example.pacetride.data.Resena
 
 data class RaceDetailState(
     val carrera: Carrera? = Carrera(
@@ -11,5 +12,8 @@ data class RaceDetailState(
         precioBase = 10,
         descripcion = "Si si"
     ),
-    val kmSeleccionado: Int = 0
+    val kmSeleccionado: Int = 0,
+    val resenas: List<Resena> = emptyList(),
+    val isLoading: Boolean = false,
+    val errorMessage: String? = null,
 )

@@ -35,17 +35,18 @@ import com.example.pacetride.ui.utils.TituloSeccionDetalle
 @Composable
 fun EscribirResenaScreenContent(
     carrera: Carrera,
+    resenaId: String?,
     calificacion: Int,
     onCalificacionChange: (Int) -> Unit,
     textoResena: String,
     onTextoResenaChange: (String) -> Unit,
     opcionesDestacar: List<String>,
-    seleccionadas: Set<String>,
+    seleccionadas: List<String>?,
     onToggleDestacar: (String) -> Unit,
     onPublicarClick: () -> Unit,
     atrasPressed: () -> Unit,
     mostrarMensajeError: Boolean,
-    errorMessage: String,
+    errorMessage: String?,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -91,21 +92,17 @@ fun EscribirResenaScreenContent(
         Spacer(modifier = Modifier.height(32.dp))
 
         if (mostrarMensajeError) {
-            Text(
-                text = errorMessage,
-                color = MaterialTheme.colorScheme.tertiaryContainer,
-                fontSize = 12.sp,
-                modifier = Modifier.fillMaxWidth(),
-                textAlign = TextAlign.Center
-            )
+            if (errorMessage != null) {
+                Text(
+                    text = errorMessage,
+                    color = MaterialTheme.colorScheme.tertiaryContainer,
+                    fontSize = 12.sp,
+                    modifier = Modifier.fillMaxWidth(),
+                    textAlign = TextAlign.Center
+                )
+            }
             Spacer(modifier = Modifier.height(8.dp))
         }
-
-        BotonPublicarResena(onClick = {
-            onPublicarClick()
-        })
-
-        Spacer(modifier = Modifier.height(12.dp))
         Text(
             stringResource(R.string.tu_resena_ayudara),
             color = MaterialTheme.colorScheme.onSurfaceVariant,
@@ -114,6 +111,12 @@ fun EscribirResenaScreenContent(
             textAlign = TextAlign.Center
         )
         Spacer(modifier = Modifier.height(20.dp))
+
+        BotonPublicarResena(onClick = {
+            onPublicarClick()
+        })
+
+        Spacer(modifier = Modifier.height(12.dp))
     }
 }
 
@@ -122,7 +125,7 @@ fun EscribirResenaScreenContent(
 fun EscribirResenaScreenContentPreview(){
     PacetrideTheme(darkTheme = true) {
         val carerra = LocalCarreraProvider.listCarrera[2]
-        var seleccionadas by remember { mutableStateOf(setOf("Ruta", "Organización", "Ambiente")) }
+        var seleccionadas by remember { mutableStateOf(listOf("Ruta", "Organización", "Ambiente")) }
         EscribirResenaScreenContent(
             atrasPressed = {},
             calificacion = 4,
@@ -135,7 +138,8 @@ fun EscribirResenaScreenContentPreview(){
             onToggleDestacar = {},
             opcionesDestacar = listOf("su", "no"),
             seleccionadas = seleccionadas,
-            textoResena = ""
+            textoResena = "",
+            resenaId = "1"
         )
     }
 }

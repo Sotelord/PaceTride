@@ -1,5 +1,6 @@
 package com.example.pacetride.ui.screens.raceDetail.components
 
+import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -20,8 +21,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.pacetride.R
 import com.example.pacetride.data.Carrera
+import com.example.pacetride.data.Resena
 import com.example.pacetride.data.aPrecioCop
 import com.example.pacetride.data.local.LocalCarreraProvider
+import com.example.pacetride.data.local.LocalResenaProvider
 import com.example.pacetride.ui.screens.raceDetail.components.content.DistanciasDetalleRow
 import com.example.pacetride.ui.screens.raceDetail.components.content.ImagenPortadaCarrera
 import com.example.pacetride.ui.screens.raceDetail.components.content.IncluyeGrid
@@ -29,6 +32,7 @@ import com.example.pacetride.ui.screens.raceDetail.components.content.MapaRuta
 import com.example.pacetride.ui.screens.raceDetail.components.content.TarjetaInfoCarrera
 import com.example.pacetride.ui.screens.raceDetail.components.content.TituloCarrera
 import com.example.pacetride.ui.theme.PacetrideTheme
+import com.example.pacetride.ui.utils.AppButton
 import com.example.pacetride.ui.utils.TituloSeccionDetalle
 import com.example.pacetride.ui.utils.reviews.ResenasList
 
@@ -38,6 +42,8 @@ fun RaceDetailScreenContent(
     kmSeleccionado: Int,
     onSeleccionarKm: (Int) -> Unit,
     atrasPressed: () -> Unit,
+    resenas: List<Resena>,
+    escribirResenaPressed: (String) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -106,13 +112,28 @@ fun RaceDetailScreenContent(
             Spacer(modifier = Modifier.height(24.dp))
 
             Spacer(modifier = Modifier.height(24.dp))
+
+            AppButton(
+                modifier = Modifier.fillMaxWidth(),
+                textoBoton = "Escribir reseña",
+                onClick = {
+                    escribirResenaPressed(carrera.id)
+                    Log.d("RaceDetailScreen", "Escribir reseña pressed")
+                }
+            )
+
+            Spacer(modifier = Modifier.height(24.dp))
+
             TituloSeccionDetalle(
-                texto = stringResource(R.string.comentarios).replaceFirstChar { if (it.isLowerCase()) it.titlecase() else it.toString() },
+                texto = stringResource(R.string.ultimas_resenas),
                 modifier = Modifier
                     .padding(bottom = 8.dp)
                     .fillMaxWidth()
             )
 
+            Spacer(modifier = Modifier.height(24.dp))
+
+            ResenasList(resenas = resenas)
         }
     }
 }
@@ -121,12 +142,15 @@ fun RaceDetailScreenContent(
 @Preview(showBackground = true)
 fun RaceDetailScreenContentPreview() {
     val carrera = LocalCarreraProvider.listCarrera[0]
+    val resenas = LocalResenaProvider.listaResenas
     PacetrideTheme(darkTheme = true) {
         RaceDetailScreenContent(
             carrera = carrera,
             kmSeleccionado = 1,
             onSeleccionarKm = {},
-            atrasPressed = {}
+            atrasPressed = {},
+            resenas = resenas,
+            escribirResenaPressed = {}
         )
     }
 }

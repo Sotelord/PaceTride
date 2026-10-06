@@ -1,13 +1,17 @@
 package com.example.pacetride.ui.screens.explorer
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -28,24 +32,38 @@ fun ExploreScreen(
         exploreViewModel.inicializarConFiltro(filtroDistanciaInicial)
     }
 
+    when {
+        state.isLoading -> {
+            Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                CircularProgressIndicator()
+            }
+        }
+        state.errorMessage != null -> {
+            Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                Text(text = state.errorMessage ?: "Error desconocido")
+            }
+        }
 
-    Column(
-        modifier = modifier
-            .fillMaxSize()
-            .background(MaterialTheme.colorScheme.background)
-    ) {
-        ExploreScreenContent(
-            verCarreraButtonPressed = verCarreraButtonPressed,
-            carreras = state.carreras,
-            comunidadPressed = comunidadPressed,
-            textoBusqueda = state.textoBusqueda,
-            onTextoBusquedaChange = { exploreViewModel.updateTextoBusqueda(it) },
-            filtroSeleccionado = state.filtroSeleccionado,
-            onFiltroSeleccionadoChange = { exploreViewModel.updateFiltroSeleccionado(it) },
-            filtrosVisibles = state.filtrosVisibles,
-            onToggleFiltros = { exploreViewModel.toggleFiltrosVisibles() },
-            modifier = Modifier.weight(1f)
-        )
+        else -> {
+            Column(
+                modifier = modifier
+                    .fillMaxSize()
+                    .background(MaterialTheme.colorScheme.background)
+            ) {
+                ExploreScreenContent(
+                    verCarreraButtonPressed = verCarreraButtonPressed,
+                    carreras = state.carreras,
+                    comunidadPressed = comunidadPressed,
+                    textoBusqueda = state.textoBusqueda,
+                    onTextoBusquedaChange = { exploreViewModel.updateTextoBusqueda(it) },
+                    filtroSeleccionado = state.filtroSeleccionado,
+                    onFiltroSeleccionadoChange = { exploreViewModel.updateFiltroSeleccionado(it) },
+                    filtrosVisibles = state.filtrosVisibles,
+                    onToggleFiltros = { exploreViewModel.toggleFiltrosVisibles() },
+                    modifier = Modifier.weight(1f)
+                )
+            }
+        }
     }
 }
 

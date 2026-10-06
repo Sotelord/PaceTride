@@ -6,12 +6,14 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -27,37 +29,56 @@ fun RaceDetailScreen(
     raceId: String,
     atrasPressed: () -> Unit,
     inscribemePressed: () -> Unit,
+    escribirResenaPressed: (String) -> Unit,
     modifier: Modifier = Modifier
 ) {
     val state by raceDetailViewModel.uiState.collectAsState()
 
     LaunchedEffect(Unit) {
         raceDetailViewModel.getRaceId(raceId)
+        raceDetailViewModel.getResenas(raceId)
     }
 
     if (state.carrera != null) {
         val precioActual = raceDetailViewModel.getPrecioActual()
 
-        Column(
-            modifier = modifier
-                .fillMaxSize()
-                .background(MaterialTheme.colorScheme.background)
-        ) {
-            RaceDetailScreenContent(
-                carrera = state.carrera!!,
-                kmSeleccionado = state.kmSeleccionado,
-                onSeleccionarKm = { raceDetailViewModel.updateKmSeleccionado(it) },
-                atrasPressed = atrasPressed,
-                modifier = Modifier.weight(1f),
-            )
-            // ---------- "bottomBar" manual ----------
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .background(MaterialTheme.colorScheme.background)
-                    .padding(16.dp)
-            ) {
-                BotonInscripcion(inscribemePressed, precio = precioActual.aPrecioCop())
+        when {
+            state.isLoading -> {
+                Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                    CircularProgressIndicator()
+                }
+            }
+            state.errorMessage != null -> {
+                Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                    Text(text = state.errorMessage ?: "Error desconocido")
+                }
+            }
+
+            else -> {
+                Column(
+                    modifier = modifier
+                        .fillMaxSize()
+                        .background(MaterialTheme.colorScheme.background)
+                ) {
+                    RaceDetailScreenContent(
+                        carrera = state.carrera!!,
+                        kmSeleccionado = state.kmSeleccionado,
+                        onSeleccionarKm = { raceDetailViewModel.updateKmSeleccionado(it) },
+                        atrasPressed = atrasPressed,
+                        resenas = state.resenas,
+                        escribirResenaPressed = escribirResenaPressed,
+                        modifier = Modifier.weight(1f),
+                    )
+                    // ---------- "bottomBar" manual ----------
+                    Box(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .background(MaterialTheme.colorScheme.background)
+                            .padding(16.dp)
+                    ) {
+                        BotonInscripcion(inscribemePressed, precio = precioActual.aPrecioCop())
+                    }
+                }
             }
         }
     } else{
@@ -74,6 +95,7 @@ fun RaceDetailScreenPreview() {
             inscribemePressed = {},
             raceId = "2",
             atrasPressed = {},
+            escribirResenaPressed = {}
         )
     }
 }

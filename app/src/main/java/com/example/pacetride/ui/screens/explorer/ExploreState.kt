@@ -6,5 +6,7 @@ data class ExploreState(
     val carreras: List<Carrera> = emptyList(),
     val textoBusqueda: String = "",
     val filtroSeleccionado: String = "Todas",
-    val filtrosVisibles: Boolean = false
+    val filtrosVisibles: Boolean = false,
+    val isLoading: Boolean = false,
+    val errorMessage: String? = null,
 )

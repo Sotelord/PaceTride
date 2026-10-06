@@ -75,7 +75,11 @@ sealed class Screen(val route: String) {
     object EditProfile : Screen("editProfile")
     object Configuracion : Screen("Configuracion")
     object RecuperarContrasena : Screen("recuperarContrasena")
-    object EscribirResena : Screen("escribirResena")
+    object EscribirResena : Screen("escribirResena") {
+        fun createRoute(raceId: String, reviewId: String? = null) =
+            if (reviewId == null) "escribirResena/$raceId"
+            else "escribirResena/$raceId?reviewId=$reviewId"
+    }
     object Comunidad : Screen("comunidad")
     object Splash : Screen("splash")
 }
@@ -217,6 +221,7 @@ fun AppNavigation(
         composable(route = Screen.Profile.route) {
             val profileViewModel: ProfileViewModel = hiltViewModel()
             ProfileScreen(
+                userId = "3",
                 profileViewModel = profileViewModel,
                 editProfilePressed = {
                     navControler.navigate(Screen.EditProfile.route)
@@ -228,6 +233,9 @@ fun AppNavigation(
                     navControler.navigate(Screen.Login.route) {
                         popUpTo(0) { inclusive = true }
                     }
+                },
+                onClickEdit = { raceId, reviewId ->
+                    navControler.navigate(Screen.EscribirResena.createRoute(raceId, reviewId))
                 }
             )
         }
@@ -251,7 +259,7 @@ fun AppNavigation(
             ComunidadScreen(
                 comunidadViewModel = comunidadViewModel,
                 escribirResenaPressed = {
-                    navControler.navigate(Screen.EscribirResena.route)
+                    //navControler.navigate(Screen.EscribirResena.route)
                 },
                 notificacionButtonPressed = { usuarioId ->
                     navControler.navigate(Screen.Notifications.createRoute(usuarioId))
@@ -274,6 +282,9 @@ fun AppNavigation(
                 },
                 inscribemePressed = {
                     navControler.navigate(Screen.Inscribeme.route)
+                },
+                escribirResenaPressed = { id ->
+                    navControler.navigate(Screen.EscribirResena.createRoute(id))
                 }
             )
         }
@@ -282,8 +293,21 @@ fun AppNavigation(
             Text("Falta esta pantalla")
         }
 
-        composable(route = Screen.EscribirResena.route) {
+        composable(
+            route = "${Screen.EscribirResena.route}/{raceId}?reviewId={reviewId}",
+            arguments = listOf(
+                navArgument("raceId") { type = NavType.StringType },
+                navArgument("reviewId") {
+                    type = NavType.StringType
+                    nullable = true
+                    defaultValue = null
+                }
+            )
+        ) {
             val escribirResenaViewModel: EscribirResenaViewModel = hiltViewModel()
+            val raceId = it.arguments?.getString("raceId") ?: ""
+            val reviewId = it.arguments?.getString("reviewId")
+
             val state by escribirResenaViewModel.uiState.collectAsState()
             LaunchedEffect(state.navigate) {
                 if (state.navigate) {
@@ -292,6 +316,8 @@ fun AppNavigation(
             }
             EscribirResenaScreen(
                 escribirResenaViewModel = escribirResenaViewModel,
+                raceId = raceId,
+                reviewId = reviewId,
                 atrasPressed = {
                     navControler.popBackStack()
                 }
@@ -332,9 +358,6 @@ fun AppNavigation(
                     navControler.popBackStack()
                 },
                 usuarioId = usuarioId,
-                comentariosPressed = {
-                    navControler.navigate(Screen.Comentarios.route)
-                },
                 configPressed = {
                     navControler.navigate(Screen.ConfigUsuarioPublico.route)
                 }

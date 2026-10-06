@@ -27,7 +27,6 @@ import com.example.pacetride.ui.utils.stats.EstadisticasRow
 fun PublicProfileContent(
     usuario: Usuario,
     atrasPressed: () -> Unit,
-    comentariosPressed: () -> Unit,
     configPressed: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -70,7 +69,7 @@ fun PublicProfileContent(
             modifier = Modifier.padding(bottom = 8.dp).fillMaxWidth()
         )
 
-        ResenasList(usuario.resenas, comentariosPressed)
+        ResenasList( resenas = usuario.resenas)
     }
 }
 
@@ -82,7 +81,6 @@ fun PublicProfileScreenContentPreview(){
         PublicProfileContent(
             atrasPressed = {},
             configPressed = {},
-            comentariosPressed = {},
             usuario = usuario
         )
     }
