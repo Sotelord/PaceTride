@@ -44,6 +44,7 @@ fun RaceDetailScreenContent(
     atrasPressed: () -> Unit,
     resenas: List<Resena>,
     escribirResenaPressed: (String) -> Unit,
+    onClickUsuario: (String) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -133,7 +134,7 @@ fun RaceDetailScreenContent(
 
             Spacer(modifier = Modifier.height(24.dp))
 
-            ResenasList(resenas = resenas)
+            ResenasList(resenas = resenas, onClickUsuario = onClickUsuario)
         }
     }
 }
@@ -150,7 +151,8 @@ fun RaceDetailScreenContentPreview() {
             onSeleccionarKm = {},
             atrasPressed = {},
             resenas = resenas,
-            escribirResenaPressed = {}
+            escribirResenaPressed = {},
+            onClickUsuario = {},
         )
     }
 }

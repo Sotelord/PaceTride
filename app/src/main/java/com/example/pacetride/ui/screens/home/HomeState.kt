@@ -26,5 +26,8 @@ data class HomeState(
         ubicacion = "Allá",
         precioBase = 10,
         descripcion = "Si si"
-    )
+    ),
+    val carreras: List<Carrera> = emptyList(),
+    val isLoading: Boolean = false,
+    val errorMessage: String? = null,
 )

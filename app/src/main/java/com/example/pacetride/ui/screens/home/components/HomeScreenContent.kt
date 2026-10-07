@@ -27,6 +27,7 @@ import com.example.pacetride.ui.utils.SeccionTitulo
 fun HomeScreenContent(
     usuario: Usuario,
     featuredRace: Carrera,
+    carreras: List<Carrera>,
     verCarreraButtonPressed: (String) -> Unit,
     raceCardPressed: (String)-> Unit,
     notificacionButtonPressed: (String)-> Unit,
@@ -45,7 +46,7 @@ fun HomeScreenContent(
             modifier = Modifier.padding(horizontal = 20.dp)
         )
         SeccionTitulo(stringResource(R.string.pr_ximas_carreras))
-        ProximasCarrerasRow(usuario.proximaCarreras, raceCardPressed)
+        ProximasCarrerasRow(carreras = carreras, raceCardPressed)
         SeccionTitulo(stringResource(R.string.elige_tu_distancia))
         DistanciasRow(distanciaShortcutPressed)
         Spacer(modifier = Modifier.height(20.dp))
@@ -61,6 +62,7 @@ fun HomeScreenContentPreview(){
         HomeScreenContent(
             usuario = usuario,
             featuredRace = featuredRace,
+            carreras = listOf(),
             verCarreraButtonPressed = {},
             raceCardPressed = {},
             notificacionButtonPressed = {},

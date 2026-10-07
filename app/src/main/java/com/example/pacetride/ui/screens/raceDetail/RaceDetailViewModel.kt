@@ -27,6 +27,10 @@ class RaceDetailViewModel @Inject constructor(
                     _uiState.update {
                         it.copy(
                             carrera = carrera,
+                            kmSeleccionado = if (it.kmSeleccionado in carrera.distanciasDisponiblesKm)
+                                it.kmSeleccionado
+                            else
+                                carrera.distanciasDisponiblesKm.firstOrNull() ?: carrera.distanciaReferenciaKm,
                             isLoading = false,
                             errorMessage = null
                         )

@@ -29,6 +29,7 @@ fun UsuarioDto.toUsuario(): Usuario {
         nombre = nombre,
         usuario = usuario,
         ubicacion = ubicacion,
+        fotoPerfil = fotoPerfil,
         estadisticasGlobales = EstadisticasGlobales(
             numCarrera = estadisticasGlobales.numCarrera,
             distacia = estadisticasGlobales.distancia,

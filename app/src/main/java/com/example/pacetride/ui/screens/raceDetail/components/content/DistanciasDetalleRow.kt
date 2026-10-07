@@ -25,10 +25,12 @@ fun DistanciasDetalleRow(
         modifier = modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.spacedBy(8.dp)
     ) {
-        distancias.forEach { dist ->
+        val haySeleccion = distancias.contains(seleccionada)
+
+        distancias.forEachIndexed { index, dist ->
             ChipDistanciaDetalle(
                 texto = dist,
-                seleccionado = dist == seleccionada,
+                seleccionado = if (haySeleccion) dist == seleccionada else index == 0,
                 onClick = {
                     Log.d("RaceDetailScreen", "ChipDistancia clicked")
                     onSeleccionar(dist)

@@ -285,6 +285,9 @@ fun AppNavigation(
                 },
                 escribirResenaPressed = { id ->
                     navControler.navigate(Screen.EscribirResena.createRoute(id))
+                },
+                onClickUsuario = { usuarioId ->
+                    navControler.navigate(Screen.PublicProfile.createRoute(usuarioId))
                 }
             )
         }

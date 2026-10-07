@@ -37,10 +37,11 @@ fun ResenaCard(
     resena: Resena,
     isOwn: Boolean,
     onClickEdit: (String, String) -> Unit,
-    onClickDelete: (String) -> Unit
+    onClickDelete: (String) -> Unit,
+    onClickUsuario: (String) -> Unit,
 ) {
     var meGustaActivo by remember { mutableStateOf(false) }
-    var cantidadLikes by remember (resena.id) { mutableIntStateOf(resena.likes) }
+    var cantidadLikes by remember(resena.id) { mutableIntStateOf(resena.likes) }
     Column(
         modifier = modifier
             .fillMaxWidth()
@@ -52,28 +53,36 @@ fun ResenaCard(
                 .fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            ProfileAsyncImage(
-                imageURL = resena.fotoUsuario,
-                size = 48,
-                imgSize = 22,
-                background = MaterialTheme.colorScheme.background,
-                errorIcon = R.drawable.ic_user_profile
-            )
-
-            Spacer(modifier = Modifier.width(12.dp))
-
-            if (resena.usuario != null){
-                Text(
-                    text = resena.usuario,
-                    fontWeight = FontWeight.Bold,
-                    color = MaterialTheme.colorScheme.onBackground,
-                    modifier = Modifier.weight(1f)
+            Row(
+                modifier = Modifier
+                    .weight(1f)
+                    .clickable { onClickUsuario(resena.usuarioId) },
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                ProfileAsyncImage(
+                    imageURL = resena.fotoUsuario,
+                    size = 48,
+                    imgSize = 22,
+                    background = MaterialTheme.colorScheme.background,
+                    errorIcon = R.drawable.ic_user_profile
                 )
+
+                Spacer(modifier = Modifier.width(12.dp))
+
+                if (resena.usuario != null) {
+                    Text(
+                        text = resena.usuario,
+                        fontWeight = FontWeight.Bold,
+                        color = MaterialTheme.colorScheme.onBackground,
+                        modifier = Modifier.weight(1f)
+                    )
+                }
             }
 
             Spacer(modifier = Modifier.width(12.dp))
 
-            Text(text = resena.fechaPublicacion,
+            Text(
+                text = resena.fechaPublicacion,
                 fontSize = 10.sp,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )
@@ -84,7 +93,7 @@ fun ResenaCard(
             modifier = Modifier.fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            if (resena.carrera != null){
+            if (resena.carrera != null) {
                 Text(
                     text = resena.carrera,
                     color = MaterialTheme.colorScheme.onBackground,
@@ -157,13 +166,14 @@ fun ResenaCard(
                 thickness = 1.dp,
                 color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.2f)
             )
-            Row( modifier = Modifier.fillMaxWidth(),
+            Row(
+                modifier = Modifier.fillMaxWidth(),
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.End
             ) {
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
-                    modifier = Modifier.clickable{
+                    modifier = Modifier.clickable {
                         onClickEdit(resena.carreraId, resena.id)
                         Log.d("ResenaCard", "Editar Pressed")
                     }
@@ -184,7 +194,7 @@ fun ResenaCard(
                 Spacer(modifier = Modifier.width(24.dp))
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
-                    modifier = Modifier.clickable{
+                    modifier = Modifier.clickable {
                         onClickDelete(resena.id)
                         Log.d("ResenaCard", "Eliminar Pressed")
                     }
@@ -216,7 +226,8 @@ fun ResenaCardPreview() {
             resena = resena,
             isOwn = false,
             onClickEdit = { _, _ -> },
-            onClickDelete = {}
+            onClickDelete = {},
+            onClickUsuario = {}
         )
     }
 }
@@ -230,7 +241,8 @@ fun ResenaCardPreview2() {
             resena = resena,
             isOwn = true,
             onClickEdit = { _, _ -> },
-            onClickDelete = {}
+            onClickDelete = {},
+            onClickUsuario = {}
         )
     }
 }

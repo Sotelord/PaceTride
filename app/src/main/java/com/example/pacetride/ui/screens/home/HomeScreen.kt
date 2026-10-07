@@ -1,12 +1,17 @@
 package com.example.pacetride.ui.screens.home
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -24,20 +29,41 @@ fun HomeScreen(
 ) {
     val state by homeViewModel.uiState.collectAsState()
 
-    Column(
-        modifier = modifier
-            .fillMaxSize()
-            .background(MaterialTheme.colorScheme.background)
-    ) {
-        HomeScreenContent(
-            state.usuario,
-            state.featuredRace,
-            raceCardPressed =  raceCardPressed,
-            verCarreraButtonPressed = verCarreraButtonPressed,
-            notificacionButtonPressed = notificacionButtonPressed,
-            distanciaShortcutPressed =  distanciaShortcutPressed,
-            modifier = Modifier.weight(1f)
-        )
+    LaunchedEffect(Unit) {
+        homeViewModel.getUser("3")
+    }
+
+    when {
+        state.isLoading -> {
+            Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                CircularProgressIndicator()
+            }
+        }
+
+        state.errorMessage != null -> {
+            Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                Text(text = state.errorMessage ?: "Error desconocido")
+            }
+        }
+
+        else -> {
+            Column(
+                modifier = modifier
+                    .fillMaxSize()
+                    .background(MaterialTheme.colorScheme.background)
+            ) {
+                HomeScreenContent(
+                    usuario = state.usuario,
+                    featuredRace = state.featuredRace,
+                    carreras = state.carreras,
+                    raceCardPressed =  raceCardPressed,
+                    verCarreraButtonPressed = verCarreraButtonPressed,
+                    notificacionButtonPressed = notificacionButtonPressed,
+                    distanciaShortcutPressed =  distanciaShortcutPressed,
+                    modifier = Modifier.weight(1f)
+                )
+            }
+        }
     }
 }
 

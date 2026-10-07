@@ -30,6 +30,7 @@ fun RaceDetailScreen(
     atrasPressed: () -> Unit,
     inscribemePressed: () -> Unit,
     escribirResenaPressed: (String) -> Unit,
+    onClickUsuario: (String) -> Unit,
     modifier: Modifier = Modifier
 ) {
     val state by raceDetailViewModel.uiState.collectAsState()
@@ -67,6 +68,7 @@ fun RaceDetailScreen(
                         atrasPressed = atrasPressed,
                         resenas = state.resenas,
                         escribirResenaPressed = escribirResenaPressed,
+                        onClickUsuario = onClickUsuario,
                         modifier = Modifier.weight(1f),
                     )
                     // ---------- "bottomBar" manual ----------
@@ -95,7 +97,8 @@ fun RaceDetailScreenPreview() {
             inscribemePressed = {},
             raceId = "2",
             atrasPressed = {},
-            escribirResenaPressed = {}
+            escribirResenaPressed = {},
+            onClickUsuario = {},
         )
     }
 }

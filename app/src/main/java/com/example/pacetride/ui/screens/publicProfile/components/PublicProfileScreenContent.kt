@@ -5,13 +5,17 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.pacetride.R
+import com.example.pacetride.data.Resena
 import com.example.pacetride.data.Usuario
 import com.example.pacetride.data.local.LocalUsuarioProvider
 import com.example.pacetride.ui.screens.publicProfile.components.content.DatosUsuarioPublico
@@ -26,6 +30,7 @@ import com.example.pacetride.ui.utils.stats.EstadisticasRow
 @Composable
 fun PublicProfileContent(
     usuario: Usuario,
+    resenas: List<Resena>,
     atrasPressed: () -> Unit,
     configPressed: () -> Unit,
     modifier: Modifier = Modifier
@@ -60,7 +65,15 @@ fun PublicProfileContent(
             modifier = Modifier.padding(bottom = 8.dp).fillMaxWidth()
         )
 
-        MisCarrerasRow(usuario.historial)
+        if (usuario.historial.isEmpty()){
+            Text(
+                text = "Aún no has realizado ninguna carrera",
+                textAlign = TextAlign.Center,
+                color = MaterialTheme.colorScheme.onBackground
+            )
+        } else {
+            MisCarrerasRow(usuario.historial)
+        }
 
         Spacer(modifier = Modifier.height(24.dp))
 
@@ -69,7 +82,12 @@ fun PublicProfileContent(
             modifier = Modifier.padding(bottom = 8.dp).fillMaxWidth()
         )
 
-        ResenasList( resenas = usuario.resenas)
+        ResenasList(
+            resenas = resenas,
+            isOwn = true,
+        )
+
+        Spacer(modifier = Modifier.height(24.dp))
     }
 }
 
@@ -81,7 +99,8 @@ fun PublicProfileScreenContentPreview(){
         PublicProfileContent(
             atrasPressed = {},
             configPressed = {},
-            usuario = usuario
+            usuario = usuario,
+            resenas = listOf()
         )
     }
 }
