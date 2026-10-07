@@ -33,6 +33,7 @@ fun PublicProfileContent(
     resenas: List<Resena>,
     atrasPressed: () -> Unit,
     configPressed: () -> Unit,
+    onClickCarrera: (String) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -84,7 +85,7 @@ fun PublicProfileContent(
 
         ResenasList(
             resenas = resenas,
-            isOwn = true,
+            onClickCarrera = onClickCarrera
         )
 
         Spacer(modifier = Modifier.height(24.dp))
@@ -100,7 +101,8 @@ fun PublicProfileScreenContentPreview(){
             atrasPressed = {},
             configPressed = {},
             usuario = usuario,
-            resenas = listOf()
+            resenas = listOf(),
+            onClickCarrera = {}
         )
     }
 }

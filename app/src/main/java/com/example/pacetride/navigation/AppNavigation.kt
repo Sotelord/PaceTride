@@ -236,7 +236,9 @@ fun AppNavigation(
                 },
                 onClickEdit = { raceId, reviewId ->
                     navControler.navigate(Screen.EscribirResena.createRoute(raceId, reviewId))
-                }
+                },
+                onClickCarrera = {raceId ->
+                    navControler.navigate(Screen.RaceDetail.createRoute(raceId))}
             )
         }
 
@@ -363,6 +365,9 @@ fun AppNavigation(
                 usuarioId = usuarioId,
                 configPressed = {
                     navControler.navigate(Screen.ConfigUsuarioPublico.route)
+                },
+                onClickCarrera = { raceId ->
+                    navControler.navigate(Screen.RaceDetail.createRoute(raceId))
                 }
             )
         }

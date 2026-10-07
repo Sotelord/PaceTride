@@ -27,6 +27,7 @@ fun ProfileScreen(
     configurationPressed: () -> Unit,
     logOutPressed: () -> Unit,
     onClickEdit: (String, String) -> Unit,
+    onClickCarrera: (String) -> Unit,
 ) {
     val state by profileViewModel.uiState.collectAsState()
 
@@ -64,6 +65,7 @@ fun ProfileScreen(
                     onPickImg = { profileViewModel.uploadImageToFirebase(it) },
                     modifier = Modifier.weight(1f),
                     onClickEdit = onClickEdit,
+                    onClickCarrea = onClickCarrera,
                     onClickDelete = { resenaId -> profileViewModel.deleteResena(resenaId)}
                 )
             }
@@ -83,6 +85,7 @@ fun ProfileScreenPreview() {
             configurationPressed = {},
             logOutPressed = {},
             onClickEdit = { _, _ -> },
+            onClickCarrera = {}
         )
     }
 }

@@ -39,6 +39,7 @@ fun ResenaCard(
     onClickEdit: (String, String) -> Unit,
     onClickDelete: (String) -> Unit,
     onClickUsuario: (String) -> Unit,
+    onClickCarrera: (String) -> Unit,
 ) {
     var meGustaActivo by remember { mutableStateOf(false) }
     var cantidadLikes by remember(resena.id) { mutableIntStateOf(resena.likes) }
@@ -93,15 +94,23 @@ fun ResenaCard(
             modifier = Modifier.fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            if (resena.carrera != null) {
-                Text(
-                    text = resena.carrera,
-                    color = MaterialTheme.colorScheme.onBackground,
-                    fontSize = 16.sp,
-                    fontWeight = FontWeight.Bold,
-                    modifier = Modifier.weight(1f)
-                )
+            Row(
+                modifier = Modifier
+                    .weight(1f)
+                    .clickable { onClickCarrera(resena.carreraId) },
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                if (resena.carrera != null) {
+                    Text(
+                        text = resena.carrera,
+                        color = MaterialTheme.colorScheme.onBackground,
+                        fontSize = 16.sp,
+                        fontWeight = FontWeight.Bold,
+                        modifier = Modifier.weight(1f)
+                    )
+                }
             }
+
             Spacer(modifier = Modifier.width(8.dp))
             Text(
                 text = resena.calificacion,
@@ -227,7 +236,8 @@ fun ResenaCardPreview() {
             isOwn = false,
             onClickEdit = { _, _ -> },
             onClickDelete = {},
-            onClickUsuario = {}
+            onClickUsuario = {},
+            onClickCarrera = {}
         )
     }
 }
@@ -242,7 +252,8 @@ fun ResenaCardPreview2() {
             isOwn = true,
             onClickEdit = { _, _ -> },
             onClickDelete = {},
-            onClickUsuario = {}
+            onClickUsuario = {},
+            onClickCarrera = {}
         )
     }
 }

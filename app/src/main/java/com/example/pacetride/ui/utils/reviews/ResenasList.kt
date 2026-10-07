@@ -23,6 +23,7 @@ fun ResenasList(
     onClickEdit: (String, String) -> Unit = {_, _ ->},
     onClickDelete: (String) -> Unit = {},
     onClickUsuario: (String) -> Unit = {},
+    onClickCarrera: (String) -> Unit = {}
 ) {
     if (!resenas.isEmpty()) {
         Column(
@@ -35,7 +36,8 @@ fun ResenasList(
                     isOwn = isOwn,
                     onClickEdit = onClickEdit,
                     onClickDelete = onClickDelete,
-                    onClickUsuario = onClickUsuario
+                    onClickUsuario = onClickUsuario,
+                    onClickCarrera = onClickCarrera
                 )
             }
         }

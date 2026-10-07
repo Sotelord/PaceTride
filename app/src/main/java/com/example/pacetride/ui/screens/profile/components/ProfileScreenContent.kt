@@ -44,6 +44,7 @@ fun ProfileScreenContent(
     onPickImg: (uri: Uri) -> Unit,
     onClickEdit: (String, String) -> Unit,
     onClickDelete: (String) -> Unit,
+    onClickCarrea: (String) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -131,7 +132,8 @@ fun ProfileScreenContent(
             resenas = resenas,
             isOwn = true,
             onClickDelete = onClickDelete,
-            onClickEdit = onClickEdit
+            onClickEdit = onClickEdit,
+            onClickCarrera = onClickCarrea,
         )
 
         Spacer(modifier = Modifier.height(24.dp))
@@ -152,6 +154,7 @@ fun ProfileScreenContentPreview() {
             resenas = emptyList(),
             onClickDelete = {},
             onClickEdit = { _, _ -> },
+            onClickCarrea = {}
         )
     }
 }

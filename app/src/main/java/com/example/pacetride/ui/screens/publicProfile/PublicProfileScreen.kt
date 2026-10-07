@@ -25,6 +25,7 @@ fun PublicProfileScreen(
     usuarioId: String,
     atrasPressed: () -> Unit,
     configPressed: () -> Unit,
+    onClickCarrera: (String) -> Unit,
     modifier: Modifier = Modifier
 ) {
 
@@ -57,6 +58,7 @@ fun PublicProfileScreen(
                     PublicProfileContent(
                         atrasPressed = atrasPressed,
                         configPressed = configPressed,
+                        onClickCarrera = onClickCarrera,
                         usuario = state.usuario!!,
                         resenas = state.resenas,
                         modifier = Modifier
@@ -84,7 +86,8 @@ fun PublicProfileScreenPreview() {
             publicProfileViewModel = viewModel(),
             usuarioId = "2",
             atrasPressed = {},
-            configPressed = {}
+            configPressed = {},
+            onClickCarrera = {}
         )
     }
 }
