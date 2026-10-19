@@ -21,6 +21,12 @@ fun RegisterForm(
     onNameChange: (String) -> Unit,
     email: String,
     onEmailChange: (String) -> Unit,
+    usuario: String,
+    onUsuarioChange: (String) -> Unit,
+    ubicacion: String?,
+    onUbicacionChange: (String) -> Unit,
+    bio: String?,
+    onBioChange: (String) -> Unit,
     password: String,
     onPasswordChange: (String) -> Unit,
     confirmPassword: String,
@@ -62,6 +68,40 @@ fun RegisterForm(
             onValueChange = onEmailChange,
             label = "Correo electrónico",
             colors = fieldColors,
+            modifier = Modifier.fillMaxWidth()
+        )
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        // Campo: Usuario
+        FormTextField(
+            value = usuario,
+            onValueChange = onUsuarioChange,
+            label = "Usuario",
+            colors = fieldColors,
+            modifier = Modifier.fillMaxWidth()
+        )
+        Spacer(modifier = Modifier.height(16.dp))
+
+        // Campo: Ubicación
+        FormTextField(
+            value = ubicacion,
+            onValueChange = onUbicacionChange,
+            label = "Ubicación (Opcional)",
+            colors = fieldColors,
+            modifier = Modifier.fillMaxWidth()
+        )
+        Spacer(modifier = Modifier.height(16.dp))
+
+        // Campo: Biografica
+        FormTextField(
+            value = bio,
+            onValueChange = onBioChange,
+            label = "Cuentanos sobre tí (Opcional)",
+            colors = fieldColors,
+            maxLength = 500,
+            singleLine = false,
+            minLines = 4,
             modifier = Modifier.fillMaxWidth()
         )
 
@@ -156,6 +196,12 @@ fun RegisterFormPreview() {
             onNameChange = {},
             email = "",
             onEmailChange = {},
+            usuario = "",
+            onUsuarioChange = {},
+            ubicacion = "",
+            onUbicacionChange = {},
+            bio = "",
+            onBioChange = {},
             password = "",
             onPasswordChange = {},
             confirmPassword = "",

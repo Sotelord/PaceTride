@@ -28,7 +28,7 @@ import com.example.pacetride.ui.screens.escribirResena.components.content.CampoR
 import com.example.pacetride.ui.screens.escribirResena.components.content.ChipsFlowDestacar
 import com.example.pacetride.ui.screens.escribirResena.components.content.SelectorCalificacion
 import com.example.pacetride.ui.screens.escribirResena.components.content.TarjetaResumenCarrera
-import com.example.pacetride.ui.screens.escribirResena.components.header.BarraSuperiorConTitulo
+import com.example.pacetride.ui.utils.BarraSuperiorConTitulo
 import com.example.pacetride.ui.theme.PacetrideTheme
 import com.example.pacetride.ui.utils.TituloSeccionDetalle
 

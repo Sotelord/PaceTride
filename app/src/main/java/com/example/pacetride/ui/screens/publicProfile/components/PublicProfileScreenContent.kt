@@ -54,7 +54,9 @@ fun PublicProfileContent(
 
         TituloSeccionDetalle(
             texto = stringResource(R.string.estad_sticas),
-            modifier = Modifier.padding(bottom = 8.dp).fillMaxWidth()
+            modifier = Modifier
+                .padding(bottom = 8.dp)
+                .fillMaxWidth()
         )
 
         EstadisticasRow(usuario.estadisticasGlobales)
@@ -62,13 +64,15 @@ fun PublicProfileContent(
         Spacer(modifier = Modifier.height(24.dp))
 
         TituloSeccionDetalle(
-            texto = stringResource(R.string.mis_carreras),
-            modifier = Modifier.padding(bottom = 8.dp).fillMaxWidth()
+            texto = stringResource(R.string.sus_carreras),
+            modifier = Modifier
+                .padding(bottom = 8.dp)
+                .fillMaxWidth()
         )
 
         if (usuario.historial.isEmpty()){
             Text(
-                text = "Aún no has realizado ninguna carrera",
+                text = "Aún no ha realizado ninguna carrera",
                 textAlign = TextAlign.Center,
                 color = MaterialTheme.colorScheme.onBackground
             )
@@ -80,7 +84,9 @@ fun PublicProfileContent(
 
         TituloSeccionDetalle(
             texto = stringResource(R.string.ultimas_resenas),
-            modifier = Modifier.padding(bottom = 8.dp).fillMaxWidth()
+            modifier = Modifier
+                .padding(bottom = 8.dp)
+                .fillMaxWidth()
         )
 
         ResenasList(

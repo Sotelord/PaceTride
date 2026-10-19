@@ -18,7 +18,7 @@ import com.example.pacetride.ui.theme.PacetrideTheme
 fun DatosUsuario(
     nombre: String,
     usuario: String,
-    email: String,
+    email: String? = null,
     ubicacion: String,
     bio: String?,
     modifier: Modifier = Modifier
@@ -28,10 +28,12 @@ fun DatosUsuario(
         modifier = modifier
     ) {
         Text(nombre, color = MaterialTheme.colorScheme.onBackground, fontSize = 24.sp, fontWeight = FontWeight.Bold)
-        Text(usuario, color = MaterialTheme.colorScheme.onSurfaceVariant, fontSize = 14.sp)
+        Text(text = "@$usuario", color = MaterialTheme.colorScheme.onSurfaceVariant, fontSize = 14.sp)
         Spacer(modifier = Modifier.height(8.dp))
-        Text(email, color = MaterialTheme.colorScheme.onSurfaceVariant, fontSize = 14.sp)
-        Spacer(modifier = Modifier.height(8.dp))
+        if (email != null) {
+            Text(email, color = MaterialTheme.colorScheme.onSurfaceVariant, fontSize = 14.sp)
+            Spacer(modifier = Modifier.height(8.dp))
+        }
         UbicacionUsuario(ubicacion)
         Spacer(modifier = Modifier.height(8.dp))
         if(bio != null){
@@ -46,7 +48,7 @@ fun DatosUsuarioPreview(){
     PacetrideTheme(darkTheme = true) {
         DatosUsuario(
             "Santiago Rayo",
-            "@santiagorayo",
+            "santiagorayo",
             "example.com",
             "Bogotá, Colombia",
             "Runner • Siempre buscando mi próximo reto 🏃"

@@ -6,7 +6,7 @@ data class Usuario(
     val usuario: String,
     val email: String,
     val ubicacion: String,
-    val bio: String?,
+    val bio: String,
     val fotoPerfil: String? = null,
     val proximaCarreras: List<Carrera> = emptyList(),
     val historial: List<CarreraRealizada> = emptyList(),

@@ -66,7 +66,7 @@ fun EscribirResenaScreen(
                     opcionesDestacar = opcionesDestacar,
                     seleccionadas = state.seleccionadas,
                     onToggleDestacar = { opcion -> escribirResenaViewModel.toggleDestacar(opcion)},
-                    onPublicarClick = { escribirResenaViewModel.createResena("3", reviewId) },
+                    onPublicarClick = { escribirResenaViewModel.createResena(reviewId) },
                     mostrarMensajeError = state.mostrarMensajeError,
                     errorMessage = state.errorMessage,
                     atrasPressed = atrasPressed,

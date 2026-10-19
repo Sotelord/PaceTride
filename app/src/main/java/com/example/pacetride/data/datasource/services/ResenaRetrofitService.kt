@@ -1,7 +1,7 @@
 package com.example.pacetride.data.datasource.services
 
 import com.example.pacetride.data.dtos.CreateResenaDto
-import com.example.pacetride.data.dtos.ResenaDto
+import com.example.pacetride.data.dtos.ResenaRetrofitDto
 import com.example.pacetride.data.dtos.UpdateResenaDto
 import retrofit2.http.Body
 import retrofit2.http.DELETE
@@ -21,5 +21,5 @@ interface ResenaRetrofitService {
     suspend fun updateResena(@Path("id") id: String, @Body resena: UpdateResenaDto): Unit
 
     @GET("resenas/{id}")
-    suspend fun getResenaById(@Path("id") id: String): ResenaDto
+    suspend fun getResenaById(@Path("id") id: String): ResenaRetrofitDto
 }

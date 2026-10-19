@@ -39,6 +39,8 @@ import com.example.pacetride.ui.screens.notifications.NotificationsScreen
 import com.example.pacetride.ui.screens.notifications.NotificationsViewModel
 import com.example.pacetride.ui.screens.profile.ProfileScreen
 import com.example.pacetride.ui.screens.profile.ProfileViewModel
+import com.example.pacetride.ui.screens.profileEdit.ProfileEditScren
+import com.example.pacetride.ui.screens.profileEdit.ProfileEditViewModel
 import com.example.pacetride.ui.screens.publicProfile.PublicProfileScreen
 import com.example.pacetride.ui.screens.publicProfile.PublicProfileViewModel
 import com.example.pacetride.ui.screens.raceDetail.RaceDetailViewModel
@@ -221,7 +223,6 @@ fun AppNavigation(
         composable(route = Screen.Profile.route) {
             val profileViewModel: ProfileViewModel = hiltViewModel()
             ProfileScreen(
-                userId = "3",
                 profileViewModel = profileViewModel,
                 editProfilePressed = {
                     navControler.navigate(Screen.EditProfile.route)
@@ -253,7 +254,19 @@ fun AppNavigation(
         }
 
         composable(route = Screen.EditProfile.route) {
-            Text("Falta esta pantalla")
+            val profileEditViewModel: ProfileEditViewModel = hiltViewModel()
+            val state by profileEditViewModel.uiState.collectAsState()
+            LaunchedEffect(state.navigate) {
+                if (state.navigate) {
+                    navControler.popBackStack()
+                }
+            }
+            ProfileEditScren(
+                profileEditViewModel = profileEditViewModel,
+                atrasPressed = {
+                    navControler.popBackStack()
+                }
+            )
         }
 
         composable(route = Screen.Comunidad.route) {

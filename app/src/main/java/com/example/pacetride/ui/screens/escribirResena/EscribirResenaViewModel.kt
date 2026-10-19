@@ -3,6 +3,7 @@ package com.example.pacetride.ui.screens.escribirResena
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.pacetride.data.repository.AuthRepository
 import com.example.pacetride.data.repository.CarreraRepository
 import com.example.pacetride.data.repository.ResenaRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -16,7 +17,8 @@ import kotlin.math.roundToInt
 @HiltViewModel
 class EscribirResenaViewModel @Inject constructor(
     private val resenaRepository: ResenaRepository,
-    private val carreraRepository: CarreraRepository
+    private val carreraRepository: CarreraRepository,
+    private val authRepository: AuthRepository
 ) : ViewModel() {
     private val _uiState = MutableStateFlow(EscribirResenaState())
     val uiState: StateFlow<EscribirResenaState> = _uiState
@@ -40,7 +42,8 @@ class EscribirResenaViewModel @Inject constructor(
         }
     }
 
-    fun createResena(usuarioId: String, reviewId: String? = null) {
+    fun createResena(reviewId: String? = null) {
+        val usuarioId = authRepository.currentUser?.uid ?: return
         if (_uiState.value.textoResena.isBlank()) {
             _uiState.update {
                 it.copy(

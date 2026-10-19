@@ -25,7 +25,7 @@ fun ResenasList(
     onClickUsuario: (String) -> Unit = {},
     onClickCarrera: (String) -> Unit = {}
 ) {
-    if (!resenas.isEmpty()) {
+    if (resenas.isNotEmpty()) {
         Column(
             verticalArrangement = Arrangement.spacedBy(12.dp), // Espacio entre cada tarjeta
             modifier = modifier.fillMaxWidth()

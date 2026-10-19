@@ -1,4 +1,4 @@
-package com.example.pacetride.ui.screens.escribirResena.components.header
+package com.example.pacetride.ui.utils
 
 import android.util.Log
 import androidx.compose.foundation.Image

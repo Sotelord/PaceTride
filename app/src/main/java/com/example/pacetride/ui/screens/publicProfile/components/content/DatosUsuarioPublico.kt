@@ -51,11 +51,10 @@ fun DatosUsuarioPublico(
         modifier = modifier.fillMaxWidth()
     ) {
         DatosUsuario(
-            usuario.nombre,
-            usuario.usuario,
-            usuario.email,
-            usuario.ubicacion,
-            usuario.bio
+            nombre = usuario.nombre,
+            usuario = usuario.usuario,
+            ubicacion= usuario.ubicacion,
+            bio = usuario.bio
         )
 
         Spacer(modifier = Modifier.height(20.dp))

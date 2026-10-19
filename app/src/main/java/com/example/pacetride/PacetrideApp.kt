@@ -10,6 +10,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.pacetride.navigation.AppNavigation
 import com.example.pacetride.navigation.NavigationLogic
 import com.example.pacetride.navigation.PacetrideBottomNavigationBar
+import com.google.firebase.auth.FirebaseAuth
 
 @Composable
 fun PacetrideApp(){

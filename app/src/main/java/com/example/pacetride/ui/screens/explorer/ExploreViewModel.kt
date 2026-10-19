@@ -61,7 +61,7 @@ class ExploreViewModel @Inject constructor(
         }
     }
 
-    init {
+    /*init {
         getCarreras()
-    }
+    }*/
 }

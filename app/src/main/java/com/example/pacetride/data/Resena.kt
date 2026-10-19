@@ -2,6 +2,7 @@ package com.example.pacetride.data
 
 data class Resena(
     val usuario: String?,
+    val userName: String?,
     val carrera: String?,
     val id: String,
     val resena: String,

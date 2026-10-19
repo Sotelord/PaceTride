@@ -2,10 +2,15 @@ package com.example.pacetride.data.repository
 
 import android.util.Log
 import com.example.pacetride.data.Resena
-import com.example.pacetride.data.datasource.impl.ResenaRetrofitDataSourceImpl
+import com.example.pacetride.data.datasource.AuthRemoteDataSource
+import com.example.pacetride.data.datasource.impl.firestore.CarreraFirestoreDataSourceImpl
+import com.example.pacetride.data.datasource.impl.firestore.ResenaFirestoreDataSourceImpl
+import com.example.pacetride.data.datasource.impl.firestore.UsuarioFirestoreDataSourceImpl
+import com.example.pacetride.data.datasource.impl.retrofit.ResenaRetrofitDataSourceImpl
+import com.example.pacetride.data.dtos.CreateResenaCarreraDto
 import com.example.pacetride.data.dtos.CreateResenaDto
+import com.example.pacetride.data.dtos.CreateResenaUsuarioDto
 import com.example.pacetride.data.dtos.UpdateResenaDto
-import com.example.pacetride.data.dtos.toResena
 import com.google.gson.JsonParseException
 import kotlinx.coroutines.CancellationException
 import retrofit2.HttpException
@@ -16,7 +21,11 @@ import java.net.UnknownHostException
 import javax.inject.Inject
 
 class ResenaRepository @Inject constructor(
-    private val resenaRemoteDataSource: ResenaRetrofitDataSourceImpl
+    private val resenaRemoteDataSource: ResenaFirestoreDataSourceImpl,
+    private val usuarioRemoteDataSource: UsuarioFirestoreDataSourceImpl,
+    private val carreraRemoteDataSource: CarreraFirestoreDataSourceImpl,
+    private val authRemoteDataSource: AuthRemoteDataSource
+    //private val resenaRemoteDataSource: ResenaRetrofitDataSourceImpl
 ) {
     suspend fun createResena(
         usuarioId: String,
@@ -26,12 +35,28 @@ class ResenaRepository @Inject constructor(
         categoriasDestacadas: List<String>?
     ): Result<Unit> {
         return try {
+            val user = usuarioRemoteDataSource.getUsuarioById(usuarioId)
+            val carrera = carreraRemoteDataSource.getCarreraById(carreraId)
+            val fotoPerfil = authRemoteDataSource.currentUser?.photoUrl?.toString().orEmpty()
+
+            val createResenaUsuarioDto = CreateResenaUsuarioDto(
+                fotoPerfil = fotoPerfil,
+                nombre = user.nombre,
+                usuario = user.userName
+            )
+
+            val createResenaCarreraDto = CreateResenaCarreraDto(
+                nombre = carrera.nombre
+            )
+
             val createResenaDto = CreateResenaDto(
-                usuarioId = usuarioId.toInt(),
-                carreraId = carreraId.toInt(),
+                usuarioId = usuarioId,
+                carreraId = carreraId,
                 resena = resena,
                 calificacion = calificacion.toFloat(),
-                categoriasDestacadas = categoriasDestacadas
+                categoriasDestacadas = categoriasDestacadas,
+                usuario = createResenaUsuarioDto,
+                carrera = createResenaCarreraDto
             )
             resenaRemoteDataSource.createResena(createResenaDto)
             Result.success(Unit)

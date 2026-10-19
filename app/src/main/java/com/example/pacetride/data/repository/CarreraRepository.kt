@@ -4,9 +4,9 @@ import android.util.Log
 import retrofit2.HttpException
 import com.example.pacetride.data.Carrera
 import com.example.pacetride.data.Resena
-import com.example.pacetride.data.datasource.impl.CarreraRetrofitDataSourceImpl
+import com.example.pacetride.data.datasource.impl.firestore.CarreraFirestoreDataSourceImpl
+import com.example.pacetride.data.datasource.impl.retrofit.CarreraRetrofitDataSourceImpl
 import com.example.pacetride.data.dtos.toCarrera
-import com.example.pacetride.data.dtos.toResena
 import com.google.gson.JsonParseException
 import kotlinx.coroutines.CancellationException
 import java.io.IOException
@@ -16,7 +16,8 @@ import java.net.UnknownHostException
 import javax.inject.Inject
 
 class CarreraRepository @Inject constructor(
-    private val carreraRemoteDataSource: CarreraRetrofitDataSourceImpl
+    private val carreraRemoteDataSource: CarreraFirestoreDataSourceImpl
+    //private val carreraRemoteDataSource: CarreraRetrofitDataSourceImpl
 ) {
     suspend fun getCarreras(): Result<List<Carrera>> {
         return try {

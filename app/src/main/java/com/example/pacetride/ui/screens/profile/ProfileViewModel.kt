@@ -26,6 +26,20 @@ class ProfileViewModel @Inject constructor(
     private val _uiState = MutableStateFlow(ProfileState())
     val uiState: StateFlow<ProfileState> = _uiState
 
+    fun cargarPerfil(){
+        val uid = authRepository.currentUser?.uid
+        if (uid == null) {
+            _uiState.update {
+                it.copy(
+                    errorMessage = "No se pudo cargar el perfil", isLoading = false
+                )
+            }
+            return
+        }
+        getUser(uid)
+        getReviewsUsuarioId(uid)
+    }
+
     fun getUser(id: String) {
         viewModelScope.launch {
             _uiState.update { it.copy(isLoading = true, errorMessage = null) }
@@ -82,9 +96,18 @@ class ProfileViewModel @Inject constructor(
             val result = storageRepository.uploadProfileImage(uri)
             if (result.isSuccess) {
                 val urlFinal = result.getOrNull()
+                val uid = authRepository.currentUser?.uid
+                if (uid != null) {
+                    val guardado = usuarioRepository.updateFotoPerfil(uid, urlFinal!!)
+                    if (guardado.isFailure){
+                        Log.e("FOTO", "Error al guardar la foto", guardado.exceptionOrNull())
+                    }
+                }
                 _uiState.update {
                     it.copy(usuario = it.usuario.copy(fotoPerfil = urlFinal))
                 }
+            } else {
+                Log.e("FOTO", "Error al subir la imagen", result.exceptionOrNull())
             }
         }
     }

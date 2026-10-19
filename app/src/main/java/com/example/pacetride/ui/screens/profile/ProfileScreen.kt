@@ -21,7 +21,6 @@ import com.example.pacetride.ui.screens.profile.components.ProfileScreenContent
 @Composable
 fun ProfileScreen(
     modifier: Modifier = Modifier,
-    userId: String,
     profileViewModel: ProfileViewModel,
     editProfilePressed: () -> Unit,
     configurationPressed: () -> Unit,
@@ -32,8 +31,7 @@ fun ProfileScreen(
     val state by profileViewModel.uiState.collectAsState()
 
     LaunchedEffect(Unit) {
-        profileViewModel.getUser(userId)
-        profileViewModel.getReviewsUsuarioId(userId)
+        profileViewModel.cargarPerfil()
     }
     when {
         state.isLoading -> {
@@ -79,7 +77,6 @@ fun ProfileScreen(
 fun ProfileScreenPreview() {
     PacetrideTheme(darkTheme = true) {
         ProfileScreen(
-            userId = "1",
             profileViewModel = viewModel(),
             editProfilePressed = {},
             configurationPressed = {},

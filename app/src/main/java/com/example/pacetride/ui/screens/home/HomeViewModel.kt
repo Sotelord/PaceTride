@@ -2,6 +2,7 @@ package com.example.pacetride.ui.screens.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.pacetride.data.repository.AuthRepository
 import com.example.pacetride.data.repository.CarreraRepository
 import com.example.pacetride.data.repository.UsuarioRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -15,11 +16,13 @@ import kotlinx.coroutines.launch
 class HomeViewModel @Inject constructor(
     private val carreraRepository: CarreraRepository,
     private val usuarioRepository: UsuarioRepository,
+    private val authRepository: AuthRepository
 ) : ViewModel() {
     private val _uiState = MutableStateFlow(HomeState())
     val uiState: StateFlow<HomeState> =_uiState
 
-    fun getUser(id: String){
+    fun getUser(){
+        val id = authRepository.currentUser?.uid ?: return
         viewModelScope.launch {
             _uiState.update { it.copy(isLoading = true, errorMessage = null) }
             val result = usuarioRepository.getUsuarioById(id)
@@ -69,9 +72,5 @@ class HomeViewModel @Inject constructor(
                 }
             }
         }
-    }
-
-    init {
-        getCarreras()
     }
 }

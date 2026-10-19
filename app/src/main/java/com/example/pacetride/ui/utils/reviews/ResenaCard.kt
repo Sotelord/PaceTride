@@ -70,13 +70,21 @@ fun ResenaCard(
 
                 Spacer(modifier = Modifier.width(12.dp))
 
-                if (resena.usuario != null) {
-                    Text(
-                        text = resena.usuario,
-                        fontWeight = FontWeight.Bold,
-                        color = MaterialTheme.colorScheme.onBackground,
-                        modifier = Modifier.weight(1f)
-                    )
+                Column(modifier = Modifier.weight(1f)) {
+                    if (resena.usuario != null) {
+                        Text(
+                            text = resena.usuario,
+                            fontWeight = FontWeight.Bold,
+                            color = MaterialTheme.colorScheme.onBackground
+                        )
+                    }
+                    if (!resena.userName.isNullOrBlank()) {
+                        Text(
+                            text = if (resena.userName.startsWith("@")) resena.userName else "@${resena.userName}",
+                            fontSize = 12.sp,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+                    }
                 }
             }
 

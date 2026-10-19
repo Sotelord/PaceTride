@@ -30,7 +30,8 @@ fun HomeScreen(
     val state by homeViewModel.uiState.collectAsState()
 
     LaunchedEffect(Unit) {
-        homeViewModel.getUser("3")
+        homeViewModel.getCarreras()
+        homeViewModel.getUser()
     }
 
     when {

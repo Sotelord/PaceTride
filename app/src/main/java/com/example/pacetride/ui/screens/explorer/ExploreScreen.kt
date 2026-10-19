@@ -29,6 +29,7 @@ fun ExploreScreen(
     val state by exploreViewModel.uiState.collectAsState()
 
     LaunchedEffect(Unit) {
+        exploreViewModel.getCarreras()
         exploreViewModel.inicializarConFiltro(filtroDistanciaInicial)
     }
 

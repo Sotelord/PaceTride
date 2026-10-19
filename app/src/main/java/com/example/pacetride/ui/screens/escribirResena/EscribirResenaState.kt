@@ -13,20 +13,6 @@ data class EscribirResenaState(
         precioBase = 10,
         descripcion = "Si si"
     ),
-    val usuario: Usuario = Usuario(
-        id = "10",
-        nombre = "demo",
-        usuario = "@demo",
-        email = "example0.com",
-        ubicacion = "Tangamandapio",
-        bio = "a",
-        estadisticasGlobales = EstadisticasGlobales(
-            numCarrera = 10,
-            distacia = "10km",
-            mejorTiempo10k = "10",
-            mejorTiempo21k = "21"
-        )
-    ),
     val calificacion: Int = 0,
     val textoResena: String = "",
     val mostrarMensajeError: Boolean = false,

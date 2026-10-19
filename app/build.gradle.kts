@@ -74,7 +74,6 @@ dependencies {
 
     //Firebase
     implementation(platform (libs.firebase.bom))
-    implementation(libs.firebase.firestore)
     implementation(libs.firebase.auth)
     implementation(libs.firebase.crashlytics)
     implementation(libs.firebase.analytics)
@@ -88,6 +87,9 @@ dependencies {
     //Retrofit con Scalar Converter
     implementation(libs.retrofit.convert.scalars)
     implementation(libs.retrofit.convert.gson)
+
+    //Firestore
+    implementation(libs.firebase.firestore)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
