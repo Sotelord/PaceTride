@@ -7,6 +7,9 @@ data class RegisterUserDto(
     val ubicacion: String? = null,
     val fotoPerfil: String? = null,
     val estadisticasGlobales: EstadisticasGlobalesDto,
+    val followersCount: Int = 0,
+    val followingCount: Int = 0,
+    val fcmToken: String
 )
 
 data class UpdateUserDto(

@@ -7,6 +7,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import jakarta.inject.Inject
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
@@ -18,7 +19,7 @@ class ExploreViewModel @Inject constructor(
     val uiState: StateFlow<ExploreState> = _uiState
 
     fun getCarreras() {
-        viewModelScope.launch {
+        /*viewModelScope.launch {
             _uiState.update { it.copy(isLoading = true, errorMessage = null) }
             val result = carreraRepository.getCarreras()
             if (result.isSuccess) {
@@ -37,6 +38,26 @@ class ExploreViewModel @Inject constructor(
                     )
                 }
             }
+        }*/
+        viewModelScope.launch {
+            _uiState.update { it.copy(isLoading = true, errorMessage = null) }
+            carreraRepository.getCarrerasLive()
+                .catch { e ->
+                    _uiState.update {
+                        it.copy(
+                            errorMessage = e.message,
+                            isLoading = false
+                        )
+                    }
+                }
+                .collect { carreras ->
+                    _uiState.update {
+                        it.copy(
+                            carreras = carreras,
+                            isLoading = false
+                        )
+                    }
+                }
         }
     }
 

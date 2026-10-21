@@ -39,7 +39,9 @@ import com.example.pacetride.ui.utils.reviews.ResenasList
 @Composable
 fun RaceDetailScreenContent(
     carrera: Carrera,
+    sesion: String,
     kmSeleccionado: Int,
+    sendOrDeleteResenaLike: (String, String) -> Unit,
     onSeleccionarKm: (Int) -> Unit,
     atrasPressed: () -> Unit,
     resenas: List<Resena>,
@@ -134,7 +136,12 @@ fun RaceDetailScreenContent(
 
             Spacer(modifier = Modifier.height(24.dp))
 
-            ResenasList(resenas = resenas, onClickUsuario = onClickUsuario)
+            ResenasList(
+                sesion = sesion,
+                resenas = resenas,
+                sendOrDeleteResenaLike = sendOrDeleteResenaLike,
+                onClickUsuario = onClickUsuario
+            )
         }
     }
 }
@@ -146,6 +153,8 @@ fun RaceDetailScreenContentPreview() {
     val resenas = LocalResenaProvider.listaResenas
     PacetrideTheme(darkTheme = true) {
         RaceDetailScreenContent(
+            sesion = "",
+            sendOrDeleteResenaLike = { _, _ -> },
             carrera = carrera,
             kmSeleccionado = 1,
             onSeleccionarKm = {},

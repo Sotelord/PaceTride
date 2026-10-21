@@ -38,6 +38,7 @@ import com.example.pacetride.ui.utils.reviews.ResenasList
 fun ProfileScreenContent(
     usuario: Usuario,
     resenas: List<Resena>,
+    sendOrDeleteResenaLike: (String, String) -> Unit,
     editProfilePressed: () -> Unit,
     configurationPressed: () -> Unit,
     logOutPressed: () -> Unit,
@@ -68,7 +69,9 @@ fun ProfileScreenContent(
             usuario = usuario.usuario,
             email = usuario.email,
             ubicacion = usuario.ubicacion,
-            bio = usuario.bio
+            bio = usuario.bio,
+            followerCount = usuario.followersCount,
+            followingCount = usuario.followingCount
         )
 
         Spacer(modifier = Modifier.height(24.dp))
@@ -129,7 +132,9 @@ fun ProfileScreenContent(
         )
 
         ResenasList(
+            sesion = usuario.id,
             resenas = resenas,
+            sendOrDeleteResenaLike = sendOrDeleteResenaLike,
             isOwn = true,
             onClickDelete = onClickDelete,
             onClickEdit = onClickEdit,
@@ -148,6 +153,7 @@ fun ProfileScreenContentPreview() {
         ProfileScreenContent(
             configurationPressed = {},
             editProfilePressed = {},
+            sendOrDeleteResenaLike = { _, _ -> },
             logOutPressed = {},
             onPickImg = {},
             usuario = usuario,

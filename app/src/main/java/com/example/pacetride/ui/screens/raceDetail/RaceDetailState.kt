@@ -16,4 +16,5 @@ data class RaceDetailState(
     val resenas: List<Resena> = emptyList(),
     val isLoading: Boolean = false,
     val errorMessage: String? = null,
+    val sesion: String = "",
 )

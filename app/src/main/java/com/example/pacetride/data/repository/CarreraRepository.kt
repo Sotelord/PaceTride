@@ -4,11 +4,14 @@ import android.util.Log
 import retrofit2.HttpException
 import com.example.pacetride.data.Carrera
 import com.example.pacetride.data.Resena
+import com.example.pacetride.data.datasource.AuthRemoteDataSource
 import com.example.pacetride.data.datasource.impl.firestore.CarreraFirestoreDataSourceImpl
 import com.example.pacetride.data.datasource.impl.retrofit.CarreraRetrofitDataSourceImpl
 import com.example.pacetride.data.dtos.toCarrera
 import com.google.gson.JsonParseException
 import kotlinx.coroutines.CancellationException
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import java.io.IOException
 import java.net.ConnectException
 import java.net.SocketTimeoutException
@@ -16,7 +19,8 @@ import java.net.UnknownHostException
 import javax.inject.Inject
 
 class CarreraRepository @Inject constructor(
-    private val carreraRemoteDataSource: CarreraFirestoreDataSourceImpl
+    private val carreraRemoteDataSource: CarreraFirestoreDataSourceImpl,
+    private val authRemoteDataSource: AuthRemoteDataSource
     //private val carreraRemoteDataSource: CarreraRetrofitDataSourceImpl
 ) {
     suspend fun getCarreras(): Result<List<Carrera>> {
@@ -78,8 +82,9 @@ class CarreraRepository @Inject constructor(
     }
 
     suspend fun getReviewsCarreraId(id: String): Result<List<Resena>> {
+        val currentUserId = authRemoteDataSource.currentUser?.uid ?: ""
         return try {
-            val resenasDto = carreraRemoteDataSource.getReviewsCarreraId(id)
+            val resenasDto = carreraRemoteDataSource.getReviewsCarreraId(id, currentUserId)
             val resenas = resenasDto.map { it.toResena() }
             Result.success(resenas)
         } catch (e: CancellationException) {
@@ -103,6 +108,12 @@ class CarreraRepository @Inject constructor(
         } catch (e: Exception) {
             Log.e("CARRERA", "Error inesperado", e)
             Result.failure(e)
+        }
+    }
+
+    suspend fun getCarrerasLive(): Flow<List<Carrera>> {
+        return carreraRemoteDataSource.listenAllCarreras().map { carrerasDto ->
+            carrerasDto.map { it.toCarrera() }
         }
     }
 }

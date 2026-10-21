@@ -3,6 +3,7 @@ package com.example.pacetride.ui.screens.login
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.pacetride.data.repository.AuthRepository
+import com.example.pacetride.data.repository.UsuarioRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import jakarta.inject.Inject
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -12,7 +13,8 @@ import kotlinx.coroutines.launch
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(
-    private val authRepository: AuthRepository
+    private val authRepository: AuthRepository,
+    private val usuarioRepository: UsuarioRepository
 ) : ViewModel() {
     private val _uiState = MutableStateFlow(LoginState())
     val uiState: StateFlow<LoginState> = _uiState
@@ -41,6 +43,9 @@ class LoginViewModel @Inject constructor(
                 val result = authRepository.signIn(_uiState.value.email, _uiState.value.password)
 
                 if (result.isSuccess) {
+                    authRepository.currentUser?.uid?.let { uid ->
+                        usuarioRepository.saveFcmToken(uid)
+                    }
                     _uiState.update { it.copy(navigate = true) }
                 } else {
                     val mensaje = result.exceptionOrNull()?.message ?: "Error al iniciar sesión"

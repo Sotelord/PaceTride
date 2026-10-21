@@ -13,6 +13,8 @@ import com.example.pacetride.data.dtos.CreateResenaUsuarioDto
 import com.example.pacetride.data.dtos.UpdateResenaDto
 import com.google.gson.JsonParseException
 import kotlinx.coroutines.CancellationException
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import retrofit2.HttpException
 import java.io.IOException
 import java.net.ConnectException
@@ -131,8 +133,9 @@ class ResenaRepository @Inject constructor(
     }
 
     suspend fun getResenaById(id: String): Result<Resena> {
+        val currentUserId = authRemoteDataSource.currentUser?.uid ?: ""
         return try {
-            val resenaDto = resenaRemoteDataSource.getResenasById(id)
+            val resenaDto = resenaRemoteDataSource.getResenasById(id, currentUserId)
             val resena = resenaDto.toResena()
             Result.success(resena)
         } catch (e: CancellationException) {
@@ -165,6 +168,45 @@ class ResenaRepository @Inject constructor(
             Result.success(Unit)
         } catch (e: Exception) {
             Result.failure(e)
+        }
+    }
+
+    suspend fun sendOrDeleteResenaLike(resenaId: String, userId: String): Result<Unit> {
+        return try {
+            resenaRemoteDataSource.sendOrDeleteResenaLike(resenaId, userId)
+            Result.success(Unit)
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
+
+    suspend fun getAllResenas(): Result<List<Resena>> {
+        val currentUserId = authRemoteDataSource.currentUser?.uid ?: ""
+        return try {
+            Result.success(resenaRemoteDataSource.getAllResenas(currentUserId).map { it.toResena() })
+        } catch (e: CancellationException) {
+            throw e
+        } catch (e: Exception) {
+            Log.e("RESENA", "Error al cargar reseñas", e)
+            Result.failure(e)
+        }
+    }
+
+    suspend fun getResenasSeguidos(): Result<List<Resena>> {
+        val currentUserId = authRemoteDataSource.currentUser?.uid ?: ""
+        return try {
+            Result.success(resenaRemoteDataSource.getResenasSeguidos(currentUserId).map { it.toResena() })
+        } catch (e: CancellationException) {
+            throw e
+        } catch (e: Exception) {
+            Log.e("RESENA", "Error al cargar reseñas de seguidos", e)
+            Result.failure(e)
+        }
+    }
+
+    suspend fun getResenasLive(): Flow<List<Resena>> {
+        return resenaRemoteDataSource.listenAllResenas().map { resenasDto ->
+            resenasDto.map { it.toResena() }
         }
     }
 }

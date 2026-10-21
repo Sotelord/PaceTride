@@ -17,7 +17,12 @@ data class NotificationsState(
             distacia = "10km",
             mejorTiempo10k = "10",
             mejorTiempo21k = "21"
-        )
+        ),
+        historial = emptyList(),
+        resenas = emptyList(),
+        followed = false,
+        followersCount = 0,
+        followingCount = 0
     ),
     val notificaciones: List<Notificacion> = emptyList()
 )

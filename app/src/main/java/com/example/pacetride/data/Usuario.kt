@@ -11,5 +11,8 @@ data class Usuario(
     val proximaCarreras: List<Carrera> = emptyList(),
     val historial: List<CarreraRealizada> = emptyList(),
     val resenas: List<Resena> = emptyList(),
-    val estadisticasGlobales: EstadisticasGlobales
+    val estadisticasGlobales: EstadisticasGlobales,
+    val followingCount: Int,
+    val followersCount: Int,
+    val followed: Boolean = false
 )

@@ -35,7 +35,6 @@ fun PublicProfileScreen(
         publicProfileViewModel.getUserId(usuarioId)
         publicProfileViewModel.getReviewsUsuarioId(usuarioId)
     }
-
     when {
         state.isLoading -> {
             Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
@@ -56,11 +55,16 @@ fun PublicProfileScreen(
             ) {
                 if (state.usuario != null) {
                     PublicProfileContent(
+                        onFollowPressed = { publicProfileViewModel.followOrUnfollowUsuario(usuarioId) },
+                        sendOrDeleteResenaLike = { resenaId, userId ->
+                            publicProfileViewModel.sendOrDeleteResenaLike(resenaId, userId)
+                        },
                         atrasPressed = atrasPressed,
                         configPressed = configPressed,
                         onClickCarrera = onClickCarrera,
                         usuario = state.usuario!!,
                         resenas = state.resenas,
+                        sesion = state.sesion,
                         modifier = Modifier
                             .weight(1f)
                             .verticalScroll(rememberScrollState())

@@ -13,7 +13,7 @@ object LocalUsuarioProvider {
         Usuario(
             id = "1",
             nombre = "Santiago Rayo",
-            usuario = "@santiagorayo",
+            usuario = "santiagorayo",
             email = "example.com",
             ubicacion = "Bogotá, Colombia",
             bio = "Runner • Siempre buscando mi próximo reto 🏃",
@@ -26,13 +26,16 @@ object LocalUsuarioProvider {
                 mejorTiempo21k = "1:52:40"
             ),
             historial = historial,
-            resenas = resenas
+            resenas = resenas,
+            followed = true,
+            followersCount = 10,
+            followingCount = 5
         ),
 
         Usuario(
             id = "2",
             nombre = "Sara Castro",
-            usuario = "@saracastro",
+            usuario = "saracastro",
             email = "example2.com",
             ubicacion = "Chía, Colombia",
             bio = "Corredora • Kilómetros, música y nuevas metas 🎧🏃‍♀️",
@@ -45,13 +48,16 @@ object LocalUsuarioProvider {
                 mejorTiempo21k = "2:01:35"
             ),
             historial = historial,
-            resenas = resenas
+            resenas = resenas,
+            followed = false,
+            followersCount = 2,
+            followingCount = 1
         ),
 
         Usuario(
             id = "3",
             nombre = "David Sotelo",
-            usuario = "@davidsotelo",
+            usuario = "davidsotelo",
             email = "example3.com",
             ubicacion = "Cajicá, Colombia",
             bio = "Runner • Constancia hoy, kilómetros mañana 🚀🏃",
@@ -62,13 +68,16 @@ object LocalUsuarioProvider {
                 mejorTiempo10k = "46:55",
                 mejorTiempo21k = "1:48:20"
             ),
-            historial = historial
+            historial = historial,
+            followed = true,
+            followersCount = 8,
+            followingCount = 3
         ),
 
         Usuario(
             id = "4",
             nombre = "Juan Angarita",
-            usuario = "@juanangarita",
+            usuario = "juanangarita",
             email = "example4.com",
             ubicacion = "Bogotá, Colombia",
             bio = "Runner • Disfrutando cada kilómetro y cada nueva ruta 🏃‍♂️🌄",
@@ -79,7 +88,10 @@ object LocalUsuarioProvider {
                 mejorTiempo10k = "49:47",
                 mejorTiempo21k = "1:56:12"
             ),
-            historial = historial
+            historial = historial,
+            followed = false,
+            followersCount = 0,
+            followingCount = 0
         )
     )
 }

@@ -19,7 +19,10 @@ import com.example.pacetride.ui.theme.PacetrideTheme
 fun ResenasList(
     modifier: Modifier = Modifier,
     resenas: List<Resena>,
+    sesion: String,
     isOwn: Boolean = false,
+    mensajeVacio: String = "Aún no hay reseñas para esta carrera, anímate a escribir la primera.",
+    sendOrDeleteResenaLike: (String, String) -> Unit,
     onClickEdit: (String, String) -> Unit = {_, _ ->},
     onClickDelete: (String) -> Unit = {},
     onClickUsuario: (String) -> Unit = {},
@@ -32,8 +35,10 @@ fun ResenasList(
         ) {
             resenas.forEach { itemResena ->
                 ResenaCard(
+                    sesion = sesion,
                     resena = itemResena,
                     isOwn = isOwn,
+                    sendOrDeleteResenaLike = sendOrDeleteResenaLike,
                     onClickEdit = onClickEdit,
                     onClickDelete = onClickDelete,
                     onClickUsuario = onClickUsuario,
@@ -43,7 +48,7 @@ fun ResenasList(
         }
     } else {
         Text(
-            text = "Aún no hay reseñas para esta carrera, anímate a escribir la primera.",
+            text = mensajeVacio,
             textAlign = TextAlign.Center,
             color = MaterialTheme.colorScheme.onBackground
         )
@@ -55,7 +60,9 @@ fun ResenasList(
 fun ResenasListPreview() {
     PacetrideTheme(darkTheme = true) {
         ResenasList(
+            sesion = "1",
             resenas = LocalResenaProvider.listaResenas,
+            sendOrDeleteResenaLike = { _, _ -> },
         )
     }
 }
@@ -66,7 +73,9 @@ fun ResenasListPreview2() {
     PacetrideTheme(darkTheme = true) {
         val resenasList = listOf<Resena>()
         ResenasList(
+            sesion = "1",
             resenas = resenasList,
+            sendOrDeleteResenaLike = { _, _ -> },
         )
     }
 }
@@ -76,8 +85,10 @@ fun ResenasListPreview2() {
 fun ResenasListPreview3() {
     PacetrideTheme(darkTheme = true) {
         ResenasList(
+            sesion = "",
             resenas = LocalResenaProvider.listaResenas,
-            isOwn = true
+            isOwn = true,
+            sendOrDeleteResenaLike = { _, _ -> },
         )
     }
 }

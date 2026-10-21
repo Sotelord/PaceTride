@@ -5,11 +5,11 @@ import com.example.pacetride.data.Resena
 import com.example.pacetride.data.Usuario
 
 data class PublicProfileState(
-     val usuario: Usuario? = Usuario(
+    val usuario: Usuario? = Usuario(
         id = "10",
         nombre = "demo",
         usuario = "@demo",
-         email = "example0.com",
+        email = "example0.com",
         ubicacion = "Tangamandapio",
         bio = "a",
         estadisticasGlobales = EstadisticasGlobales(
@@ -17,9 +17,15 @@ data class PublicProfileState(
             distacia = "10km",
             mejorTiempo10k = "10",
             mejorTiempo21k = "21"
-        )
+        ),
+        historial = emptyList(),
+        resenas = emptyList(),
+        followed = false,
+        followersCount = 0,
+        followingCount = 0
     ),
-     val isLoading: Boolean = false,
-     val errorMessage: String? = null,
-     val resenas: List<Resena> = emptyList(),
+    val isLoading: Boolean = false,
+    val errorMessage: String? = null,
+    val resenas: List<Resena> = emptyList(),
+    val sesion: String = "",
 )

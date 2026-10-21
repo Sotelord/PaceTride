@@ -16,8 +16,9 @@ import com.example.pacetride.ui.theme.PacetrideTheme
 @Composable
 fun ComunidadScreen(
     comunidadViewModel: ComunidadViewModel,
-    escribirResenaPressed: () -> Unit,
-    notificacionButtonPressed: (String)-> Unit,
+    notificacionButtonPressed: (String) -> Unit,
+    onClickUsuario: (String) -> Unit,
+    onClickCarrera: (String) -> Unit,
     modifier: Modifier = Modifier
 ) {
     val state by comunidadViewModel.uiState.collectAsState()
@@ -27,12 +28,21 @@ fun ComunidadScreen(
             .background(MaterialTheme.colorScheme.background)
     ) {
         ComunidadScreenContent(
-            publicaciones = state.publicaciones,
+            resenas = state.resenas,
             usuario = state.usuario,
-            escribirResenaPressed = escribirResenaPressed,
-            notificacionButtonPressed = notificacionButtonPressed,
+            sesion = state.sesion,
+            tabSeleccionada = state.tabSeleccionada,
+            onTabSelected = { comunidadViewModel.selectTab(it) },
+            isLoading = state.isLoading,
+            errorMessage = state.errorMessage,
             textoBusqueda = state.textoBusqueda,
-            onTextoBusquedaChange = {comunidadViewModel.updateTextoBusqueda(it)},
+            onTextoBusquedaChange = { comunidadViewModel.updateTextoBusqueda(it) },
+            sendOrDeleteResenaLike = { resenaId, userId ->
+                comunidadViewModel.sendOrDeleteResenaLike(resenaId, userId)
+            },
+            notificacionButtonPressed = notificacionButtonPressed,
+            onClickUsuario = onClickUsuario,
+            onClickCarrera = onClickCarrera,
             modifier = Modifier.weight(1f)
         )
     }
@@ -44,8 +54,9 @@ fun ComunidadScreenPreview() {
     PacetrideTheme(darkTheme = true) {
         ComunidadScreen(
             comunidadViewModel = viewModel(),
-            escribirResenaPressed = {},
-            notificacionButtonPressed = {}
+            notificacionButtonPressed = {},
+            onClickUsuario = {},
+            onClickCarrera = {}
         )
     }
 }

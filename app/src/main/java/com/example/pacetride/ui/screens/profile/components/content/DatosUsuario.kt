@@ -1,8 +1,12 @@
 package com.example.pacetride.ui.screens.profile.components.content
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.width
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -16,12 +20,14 @@ import com.example.pacetride.ui.theme.PacetrideTheme
 
 @Composable
 fun DatosUsuario(
+    modifier: Modifier = Modifier,
     nombre: String,
     usuario: String,
     email: String? = null,
     ubicacion: String,
     bio: String?,
-    modifier: Modifier = Modifier
+    followerCount: Int,
+    followingCount: Int? = null,
 ) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -39,6 +45,17 @@ fun DatosUsuario(
         if(bio != null){
             Text(bio, color = MaterialTheme.colorScheme.onSurfaceVariant, fontSize = 12.sp)
         }
+        Row(
+            horizontalArrangement = Arrangement.Center,
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            if (followingCount != null) {
+                ContadorItem(cantidad = followingCount, etiqueta = "Siguiendo")
+                Spacer(modifier = Modifier.width(24.dp))
+            }
+            ContadorItem(cantidad = followerCount, etiqueta = "Seguidores")
+        }
     }
 }
 
@@ -47,11 +64,28 @@ fun DatosUsuario(
 fun DatosUsuarioPreview(){
     PacetrideTheme(darkTheme = true) {
         DatosUsuario(
-            "Santiago Rayo",
-            "santiagorayo",
-            "example.com",
-            "Bogotá, Colombia",
-            "Runner • Siempre buscando mi próximo reto 🏃"
+            nombre = "Santiago Rayo",
+            usuario = "santiagorayo",
+            email = "example.com",
+            ubicacion = "Bogotá, Colombia",
+            bio = "Runner • Siempre buscando mi próximo reto 🏃",
+            followerCount = 0,
+            followingCount = 0
+        )
+    }
+}
+
+@Composable
+@Preview
+fun DatosUsuarioPreview2(){
+    PacetrideTheme(darkTheme = true) {
+        DatosUsuario(
+            nombre = "Santiago Rayo",
+            usuario = "santiagorayo",
+            email = "example.com",
+            ubicacion = "Bogotá, Colombia",
+            bio = "Runner • Siempre buscando mi próximo reto 🏃",
+            followerCount = 0,
         )
     }
 }

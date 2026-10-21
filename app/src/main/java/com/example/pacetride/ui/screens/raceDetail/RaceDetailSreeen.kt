@@ -62,8 +62,12 @@ fun RaceDetailScreen(
                         .background(MaterialTheme.colorScheme.background)
                 ) {
                     RaceDetailScreenContent(
+                        sesion = state.sesion,
                         carrera = state.carrera!!,
                         kmSeleccionado = state.kmSeleccionado,
+                        sendOrDeleteResenaLike = { resenaId, userId ->
+                            raceDetailViewModel.sendOrDeleteResenaLike(resenaId, userId)
+                        },
                         onSeleccionarKm = { raceDetailViewModel.updateKmSeleccionado(it) },
                         atrasPressed = atrasPressed,
                         resenas = state.resenas,

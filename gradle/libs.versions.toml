@@ -58,7 +58,6 @@ dagger-hilt = { module = "com.google.dagger:hilt-android", version = "2.60.1" }
 dagger-kapt = { module = 'com.google.dagger:hilt-android-compiler', version = "2.60.1" }
 hilt-compose-navigation = { module = "androidx.hilt:hilt-navigation-compose", version = "1.4.0" }
 
-firebase-analytics = { module = "com.google.firebase:firebase-analytics" }
 firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebaseBom" }
 firebase-auth = { module = "com.google.firebase:firebase-auth" }
 firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics" }
@@ -70,6 +69,9 @@ coil-kt = { module = "io.coil-kt:coil-compose", version.ref = "coil"}
 retrofit-retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
 retrofit-convert-scalars = { module = "com.squareup.retrofit2:converter-scalars", version.ref = "retrofitScalars" }
 retrofit-convert-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "retrofirGson" }
+
+firebase-analytics = { module = "com.google.firebase:firebase-analytics" }
+firebase-messaging = { module = "com.google.firebase:firebase-messaging" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

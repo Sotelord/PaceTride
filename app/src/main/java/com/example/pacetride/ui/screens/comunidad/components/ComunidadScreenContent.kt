@@ -1,58 +1,60 @@
 package com.example.pacetride.ui.screens.comunidad.components
 
-import android.util.Log
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.pacetride.R
-import com.example.pacetride.data.Publicacion
+import com.example.pacetride.data.Resena
 import com.example.pacetride.data.Usuario
-import com.example.pacetride.data.local.LocalPublicacionProvider
+import com.example.pacetride.data.local.LocalResenaProvider
 import com.example.pacetride.data.local.LocalUsuarioProvider
-import com.example.pacetride.ui.screens.comunidad.components.content.PostCard
+import com.example.pacetride.ui.screens.comunidad.components.content.TabsComunidad
 import com.example.pacetride.ui.screens.comunidad.components.header.HeaderComunidad
 import com.example.pacetride.ui.theme.PacetrideTheme
-import com.example.pacetride.ui.utils.AppButton
+import com.example.pacetride.ui.utils.reviews.ResenasList
 
-private fun filtrarPublicaciones(
-    publicaciones: List<Publicacion>,
-    textoBusqueda: String
-): List<Publicacion> {
-    if (textoBusqueda.isBlank()) return publicaciones
-
-    return publicaciones.filter { publicacion ->
-        publicacion.nombre.contains(textoBusqueda, ignoreCase = true) ||
-                publicacion.textoAMostrar.contains(textoBusqueda, ignoreCase = true)
+private fun filtrarResenas(resenas: List<Resena>, texto: String): List<Resena> {
+    if (texto.isBlank()) return resenas
+    return resenas.filter { r ->
+        r.usuario?.contains(texto, ignoreCase = true) == true ||
+                r.userName?.contains(texto, ignoreCase = true) == true ||
+                r.carrera?.contains(texto, ignoreCase = true) == true ||
+                r.resena.contains(texto, ignoreCase = true)
     }
 }
 
 @Composable
 fun ComunidadScreenContent(
-    publicaciones: List<Publicacion>,
+    resenas: List<Resena>,
     usuario: Usuario,
-    escribirResenaPressed: () -> Unit,
-    notificacionButtonPressed: (String)-> Unit,
+    sesion: String,
+    tabSeleccionada: Int,
+    onTabSelected: (Int) -> Unit,
+    isLoading: Boolean,
+    errorMessage: String?,
     textoBusqueda: String,
     onTextoBusquedaChange: (String) -> Unit,
+    sendOrDeleteResenaLike: (String, String) -> Unit,
+    notificacionButtonPressed: (String) -> Unit,
+    onClickUsuario: (String) -> Unit,
+    onClickCarrera: (String) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    val publicacionesFiltradas = remember(publicaciones, textoBusqueda) {
-        filtrarPublicaciones(publicaciones, textoBusqueda)
+    val resenasFiltradas = remember(resenas, textoBusqueda) {
+        filtrarResenas(resenas, textoBusqueda)
     }
 
     Column(modifier = modifier) {
@@ -64,63 +66,65 @@ fun ComunidadScreenContent(
             notificacionButtonPressed = notificacionButtonPressed,
             modifier = Modifier.padding(horizontal = 20.dp)
         )
+        Spacer(modifier = Modifier.height(8.dp))
+        TabsComunidad(selectedTabIndex = tabSeleccionada, onTabSelected = onTabSelected)
         Spacer(modifier = Modifier.height(16.dp))
 
-        LazyColumn(
-            modifier = Modifier
-                .fillMaxWidth()
-                .weight(1f),
-            contentPadding = PaddingValues(
-                horizontal = 20.dp,
-                vertical = 4.dp
-            ),
-            verticalArrangement = Arrangement.spacedBy(14.dp)
-        ) {
-            items(publicacionesFiltradas) { publicacion ->
-                val esMiPublicacion = publicacion.nombre == usuario.nombre
-                PostCard(
-                    imageURL = if(esMiPublicacion) usuario.fotoPerfil else publicacion.imageUserURL,
-                    nombre = publicacion.nombre,
-                    tiempo = publicacion.tiempo,
-                    texto = publicacion.textoAMostrar,
-                    estadisticasCarrera = publicacion.estadisiticas,
-                    resena = publicacion.resena,
-                    likes = publicacion.likes,
-                    comentarios = publicacion.comentarios
+        when {
+            isLoading -> Box(
+                modifier = Modifier.weight(1f).fillMaxWidth(),
+                contentAlignment = Alignment.Center
+            ) { CircularProgressIndicator() }
+
+            errorMessage != null -> Box(
+                modifier = Modifier.weight(1f).fillMaxWidth(),
+                contentAlignment = Alignment.Center
+            ) { Text(text = errorMessage, color = MaterialTheme.colorScheme.onBackground) }
+
+            else -> Column(
+                modifier = Modifier
+                    .weight(1f)
+                    .fillMaxWidth()
+                    .verticalScroll(rememberScrollState())
+                    .padding(horizontal = 20.dp)
+            ) {
+                ResenasList(
+                    resenas = resenasFiltradas,
+                    sesion = sesion,
+                    sendOrDeleteResenaLike = sendOrDeleteResenaLike,
+                    onClickUsuario = onClickUsuario,
+                    onClickCarrera = onClickCarrera,
+                    mensajeVacio = if (tabSeleccionada == 0)
+                        "Aún no hay reseñas."
+                    else
+                        "Las personas que sigues aún no han publicado reseñas."
                 )
+                Spacer(modifier = Modifier.height(24.dp))
             }
-        }
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .background(MaterialTheme.colorScheme.background)
-                .padding(16.dp)
-        ) {
-            AppButton(
-                textoBoton = stringResource(R.string.escribir_resena),
-                onClick = {
-                    Log.d("ExplorerScreen", "Escribir reseña clicked")
-                    escribirResenaPressed()
-                },
-                modifier = Modifier.fillMaxWidth()
-            )
         }
     }
 }
 
 @Composable
 @Preview
-fun ComunidadScreenContentPreview(){
+fun ComunidadScreenContentPreview() {
+    val resenas = LocalResenaProvider.listaResenas
+    val usuario = LocalUsuarioProvider.usuarios[0]
     PacetrideTheme(darkTheme = true) {
-        val publicaciones = LocalPublicacionProvider.publicaciones
-        val usuario = LocalUsuarioProvider.usuarios[2]
         ComunidadScreenContent(
-            publicaciones = publicaciones,
+            resenas = resenas,
             usuario = usuario,
-            escribirResenaPressed = {},
-            notificacionButtonPressed = {},
+            sesion = "",
+            tabSeleccionada = 0,
+            onTabSelected = {},
+            isLoading = false,
+            errorMessage = null,
+            textoBusqueda = "",
             onTextoBusquedaChange = {},
-            textoBusqueda = ""
+            sendOrDeleteResenaLike = { _, _ -> },
+            notificacionButtonPressed = {},
+            onClickUsuario = {},
+            onClickCarrera = {}
         )
     }
 }

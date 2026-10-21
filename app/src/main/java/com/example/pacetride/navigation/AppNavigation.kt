@@ -273,11 +273,14 @@ fun AppNavigation(
             val comunidadViewModel: ComunidadViewModel = hiltViewModel()
             ComunidadScreen(
                 comunidadViewModel = comunidadViewModel,
-                escribirResenaPressed = {
-                    //navControler.navigate(Screen.EscribirResena.route)
-                },
                 notificacionButtonPressed = { usuarioId ->
                     navControler.navigate(Screen.Notifications.createRoute(usuarioId))
+                },
+                onClickUsuario = { usuarioId ->
+                    navControler.navigate(Screen.PublicProfile.createRoute(usuarioId))
+                },
+                onClickCarrera = { raceId ->
+                    navControler.navigate(Screen.RaceDetail.createRoute(raceId))
                 }
             )
         }

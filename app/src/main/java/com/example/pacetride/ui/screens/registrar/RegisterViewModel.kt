@@ -66,58 +66,49 @@ class RegisterViewModel @Inject constructor(
         _uiState.update { it.copy(termsAccepted = !valorActual) }
     }
 
-    fun registerButtonPressed(){
+    fun registerButtonPressed() {
         val state = _uiState.value
-        if(
-            state.name.isBlank() ||
-            state.email.isBlank() ||
-            state.password.isBlank() ||
-            state.confirmPassword.isBlank() ||
-            state.usuario.isBlank()
-        ){
-            _uiState.update { it.copy(mostrarMensajeError = true, errorMessage = "Todos los campos obligatorios deben ser rellenados") }
-        } else {
-            if(_uiState.value.password.length < 7){
-                _uiState.update { it.copy(mostrarMensajeError = true, errorMessage = "La contraseña debe tener más de 7 dígitos") }
+
+        val error = when {
+            state.name.isBlank() || state.email.isBlank() || state.usuario.isBlank() ||
+                    state.password.isBlank() || state.confirmPassword.isBlank() ->
+                "Todos los campos obligatorios deben ser rellenados"
+            state.password.length < 7 -> "La contraseña debe tener al menos 7 caracteres"
+            !Patterns.EMAIL_ADDRESS.matcher(state.email).matches() -> "Ingresa un correo válido"
+            state.password != state.confirmPassword -> "Las contraseñas no coinciden"
+            !state.termsAccepted -> "Debes aceptar los términos y condiciones"
+            (state.bio?.length ?: 0) > 500 -> "La biografía no puede tener más de 500 caracteres"
+            else -> null
+        }
+
+        if (error != null) {
+            _uiState.update { it.copy(mostrarMensajeError = true, errorMessage = error) }
+            return
+        }
+
+        viewModelScope.launch {
+            val result = authRepository.signUp(state.email, state.password)
+            if (result.isFailure) {
+                val mensaje = result.exceptionOrNull()?.message ?: "Error al registrarse"
+                _uiState.update { it.copy(mostrarMensajeError = true, errorMessage = mensaje) }
+            }
+
+            val userId = authRepository.currentUser?.uid
+            if (userId == null) {
+                _uiState.update { it.copy(mostrarMensajeError = true, errorMessage = "No se pudo obtener el id del usuario") }
             } else {
-                if(!Patterns.EMAIL_ADDRESS.matcher(_uiState.value.email).matches()){
-                    _uiState.update { it.copy(mostrarMensajeError = true, errorMessage = "Ingresa un correo válido") }
+                val registro = usuarioRepository.registerUsuario(
+                    nombre = state.name,
+                    userName = state.usuario,
+                    bio = state.bio,
+                    ubicacion = state.ubicacion,
+                    userId = userId
+                )
+                if (registro.isSuccess) {
+                    _uiState.update { it.copy(navigate = true) }
                 } else {
-                    if(_uiState.value.password != _uiState.value.confirmPassword){
-                        _uiState.update { it.copy(mostrarMensajeError = true, errorMessage = "Las contraseñas no coinciden") }
-                    } else {
-                        if(!_uiState.value.termsAccepted){
-                            _uiState.update { it.copy(mostrarMensajeError = true, errorMessage = "Debes aceptar los términos y condiciones") }
-                        } else {
-                            _uiState.value.bio?.length?.let { it ->
-                                if(it > 500){
-                                    _uiState.update { it.copy(mostrarMensajeError = true, errorMessage = "La biografía no puede tener más de 500 caracteres") }
-                                } else {
-                                    // Registro en Firebase
-
-                                    viewModelScope.launch {
-                                        val result = authRepository.signUp(_uiState.value.email, _uiState.value.password)
-                                        if (result.isSuccess) {
-
-                                            val userId = authRepository.currentUser?.uid ?: throw Exception("No se pudo obtener el id del usuario")
-                                            usuarioRepository.registerUsuario(
-                                                nombre = state.name,
-                                                userName = state.usuario,
-                                                bio = state.bio,
-                                                ubicacion = state.ubicacion,
-                                                userId = userId
-                                            )
-
-                                            _uiState.update { it.copy(navigate = true) }
-                                        } else {
-                                            val mensaje = result.exceptionOrNull()?.message ?: "Error al registrarse"
-                                            _uiState.update { it.copy(errorMessage = mensaje, mostrarMensajeError = true) }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
+                    val mensaje = registro.exceptionOrNull()?.message ?: "No pudimos guardar tu perfil"
+                    _uiState.update { it.copy(mostrarMensajeError = true, errorMessage = mensaje) }
                 }
             }
         }

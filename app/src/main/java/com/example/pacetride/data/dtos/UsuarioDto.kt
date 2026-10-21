@@ -16,7 +16,10 @@ data class UsuarioFirestoreDto(
     val ubicacion: String?, //Bogotá, Colombia
     val bio: String?, //Runner • Disfrutando cada kilómetro y cada nueva ruta 🏃‍♂️🌄
     val fotoPerfil: String?, //null
-    val estadisticasGlobales: EstadisticasGlobalesDto
+    val estadisticasGlobales: EstadisticasGlobalesDto,
+    val followingCount: Int,
+    val followersCount: Int,
+    var followed: Boolean
 ): UsuarioDtoGeneric() {
     constructor() : this(
         id= "0",
@@ -31,7 +34,10 @@ data class UsuarioFirestoreDto(
             numCarrera = 0,
             mejorTiempo10k = "0:00",
             mejorTiempo21k = "0:00"
-        )
+        ),
+        followingCount = 0,
+        followersCount = 0,
+        followed = false
     )
 
     override fun toUsuario(): Usuario {
@@ -48,7 +54,10 @@ data class UsuarioFirestoreDto(
                 distacia = estadisticasGlobales.distancia,
                 mejorTiempo10k = estadisticasGlobales.mejorTiempo10k,
                 mejorTiempo21k = estadisticasGlobales.mejorTiempo21k
-            )
+            ),
+            followingCount = followingCount,
+            followersCount = followersCount,
+            followed = followed
         )
     }
 }
@@ -61,7 +70,10 @@ data class UsuarioRetrofitDto(
     val ubicacion: String?, //Bogotá, Colombia
     val bio: String?, //Runner • Disfrutando cada kilómetro y cada nueva ruta 🏃‍♂️🌄
     val fotoPerfil: String?, //null
-    val estadisticasGlobales: EstadisticasGlobalesDto
+    val estadisticasGlobales: EstadisticasGlobalesDto,
+    val followingCount: Int,
+    val followersCount: Int,
+    val followed: Boolean
 ): UsuarioDtoGeneric() {
     constructor() : this(
         id= "0",
@@ -76,7 +88,10 @@ data class UsuarioRetrofitDto(
             numCarrera = 0,
             mejorTiempo10k = "0:00",
             mejorTiempo21k = "0:00"
-        )
+        ),
+        followingCount = 0,
+        followersCount = 0,
+        followed = false
     )
 
     override fun toUsuario(): Usuario {
@@ -93,7 +108,10 @@ data class UsuarioRetrofitDto(
                 distacia = estadisticasGlobales.distancia,
                 mejorTiempo10k = estadisticasGlobales.mejorTiempo10k,
                 mejorTiempo21k = estadisticasGlobales.mejorTiempo21k
-            )
+            ),
+            followingCount = followingCount,
+            followersCount = followersCount,
+            followed = followed
         )
     }
 }

@@ -3,14 +3,17 @@ package com.example.pacetride.data.repository
 import android.util.Log
 import com.example.pacetride.data.Resena
 import com.example.pacetride.data.Usuario
+import com.example.pacetride.data.datasource.AuthRemoteDataSource
 import com.example.pacetride.data.datasource.impl.firestore.UsuarioFirestoreDataSourceImpl
 import com.example.pacetride.data.datasource.impl.retrofit.UsuarioRetrofitDataSourceImpl
 import com.example.pacetride.data.dtos.EstadisticasGlobalesDto
 import com.example.pacetride.data.dtos.RegisterUserDto
 import com.example.pacetride.data.dtos.UpdateUserDto
 import com.google.firebase.firestore.FirebaseFirestoreException
+import com.google.firebase.messaging.FirebaseMessaging
 import com.google.gson.JsonParseException
 import kotlinx.coroutines.CancellationException
+import kotlinx.coroutines.tasks.await
 import retrofit2.HttpException
 import java.io.IOException
 import java.net.ConnectException
@@ -19,12 +22,14 @@ import java.net.UnknownHostException
 import javax.inject.Inject
 
 class UsuarioRepository @Inject constructor(
-    private val usuarioRemoteDataSource: UsuarioFirestoreDataSourceImpl
+    private val usuarioRemoteDataSource: UsuarioFirestoreDataSourceImpl,
+    private val authRemoteDataSource: AuthRemoteDataSource
     //private val usuarioRemoteDataSource: UsuarioRetrofitDataSourceImpl
 ) {
     suspend fun getUsuarioById(id: String): Result<Usuario> {
+        val currentUserId = authRemoteDataSource.currentUser?.uid ?: ""
         return try {
-            val usuarioDto = usuarioRemoteDataSource.getUsuarioById(id)
+            val usuarioDto = usuarioRemoteDataSource.getUsuarioById(id, currentUserId)
             val usuario = usuarioDto.toUsuario()
             Result.success(usuario)
         } catch (e: CancellationException) {
@@ -73,8 +78,9 @@ class UsuarioRepository @Inject constructor(
     }
 
     suspend fun getReviewsUsuarioId(id: String): Result<List<Resena>> {
+        val currentUserId = authRemoteDataSource.currentUser?.uid ?: ""
         return try {
-            val resenasDto = usuarioRemoteDataSource.getReviewsUsuarioId(id)
+            val resenasDto = usuarioRemoteDataSource.getReviewsUsuarioId(id, currentUserId)
             val resenas = resenasDto.map { it.toResena() }
             Log.d("Lenght", "Repo ${resenas.size}")
             Result.success(resenas)
@@ -112,6 +118,7 @@ class UsuarioRepository @Inject constructor(
         ubicacion: String?
     ): Result<Unit> {
         return try {
+            val fcmToken = FirebaseMessaging.getInstance().token.await()
             val registerUserDto = RegisterUserDto(
                 nombre = nombre,
                 userName = userName,
@@ -122,7 +129,10 @@ class UsuarioRepository @Inject constructor(
                     numCarrera = 0,
                     mejorTiempo10k = "0:00",
                     mejorTiempo21k = "0:00"
-                )
+                ),
+                followersCount = 0,
+                followingCount = 0,
+                fcmToken = fcmToken
             )
             usuarioRemoteDataSource.registerUsuario(registerUserDto, userId)
             Result.success(Unit)
@@ -205,6 +215,31 @@ class UsuarioRepository @Inject constructor(
             Result.failure(Exception(mensaje))
         } catch (e: Exception) {
             Log.e("USUARIOS", "Error inesperado", e)
+            Result.failure(e)
+        }
+    }
+
+    suspend fun followOrUnfollowUsuario(currentUserId: String, targetUserId: String): Result<Unit> {
+        return try {
+            usuarioRemoteDataSource.followOrUnfollowUsuario(currentUserId, targetUserId)
+            Result.success(Unit)
+        } catch (e: CancellationException) {
+            throw e
+        } catch (e: Exception) {
+            Log.e("USUARIOS", "Error inesperado", e)
+            Result.failure(e)
+        }
+    }
+
+    suspend fun saveFcmToken(userId: String): Result<Unit> {
+        return try {
+            val token = FirebaseMessaging.getInstance().token.await()
+            usuarioRemoteDataSource.updateFcmToken(userId, token)
+            Result.success(Unit)
+        } catch (e: CancellationException) {
+            throw e
+        } catch (e: Exception) {
+            Log.e("FCM", "No se pudo guardar el token", e)
             Result.failure(e)
         }
     }

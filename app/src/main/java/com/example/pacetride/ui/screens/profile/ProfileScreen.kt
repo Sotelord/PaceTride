@@ -54,6 +54,9 @@ fun ProfileScreen(
                 ProfileScreenContent(
                     usuario = state.usuario,
                     resenas = state.resenas,
+                    sendOrDeleteResenaLike = { resenaId, userId ->
+                        profileViewModel.sendOrDeleteResenaLike(resenaId, userId)
+                    },
                     editProfilePressed = editProfilePressed,
                     configurationPressed = configurationPressed,
                     logOutPressed = {

@@ -42,10 +42,10 @@ import com.example.pacetride.ui.utils.AppButton
 fun DatosUsuarioPublico(
     usuario: Usuario,
     configPressed: () -> Unit,
+    onFollowPressed: () -> Unit,
+    sesion: String,
     modifier: Modifier = Modifier
 ) {
-    var siguiendo by remember { mutableStateOf(false) }
-
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = modifier.fillMaxWidth()
@@ -54,7 +54,8 @@ fun DatosUsuarioPublico(
             nombre = usuario.nombre,
             usuario = usuario.usuario,
             ubicacion= usuario.ubicacion,
-            bio = usuario.bio
+            bio = usuario.bio,
+            followerCount = usuario.followersCount,
         )
 
         Spacer(modifier = Modifier.height(20.dp))
@@ -64,18 +65,20 @@ fun DatosUsuarioPublico(
             horizontalArrangement = Arrangement.Center,
             modifier = Modifier.fillMaxWidth()
         ) {
-            if (siguiendo) {
+            if (usuario.followed) {
                 OutlinedButton(
                     onClick = {
-                        siguiendo = false
-                        Log.d("PubliProfileScreen", "Dejar de seguir clicked")
+                        onFollowPressed()
+                        Log.d("PubliProfileScreen", "El usuario $sesion esta tratando a dejar de seguir a ${usuario.id}")
                     },
                     colors = ButtonDefaults.outlinedButtonColors(
                         containerColor = MaterialTheme.colorScheme.secondaryContainer,
                         contentColor = MaterialTheme.colorScheme.primaryContainer
                     ),
                     border = BorderStroke(1.5.dp, MaterialTheme.colorScheme.primaryContainer),
-                    modifier = Modifier.width(140.dp).height(48.dp)
+                    modifier = Modifier
+                        .width(140.dp)
+                        .height(48.dp)
                 ) {
                     Text("Siguiendo", fontWeight = FontWeight.Bold)
                 }
@@ -83,10 +86,12 @@ fun DatosUsuarioPublico(
                 AppButton(
                     textoBoton = "Seguir",
                     onClick = {
-                        siguiendo = true
-                        Log.d("PubliProfileScreen", "Seguir clicked")
+                        onFollowPressed()
+                        Log.d("PubliProfileScreen", "El usuario $sesion esta tratando a seguir a ${usuario.id}")
                     },
-                    modifier = Modifier.width(140.dp).height(48.dp)
+                    modifier = Modifier
+                        .width(140.dp)
+                        .height(48.dp)
                 )
             }
 
@@ -119,6 +124,8 @@ fun DatosUsuarioPublicoPreview() {
         val usuario = LocalUsuarioProvider.usuarios[1]
         DatosUsuarioPublico(
             usuario = usuario,
+            onFollowPressed = {},
+            sesion = "",
             configPressed = {},
             modifier = Modifier.padding(16.dp)
         )

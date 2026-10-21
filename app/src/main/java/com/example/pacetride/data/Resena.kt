@@ -13,4 +13,6 @@ data class Resena(
     val usuarioId: String,
     val carreraId: String,
     val fotoUsuario: String? = "",
+    //nuevo
+    val liked: Boolean = false,
 )

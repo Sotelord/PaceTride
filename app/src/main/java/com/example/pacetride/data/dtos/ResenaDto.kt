@@ -40,6 +40,7 @@ data class ResenaFirestoreDto(
     val updatedAt: Timestamp? = null, //2026-10-04T00:50:38.234Z
     val carrera: ResenaCarreraDto? = null, //{ "nombre": "Corre por Bogotá 5K" }
     val usuario: ResenaUsuarioDto? = null, //{ "nombre": "Santiago Rayo", "fotoPerfil": "https://media.istockphoto.com/id/545805760/photo/man-runner-jogger-running-isolated.jpg?s=612x612&w=0&k=20&c=h_yH1K2Ou_b6fjL8At0TY2wV5rhasGFNu4sdFVZW54A=" }
+    var liked: Boolean = false,
 ): ResenaDtoGeneric() {
     constructor() : this(
         usuarioId = "",
@@ -51,6 +52,7 @@ data class ResenaFirestoreDto(
         likes = 0,
         createdAt = null,
         updatedAt = null,
+        liked = false
     )
 
     override fun toResena(): Resena {
@@ -66,7 +68,8 @@ data class ResenaFirestoreDto(
             calificacion = calificacion.toString(),
             categoriasDestacadas = categoriasDestacadas,
             likes = likes,
-            fechaPublicacion = formaterarFechaPublicacion(createdAt?.toDate()?.toInstant().toString())
+            fechaPublicacion = formaterarFechaPublicacion(createdAt?.toDate()?.toInstant().toString()),
+            liked = liked
         )
     }
 }
@@ -83,6 +86,7 @@ data class ResenaRetrofitDto(
     val updatedAt: String, //2026-10-04T00:50:38.234Z
     val carrera: ResenaCarreraDto? = null, //{ "nombre": "Corre por Bogotá 5K" }
     val usuario: ResenaUsuarioDto? = null, //{ "nombre": "Santiago Rayo", "fotoPerfil": "https://media.istockphoto.com/id/545805760/photo/man-runner-jogger-running-isolated.jpg?s=612x612&w=0&k=20&c=h_yH1K2Ou_b6fjL8At0TY2wV5rhasGFNu4sdFVZW54A=" }
+    val liked: Boolean = false,
 ): ResenaDtoGeneric() {
     constructor() : this(
         usuarioId = "",
@@ -94,6 +98,7 @@ data class ResenaRetrofitDto(
         likes = 0,
         createdAt = "",
         updatedAt = "",
+        liked = false,
     )
 
     override fun toResena(): Resena {
@@ -109,7 +114,8 @@ data class ResenaRetrofitDto(
             calificacion = calificacion.toString(),
             categoriasDestacadas = categoriasDestacadas,
             likes = likes,
-            fechaPublicacion = formaterarFechaPublicacion(createdAt)
+            fechaPublicacion = formaterarFechaPublicacion(createdAt),
+            liked = liked,
         )
     }
     }

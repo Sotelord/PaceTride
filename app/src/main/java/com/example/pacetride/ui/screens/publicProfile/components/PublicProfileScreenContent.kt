@@ -31,9 +31,12 @@ import com.example.pacetride.ui.utils.stats.EstadisticasRow
 fun PublicProfileContent(
     usuario: Usuario,
     resenas: List<Resena>,
+    sesion: String,
+    sendOrDeleteResenaLike: (String, String) -> Unit,
     atrasPressed: () -> Unit,
     configPressed: () -> Unit,
     onClickCarrera: (String) -> Unit,
+    onFollowPressed: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -48,7 +51,12 @@ fun PublicProfileContent(
 
         Spacer(modifier = Modifier.height(12.dp))
 
-        DatosUsuarioPublico(usuario, configPressed)
+        DatosUsuarioPublico(
+            usuario = usuario,
+            configPressed = configPressed,
+            sesion = sesion,
+            onFollowPressed = onFollowPressed
+        )
 
         Spacer(modifier = Modifier.height(24.dp))
 
@@ -90,7 +98,9 @@ fun PublicProfileContent(
         )
 
         ResenasList(
+            sesion = sesion,
             resenas = resenas,
+            sendOrDeleteResenaLike = sendOrDeleteResenaLike,
             onClickCarrera = onClickCarrera
         )
 
@@ -104,6 +114,9 @@ fun PublicProfileScreenContentPreview(){
     val usuario = LocalUsuarioProvider.usuarios[1]
     PacetrideTheme(darkTheme = true) {
         PublicProfileContent(
+            onFollowPressed = {},
+            sesion = "",
+            sendOrDeleteResenaLike = { _, _ -> },
             atrasPressed = {},
             configPressed = {},
             usuario = usuario,

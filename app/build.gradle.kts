@@ -76,7 +76,6 @@ dependencies {
     implementation(platform (libs.firebase.bom))
     implementation(libs.firebase.auth)
     implementation(libs.firebase.crashlytics)
-    implementation(libs.firebase.analytics)
     implementation(libs.firebase.storage.ktx)
 
     //Coil
@@ -90,6 +89,10 @@ dependencies {
 
     //Firestore
     implementation(libs.firebase.firestore)
+
+    //Messaging
+    implementation(libs.firebase.analytics)
+    implementation(libs.firebase.messaging)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

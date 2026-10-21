@@ -12,11 +12,7 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
@@ -36,13 +32,13 @@ fun ResenaCard(
     modifier: Modifier = Modifier,
     resena: Resena,
     isOwn: Boolean,
+    sesion: String,
+    sendOrDeleteResenaLike: (String, String) -> Unit,
     onClickEdit: (String, String) -> Unit,
     onClickDelete: (String) -> Unit,
     onClickUsuario: (String) -> Unit,
     onClickCarrera: (String) -> Unit,
 ) {
-    var meGustaActivo by remember { mutableStateOf(false) }
-    var cantidadLikes by remember(resena.id) { mutableIntStateOf(resena.likes) }
     Column(
         modifier = modifier
             .fillMaxWidth()
@@ -151,26 +147,28 @@ fun ResenaCard(
                     interactionSource = remember { MutableInteractionSource() },
                     indication = null,
                     onClick = {
-                        Log.d("PubliProfileScreen", "Like clicked")
-                        meGustaActivo = !meGustaActivo
-                        cantidadLikes += if (meGustaActivo) 1 else -1
+                        sendOrDeleteResenaLike(resena.id, sesion)
+                        Log.d(
+                            "ResenaCard",
+                            "El usuario $sesion esta tratando de dar like a la reseña ${resena.id}"
+                        )
                     }
                 )
             ) {
                 Image(
                     painter = painterResource(
-                        id = if (meGustaActivo) R.drawable.ic_me_gusta_lleno else R.drawable.ic_me_gusta
+                        id = if (resena.liked) R.drawable.ic_me_gusta_lleno else R.drawable.ic_me_gusta
                     ),
                     contentDescription = "Likes",
-                    colorFilter = if (meGustaActivo) ColorFilter.tint(MaterialTheme.colorScheme.primaryContainer) else ColorFilter.tint(
+                    colorFilter = if (resena.liked) ColorFilter.tint(MaterialTheme.colorScheme.primaryContainer) else ColorFilter.tint(
                         MaterialTheme.colorScheme.onSurfaceVariant
                     ),
                     modifier = Modifier.size(16.dp)
                 )
                 Spacer(modifier = Modifier.width(4.dp))
                 Text(
-                    text = "Esta reseña le gusto a $cantidadLikes personas",
-                    color = if (meGustaActivo) MaterialTheme.colorScheme.primaryContainer else MaterialTheme.colorScheme.onSurfaceVariant,
+                    text = "Esta reseña le gusto a ${resena.likes} personas",
+                    color = if (resena.liked) MaterialTheme.colorScheme.primaryContainer else MaterialTheme.colorScheme.onSurfaceVariant,
                     fontSize = 14.sp,
                     modifier = Modifier.weight(1f)
                 )
@@ -240,8 +238,10 @@ fun ResenaCardPreview() {
     PacetrideTheme(darkTheme = true) {
         val resena = LocalResenaProvider.listaResenas[3]
         ResenaCard(
+            sesion = "1",
             resena = resena,
             isOwn = false,
+            sendOrDeleteResenaLike = { _, _ -> },
             onClickEdit = { _, _ -> },
             onClickDelete = {},
             onClickUsuario = {},
@@ -257,8 +257,10 @@ fun ResenaCardPreview2() {
         val resena = LocalResenaProvider.listaResenas[3]
         ResenaCard(
             resena = resena,
+            sesion = "1",
             isOwn = true,
             onClickEdit = { _, _ -> },
+            sendOrDeleteResenaLike = { _, _ -> },
             onClickDelete = {},
             onClickUsuario = {},
             onClickCarrera = {}

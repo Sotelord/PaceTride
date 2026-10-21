@@ -123,6 +123,30 @@ class ProfileViewModel @Inject constructor(
         }
     }
 
+    fun sendOrDeleteResenaLike(resenaId: String, userId: String) {
+        viewModelScope.launch {
+            val result = resenaRepository.sendOrDeleteResenaLike(resenaId, userId)
+            if (result.isSuccess) {
+                _uiState.update { state ->
+                    state.copy(
+                        resenas = state.resenas.map { resena ->
+                            if (resena.id == resenaId) {
+                                resena.copy(
+                                    liked = !resena.liked,
+                                    likes = if (resena.liked) resena.likes - 1 else resena.likes + 1
+                                )
+                            } else {
+                                resena
+                            }
+                        }
+                    )
+                }
+            } else {
+                Log.e("LIKE", "Error al dar like", result.exceptionOrNull())
+            }
+        }
+    }
+
     fun logOut() {
         authRepository.signOut()
     }
