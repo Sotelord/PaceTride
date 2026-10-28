@@ -23,11 +23,11 @@ class CarreraFirestoreDataSourceImpl @Inject constructor(
         }
     }
 
-    override suspend fun getCarreraById(id: String): CarreraDto {
+    override suspend fun getCarreraById(id: String): CarreraDto? {
         val docRef = db.collection("carreras").document(id)
         val respuesta = docRef.get().await()
         return respuesta.toObject(CarreraDto::class.java)?.copy(id = respuesta.id)
-            ?: throw Exception("No se pudo obtener la carrera")
+            ?: return null
     }
 
     override suspend fun getReviewsCarreraId(

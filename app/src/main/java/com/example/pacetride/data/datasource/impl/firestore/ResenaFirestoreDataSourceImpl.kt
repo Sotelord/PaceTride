@@ -43,11 +43,11 @@ class ResenaFirestoreDataSourceImpl @Inject constructor(
     override suspend fun getResenasById(
         id: String,
         currentUserId: String
-    ): ResenaDtoGeneric {
+    ): ResenaDtoGeneric? {
         val resenaRef = db.collection("resenas").document(id)
         val resenaSnapshot = resenaRef.get().await()
         val resena = resenaSnapshot.toObject(ResenaFirestoreDto::class.java)?.copy(id = resenaSnapshot.id)
-            ?: throw Exception("No se pudo obtener la reseña")
+            ?: return null
         if(currentUserId.isNotEmpty()) {
             val likeSnapshot = resenaRef.collection("likes").document(currentUserId).get().await()
             val hasLiked = likeSnapshot.exists()

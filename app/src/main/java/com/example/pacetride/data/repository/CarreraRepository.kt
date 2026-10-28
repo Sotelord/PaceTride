@@ -55,6 +55,7 @@ class CarreraRepository @Inject constructor(
     suspend fun getCarreraById(id: String): Result<Carrera> {
         return try {
             val carreraDto = carreraRemoteDataSource.getCarreraById(id)
+            if (carreraDto == null) return Result.failure(Exception("Carrera no encontrada"))
             val carrera = carreraDto.toCarrera()
             Result.success(carrera)
         } catch (e: CancellationException) {

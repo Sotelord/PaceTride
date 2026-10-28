@@ -8,6 +8,7 @@ import com.google.firebase.auth.FirebaseAuthInvalidUserException
 import com.google.firebase.auth.FirebaseAuthUserCollisionException
 import com.google.firebase.auth.FirebaseUser
 import javax.inject.Inject
+import kotlin.coroutines.cancellation.CancellationException
 
 class AuthRepository @Inject constructor (
     private val authRemoteDataSource: AuthRemoteDataSource
@@ -50,5 +51,24 @@ class AuthRepository @Inject constructor (
 
     fun signOut(){
         authRemoteDataSource.signOut()
+    }
+
+    suspend fun sendPasswordResetEmail(email: String): Result<Unit> {
+        return try {
+            authRemoteDataSource.sendPasswordResetEmail(email)
+            Result.success(Unit)
+        } catch (e: CancellationException) {
+            throw e
+        } catch (e: FirebaseAuthInvalidCredentialsException) {
+            Result.failure(Exception("El correo no tiene un formato válido"))
+        } catch (e: FirebaseAuthInvalidUserException) {
+            Result.failure(Exception("No existe una cuenta con ese correo"))
+        } catch (e: FirebaseNetworkException) {
+            Result.failure(Exception("Sin conexión a internet. Revisa tu red"))
+        } catch (e: FirebaseTooManyRequestsException) {
+            Result.failure(Exception("Demasiados intentos. Intenta de nuevo más tarde"))
+        } catch (e: Exception) {
+            Result.failure(Exception("No pudimos enviar el correo. Intenta de nuevo"))
+        }
     }
 }

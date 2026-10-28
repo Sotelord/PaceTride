@@ -20,7 +20,7 @@ lifecycleViewmodelCompose = "2.11.0"
 googleServices = "4.5.0"
 googleKotlinKsp = "2.3.11"
 firebaseCrashlytics = "3.0.8"
-firebaseBom = "35.0.2"
+firebaseBom = "35.1.0"
 dagger = "2.60.1"
 firebaseStorageKtx = "21.0.2"
 
@@ -29,6 +29,13 @@ coil = "2.7.0"
 retrofit = "3.0.0"
 retrofitScalars = "3.0.0"
 retrofirGson = "3.0.0"
+
+mockk = "1.13.11"
+mockk-android = "1.13.14"
+kotlinx-coroutines = "1.10.2"
+truth = "1.4.2"
+uiautomator = "2.3.0"
+androidx-core-test = "1.5.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -72,6 +79,28 @@ retrofit-convert-gson = { module = "com.squareup.retrofit2:converter-gson", vers
 
 firebase-analytics = { module = "com.google.firebase:firebase-analytics" }
 firebase-messaging = { module = "com.google.firebase:firebase-messaging" }
+
+# Adicionales / Mocks
+test-mockk = { group = "io.mockk", name = "mockk", version.ref = "mockk" }
+test-mockk-android = { group = "io.mockk", name = "mockk-android", version.ref = "mockk-android" }
+
+# Coroutines
+test-coroutines = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "kotlinx-coroutines" }
+
+# Truth (Asserts)
+test-truth = { group = "com.google.truth", name = "truth", version.ref = "truth" }
+android-test-truth = { group = "com.google.truth", name = "truth", version.ref = "truth" }
+
+# Hilt Testing
+android-test-hilt = { group = "com.google.dagger", name = "hilt-android-testing", version.ref = "dagger" }
+
+# UI Automator
+android-test-uiautomator = { group = "androidx.test.uiautomator", name = "uiautomator", version.ref = "uiautomator" }
+
+# AndroidX Test (e2e / ActivityScenario)
+android-test-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
+android-test-espresso = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
+android-test-core = { group = "androidx.test", name = "core", version.ref = "androidx-core-test" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

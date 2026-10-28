@@ -25,6 +25,9 @@ android {
     }
 
     buildTypes {
+        debug {
+            isDebuggable = true
+        }
         release {
             optimization {
                 enable = false
@@ -35,8 +38,13 @@ android {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
+    packaging {
+        excludes += "META-INF/LICENSE.md"
+        excludes += "META-INF/LICENSE-notice.md"
+    }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
 }
 
@@ -101,4 +109,33 @@ dependencies {
     androidTestImplementation(libs.androidx.compose.ui.test.junit4)
     debugImplementation(libs.androidx.compose.ui.test.manifest)
     debugImplementation(libs.androidx.compose.ui.tooling)
+
+    // Adicionales
+    testImplementation(libs.test.mockk)
+
+    // Coroutines test
+    testImplementation(libs.test.coroutines)
+
+    // Alternativa a los asserts tradicionales
+    testImplementation(libs.test.truth)
+    androidTestImplementation(libs.android.test.truth)
+
+    // Hilt Testing
+    androidTestImplementation(libs.android.test.hilt)
+    kspAndroidTest(libs.dagger.kapt)
+
+    // UI Automator
+    androidTestImplementation(libs.android.test.uiautomator)
+    testImplementation(kotlin("test"))
+
+    // //e2e
+    // // AndroidX Test - Instrumented
+    androidTestImplementation(libs.android.test.junit)
+    androidTestImplementation(libs.android.test.espresso)
+
+    // // ActivityScenario
+    androidTestImplementation(libs.android.test.core)
+
+    // // Para UI / instrumented tests (androidTest/)
+    androidTestImplementation(libs.test.mockk.android)
 }

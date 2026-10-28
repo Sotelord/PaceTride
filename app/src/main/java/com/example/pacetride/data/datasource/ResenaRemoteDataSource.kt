@@ -9,7 +9,7 @@ interface ResenaRemoteDataSource {
     suspend fun createResena(resena: CreateResenaDto): Unit
     suspend fun updateResena(id: String, resena: UpdateResenaDto): Unit
     suspend fun deleteResena(id: String): Unit
-    suspend fun getResenasById(id: String, currentUserId: String = ""): ResenaDtoGeneric
+    suspend fun getResenasById(id: String, currentUserId: String = ""): ResenaDtoGeneric?
     suspend fun sendOrDeleteResenaLike(resenaId: String, userId: String): Unit
     suspend fun getAllResenas(currentUserId: String = ""): List<ResenaDtoGeneric>
     suspend fun getResenasSeguidos(currentUserId: String = ""): List<ResenaDtoGeneric>

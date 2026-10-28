@@ -34,4 +34,8 @@ class AuthRemoteDataSource @Inject constructor (
                 .build()
         )?.await()
     }
+
+    suspend fun sendPasswordResetEmail(email: String) {
+        auth.sendPasswordResetEmail(email).await()
+    }
 }

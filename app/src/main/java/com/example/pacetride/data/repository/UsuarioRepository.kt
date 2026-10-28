@@ -30,6 +30,7 @@ class UsuarioRepository @Inject constructor(
         val currentUserId = authRemoteDataSource.currentUser?.uid ?: ""
         return try {
             val usuarioDto = usuarioRemoteDataSource.getUsuarioById(id, currentUserId)
+            if (usuarioDto == null) return Result.failure(Exception("Usuario no encontrado"))
             val usuario = usuarioDto.toUsuario()
             Result.success(usuario)
         } catch (e: CancellationException) {
@@ -118,7 +119,14 @@ class UsuarioRepository @Inject constructor(
         ubicacion: String?
     ): Result<Unit> {
         return try {
-            val fcmToken = FirebaseMessaging.getInstance().token.await()
+            val fcmToken = try {
+                FirebaseMessaging.getInstance().token.await()
+            } catch (e: CancellationException) {
+                throw e
+            } catch (e: Exception) {
+                Log.w("REGISTER", "No se pudo obtener el token FCM, se registra sin él", e)
+                ""
+            }
             val registerUserDto = RegisterUserDto(
                 nombre = nombre,
                 userName = userName,

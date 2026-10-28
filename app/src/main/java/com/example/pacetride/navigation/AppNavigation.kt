@@ -45,6 +45,8 @@ import com.example.pacetride.ui.screens.publicProfile.PublicProfileScreen
 import com.example.pacetride.ui.screens.publicProfile.PublicProfileViewModel
 import com.example.pacetride.ui.screens.raceDetail.RaceDetailViewModel
 import com.example.pacetride.ui.screens.raceDetail.RaceDetailScreen
+import com.example.pacetride.ui.screens.recuperarContrasena.RecuperarContrasenaScreen
+import com.example.pacetride.ui.screens.recuperarContrasena.RecuperarContrasenaViewModel
 import com.example.pacetride.ui.screens.registrar.RegisterScreen
 import com.example.pacetride.ui.screens.registrar.RegisterViewModel
 import com.example.pacetride.ui.screens.splash.SplashScreen
@@ -137,6 +139,14 @@ fun AppNavigation(
                 recuperarContrasenaPressed = {
                     navControler.navigate((Screen.RecuperarContrasena.route))
                 }
+            )
+        }
+
+        composable(route = Screen.RecuperarContrasena.route) {
+            val recuperarViewModel: RecuperarContrasenaViewModel = hiltViewModel()
+            RecuperarContrasenaScreen(
+                viewModel = recuperarViewModel,
+                atrasPressed = { navControler.popBackStack() }
             )
         }
 
@@ -242,13 +252,6 @@ fun AppNavigation(
                     navControler.navigate(Screen.RaceDetail.createRoute(raceId))}
             )
         }
-
-
-        //Otra navegación
-        composable(route = Screen.RecuperarContrasena.route) {
-            Text("Falta esta pantalla")
-        }
-
         composable(route = Screen.Configuracion.route) {
             Text("Falta esta pantalla")
         }

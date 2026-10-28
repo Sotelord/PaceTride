@@ -6,7 +6,7 @@ import com.example.pacetride.data.dtos.UpdateUserDto
 import com.example.pacetride.data.dtos.UsuarioDtoGeneric
 
 interface UsuarioRemoteDataSource {
-    suspend fun getUsuarioById(id: String, currentUserId: String = ""): UsuarioDtoGeneric
+    suspend fun getUsuarioById(id: String, currentUserId: String = ""): UsuarioDtoGeneric?
     suspend fun getReviewsUsuarioId(id: String, currentUserId: String = ""): List<ResenaDtoGeneric>
     suspend fun registerUsuario(registerUserDto: RegisterUserDto, userId: String): Unit
     suspend fun updateUsuario(id: String, updateUserDto: UpdateUserDto): Unit

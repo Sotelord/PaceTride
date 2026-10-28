@@ -6,7 +6,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface CarreraRemoteDataSource {
     suspend fun getCarreras(): List<CarreraDto>
-    suspend fun getCarreraById(id: String): CarreraDto
+    suspend fun getCarreraById(id: String): CarreraDto?
     suspend fun getReviewsCarreraId(id: String, currentUserId: String = ""): List<ResenaDtoGeneric>
     suspend fun listenAllCarreras(): Flow<List<CarreraDto>>
 }

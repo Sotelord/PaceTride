@@ -43,12 +43,12 @@ class ResenaRepository @Inject constructor(
 
             val createResenaUsuarioDto = CreateResenaUsuarioDto(
                 fotoPerfil = fotoPerfil,
-                nombre = user.nombre,
-                usuario = user.userName
+                nombre = user?.nombre,
+                usuario = user?.userName
             )
 
             val createResenaCarreraDto = CreateResenaCarreraDto(
-                nombre = carrera.nombre
+                nombre = carrera?.nombre ?: "",
             )
 
             val createResenaDto = CreateResenaDto(
@@ -136,6 +136,7 @@ class ResenaRepository @Inject constructor(
         val currentUserId = authRemoteDataSource.currentUser?.uid ?: ""
         return try {
             val resenaDto = resenaRemoteDataSource.getResenasById(id, currentUserId)
+            if (resenaDto == null) return Result.failure(Exception("Resena no encontrada"))
             val resena = resenaDto.toResena()
             Result.success(resena)
         } catch (e: CancellationException) {
