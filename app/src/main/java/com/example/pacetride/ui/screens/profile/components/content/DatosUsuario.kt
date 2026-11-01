@@ -17,6 +17,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.pacetride.ui.theme.PacetrideTheme
+import com.example.pacetride.ui.utils.seguimiento.ContadoresSeguimiento
 
 @Composable
 fun DatosUsuario(
@@ -26,8 +27,10 @@ fun DatosUsuario(
     email: String? = null,
     ubicacion: String,
     bio: String?,
+    onSeguidoresPressed: () -> Unit,
+    onSeguidosPressed: () -> Unit,
     followerCount: Int,
-    followingCount: Int? = null,
+    followingCount: Int
 ) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -45,17 +48,13 @@ fun DatosUsuario(
         if(bio != null){
             Text(bio, color = MaterialTheme.colorScheme.onSurfaceVariant, fontSize = 12.sp)
         }
-        Row(
-            horizontalArrangement = Arrangement.Center,
-            verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier.fillMaxWidth()
-        ) {
-            if (followingCount != null) {
-                ContadorItem(cantidad = followingCount, etiqueta = "Siguiendo")
-                Spacer(modifier = Modifier.width(24.dp))
-            }
-            ContadorItem(cantidad = followerCount, etiqueta = "Seguidores")
-        }
+        Spacer(modifier = Modifier.height(12.dp))
+        ContadoresSeguimiento(
+            followersCount = followerCount,
+            followingCount = followingCount,
+            onSeguidoresPressed = onSeguidoresPressed,
+            onSeguidosPressed = onSeguidosPressed
+        )
     }
 }
 
@@ -70,7 +69,9 @@ fun DatosUsuarioPreview(){
             ubicacion = "Bogotá, Colombia",
             bio = "Runner • Siempre buscando mi próximo reto 🏃",
             followerCount = 0,
-            followingCount = 0
+            followingCount = 0,
+            onSeguidoresPressed = {},
+            onSeguidosPressed = {}
         )
     }
 }
@@ -86,6 +87,9 @@ fun DatosUsuarioPreview2(){
             ubicacion = "Bogotá, Colombia",
             bio = "Runner • Siempre buscando mi próximo reto 🏃",
             followerCount = 0,
+            followingCount = 0,
+            onSeguidoresPressed = {},
+            onSeguidosPressed = {}
         )
     }
 }

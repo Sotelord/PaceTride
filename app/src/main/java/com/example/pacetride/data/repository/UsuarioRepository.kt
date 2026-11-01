@@ -251,4 +251,26 @@ class UsuarioRepository @Inject constructor(
             Result.failure(e)
         }
     }
+
+    suspend fun getFollowers(id: String): Result<List<Usuario>> {
+        return try {
+            Result.success(usuarioRemoteDataSource.getFollowers(id).map { it.toUsuario() })
+        } catch (e: CancellationException) {
+            throw e
+        } catch (e: Exception) {
+            Log.e("USUARIOS", "Error al cargar seguidores", e)
+            Result.failure(Exception("No pudimos cargar los seguidores"))
+        }
+    }
+
+    suspend fun getFollowing(id: String): Result<List<Usuario>> {
+        return try {
+            Result.success(usuarioRemoteDataSource.getFollowing(id).map { it.toUsuario() })
+        } catch (e: CancellationException) {
+            throw e
+        } catch (e: Exception) {
+            Log.e("USUARIOS", "Error inesperado", e)
+            Result.failure(Exception("No pudimos cargar los seguidores"))
+        }
+    }
 }

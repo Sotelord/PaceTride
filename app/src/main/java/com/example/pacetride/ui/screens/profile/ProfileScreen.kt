@@ -27,6 +27,8 @@ fun ProfileScreen(
     logOutPressed: () -> Unit,
     onClickEdit: (String, String) -> Unit,
     onClickCarrera: (String) -> Unit,
+    onSeguidosPressed: (String) -> Unit,
+    onSeguidoresPressed: (String) -> Unit,
 ) {
     val state by profileViewModel.uiState.collectAsState()
 
@@ -67,7 +69,9 @@ fun ProfileScreen(
                     modifier = Modifier.weight(1f),
                     onClickEdit = onClickEdit,
                     onClickCarrea = onClickCarrera,
-                    onClickDelete = { resenaId -> profileViewModel.deleteResena(resenaId)}
+                    onClickDelete = { resenaId -> profileViewModel.deleteResena(resenaId)},
+                    onSeguidosPressed = onSeguidosPressed,
+                    onSeguidoresPressed = onSeguidoresPressed
                 )
             }
         }
@@ -85,7 +89,9 @@ fun ProfileScreenPreview() {
             configurationPressed = {},
             logOutPressed = {},
             onClickEdit = { _, _ -> },
-            onClickCarrera = {}
+            onClickCarrera = {},
+            onSeguidosPressed = {},
+            onSeguidoresPressed = {}
         )
     }
 }

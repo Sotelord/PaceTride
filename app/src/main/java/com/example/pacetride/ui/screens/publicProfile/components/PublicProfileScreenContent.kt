@@ -37,6 +37,8 @@ fun PublicProfileContent(
     configPressed: () -> Unit,
     onClickCarrera: (String) -> Unit,
     onFollowPressed: () -> Unit,
+    onSeguidoresPressed: (String) -> Unit,
+    onSeguidosPressed: (String) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -55,7 +57,9 @@ fun PublicProfileContent(
             usuario = usuario,
             configPressed = configPressed,
             sesion = sesion,
-            onFollowPressed = onFollowPressed
+            onFollowPressed = onFollowPressed,
+            onSeguidoresPressed = onSeguidoresPressed,
+            onSeguidosPressed = onSeguidosPressed
         )
 
         Spacer(modifier = Modifier.height(24.dp))
@@ -121,7 +125,9 @@ fun PublicProfileScreenContentPreview(){
             configPressed = {},
             usuario = usuario,
             resenas = listOf(),
-            onClickCarrera = {}
+            onClickCarrera = {},
+            onSeguidoresPressed = {},
+            onSeguidosPressed = {}
         )
     }
 }

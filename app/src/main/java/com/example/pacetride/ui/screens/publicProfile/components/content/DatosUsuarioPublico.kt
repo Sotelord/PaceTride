@@ -44,6 +44,8 @@ fun DatosUsuarioPublico(
     configPressed: () -> Unit,
     onFollowPressed: () -> Unit,
     sesion: String,
+    onSeguidoresPressed: (String) -> Unit,
+    onSeguidosPressed: (String) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -56,6 +58,9 @@ fun DatosUsuarioPublico(
             ubicacion= usuario.ubicacion,
             bio = usuario.bio,
             followerCount = usuario.followersCount,
+            followingCount = usuario.followingCount,
+            onSeguidoresPressed = { onSeguidoresPressed(usuario.id) },
+            onSeguidosPressed = { onSeguidosPressed(usuario.id) }
         )
 
         Spacer(modifier = Modifier.height(20.dp))
@@ -127,7 +132,9 @@ fun DatosUsuarioPublicoPreview() {
             onFollowPressed = {},
             sesion = "",
             configPressed = {},
-            modifier = Modifier.padding(16.dp)
+            modifier = Modifier.padding(16.dp),
+            onSeguidoresPressed = {},
+            onSeguidosPressed = {}
         )
     }
 }

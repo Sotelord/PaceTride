@@ -46,6 +46,8 @@ fun ProfileScreenContent(
     onClickEdit: (String, String) -> Unit,
     onClickDelete: (String) -> Unit,
     onClickCarrea: (String) -> Unit,
+    onSeguidosPressed: (String) -> Unit,
+    onSeguidoresPressed: (String) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -71,7 +73,9 @@ fun ProfileScreenContent(
             ubicacion = usuario.ubicacion,
             bio = usuario.bio,
             followerCount = usuario.followersCount,
-            followingCount = usuario.followingCount
+            followingCount = usuario.followingCount,
+            onSeguidoresPressed = { onSeguidoresPressed(usuario.id) },
+            onSeguidosPressed = { onSeguidosPressed(usuario.id) }
         )
 
         Spacer(modifier = Modifier.height(24.dp))
@@ -160,7 +164,9 @@ fun ProfileScreenContentPreview() {
             resenas = emptyList(),
             onClickDelete = {},
             onClickEdit = { _, _ -> },
-            onClickCarrea = {}
+            onClickCarrea = {},
+            onSeguidosPressed = {},
+            onSeguidoresPressed = {}
         )
     }
 }

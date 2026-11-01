@@ -55,4 +55,12 @@ class UsuarioRetrofitDataSourceImpl @Inject constructor(
     override suspend fun updateFcmToken(userId: String, token: String) {
         TODO("Not yet implemented")
     }
+
+    override suspend fun getFollowers(id: String): List<UsuarioDtoGeneric> {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun getFollowing(id: String): List<UsuarioDtoGeneric> {
+        TODO("Not yet implemented")
+    }
 }

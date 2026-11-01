@@ -26,7 +26,9 @@ fun PublicProfileScreen(
     atrasPressed: () -> Unit,
     configPressed: () -> Unit,
     onClickCarrera: (String) -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onSeguidoresPressed: (String) -> Unit,
+    onSeguidosPressed: (String) -> Unit
 ) {
 
     val state by publicProfileViewModel.uiState.collectAsState()
@@ -65,6 +67,8 @@ fun PublicProfileScreen(
                         usuario = state.usuario!!,
                         resenas = state.resenas,
                         sesion = state.sesion,
+                        onSeguidoresPressed = onSeguidoresPressed,
+                        onSeguidosPressed = onSeguidosPressed,
                         modifier = Modifier
                             .weight(1f)
                             .verticalScroll(rememberScrollState())
@@ -91,7 +95,9 @@ fun PublicProfileScreenPreview() {
             usuarioId = "2",
             atrasPressed = {},
             configPressed = {},
-            onClickCarrera = {}
+            onClickCarrera = {},
+            onSeguidoresPressed = {},
+            onSeguidosPressed = {}
         )
     }
 }

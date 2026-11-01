@@ -5,6 +5,7 @@ import com.example.pacetride.data.dtos.RegisterUserDto
 import com.example.pacetride.data.dtos.ResenaDtoGeneric
 import com.example.pacetride.data.dtos.ResenaFirestoreDto
 import com.example.pacetride.data.dtos.UpdateUserDto
+import com.example.pacetride.data.dtos.UsuarioDtoGeneric
 import com.example.pacetride.data.dtos.UsuarioFirestoreDto
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
@@ -20,7 +21,7 @@ class UsuarioFirestoreDataSourceImpl @Inject constructor(
         val respuesta = docRef.get().await()
         val usuario = respuesta.toObject(UsuarioFirestoreDto::class.java)?.copy(id = respuesta.id)
             ?: return null
-        if(currentUserId.isNotEmpty()) {
+        if (currentUserId.isNotEmpty()) {
             val followerDoc =
                 db.collection("usuarios").document(id).collection("followers")
                     .document(currentUserId)
@@ -108,5 +109,27 @@ class UsuarioFirestoreDataSourceImpl @Inject constructor(
         db.collection("usuarios").document(userId)
             .set(mapOf("fcmToken" to token), SetOptions.merge())
             .await()
+    }
+
+    override suspend fun getFollowers(id: String): List<UsuarioFirestoreDto> {
+        val usuarios = mutableListOf<UsuarioFirestoreDto>()
+        val snapshot = db.collection("usuarios").document(id).collection("followers").get().await()
+        for (doc in snapshot.documents) {
+            val usuario = db.collection("usuarios").document(doc.id).get().await()
+            usuario.toObject(UsuarioFirestoreDto::class.java)?.copy(id = doc.id)
+                ?.let { usuarios.add(it) } ?: throw Exception("No se pudo obtener los seguidores")
+        }
+        return usuarios
+    }
+
+    override suspend fun getFollowing(id: String): List<UsuarioDtoGeneric> {
+        val usuarios = mutableListOf<UsuarioFirestoreDto>()
+        val snapshot = db.collection("usuarios").document(id).collection("following").get().await()
+        for (doc in snapshot.documents) {
+            val usuario = db.collection("usuarios").document(doc.id).get().await()
+            usuario.toObject(UsuarioFirestoreDto::class.java)?.copy(id = doc.id)
+                ?.let { usuarios.add(it) } ?: throw Exception("No se pudo obtener los seguidores")
+        }
+        return usuarios
     }
 }

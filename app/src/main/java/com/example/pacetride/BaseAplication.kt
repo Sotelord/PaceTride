@@ -10,7 +10,7 @@ import dagger.hilt.android.HiltAndroidApp
 class BaseAplication: Application() {
     override fun onCreate() {
         super.onCreate()
-        val usarEmulador = true
+        val usarEmulador = false
         //BuildConfig.DEBUG
         if (usarEmulador) {
             Firebase.firestore.useEmulator("10.0.2.2", 8080)

@@ -25,6 +25,9 @@ import com.example.pacetride.ui.theme.PacetrideTheme
 import com.example.pacetride.R
 import com.example.pacetride.ui.screens.comunidad.ComunidadScreen
 import com.example.pacetride.ui.screens.comunidad.ComunidadViewModel
+import com.example.pacetride.ui.screens.conexiones.ConexionesScreen
+import com.example.pacetride.ui.screens.conexiones.ConexionesViewModel
+import com.example.pacetride.ui.screens.conexiones.TipoConexion
 import com.example.pacetride.ui.screens.escribirResena.EscribirResenaScreen
 import com.example.pacetride.ui.screens.escribirResena.EscribirResenaViewModel
 import com.example.pacetride.ui.screens.explorer.ExploreScreen
@@ -84,8 +87,13 @@ sealed class Screen(val route: String) {
             if (reviewId == null) "escribirResena/$raceId"
             else "escribirResena/$raceId?reviewId=$reviewId"
     }
+
     object Comunidad : Screen("comunidad")
     object Splash : Screen("splash")
+    object Conexiones : Screen("conexiones") {
+        fun createRoute(usuarioId: String, tipo: TipoConexion) =
+            "conexiones/$usuarioId/${tipo.name}"
+    }
 }
 
 
@@ -248,10 +256,42 @@ fun AppNavigation(
                 onClickEdit = { raceId, reviewId ->
                     navControler.navigate(Screen.EscribirResena.createRoute(raceId, reviewId))
                 },
-                onClickCarrera = {raceId ->
-                    navControler.navigate(Screen.RaceDetail.createRoute(raceId))}
+                onClickCarrera = { raceId ->
+                    navControler.navigate(Screen.RaceDetail.createRoute(raceId))
+                },
+                onSeguidosPressed = { usuarioId ->
+                    navControler.navigate(Screen.Conexiones.createRoute(usuarioId, TipoConexion.SEGUIDOS))
+                },
+                onSeguidoresPressed = { usuarioId ->
+                    navControler.navigate(Screen.Conexiones.createRoute(usuarioId, TipoConexion.SEGUIDORES))
+                }
             )
         }
+
+        composable(
+            route = "${Screen.Conexiones.route}/{usuarioId}/{tipo}",
+            arguments = listOf(
+                navArgument("usuarioId") { type = NavType.StringType },
+                navArgument("tipo") { type = NavType.StringType }
+            )
+        ) {
+            val conexionesViewModel: ConexionesViewModel = hiltViewModel()
+            val usuarioId = it.arguments?.getString("usuarioId") ?: ""
+            val tipo = TipoConexion.valueOf(it.arguments?.getString("tipo") ?: TipoConexion.SEGUIDORES.name)
+
+            ConexionesScreen(
+                conexionesViewModel = conexionesViewModel,
+                usuarioId = usuarioId,
+                tipo = tipo,
+                atrasPressed = {
+                    navControler.popBackStack()
+                },
+                onClickUsuario = { usuarioId ->
+                    navControler.navigate(Screen.PublicProfile.createRoute(usuarioId))
+                }
+            )
+        }
+
         composable(route = Screen.Configuracion.route) {
             Text("Falta esta pantalla")
         }
@@ -387,6 +427,12 @@ fun AppNavigation(
                 },
                 onClickCarrera = { raceId ->
                     navControler.navigate(Screen.RaceDetail.createRoute(raceId))
+                },
+                onSeguidoresPressed = { usuarioId ->
+                    navControler.navigate(Screen.Conexiones.createRoute(usuarioId, TipoConexion.SEGUIDORES))
+                },
+                onSeguidosPressed = { usuarioId ->
+                    navControler.navigate(Screen.Conexiones.createRoute(usuarioId, TipoConexion.SEGUIDOS))
                 }
             )
         }
