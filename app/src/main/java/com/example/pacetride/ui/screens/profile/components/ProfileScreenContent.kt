@@ -29,6 +29,7 @@ import com.example.pacetride.ui.utils.stats.EstadisticasRow
 import android.net.Uri
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.style.TextAlign
 import com.example.pacetride.data.Resena
 import com.example.pacetride.data.local.LocalCarreraProvider
@@ -86,7 +87,7 @@ fun ProfileScreenContent(
                 editProfilePressed()
                 Log.d("ProfileScreen", "Editar perfil clicked")
             },
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier.fillMaxWidth().testTag("editProfileButton")
         )
 
         Spacer(modifier = Modifier.height(32.dp))

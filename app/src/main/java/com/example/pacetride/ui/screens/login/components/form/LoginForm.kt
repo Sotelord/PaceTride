@@ -9,6 +9,7 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -101,6 +102,7 @@ fun LoginForm(
             modifier = Modifier
                 .fillMaxWidth()
                 .height(56.dp)
+                .testTag("login_button")
         )
 
         Spacer(modifier = Modifier.height(24.dp))
@@ -118,7 +120,7 @@ fun LoginForm(
                 color = MaterialTheme.colorScheme.primaryContainer,
                 fontWeight = FontWeight.Bold,
                 fontSize = 14.sp,
-                modifier = Modifier.clickable { createAccountPressed() }
+                modifier = Modifier.clickable { createAccountPressed() }.testTag("create_account_button")
             )
         }
     }

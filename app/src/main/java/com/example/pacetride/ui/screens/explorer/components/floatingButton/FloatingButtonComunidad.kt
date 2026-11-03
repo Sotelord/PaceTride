@@ -8,6 +8,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -22,7 +23,7 @@ fun FloatingButtonComunidad(
 ) {
     FloatingActionButton(
         onClick = onClick,
-        modifier = modifier,
+        modifier = modifier.testTag("btnComunidad"),
         containerColor = MaterialTheme.colorScheme.primaryContainer,
         shape = CircleShape
     ) {

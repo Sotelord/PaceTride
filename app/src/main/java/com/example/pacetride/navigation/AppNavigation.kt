@@ -11,6 +11,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
@@ -491,6 +492,7 @@ fun PacetrideBottomNavigationBar(
             val isSelected = currentRoute == item.route
 
             NavigationBarItem(
+                modifier = Modifier.testTag("nav_${item.route}"),
                 icon = {
                     Icon(
                         painter = painterResource(item.idIcon),

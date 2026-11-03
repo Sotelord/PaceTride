@@ -8,6 +8,7 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.pacetride.data.Carrera
@@ -23,7 +24,8 @@ fun ProximasCarrerasRow(
     LazyRow(
         modifier = modifier
             .fillMaxWidth()
-            .padding(horizontal = 20.dp),
+            .padding(horizontal = 20.dp)
+            .testTag("proximasCarreras"),
         horizontalArrangement = Arrangement.spacedBy(12.dp)
     ) {
         items(carreras) {
@@ -32,7 +34,8 @@ fun ProximasCarrerasRow(
             onClick = {
                 raceCardPressed(carrera.id)
                 Log.d("HomeScreen", "Race Card Clicked")
-            }
+            },
+            modifier = Modifier.testTag("raceCard_${carrera.id}")
             )
 
         }

@@ -1,4 +1,4 @@
-package com.example.pacetride
+package com.example.pacetride.repository
 
 import com.example.pacetride.data.datasource.AuthRemoteDataSource
 import com.example.pacetride.data.datasource.impl.firestore.CarreraFirestoreDataSourceImpl

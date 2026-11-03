@@ -15,6 +15,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.example.pacetride.R
@@ -36,7 +37,7 @@ fun HeaderPublico(
         IconButton(onClick = {
             atrasPressed()
             Log.d("PubliProfileScreen", "Atrás clicked")
-        }) {
+        }, modifier = Modifier.testTag("atras")) {
             Image(
                 painter = painterResource(id = R.drawable.ic_atras),
                 contentDescription = "Atrás",
@@ -47,14 +48,15 @@ fun HeaderPublico(
 
         Spacer(modifier = Modifier.weight(1f))
 
-        LogoApp(modifier = Modifier
-            .height(28.dp)
-            .offset(x = (-24).dp))
+        LogoApp(
+            modifier = Modifier
+                .height(28.dp)
+                .offset(x = (-24).dp)
+        )
 
         Spacer(modifier = Modifier.weight(1f))
     }
 }
-
 
 
 @Preview

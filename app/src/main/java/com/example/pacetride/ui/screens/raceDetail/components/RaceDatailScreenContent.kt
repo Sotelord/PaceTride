@@ -14,7 +14,9 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -62,11 +64,13 @@ fun RaceDetailScreenContent(
         )
 
         Column(modifier = Modifier.padding(16.dp)) {
-            TituloCarrera(
-                titulo = carrera.nombre,
-                fecha = carrera.fecha,
-                ubicacion = carrera.ubicacion
-            )
+            Column(modifier = Modifier.semantics(mergeDescendants = true) {}.testTag("raceTitulo")) {
+                TituloCarrera(
+                    titulo = carrera.nombre,
+                    fecha = carrera.fecha,
+                    ubicacion = carrera.ubicacion
+                )
+            }
             Spacer(modifier = Modifier.height(24.dp))
 
             DistanciasDetalleRow(
@@ -76,13 +80,15 @@ fun RaceDetailScreenContent(
             )
             Spacer(modifier = Modifier.height(24.dp))
 
-            TarjetaInfoCarrera(
-                fecha = carrera.fecha,
-                hora = "6:00 a. m.",
-                lugar = carrera.ubicacion,
-                distancia = "$kmSeleccionado kilómetros",
-                precio = carrera.calcularPrecio(kmSeleccionado).aPrecioCop()
-            )
+            Column(modifier = Modifier.semantics(mergeDescendants = true) {}.testTag("raceInfo")) {
+                TarjetaInfoCarrera(
+                    fecha = carrera.fecha,
+                    hora = "6:00 a. m.",
+                    lugar = carrera.ubicacion,
+                    distancia = "$kmSeleccionado kilómetros",
+                    precio = carrera.calcularPrecio(kmSeleccionado).aPrecioCop()
+                )
+            }
 
             if (carrera.ultimosCupos == true) {
                 Spacer(modifier = Modifier.height(8.dp))
@@ -99,6 +105,7 @@ fun RaceDetailScreenContent(
             Spacer(modifier = Modifier.height(8.dp))
             Text(
                 carrera.descripcion,
+                modifier = Modifier.testTag("raceDescripcion"),
                 color = MaterialTheme.colorScheme.onBackground,
                 fontSize = 14.sp
             )

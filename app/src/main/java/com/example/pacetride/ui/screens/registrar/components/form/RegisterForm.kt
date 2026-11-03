@@ -6,6 +6,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -57,7 +58,7 @@ fun RegisterForm(
             onValueChange = onNameChange,
             label = "Nombre completo",
             colors = fieldColors,
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier.fillMaxWidth().testTag("txtNombre")
         )
 
         Spacer(modifier = Modifier.height(16.dp))
@@ -68,7 +69,7 @@ fun RegisterForm(
             onValueChange = onEmailChange,
             label = "Correo electrónico",
             colors = fieldColors,
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier.fillMaxWidth().testTag("txtEmail")
         )
 
         Spacer(modifier = Modifier.height(16.dp))
@@ -79,7 +80,7 @@ fun RegisterForm(
             onValueChange = onUsuarioChange,
             label = "Usuario",
             colors = fieldColors,
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier.fillMaxWidth().testTag("txtUsuario")
         )
         Spacer(modifier = Modifier.height(16.dp))
 
@@ -89,7 +90,7 @@ fun RegisterForm(
             onValueChange = onUbicacionChange,
             label = "Ubicación (Opcional)",
             colors = fieldColors,
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier.fillMaxWidth().testTag("txtUbicacion")
         )
         Spacer(modifier = Modifier.height(16.dp))
 
@@ -102,7 +103,7 @@ fun RegisterForm(
             maxLength = 500,
             singleLine = false,
             minLines = 4,
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier.fillMaxWidth().testTag("txtBio")
         )
 
         Spacer(modifier = Modifier.height(16.dp))
@@ -114,7 +115,8 @@ fun RegisterForm(
             label = "Contraseña",
             isVisible = passwordVisible,
             onVisibilityChange = onPasswordVisibleChange,
-            colors = fieldColors
+            colors = fieldColors,
+            modifier = Modifier.fillMaxWidth().testTag("txtPassword")
         )
 
         Spacer(modifier = Modifier.height(16.dp))
@@ -126,7 +128,8 @@ fun RegisterForm(
             label = "Confirmar contraseña",
             isVisible = confirmPasswordVisible,
             onVisibilityChange = onConfirmPasswordVisibleChange,
-            colors = fieldColors
+            colors = fieldColors,
+            modifier = Modifier.fillMaxWidth().testTag("txtConfirmPassword")
         )
 
         Spacer(modifier = Modifier.height(16.dp))
@@ -134,7 +137,8 @@ fun RegisterForm(
         // Componente: Checkbox de Términos
         TermsCheckbox(
             checked = termsAccepted,
-            onCheckedChange = onTermsAcceptedChange
+            onCheckedChange = onTermsAcceptedChange,
+            modifier = Modifier.fillMaxWidth().testTag("chkTerms")
         )
 
         Spacer(modifier = Modifier.height(24.dp))
@@ -144,7 +148,7 @@ fun RegisterForm(
                 text = errorMessage,
                 color = MaterialTheme.colorScheme.tertiaryContainer,
                 textAlign = TextAlign.Center,
-                modifier = Modifier.fillMaxWidth(1f)
+                modifier = Modifier.fillMaxWidth(1f).testTag("errorMessage")
             )
 
         Spacer(modifier = Modifier.height(24.dp))
@@ -158,7 +162,8 @@ fun RegisterForm(
             enabled = termsAccepted,
             modifier = Modifier
                 .fillMaxWidth()
-                .height(52.dp),
+                .height(52.dp)
+                .testTag("btnRegister"),
             colors = ButtonDefaults.buttonColors(
                 containerColor = MaterialTheme.colorScheme.primaryContainer,
                 contentColor = MaterialTheme.colorScheme.onPrimaryContainer

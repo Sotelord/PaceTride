@@ -13,6 +13,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.pacetride.ui.theme.PacetrideTheme
@@ -25,7 +26,7 @@ fun HomeScreen(
     raceCardPressed: (String) -> Unit,
     notificacionButtonPressed: (String)-> Unit,
     distanciaShortcutPressed: (Int)-> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier.testTag("homeScreen")
 ) {
     val state by homeViewModel.uiState.collectAsState()
 

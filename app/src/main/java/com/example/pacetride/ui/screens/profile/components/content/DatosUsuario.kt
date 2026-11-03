@@ -1,6 +1,7 @@
 package com.example.pacetride.ui.screens.profile.components.content
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -12,6 +13,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -36,17 +38,38 @@ fun DatosUsuario(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = modifier
     ) {
-        Text(nombre, color = MaterialTheme.colorScheme.onBackground, fontSize = 24.sp, fontWeight = FontWeight.Bold)
-        Text(text = "@$usuario", color = MaterialTheme.colorScheme.onSurfaceVariant, fontSize = 14.sp)
+        Text(
+            nombre,
+            modifier = Modifier.testTag("perfilNombre"),
+            color = MaterialTheme.colorScheme.onBackground,
+            fontSize = 24.sp,
+            fontWeight = FontWeight.Bold
+        )
+        Text(
+            text = "@$usuario",
+            modifier = Modifier.testTag("perfilUsuario"),
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
+            fontSize = 14.sp
+        )
         Spacer(modifier = Modifier.height(8.dp))
         if (email != null) {
-            Text(email, color = MaterialTheme.colorScheme.onSurfaceVariant, fontSize = 14.sp)
+            Text(
+                email,
+                modifier = Modifier.testTag("perfilEmail"),
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                fontSize = 14.sp
+            )
             Spacer(modifier = Modifier.height(8.dp))
         }
         UbicacionUsuario(ubicacion)
         Spacer(modifier = Modifier.height(8.dp))
-        if(bio != null){
-            Text(bio, color = MaterialTheme.colorScheme.onSurfaceVariant, fontSize = 12.sp)
+        if (bio != null) {
+            Text(
+                bio,
+                modifier = Modifier.testTag("perfilBio"),
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                fontSize = 12.sp
+            )
         }
         Spacer(modifier = Modifier.height(12.dp))
         ContadoresSeguimiento(
@@ -60,7 +83,7 @@ fun DatosUsuario(
 
 @Composable
 @Preview
-fun DatosUsuarioPreview(){
+fun DatosUsuarioPreview() {
     PacetrideTheme(darkTheme = true) {
         DatosUsuario(
             nombre = "Santiago Rayo",
@@ -78,7 +101,7 @@ fun DatosUsuarioPreview(){
 
 @Composable
 @Preview
-fun DatosUsuarioPreview2(){
+fun DatosUsuarioPreview2() {
     PacetrideTheme(darkTheme = true) {
         DatosUsuario(
             nombre = "Santiago Rayo",

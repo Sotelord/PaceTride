@@ -16,6 +16,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -53,7 +54,8 @@ fun ResenaCard(
             Row(
                 modifier = Modifier
                     .weight(1f)
-                    .clickable { onClickUsuario(resena.usuarioId) },
+                    .clickable { onClickUsuario(resena.usuarioId) }
+                    .testTag("btnUsuarioResena"),
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 ProfileAsyncImage(
@@ -134,6 +136,7 @@ fun ResenaCard(
         // Renderiza de manera dinámica el texto de la reseña
         Text(
             text = resena.resena,
+            modifier = Modifier.testTag("resenaTexto"),
             color = MaterialTheme.colorScheme.onSurfaceVariant,
             fontSize = 14.sp,
             lineHeight = 20.sp
@@ -143,17 +146,19 @@ fun ResenaCard(
             // ---------- LIKE ----------
             Row(
                 verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier.clickable(
-                    interactionSource = remember { MutableInteractionSource() },
-                    indication = null,
-                    onClick = {
-                        sendOrDeleteResenaLike(resena.id, sesion)
-                        Log.d(
-                            "ResenaCard",
-                            "El usuario $sesion esta tratando de dar like a la reseña ${resena.id}"
-                        )
-                    }
-                )
+                modifier = Modifier
+                    .testTag("btnLike")
+                    .clickable(
+                        interactionSource = remember { MutableInteractionSource() },
+                        indication = null,
+                        onClick = {
+                            sendOrDeleteResenaLike(resena.id, sesion)
+                            Log.d(
+                                "ResenaCard",
+                                "El usuario $sesion esta tratando de dar like a la reseña ${resena.id}"
+                            )
+                        }
+                    )
             ) {
                 Image(
                     painter = painterResource(

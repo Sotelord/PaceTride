@@ -1,4 +1,4 @@
-package com.example.pacetride
+package com.example.pacetride.datasources
 
 import android.util.Log
 import com.example.pacetride.data.datasource.impl.firestore.ResenaFirestoreDataSourceImpl

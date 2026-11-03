@@ -13,5 +13,6 @@ data class RegisterState(
     val termsAccepted: Boolean = false,
     val mostrarMensajeError: Boolean = false,
     val errorMessage: String = "",
-    val navigate: Boolean = false
+    val navigate: Boolean = false,
+    val loading: Boolean = false
 )

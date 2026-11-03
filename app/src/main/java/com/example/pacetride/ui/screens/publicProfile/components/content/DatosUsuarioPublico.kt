@@ -27,6 +27,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -84,6 +85,7 @@ fun DatosUsuarioPublico(
                     modifier = Modifier
                         .width(140.dp)
                         .height(48.dp)
+                        .testTag("btnFollow")
                 ) {
                     Text("Siguiendo", fontWeight = FontWeight.Bold)
                 }
@@ -97,6 +99,7 @@ fun DatosUsuarioPublico(
                     modifier = Modifier
                         .width(140.dp)
                         .height(48.dp)
+                        .testTag("btnFollow")
                 )
             }
 

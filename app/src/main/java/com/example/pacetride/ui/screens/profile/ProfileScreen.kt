@@ -13,6 +13,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.pacetride.ui.theme.PacetrideTheme
@@ -20,7 +21,7 @@ import com.example.pacetride.ui.screens.profile.components.ProfileScreenContent
 
 @Composable
 fun ProfileScreen(
-    modifier: Modifier = Modifier,
+    modifier: Modifier = Modifier.testTag("profileScreen"),
     profileViewModel: ProfileViewModel,
     editProfilePressed: () -> Unit,
     configurationPressed: () -> Unit,

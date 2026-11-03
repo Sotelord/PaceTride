@@ -1,8 +1,7 @@
-package com.example.pacetride
+package com.example.pacetride.repository
 
 import android.util.Log
 import com.example.pacetride.data.datasource.AuthRemoteDataSource
-import com.example.pacetride.data.datasource.impl.firestore.ResenaFirestoreDataSourceImpl
 import com.example.pacetride.data.datasource.impl.firestore.UsuarioFirestoreDataSourceImpl
 import com.example.pacetride.data.dtos.EstadisticasGlobalesDto
 import com.example.pacetride.data.dtos.ResenaCarreraDto

@@ -8,6 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.pacetride.ui.screens.comunidad.components.ComunidadScreenContent
@@ -19,7 +20,7 @@ fun ComunidadScreen(
     notificacionButtonPressed: (String) -> Unit,
     onClickUsuario: (String) -> Unit,
     onClickCarrera: (String) -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier.testTag("comunidadScreen")
 ) {
     val state by comunidadViewModel.uiState.collectAsState()
     Column(

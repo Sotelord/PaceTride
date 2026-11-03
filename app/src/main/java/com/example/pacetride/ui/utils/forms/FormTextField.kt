@@ -31,7 +31,7 @@ fun FormTextField(
 ) {
     val texto = value ?: ""
 
-    Column(modifier = modifier.fillMaxWidth()) {
+    Column(modifier = Modifier.fillMaxWidth()) {
         Spacer(modifier = Modifier.height(4.dp))
         OutlinedTextField(
             value = value ?: "",
@@ -39,7 +39,7 @@ fun FormTextField(
                 onValueChange(if (maxLength != null) nuevo.take(maxLength) else nuevo)
             },
             label = { Text(label) },
-            modifier = Modifier.fillMaxWidth(),
+            modifier = modifier.fillMaxWidth(),
             shape = RoundedCornerShape(16.dp),
             colors = colors,
             singleLine = singleLine,

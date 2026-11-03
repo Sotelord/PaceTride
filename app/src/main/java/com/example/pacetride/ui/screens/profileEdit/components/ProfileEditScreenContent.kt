@@ -12,6 +12,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.pacetride.ui.screens.escribirResena.components.content.BotonPublicarResena
@@ -58,7 +59,7 @@ fun ProfileEditScreenContent(
                 onValueChange = onUbicacionChange,
                 label = "Ubicación (Opcional)",
                 colors = fieldColors,
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier.fillMaxWidth().testTag("txtUbicacion")
             )
             Spacer(modifier = Modifier.height(16.dp))
             FormTextField(
@@ -76,7 +77,7 @@ fun ProfileEditScreenContent(
         AppButton(
             textoBoton = "Guardar cambios",
             onClick = onGuardarClick,
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier.fillMaxWidth().testTag("btnGuardar")
         )
     }
 }
