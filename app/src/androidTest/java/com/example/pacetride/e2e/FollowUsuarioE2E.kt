@@ -5,12 +5,14 @@ import androidx.compose.ui.test.assertIsSelected
 import androidx.compose.ui.test.assertTextContains
 import androidx.compose.ui.test.hasTestTag
 import androidx.compose.ui.test.hasText
+import androidx.compose.ui.test.junit4.v2.createAndroidComposeRule
 import androidx.compose.ui.test.junit4.v2.createEmptyComposeRule
 import androidx.compose.ui.test.onAllNodesWithTag
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performScrollTo
 import androidx.compose.ui.test.performScrollToNode
+import androidx.compose.ui.test.performTextInput
 import androidx.test.core.app.ActivityScenario
 import com.example.pacetride.MainActivity
 import com.example.pacetride.data.datasource.AuthRemoteDataSource
@@ -40,9 +42,7 @@ class FollowUsuarioE2E {
     var hiltRule = HiltAndroidRule(this)
 
     @get:Rule(order = 1)
-    var composeRule = createEmptyComposeRule()
-
-    private lateinit var scenario: ActivityScenario<MainActivity>
+    var composeRule = createAndroidComposeRule<MainActivity>()
 
     private lateinit var authRepository: AuthRepository
     private lateinit var usuarioRepository: UsuarioRepository
@@ -153,14 +153,16 @@ class FollowUsuarioE2E {
             check(registroSeguidor.isSuccess) { "No se pudo crear $seguidorEmail: ${registroSeguidor.exceptionOrNull()?.message}" }
             val seguidorId = authRepository.currentUser!!.uid
             usuarioRepository.registerUsuario(seguidorId, "David", "david", "Corredor", "Cajicá")
+            authRepository.signOut()
         }
-
-        scenario = ActivityScenario.launch(MainActivity::class.java)
     }
 
     @Test
     fun followUsuario_fromReview_updatesFollowersAndShowsInSiguiendo() {
         //1. Ingreso con el usuario ya registrado
+        composeRule.onNodeWithTag("txtCorreo").performTextInput(seguidorEmail)
+        composeRule.onNodeWithTag("txtPassword").performTextInput(password)
+        composeRule.onNodeWithTag("login_button").performClick()
         composeRule.waitUntil(timeoutMillis = 50000) {
             composeRule.onAllNodesWithTag("homeScreen").fetchSemanticsNodes().isNotEmpty()
         }
@@ -265,7 +267,6 @@ class FollowUsuarioE2E {
 
     @After
     fun tearDown() = runBlocking {
-        if (::scenario.isInitialized) scenario.close()
         limpiarSembrado()
     }
 }

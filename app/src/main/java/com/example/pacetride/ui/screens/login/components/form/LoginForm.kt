@@ -49,7 +49,7 @@ fun LoginForm(
             onValueChange = onEmailChange,
             label = "Correo electrónico",
             colors = fieldColors,
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier.fillMaxWidth().testTag("txtCorreo")
         )
 
         Spacer(modifier = Modifier.height(16.dp))
@@ -61,7 +61,8 @@ fun LoginForm(
             label = "Contraseña",
             isVisible = passwordVisible,
             onVisibilityChange = onPasswordVisibleChange,
-            colors = fieldColors
+            colors = fieldColors,
+            modifier = Modifier.fillMaxWidth().testTag("txtPassword")
         )
 
         Spacer(modifier = Modifier.height(8.dp))
