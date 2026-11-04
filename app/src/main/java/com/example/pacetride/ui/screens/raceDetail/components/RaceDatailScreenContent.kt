@@ -27,10 +27,12 @@ import com.example.pacetride.data.Resena
 import com.example.pacetride.data.aPrecioCop
 import com.example.pacetride.data.local.LocalCarreraProvider
 import com.example.pacetride.data.local.LocalResenaProvider
+import com.example.pacetride.ui.screens.raceDetail.components.content.CuentaRegresiva
 import com.example.pacetride.ui.screens.raceDetail.components.content.DistanciasDetalleRow
 import com.example.pacetride.ui.screens.raceDetail.components.content.ImagenPortadaCarrera
 import com.example.pacetride.ui.screens.raceDetail.components.content.IncluyeGrid
 import com.example.pacetride.ui.screens.raceDetail.components.content.MapaRuta
+import com.example.pacetride.ui.screens.raceDetail.components.content.PredictorTiempo
 import com.example.pacetride.ui.screens.raceDetail.components.content.TarjetaInfoCarrera
 import com.example.pacetride.ui.screens.raceDetail.components.content.TituloCarrera
 import com.example.pacetride.ui.theme.PacetrideTheme
@@ -73,6 +75,10 @@ fun RaceDetailScreenContent(
             }
             Spacer(modifier = Modifier.height(24.dp))
 
+            CuentaRegresiva(fechaIso = carrera.fecha)
+
+            Spacer(modifier = Modifier.height(24.dp))
+
             DistanciasDetalleRow(
                 distancias = carrera.distanciasDisponiblesKm.map { "${it}K" },
                 seleccionada = "${kmSeleccionado}K",
@@ -99,6 +105,10 @@ fun RaceDetailScreenContent(
                     fontWeight = FontWeight.Bold
                 )
             }
+            Spacer(modifier = Modifier.height(24.dp))
+
+            PredictorTiempo(km = kmSeleccionado)
+
             Spacer(modifier = Modifier.height(24.dp))
 
             TituloSeccionDetalle(stringResource(R.string.sobre_la_carrera))
