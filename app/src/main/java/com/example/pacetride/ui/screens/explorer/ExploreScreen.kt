@@ -25,6 +25,7 @@ fun ExploreScreen(
     exploreViewModel: ExploreViewModel,
     verCarreraButtonPressed: (String) -> Unit,
     comunidadPressed: () -> Unit,
+    mapaPressed: () -> Unit,
     filtroDistanciaInicial: Int? = null
 ) {
     val state by exploreViewModel.uiState.collectAsState()
@@ -56,6 +57,7 @@ fun ExploreScreen(
                     verCarreraButtonPressed = verCarreraButtonPressed,
                     carreras = state.carreras,
                     comunidadPressed = comunidadPressed,
+                    mapaPressed = mapaPressed,
                     textoBusqueda = state.textoBusqueda,
                     onTextoBusquedaChange = { exploreViewModel.updateTextoBusqueda(it) },
                     filtroSeleccionado = state.filtroSeleccionado,
@@ -76,7 +78,8 @@ fun ExploreScreenPreview() {
         ExploreScreen(
             exploreViewModel = viewModel(),
             verCarreraButtonPressed = {},
-            comunidadPressed = {}
+            comunidadPressed = {},
+            mapaPressed = {}
         )
     }
 }

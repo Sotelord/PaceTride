@@ -32,6 +32,7 @@ import com.example.pacetride.ui.screens.raceDetail.components.content.Distancias
 import com.example.pacetride.ui.screens.raceDetail.components.content.ImagenPortadaCarrera
 import com.example.pacetride.ui.screens.raceDetail.components.content.IncluyeGrid
 import com.example.pacetride.ui.screens.raceDetail.components.content.MapaRuta
+import com.example.pacetride.ui.screens.raceDetail.components.content.PlanEntrenamiento
 import com.example.pacetride.ui.screens.raceDetail.components.content.PredictorTiempo
 import com.example.pacetride.ui.screens.raceDetail.components.content.TarjetaInfoCarrera
 import com.example.pacetride.ui.screens.raceDetail.components.content.TituloCarrera
@@ -108,6 +109,10 @@ fun RaceDetailScreenContent(
             Spacer(modifier = Modifier.height(24.dp))
 
             PredictorTiempo(km = kmSeleccionado)
+
+            Spacer(modifier = Modifier.height(24.dp))
+
+            PlanEntrenamiento(km = kmSeleccionado, fechaIso = carrera.fecha)
 
             Spacer(modifier = Modifier.height(24.dp))
 

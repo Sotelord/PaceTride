@@ -40,6 +40,8 @@ data class ResenaFirestoreDto(
     val updatedAt: Timestamp? = null, //2026-10-04T00:50:38.234Z
     val carrera: ResenaCarreraDto? = null, //{ "nombre": "Corre por Bogotá 5K" }
     val usuario: ResenaUsuarioDto? = null, //{ "nombre": "Santiago Rayo", "fotoPerfil": "https://media.istockphoto.com/id/545805760/photo/man-runner-jogger-running-isolated.jpg?s=612x612&w=0&k=20&c=h_yH1K2Ou_b6fjL8At0TY2wV5rhasGFNu4sdFVZW54A=" }
+    val latitud: Double? = null,
+    val longitud: Double? = null,
     var liked: Boolean = false,
 ): ResenaDtoGeneric() {
     constructor() : this(
@@ -69,7 +71,9 @@ data class ResenaFirestoreDto(
             categoriasDestacadas = categoriasDestacadas,
             likes = likes,
             fechaPublicacion = formaterarFechaPublicacion(createdAt?.toDate()?.toInstant().toString()),
-            liked = liked
+            liked = liked,
+            latitud = latitud,
+            longitud = longitud
         )
     }
 }
@@ -86,6 +90,8 @@ data class ResenaRetrofitDto(
     val updatedAt: String, //2026-10-04T00:50:38.234Z
     val carrera: ResenaCarreraDto? = null, //{ "nombre": "Corre por Bogotá 5K" }
     val usuario: ResenaUsuarioDto? = null, //{ "nombre": "Santiago Rayo", "fotoPerfil": "https://media.istockphoto.com/id/545805760/photo/man-runner-jogger-running-isolated.jpg?s=612x612&w=0&k=20&c=h_yH1K2Ou_b6fjL8At0TY2wV5rhasGFNu4sdFVZW54A=" }
+    val latitud: Double? = null,
+    val longitud: Double? = null,
     val liked: Boolean = false,
 ): ResenaDtoGeneric() {
     constructor() : this(
@@ -116,6 +122,8 @@ data class ResenaRetrofitDto(
             likes = likes,
             fechaPublicacion = formaterarFechaPublicacion(createdAt),
             liked = liked,
+            latitud = latitud,
+            longitud = longitud
         )
     }
     }

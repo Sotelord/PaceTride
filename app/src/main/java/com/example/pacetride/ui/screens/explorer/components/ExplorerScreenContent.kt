@@ -22,6 +22,7 @@ import com.example.pacetride.data.Carrera
 import com.example.pacetride.data.local.LocalCarreraProvider
 import com.example.pacetride.ui.screens.explorer.components.content.GrillaCarreras
 import com.example.pacetride.ui.screens.explorer.components.floatingButton.FloatingButtonComunidad
+import com.example.pacetride.ui.screens.explorer.components.floatingButton.FloatingButtonMapa
 import com.example.pacetride.ui.screens.explorer.components.header.HeaderExplorar
 import com.example.pacetride.ui.screens.explorer.components.searchBar.BusquedaYFiltros
 import com.example.pacetride.ui.screens.explorer.components.searchBar.FiltrosRow
@@ -55,6 +56,7 @@ fun ExploreScreenContent(
     verCarreraButtonPressed: (String) -> Unit,
     carreras: List<Carrera>,
     comunidadPressed: () -> Unit,
+    mapaPressed: () -> Unit,
     textoBusqueda: String,
     onTextoBusquedaChange: (String) -> Unit,
     filtroSeleccionado: String,
@@ -103,10 +105,17 @@ fun ExploreScreenContent(
                 modifier = Modifier.weight(1f)
             )
         }
-        FloatingButtonComunidad(
-            onClick = comunidadPressed,
+        Column(
             modifier = Modifier.padding(16.dp).align(Alignment.BottomEnd)
-        )
+        ) {
+            FloatingButtonMapa(
+                onClick = mapaPressed,
+            )
+            Spacer(modifier = Modifier.height(16.dp))
+            FloatingButtonComunidad(
+                onClick = comunidadPressed,
+            )
+        }
     }
 }
 
@@ -118,6 +127,7 @@ fun ExploreScreenContentPreview(){
         ExploreScreenContent(
             carreras = carreras,
             comunidadPressed = {},
+            mapaPressed = {},
             filtroSeleccionado = "",
             filtrosVisibles = true,
             onFiltroSeleccionadoChange = {},

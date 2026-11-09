@@ -21,6 +21,8 @@ data class CreateResenaDto(
     val categoriasDestacadas: List<String>?,
     var usuario: CreateResenaUsuarioDto? = null,
     val carrera: CreateResenaCarreraDto? = null,
+    val latitud: Double? = null,
+    val longitud: Double? = null,
     @ServerTimestamp val createdAt: Timestamp? = null,
     @ServerTimestamp val updatedAt: Timestamp? = null
 )

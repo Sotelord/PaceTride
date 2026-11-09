@@ -37,6 +37,8 @@ import com.example.pacetride.ui.screens.home.HomeScreen
 import com.example.pacetride.ui.screens.home.HomeViewModel
 import com.example.pacetride.ui.screens.login.LoginScreen
 import com.example.pacetride.ui.screens.login.LoginViewModel
+import com.example.pacetride.ui.screens.mapaResenas.MapaResenasScreen
+import com.example.pacetride.ui.screens.mapaResenas.MapaResenasViewModel
 import com.example.pacetride.ui.screens.misCarreras.MisCarrerasScreen
 import com.example.pacetride.ui.screens.misCarreras.MisCarrerasViewModel
 import com.example.pacetride.ui.screens.notifications.NotificationsScreen
@@ -95,6 +97,7 @@ sealed class Screen(val route: String) {
         fun createRoute(usuarioId: String, tipo: TipoConexion) =
             "conexiones/$usuarioId/${tipo.name}"
     }
+    object Mapa: Screen("mapa")
 }
 
 
@@ -219,6 +222,9 @@ fun AppNavigation(
                 filtroDistanciaInicial = filtroDistancia,
                 comunidadPressed = {
                     navControler.navigate(Screen.Comunidad.route)
+                },
+                mapaPressed = {
+                    navControler.navigate(Screen.Mapa.route)
                 }
             )
         }
@@ -444,6 +450,16 @@ fun AppNavigation(
 
         composable(route = Screen.ConfigUsuarioPublico.route) {
             Text("Falta esta pantalla")
+        }
+
+        composable(route = Screen.Mapa.route) {
+            val mapaResenasViewModel: MapaResenasViewModel = hiltViewModel()
+            MapaResenasScreen(
+                mapaResenasViewModel = mapaResenasViewModel,
+                atrasPressed = {
+                    navControler.popBackStack()
+                }
+            )
         }
     }
 }

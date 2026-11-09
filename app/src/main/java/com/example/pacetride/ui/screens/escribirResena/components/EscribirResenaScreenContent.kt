@@ -27,6 +27,7 @@ import com.example.pacetride.ui.screens.escribirResena.components.content.BotonP
 import com.example.pacetride.ui.screens.escribirResena.components.content.CampoResena
 import com.example.pacetride.ui.screens.escribirResena.components.content.ChipsFlowDestacar
 import com.example.pacetride.ui.screens.escribirResena.components.content.SelectorCalificacion
+import com.example.pacetride.ui.screens.escribirResena.components.content.SelectorUbicacion
 import com.example.pacetride.ui.screens.escribirResena.components.content.TarjetaResumenCarrera
 import com.example.pacetride.ui.utils.BarraSuperiorConTitulo
 import com.example.pacetride.ui.theme.PacetrideTheme
@@ -47,6 +48,10 @@ fun EscribirResenaScreenContent(
     atrasPressed: () -> Unit,
     mostrarMensajeError: Boolean,
     errorMessage: String?,
+    mostrarSelectorUbicacion: Boolean,
+    compartirUbicacion: Boolean,
+    errorUbicacion: String?,
+    onToggleUbicacion: (Boolean) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -112,6 +117,17 @@ fun EscribirResenaScreenContent(
         )
         Spacer(modifier = Modifier.height(20.dp))
 
+        if (mostrarSelectorUbicacion) {
+            SelectorUbicacion(
+                compartirUbicacion = compartirUbicacion,
+                errorUbicacion = errorUbicacion,
+                onToggle = onToggleUbicacion
+            )
+            Spacer(modifier = Modifier.height(16.dp))
+        }
+
+        Spacer(modifier = Modifier.height(20.dp))
+
         BotonPublicarResena(onClick = {
             onPublicarClick()
         })
@@ -139,7 +155,11 @@ fun EscribirResenaScreenContentPreview(){
             opcionesDestacar = listOf("su", "no"),
             seleccionadas = seleccionadas,
             textoResena = "",
-            resenaId = "1"
+            resenaId = "1",
+            compartirUbicacion = false,
+            errorUbicacion = null,
+            onToggleUbicacion = {},
+            mostrarSelectorUbicacion = true
         )
     }
 }

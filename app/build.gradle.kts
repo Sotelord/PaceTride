@@ -6,6 +6,7 @@ plugins {
     alias(libs.plugins.google.ksp)
     alias(libs.plugins.google.services)
     alias(libs.plugins.firebase.crashlytics)
+    alias(libs.plugins.secrets.gradle)
 }
 
 android {
@@ -35,8 +36,8 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     packaging {
         excludes += "META-INF/LICENSE.md"
@@ -128,14 +129,19 @@ dependencies {
     androidTestImplementation(libs.android.test.uiautomator)
     testImplementation(kotlin("test"))
 
-    // //e2e
-    // // AndroidX Test - Instrumented
+    // e2e
+    // AndroidX Test - Instrumented
     androidTestImplementation(libs.android.test.junit)
     androidTestImplementation(libs.android.test.espresso)
 
-    // // ActivityScenario
+    // ActivityScenario
     androidTestImplementation(libs.android.test.core)
 
-    // // Para UI / instrumented tests (androidTest/)
+    // Para UI / instrumented tests (androidTest/)
     androidTestImplementation(libs.test.mockk.android)
+
+    // Mapas
+    implementation(libs.maps.compose)
+    implementation(libs.play.services.maps)
+    implementation(libs.play.services.location)
 }

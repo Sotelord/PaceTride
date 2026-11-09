@@ -50,4 +50,8 @@ class ResenaRetrofitDataSourceImpl @Inject constructor(
     override suspend fun listenAllResenas(): Flow<List<ResenaDtoGeneric>> {
         TODO("Not yet implemented")
     }
+
+    override suspend fun listenResenasUltimas24Horas(): Flow<List<ResenaDtoGeneric>> {
+        TODO("Not yet implemented")
+    }
 }

@@ -15,4 +15,7 @@ data class Resena(
     val fotoUsuario: String? = "",
     //nuevo
     val liked: Boolean = false,
+    //Coordenadas para marcador
+    val latitud: Double? = null,
+    val longitud: Double? = null,
 )

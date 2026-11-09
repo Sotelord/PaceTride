@@ -7,4 +7,6 @@ plugins {
     alias(libs.plugins.firebase.crashlytics) apply false
     //messaging
     alias(libs.plugins.google.services) apply false
+    //maps
+    alias(libs.plugins.secrets.gradle) apply false
 }

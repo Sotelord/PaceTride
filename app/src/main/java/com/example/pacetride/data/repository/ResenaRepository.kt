@@ -2,6 +2,7 @@ package com.example.pacetride.data.repository
 
 import android.util.Log
 import com.example.pacetride.data.Resena
+import com.example.pacetride.data.Ubicacion
 import com.example.pacetride.data.datasource.AuthRemoteDataSource
 import com.example.pacetride.data.datasource.impl.firestore.CarreraFirestoreDataSourceImpl
 import com.example.pacetride.data.datasource.impl.firestore.ResenaFirestoreDataSourceImpl
@@ -34,7 +35,8 @@ class ResenaRepository @Inject constructor(
         carreraId: String,
         resena: String,
         calificacion: String,
-        categoriasDestacadas: List<String>?
+        categoriasDestacadas: List<String>?,
+        ubicacion: Ubicacion? = null
     ): Result<Unit> {
         return try {
             val user = usuarioRemoteDataSource.getUsuarioById(usuarioId)
@@ -58,7 +60,9 @@ class ResenaRepository @Inject constructor(
                 calificacion = calificacion.toFloat(),
                 categoriasDestacadas = categoriasDestacadas,
                 usuario = createResenaUsuarioDto,
-                carrera = createResenaCarreraDto
+                carrera = createResenaCarreraDto,
+                latitud = ubicacion?.latitud,
+                longitud = ubicacion?.longitud,
             )
             resenaRemoteDataSource.createResena(createResenaDto)
             Result.success(Unit)
@@ -208,6 +212,13 @@ class ResenaRepository @Inject constructor(
     suspend fun getResenasLive(): Flow<List<Resena>> {
         return resenaRemoteDataSource.listenAllResenas().map { resenasDto ->
             resenasDto.map { it.toResena() }
+        }
+    }
+
+    suspend fun getResenasRecientesConUbicacion(): Flow<List<Resena>> {
+        return resenaRemoteDataSource.listenResenasUltimas24Horas().map { resenasDto ->
+            resenasDto.map { it.toResena() }
+                .filter { it.latitud != null && it.longitud != null }
         }
     }
 }

@@ -6,6 +6,7 @@ import com.google.firebase.auth.UserProfileChangeRequest
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 import androidx.core.net.toUri
+import com.example.pacetride.data.Ubicacion
 
 class AuthRemoteDataSource @Inject constructor (
     private val auth: FirebaseAuth

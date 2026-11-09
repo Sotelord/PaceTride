@@ -37,6 +37,12 @@ truth = "1.4.2"
 uiautomator = "2.3.0"
 androidx-core-test = "1.5.0"
 
+# Mapas
+mapsCompose = "9.0.1"
+playServicesMaps = "20.1.0"
+playServicesLocation = "21.3.0"
+secrets = "2.0.1"
+
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -102,6 +108,11 @@ android-test-junit = { group = "androidx.test.ext", name = "junit", version.ref 
 android-test-espresso = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
 android-test-core = { group = "androidx.test", name = "core", version.ref = "androidx-core-test" }
 
+# Mapas
+maps-compose = { group = "com.google.maps.android", name = "maps-compose", version.ref = "mapsCompose" }
+play-services-maps = { group = "com.google.android.gms", name = "play-services-maps", version.ref = "playServicesMaps" }
+play-services-location = { group = "com.google.android.gms", name = "play-services-location", version.ref = "playServicesLocation" }
+
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
@@ -111,3 +122,6 @@ google-ksp = { id = "com.google.devtools.ksp", version.ref = "googleKotlinKsp" }
 firebase-crashlytics = { id = "com.google.firebase.crashlytics", version.ref = "firebaseCrashlytics" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 google-services = { id = "com.google.gms.google-services", version.ref = "googleServices" }
+
+# Mapas
+secrets-gradle = { id = "com.google.android.libraries.mapsplatform.secrets-gradle-plugin", version.ref = "secrets" }

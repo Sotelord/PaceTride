@@ -5,13 +5,16 @@ import com.example.pacetride.data.dtos.CreateResenaDto
 import com.example.pacetride.data.dtos.ResenaDtoGeneric
 import com.example.pacetride.data.dtos.ResenaFirestoreDto
 import com.example.pacetride.data.dtos.UpdateResenaDto
+import com.google.firebase.Timestamp
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.SetOptions
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.tasks.await
+import java.util.Date
 import javax.inject.Inject
 
 class ResenaFirestoreDataSourceImpl @Inject constructor(
@@ -129,6 +132,27 @@ class ResenaFirestoreDataSourceImpl @Inject constructor(
                 trySend(resenas).isSuccess
             }
         }
+        awaitClose {
+            listener.remove()
+        }
+    }
+
+    override suspend fun listenResenasUltimas24Horas(): Flow<List<ResenaDtoGeneric>> = callbackFlow {
+        val hace24h = Timestamp(Date(System.currentTimeMillis() - 24 * 60 * 60 * 1000))
+
+        val listener = db.collection("resenas")
+            .whereGreaterThanOrEqualTo("createdAt", hace24h)
+            .orderBy("createdAt", Query.Direction.DESCENDING)
+            .addSnapshotListener { snapshot, error ->
+                if (error != null) {
+                    close(error)
+                    return@addSnapshotListener
+                }
+                val resenas = snapshot?.documents?.mapNotNull { doc ->
+                    doc.toObject(ResenaFirestoreDto::class.java)?.copy(id = doc.id)
+                }.orEmpty()
+                trySend(resenas)
+            }
         awaitClose {
             listener.remove()
         }

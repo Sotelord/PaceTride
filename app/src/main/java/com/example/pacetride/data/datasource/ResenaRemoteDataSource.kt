@@ -13,6 +13,7 @@ interface ResenaRemoteDataSource {
     suspend fun sendOrDeleteResenaLike(resenaId: String, userId: String): Unit
     suspend fun getAllResenas(currentUserId: String = ""): List<ResenaDtoGeneric>
     suspend fun getResenasSeguidos(currentUserId: String = ""): List<ResenaDtoGeneric>
-
     suspend fun listenAllResenas(): Flow<List<ResenaDtoGeneric>>
+    // Marcadores de las últimas 24 horas
+    suspend fun listenResenasUltimas24Horas(): Flow<List<ResenaDtoGeneric>>
 }

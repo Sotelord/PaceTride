@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.pacetride.data.repository.AuthRepository
 import com.example.pacetride.data.repository.CarreraRepository
+import com.example.pacetride.data.repository.LocationRepository
 import com.example.pacetride.data.repository.ResenaRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import jakarta.inject.Inject
@@ -18,7 +19,8 @@ import kotlin.math.roundToInt
 class EscribirResenaViewModel @Inject constructor(
     private val resenaRepository: ResenaRepository,
     private val carreraRepository: CarreraRepository,
-    private val authRepository: AuthRepository
+    private val authRepository: AuthRepository,
+    private val locationRepository: LocationRepository
 ) : ViewModel() {
     private val _uiState = MutableStateFlow(EscribirResenaState())
     val uiState: StateFlow<EscribirResenaState> = _uiState
@@ -73,17 +75,27 @@ class EscribirResenaViewModel @Inject constructor(
                         _uiState.update { it.copy(errorMessage = result.exceptionOrNull()?.message) }
                     }
                 } else {
+                    val ubicacion = if (_uiState.value.compartirUbicacion) {
+                        locationRepository.getCurrentLocation()
+                    } else null
+
                     val result = resenaRepository.createResena(
                         usuarioId = usuarioId,
                         carreraId = _uiState.value.carrera.id,
                         resena = _uiState.value.textoResena,
                         calificacion = _uiState.value.calificacion.toString(),
-                        categoriasDestacadas = _uiState.value.seleccionadas
+                        categoriasDestacadas = _uiState.value.seleccionadas,
+                        ubicacion = ubicacion
                     )
                     if (result.isSuccess) {
                         _uiState.update { it.copy(navigate = true) }
                     } else {
-                        _uiState.update { it.copy(errorMessage = result.exceptionOrNull()?.message) }
+                        _uiState.update {
+                            it.copy(
+                                mostrarMensajeError = true,
+                                errorMessage = result.exceptionOrNull()?.message
+                            )
+                        }
                     }
                 }
             }
@@ -136,4 +148,22 @@ class EscribirResenaViewModel @Inject constructor(
         }
     }
 
+    fun onPermisoUbicacionResultado(concedido: Boolean) {
+        _uiState.update {
+            it.copy(
+                compartirUbicacion = concedido,
+                permisoUbicacionDenegado = !concedido
+            )
+        }
+    }
+
+    fun desactivarCompartirUbicacion() {
+        _uiState.update {
+            it.copy(compartirUbicacion = false, permisoUbicacionDenegado = false)
+        }
+    }
+
+    fun setCompartirUbicacion(activo: Boolean, error: String? = null) {
+        _uiState.update { it.copy(compartirUbicacion = activo, errorUbicacion = error) }
+    }
 }

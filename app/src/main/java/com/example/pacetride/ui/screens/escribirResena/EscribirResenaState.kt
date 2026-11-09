@@ -19,5 +19,8 @@ data class EscribirResenaState(
     val errorMessage: String? = null,
     val navigate: Boolean = false,
     val seleccionadas: List<String>? = listOf(),
-    val isLoading: Boolean = false
+    val isLoading: Boolean = false,
+    val compartirUbicacion: Boolean = false,
+    val permisoUbicacionDenegado: Boolean = false,
+    val errorUbicacion: String? = null
 )
